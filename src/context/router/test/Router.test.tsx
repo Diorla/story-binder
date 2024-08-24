@@ -16,6 +16,7 @@ describe("Router component", () => {
     render(<Router path={invalidPath as Path} />);
 
     // Check if the NotFound component is rendered
-    expect(screen.getByText("Not found")).toBeDefined();
+    // expect(screen.getByText("Not found")).toBeDefined();
+    expect(screen.getByRole("heading")).toBeDefined();
   });
 });

@@ -13,8 +13,8 @@ export default function RouterProvider() {
     const db = localStorage.getItem("route");
     if (db) {
       const { _lastPath, params } = JSON.parse(db);
-      setPath(_lastPath);
-      setParams(params);
+      if (_lastPath) setPath(_lastPath);
+      if (params) setParams(params);
     }
   }, []);
 
