@@ -10,12 +10,44 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
     "plugin:import/electron",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "settings": {
     "import/resolver": {
       "typescript": {}
     }
+  },
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "endOfLine": "auto"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreComments": true
+      }
+    ],
+    "max-lines": [
+      "error",
+      { "max": 100, "skipBlankLines": true, "skipComments": true }
+    ],
+    "import/no-unresolved": 0,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2,
+    "no-console": 2
   }
 }
