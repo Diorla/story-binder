@@ -27,3 +27,11 @@ To publish the app to select url or in a form that can be shared with other user
 ## ```yarn lint```
 
 To lint the files
+
+# ```git```
+The `main` branch is protected. To make any update use `dev-` for example: `dev-init`
+
+```sh
+git branch dev-fix-lint
+git checkout dev-fix-lint
+```
