@@ -1,10 +1,8 @@
 export type PayloadType =
-  | "create-file"
-  | "create-directory"
+  | "write-file"
+  | "write-directory"
   | "read-file"
   | "read-directory"
-  | "update-file"
-  | "update-directory"
   | "delete-file"
   | "delete-directory";
 

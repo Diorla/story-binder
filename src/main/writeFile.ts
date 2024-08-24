@@ -1,9 +1,6 @@
 import fs from "node:fs";
 
-export default function writeFile(
-  filePath: string,
-  defaultContent: Buffer
-): Buffer {
-  fs.writeFileSync(filePath, defaultContent);
+export default function writeFile(dir: string, defaultContent: Buffer): Buffer {
+  fs.writeFileSync(dir, defaultContent);
   return defaultContent;
 }

@@ -4,8 +4,8 @@ import writeFile from "./writeFile";
 export default function readFile(dir: string, defaultContent?: Buffer): Buffer {
   if (fs.existsSync(dir)) {
     return fs.readFileSync(dir);
-  } else {
+  } else if (defaultContent) {
     writeFile(dir, defaultContent);
-    return defaultContent;
   }
+  return defaultContent;
 }
