@@ -1,6 +1,8 @@
 import { app, BrowserWindow, ipcMain, safeStorage } from "electron";
 import path from "path";
 import readFile from "./main/readFile";
+import writeFile from "./main/writeFile";
+import selectDir from "./main/selectDir";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -15,6 +17,7 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+    autoHideMenuBar: true,
   });
 
   // and load the index.html of the app.
@@ -30,14 +33,10 @@ const createWindow = () => {
   mainWindow.webContents.openDevTools();
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on("ready", () => {
   /**
    *   | "create-file"
   | "create-directory"
-  | "read-file"
   | "read-directory"
   | "update-file"
   | "update-directory"
@@ -49,12 +48,18 @@ app.on("ready", () => {
     const value = readFile(args.dir, defaultContent);
     return safeStorage.decryptString(value).toString();
   });
+  ipcMain.handle("write-file", (_e, args) => {
+    const defaultContent = safeStorage.encryptString(args.content);
+    const value = writeFile(args.dir, defaultContent);
+    return safeStorage.decryptString(value).toString();
+  });
+
+  ipcMain.handle("select-dir", () => {
+    return selectDir();
+  });
   createWindow();
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();

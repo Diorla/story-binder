@@ -1,4 +1,6 @@
-const INITIAL_USER_INFO = {
+import UserInfo from "@/types/UserInfo";
+
+const INITIAL_USER_INFO: UserInfo = {
   onboardCompleted: false,
   appInitialised: Date.now(),
   projectDir: "",

@@ -8,13 +8,16 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import RouterProvider from "./context/router";
 import ErrorBoundary from "./containers/error-boundary";
+import Initiation from "./containers/initiation";
 
 const root = createRoot(document.getElementById("app"));
 
 root.render(
   <ThemeProvider theme={THEME}>
     <ErrorBoundary>
-      <RouterProvider />
+      <Initiation>
+        <RouterProvider />
+      </Initiation>
     </ErrorBoundary>
   </ThemeProvider>
 );
