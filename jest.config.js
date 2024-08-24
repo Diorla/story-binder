@@ -14,5 +14,8 @@ module.exports = {
     "!**/*.config.js",
     "!**/.vite/**",
     "!**/*.d.ts",
+    "!**/src/main.ts",
+    "!**/src/preload.ts",
+    "!**/src/renderer.ts",
   ],
 };
