@@ -3,6 +3,7 @@ module.exports = {
   moduleNameMapper: {
     "^@/(.*)": "<rootDir>/src/$1",
   },
+  testEnvironment: "jest-environment-jsdom",
   collectCoverage: true,
   collectCoverageFrom: [
     "**/*.{ts,tsx,js,jsx}",
