@@ -2,9 +2,11 @@ import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
 import ChooseProjectDir from "./choose-project-dir";
 import Onboarding from "./onboarding";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-export default function Initiation({
+export const AppContext = createContext(INITIAL_USER_INFO);
+
+export default function AppProvider({
   children,
 }: {
   children: React.ReactNode;
@@ -45,5 +47,5 @@ export default function Initiation({
         confirmDir={(projectDir) => setStatus({ ...status, projectDir })}
       />
     );
-  return children;
+  return <AppContext.Provider value={status}>{children}</AppContext.Provider>;
 }
