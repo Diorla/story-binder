@@ -18,4 +18,5 @@ module.exports = {
     "!**/src/preload.ts",
     "!**/src/renderer.ts",
   ],
+  setupFilesAfterEnv: ["jest-extended/all"],
 };

@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material/styles";
 import THEME from "./constants/THEME";
+import * as matchers from "jest-extended";
+expect.extend(matchers);
 // import { ThemeProvider } from "my-ui-lib";
 // import { TranslationProvider } from "my-i18n-lib";
 // import defaultStrings from "i18n/en-x-default";

@@ -9,5 +9,7 @@ describe("Temp", () => {
 
     expect(button.textContent).toBe("Temp");
     expect(button.classList).toContain("MuiButton-root");
+
+    expect([]).toBeArray();
   });
 });
