@@ -1,5 +1,5 @@
-import Button from "@/components/button";
+import Button from "@mui/material/Button";
 
 export default function Temp() {
-  return <Button />;
+  return <Button>Temp</Button>;
 }
