@@ -7,11 +7,14 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import RouterProvider from "./context/router";
+import ErrorBoundary from "./containers/error-boundary";
 
 const root = createRoot(document.getElementById("app"));
 
 root.render(
   <ThemeProvider theme={THEME}>
-    <RouterProvider />
+    <ErrorBoundary>
+      <RouterProvider />
+    </ErrorBoundary>
   </ThemeProvider>
 );
