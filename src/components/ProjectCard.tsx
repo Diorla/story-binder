@@ -2,9 +2,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
-import useRouter from "@/context/router/useRouter";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
 import { truncateText } from "@/scripts/truncateText";
+import useOpenProject from "@/hooks/useOpenProject";
 
 const { height, width } = BOOK_DIMENSION;
 
@@ -17,7 +17,7 @@ export default function ProjectCard({
   summary: string;
   cover: string;
 }) {
-  const { navigate } = useRouter<{ name: string }>();
+  const openProject = useOpenProject();
 
   return (
     <Card
@@ -55,7 +55,7 @@ export default function ProjectCard({
             size="small"
             color="primary"
             variant="contained"
-            onClick={() => navigate("project", { name })}
+            onClick={() => openProject({ name, cover, summary })}
           >
             Open
           </Button>

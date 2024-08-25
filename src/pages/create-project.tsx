@@ -3,15 +3,15 @@ import Button from "@mui/material/Button";
 import { Card, Typography, Divider, TextField } from "@mui/material";
 import cover from "@/assets/placeholder";
 import useForm from "@/hooks/useForm";
-import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import ProjectInfo from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import logError from "@/scripts/logError";
+import useOpenProject from "@/hooks/useOpenProject";
 
 export default function CreateProject() {
-  const { navigate } = useRouter();
+  const openProject = useOpenProject();
   const { handleSubmit, register } = useForm<ProjectInfo>({
     defaultValue: {
       name: "",
@@ -37,7 +37,7 @@ export default function CreateProject() {
             content: JSON.stringify(form),
           })
           .then(() => {
-            navigate("project", { name: form.name });
+            openProject(form);
           });
       })
       .catch((err) => {
