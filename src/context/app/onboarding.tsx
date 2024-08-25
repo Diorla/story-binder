@@ -1,6 +1,6 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
-import logError from "@/scripts/log-error";
+import logError from "@/scripts/logError";
 import UserInfo from "@/types/UserInfo";
 import { Button, Card, Container } from "@mui/material";
 import Pagination from "@mui/material/Pagination";

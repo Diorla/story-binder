@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ErrorBoundaryProps from "./ErrorBoundaryProps";
-import logError from "@/scripts/log-error";
+import logError from "@/scripts/logError";
 import ErrorComponent from "./ErrorComponent";
 
 export default class ErrorBoundary extends Component<ErrorBoundaryProps> {

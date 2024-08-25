@@ -1,6 +1,6 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
-import logError from "@/scripts/log-error";
+import logError from "@/scripts/logError";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
