@@ -3,6 +3,8 @@ export type PayloadType =
   | "write-directory"
   | "read-file"
   | "read-directory"
+  | "rename-file"
+  | "rename-directory"
   | "delete-file"
   | "delete-directory";
 

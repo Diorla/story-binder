@@ -5,6 +5,7 @@ import writeFile from "./main/writeFile";
 import selectDir from "./main/selectDir";
 import readDirectory from "./main/readDirectory";
 import writeDirectory from "./main/writeDirectory";
+import renameDirectory from "./main/renameDirectory";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -52,6 +53,10 @@ app.on("ready", () => {
   });
   ipcMain.handle("read-directory", (_e, args) => {
     const dir = readDirectory(args.dir);
+    return dir;
+  });
+  ipcMain.handle("rename-directory", (_e, args) => {
+    const dir = renameDirectory(args.dir, args.content);
     return dir;
   });
   ipcMain.handle("write-file", (_e, args) => {
