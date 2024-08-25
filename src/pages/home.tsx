@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import Projects from "@/containers/projects";
 
 export default function Home() {
-  const { projectDir } = useApp();
+  const { workspace } = useApp();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.fs
       ?.sendMessage({
         type: "read-directory",
-        dir: projectDir,
+        dir: workspace,
       })
       .then((value: { files: string[]; folders: string[] }) => {
         setProjects(value.folders);

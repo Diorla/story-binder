@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 
 export default function Projects({ projects }: { projects: string[] }) {
   const [loading, setLoading] = useState(true);
-  const { projectDir } = useApp();
+  const { workspace } = useApp();
   const [projectList, setProjectList] = useState([]);
 
   useEffect(() => {
     const getProjectInfo = async () => {
       const list = [];
       for (const project of projects) {
-        const dir = `${projectDir}/${project}/.config`;
+        const dir = `${workspace}/${project}/.config`;
         const res = await window.fs.sendMessage({
           type: "read-file",
           dir,

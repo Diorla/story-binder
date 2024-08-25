@@ -1,7 +1,8 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
 import logError from "@/scripts/logError";
-import { Grid } from "@mui/material";
+import UserInfo from "@/types/UserInfo";
+import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -18,14 +19,15 @@ export default function ChooseProjectDir({
     window.dialog
       .selectDir()
       .then((value) => {
+        const newContent: UserInfo = {
+          ...INITIAL_USER_INFO,
+          workspace: value as string,
+          onboardCompleted: true,
+        };
         window.fs.sendMessage({
           type: "write-file",
           dir: USER_INFO_DIR,
-          content: JSON.stringify({
-            ...INITIAL_USER_INFO,
-            projectDir: value as string,
-            onboardCompleted: true,
-          }),
+          content: JSON.stringify(newContent),
         });
         confirmDir(value as string);
       })
@@ -45,9 +47,12 @@ export default function ChooseProjectDir({
         <Stack
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Grid>Hi there, please select a folder to save all your files</Grid>
+          <Typography variant="h4">Select Workspace</Typography>
+          <Typography>
+            Hi there, please select a folder (directory) to save all your files
+          </Typography>
           <Button variant="contained" onClick={openFile} disabled={loading}>
-            open folder
+            Open folder
           </Button>
         </Stack>
       </Stack>
