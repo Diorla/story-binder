@@ -1,8 +1,5 @@
-import { HighlightOff } from "@mui/icons-material";
 import {
   ListItem,
-  Tooltip,
-  IconButton,
   ListItemButton,
   ListItemText,
   useTheme,
@@ -16,16 +13,21 @@ export default function DrawerItem({
   onClick,
   active,
   isFile,
-  isTemplate,
 }: DrawerItemProps) {
   const { palette } = useTheme();
-  const { selectedDocId, setSelectedDocId, project } = useProject();
+  const { expandedCollection, setSelected, selected } = useProject();
 
-  const isDir = !isTemplate && !isFile;
+  const list: string[] = expandedCollection[text] || [];
 
-  const collection: { [key: string]: { name: string } } =
-    project?.collection[text] || {};
-  const list = Object.keys(collection).filter((item) => item !== "template");
+  const isExpanded = !!expandedCollection[text];
+
+  let backgroundColor = "transparent";
+  if (isExpanded) {
+    backgroundColor = palette.grey[200];
+  }
+  if (active) {
+    backgroundColor = palette.secondary.main;
+  }
 
   return (
     <>
@@ -35,59 +37,33 @@ export default function DrawerItem({
         disablePadding
         sx={{
           padding: 0,
-          backgroundColor: active ? palette.grey[200] : "transparent",
+          backgroundColor,
           [`& .MuiListItemButton-root`]: {
             padding: 0,
           },
-          [`& .MuiListItemSecondaryAction-root`]: {
-            display: "none",
-          },
-          [`&:hover .MuiListItemSecondaryAction-root`]: {
-            display: "initial",
-            backgroundColor: palette.grey[200],
-            opacity: 0.8,
-          },
-          [`& .MuiListItemSecondaryAction-root:hover`]: {
-            display: "initial",
-            backgroundColor: palette.grey[50],
-            opacity: 1,
-          },
         }}
-        secondaryAction={
-          isTemplate ? null : (
-            <Tooltip title="Delete">
-              {/* eslint-disable-next-line no-console */}
-              <IconButton onClick={() => console.log("delete")} size="small">
-                <HighlightOff />
-              </IconButton>
-            </Tooltip>
-          )
-        }
       >
-        <LeftIcon active={active} isTemplate={isTemplate} isFile={isFile} />
+        <LeftIcon active={isExpanded} isFile={isFile} />
         <ListItemButton>
           <ListItemText primary={text} />
         </ListItemButton>
       </ListItem>
-      {active && isDir ? (
+      {isExpanded ? (
         <div style={{ marginLeft: 10 }}>
-          <DrawerItem
-            isTemplate={true}
-            active={selectedDocId === "template" + text}
-            text="Template"
-            onClick={() => setSelectedDocId("template" + text)}
-          />
-          {list?.length
-            ? list.map((item, index) => (
-                <DrawerItem
-                  isFile={true}
-                  text={collection[item]?.name || item}
-                  key={index}
-                  active={selectedDocId === item}
-                  onClick={() => setSelectedDocId(item)}
-                />
-              ))
-            : null}
+          {list.map((name, index) => (
+            <DrawerItem
+              isFile={true}
+              text={name}
+              key={index}
+              active={selected.type === "document" && selected.name === name}
+              onClick={() => {
+                setSelected({
+                  type: "document",
+                  name,
+                });
+              }}
+            />
+          ))}
         </div>
       ) : null}
     </>

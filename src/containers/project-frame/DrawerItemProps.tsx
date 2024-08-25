@@ -3,5 +3,4 @@ export default interface DrawerItemProps {
   onClick: () => void;
   active: boolean;
   isFile?: boolean;
-  isTemplate?: boolean;
 }
