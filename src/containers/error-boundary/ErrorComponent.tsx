@@ -17,15 +17,9 @@ export default function ErrorComponent({ error }: { error: Error }) {
         <i>{error?.message}</i>
       </p>
       <div>
-        <Button color="secondary" onClick={() => navigate("home")}>
-          Go back home
-        </Button>
-        <Button color="secondary" onClick={() => navigate("home")}>
-          Reload app
-        </Button>
-        <Button color="secondary" onClick={() => navigate("home")}>
-          Report Error
-        </Button>
+        <Button onClick={() => navigate("home", null)}>Go back home</Button>
+        <Button onClick={() => navigate("home")}>Reload app</Button>
+        <Button onClick={() => navigate("home")}>Report Error</Button>
       </div>
     </div>
   );

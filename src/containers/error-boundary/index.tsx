@@ -1,10 +1,9 @@
 import { Component } from "react";
 import ErrorBoundaryProps from "./ErrorBoundaryProps";
 import logError from "@/scripts/logError";
-import ErrorComponent from "./ErrorComponent";
 
 export default class ErrorBoundary extends Component<ErrorBoundaryProps> {
-  constructor(props: { children: React.ReactNode }) {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { error: null };
   }
@@ -14,20 +13,16 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps> {
   };
 
   static getDerivedStateFromError(error: Error) {
-    logError(error);
     return { error };
   }
 
   componentDidCatch(error: Error) {
+    this.props.setError(error);
     logError(error);
     this.setState({ error });
   }
 
   render() {
-    if (this.state.error) {
-      return <ErrorComponent error={this.state.error} />;
-    }
-
     return this.props.children;
   }
 }

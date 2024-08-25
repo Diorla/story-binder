@@ -3,11 +3,13 @@ import RouterContext from "./RouterContext";
 import Router from "./Router";
 import Path from "@/types/Path";
 import Layout from "@/containers/layout";
+import ErrorBoundary from "@/containers/error-boundary";
 
 export default function RouterProvider() {
   const [path, setPath] = useState<Path>("home");
   const [history, setHistory] = useState([]);
   const [params, setParams] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const db = localStorage.getItem("route");
@@ -20,6 +22,7 @@ export default function RouterProvider() {
   }, []);
 
   function navigate<T>(path: Path, params?: T) {
+    setError(null);
     setPath(path);
     const newHistory = [...history, path];
     setHistory(newHistory);
@@ -54,7 +57,9 @@ export default function RouterProvider() {
   return (
     <RouterContext.Provider value={{ navigate, goBack, _lastPath, params }}>
       <Layout>
-        <Router path={path} />
+        <ErrorBoundary setError={setError}>
+          <Router path={path} error={error} />
+        </ErrorBoundary>
       </Layout>
     </RouterContext.Provider>
   );
