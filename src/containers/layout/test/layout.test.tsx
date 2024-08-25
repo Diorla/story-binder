@@ -3,7 +3,6 @@ import Layout from "../.";
 
 const editList = ["Undo", "Redo", "Duplicate", "Delete"];
 const fileList = [
-  "Home",
   "Open project",
   "New project",
   "Change workspace",

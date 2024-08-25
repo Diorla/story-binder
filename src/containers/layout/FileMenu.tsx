@@ -22,11 +22,11 @@ export default function FileMenu() {
       <MenuWrapper anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            navigate("home");
+            navigate("create-project");
             handleClose();
           }}
         >
-          Home
+          New project
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -34,9 +34,10 @@ export default function FileMenu() {
             handleClose();
           }}
         >
-          New project
+          Open project
         </MenuItem>
-        <MenuItem onClick={handleClose}>Open project</MenuItem>
+        {/* It would ask if user wants to migrate all their projects to a new
+        workspace */}
         <MenuItem onClick={handleClose}>Change workspace</MenuItem>
         <MenuItem onClick={handleClose}>Export</MenuItem>
         <MenuItem onClick={handleClose}>Import</MenuItem>
