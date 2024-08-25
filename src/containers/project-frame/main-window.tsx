@@ -1,8 +1,9 @@
 import Box from "@mui/material/Box";
 import { useProject } from "@/context/project/useProject";
+import EditProject from "./edit-project";
 
 export default function MainWindow() {
-  const { project } = useProject();
+  const { project, selected } = useProject();
 
   if (!project)
     return (
@@ -10,29 +11,21 @@ export default function MainWindow() {
         Loading project
       </Box>
     );
-  // if (selectedDocId.includes("template"))
-  //   return (
-  //     <Box component="main" sx={{ flexGrow: 1 }}>
-  //       update document template
-  //     </Box>
-  //   );
-  // if (selectedDocId)
-  //   return (
-  //     <Box component="main" sx={{ flexGrow: 1 }}>
-  //       Update document: {selectedDocId}
-  //     </Box>
-  //   );
-
-  // if (selectedCollection.length)
-  //   return (
-  //     <Box component="main" sx={{ flexGrow: 1 }}>
-  //       Update last selected collection:{" "}
-  //       {selectedCollection[selectedCollection.length - 1]}
-  //     </Box>
-  //   );
+  if (selected.type === "collection")
+    return (
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        update collection template: {selected.name}
+      </Box>
+    );
+  if (selected.type === "document")
+    return (
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        update document template: {selected.name}
+      </Box>
+    );
   return (
     <Box component="main" sx={{ flexGrow: 1 }}>
-      {project.name}
+      <EditProject project={project} />
     </Box>
   );
 }
