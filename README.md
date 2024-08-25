@@ -44,19 +44,19 @@ This is where all the projects will be saved. It follows this pattern
     ├── ⚙️ .config
     ├── 📁 collection
         ├── ⚙️ .template
-        ├── 📄 document1.document
-        ├── 📄 document2.document
+        ├── 📄 document1
+        ├── 📄 document2
 ├── 📁 The Lord of the Rings.sbnd
     ├── ⚙️ .config
-    ├── 📁 characters.collection
+    ├── 📁 characters
         ├── ⚙️ .template
-        ├── 📄 Gandalf.document
-        ├── 📄 Bilbo Baggins.document
-        ├── 📄 Boromir.document
-        ├── 📄 Gimli.document
-        ├── 📄 Gollum.document
-        ├── 📄 Legolas.document
-        ├── 📄 Aragon.document
-        ├── 📄 Frodo.document
-        ├── 📄 Galadriel.document
+        ├── 📄 Gandalf
+        ├── 📄 Bilbo Baggins
+        ├── 📄 Boromir
+        ├── 📄 Gimli
+        ├── 📄 Gollum
+        ├── 📄 Legolas
+        ├── 📄 Aragon
+        ├── 📄 Frodo
+        ├── 📄 Galadriel
 ```
