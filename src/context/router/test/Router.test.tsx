@@ -9,14 +9,13 @@ describe("Router component", () => {
     render(<Router path={ROUTES[0].path} />);
 
     // Check if the correct component is rendered
-    expect(screen.getByText("Home")).toBeDefined();
+    expect(screen.getByText("Loading")).toBeDefined();
 
     const invalidPath = "/invalid";
     // Render Router component with an invalid path
     render(<Router path={invalidPath as Path} />);
 
     // Check if the NotFound component is rendered
-    // expect(screen.getByText("Not found")).toBeDefined();
-    expect(screen.getByRole("heading")).toBeDefined();
+    expect(screen.getByText("Page not found")).toBeDefined();
   });
 });

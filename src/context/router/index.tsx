@@ -12,16 +12,21 @@ export default function RouterProvider() {
   useEffect(() => {
     const db = localStorage.getItem("route");
     if (db) {
-      const { _lastPath, params } = JSON.parse(db);
-      if (_lastPath) setPath(_lastPath);
+      const { params, path, history } = JSON.parse(db);
+      if (path) setPath(path);
       if (params) setParams(params);
+      setHistory(history || []);
     }
   }, []);
 
   function navigate<T>(path: Path, params?: T) {
     setPath(path);
-    setHistory([...history, path]);
-    localStorage.setItem("route", JSON.stringify({ _lastPath, params }));
+    const newHistory = [...history, path];
+    setHistory(newHistory);
+    localStorage.setItem(
+      "route",
+      JSON.stringify({ params, path, history: newHistory })
+    );
     if (params) setParams(params);
   }
 
@@ -29,16 +34,17 @@ export default function RouterProvider() {
     const previousPath = history[history.length - 2];
     if (previousPath) {
       setPath(previousPath);
+      const newHistory = history.slice(0, -1);
       setHistory(history.slice(0, -1));
       localStorage.setItem(
         "route",
-        JSON.stringify({ _lastPath: previousPath, params })
+        JSON.stringify({ params, path, history: newHistory })
       );
     } else {
       setPath("home");
       localStorage.setItem(
         "route",
-        JSON.stringify({ _lastPath: "home", params })
+        JSON.stringify({ params, path, history: ["home"] })
       );
     }
   };
