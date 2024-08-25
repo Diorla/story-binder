@@ -33,3 +33,30 @@ The `main` branch is protected. To make any update use `dev-` for example: `dev-
 git branch dev-fix-lint
 git checkout dev-fix-lint
 ```
+
+# Workspace
+This is where all the projects will be saved. It follows this pattern
+
+```
+
+📁 Workspace
+├── 📁 projectName.sbnd
+    ├── ⚙️ .config
+    ├── 📁 collection
+        ├── ⚙️ .template
+        ├── 📄 document1.document
+        ├── 📄 document2.document
+├── 📁 The Lord of the Rings.sbnd
+    ├── ⚙️ .config
+    ├── 📁 characters.collection
+        ├── ⚙️ .template
+        ├── 📄 Gandalf.document
+        ├── 📄 Bilbo Baggins.document
+        ├── 📄 Boromir.document
+        ├── 📄 Gimli.document
+        ├── 📄 Gollum.document
+        ├── 📄 Legolas.document
+        ├── 📄 Aragon.document
+        ├── 📄 Frodo.document
+        ├── 📄 Galadriel.document
+```
