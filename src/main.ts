@@ -6,6 +6,7 @@ import selectDir from "./main/selectDir";
 import readDirectory from "./main/readDirectory";
 import writeDirectory from "./main/writeDirectory";
 import renameDirectory from "./main/renameDirectory";
+import selectFile from "./main/selectFile";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -71,6 +72,10 @@ app.on("ready", () => {
 
   ipcMain.handle("select-dir", () => {
     return selectDir();
+  });
+
+  ipcMain.handle("select-file", (_e, args) => {
+    return selectFile(args);
   });
   createWindow();
 });
