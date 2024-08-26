@@ -1,0 +1,185 @@
+.tiptap:first-child {
+  margin-top: 0;
+}
+
+.control-group {
+  position: sticky;
+  top: 30px;
+}
+
+.tiptap {
+  padding: 4px;
+  outline: none;
+}
+
+/* Inline styles */
+
+.tiptap strong {
+  font-weight: bold;
+}
+
+.tiptap em {
+  font-style: italic;
+}
+
+.tiptap sup {
+  vertical-align: super;
+  font-size: small;
+}
+
+.tiptap sub {
+  vertical-align: sub;
+  font-size: small;
+}
+
+.tiptap code {
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+  font-size: "smaller";
+}
+
+.tiptap p>code {
+  background-color: #e0f2f1;
+  color: #00a59d;
+}
+
+/* Display styles */
+
+.tiptap p {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  margin-top: 1rem;
+}
+
+.tiptap pre {
+  display: block;
+  background: #f1f1f1;
+  padding: 1em;
+  border-radius: 0.33em;
+}
+
+.tiptap h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+
+}
+
+.tiptap h1 {
+  font-size: 2.8rem;
+}
+
+.tiptap h2 {
+  font-size: 2.4rem;
+}
+
+.tiptap h3 {
+  font-size: 2rem;
+}
+
+.tiptap h4 {
+  font-size: 1.6rem;
+}
+
+.tiptap h5 {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.tiptap h6 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.tiptap ul,
+ol {
+  margin-left: 2rem;
+}
+
+.tiptap ul li {
+  list-style: square;
+  margin: 0;
+}
+
+.tiptap ul ul li {
+  list-style: disc;
+  margin: 0;
+}
+
+.tiptap ul ul ul li {
+  list-style: circle;
+  margin: 0;
+}
+
+.tiptap ol li {
+  list-style: decimal;
+  margin: 0;
+}
+
+.tiptap ol ol li {
+  list-style: upper-roman;
+  margin: 0;
+}
+
+.tiptap ol ol ol li {
+  list-style: lower-roman;
+  margin: 0;
+}
+
+.tiptap ol ol ol ol li {
+  list-style: lower-latin;
+  margin: 0;
+}
+
+.tiptap ol ol ol ol ol li {
+  list-style: upper-latin;
+  margin: 0;
+}
+
+.tiptap>p::first-letter {
+  padding-left: 1rem;
+}
+
+.tiptap blockquote {
+  background: #f1f1f1;
+  margin: 1em;
+  border-radius: 0.33em;
+}
+
+.tiptap blockquote>p {
+  display: block;
+  padding: 0.2rem;
+  margin: 0;
+}
+
+.task-list {
+  margin-left: 3rem;
+}
+
+.task-list li {
+  display: block;
+}
+
+.task-list * {
+  display: inline;
+}
+
+.task-list p {
+  margin: 0;
+}
+
+/* Controls */
+
+.control-group .MuiIconButton-colorSecondary {
+  color: #00a59d;
+}

@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import { useProject } from "@/context/project/useProject";
 import EditProject from "./edit-project";
+import Editor from "../editor";
 
 export default function MainWindow() {
   const { project, selected } = useProject();
@@ -20,7 +21,7 @@ export default function MainWindow() {
   if (selected.type === "document")
     return (
       <Box component="main" sx={{ flexGrow: 1 }}>
-        update document template: {selected.name}
+        <Editor />
       </Box>
     );
   return (
