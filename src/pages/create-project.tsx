@@ -9,6 +9,9 @@ import ImagePicker from "@/components/ImagePicker";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import logError from "@/scripts/logError";
 import useOpenProject from "@/hooks/useOpenProject";
+import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
+
+const { width, height } = BOOK_DIMENSION;
 
 export default function CreateProject() {
   const openProject = useOpenProject();
@@ -56,7 +59,7 @@ export default function CreateProject() {
     >
       <Box>
         <ImagePicker
-          style={{ aspectRatio: 5.5 / 8.5, width: 200 }}
+          style={{ aspectRatio: width / height, width: 200 }}
           {...register("cover")}
         />
       </Box>
