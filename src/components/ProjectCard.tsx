@@ -27,11 +27,13 @@ export default function ProjectCard({
         backgroundImage: `url(${cover})`,
         display: "flex",
         textShadow: "0 0 1px white",
+        backgroundSize: "200px 300px",
+        fontWeight: "bold",
       }}
     >
       <CardContent
         sx={{
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          backgroundColor: "rgba(255, 255, 255, 0.6)",
           flex: 1,
           display: "flex",
           justifyContent: "space-between",
@@ -50,7 +52,7 @@ export default function ProjectCard({
         <Typography variant="body1" sx={{ fontWeight: 500 }}>
           {truncateText(summary)}
         </Typography>
-        <CardActions sx={{ backgroundColor: "white" }}>
+        <CardActions>
           <Button
             size="small"
             color="primary"
