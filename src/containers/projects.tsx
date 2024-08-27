@@ -7,7 +7,9 @@ import { useEffect } from "react";
 
 export default function Projects({ projects }: { projects: string[] }) {
   const [loading, setLoading] = useLocalState("projects-loading", true);
-  const { workspace } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const [projectList, setProjectList] = useLocalState("project-list", []);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function Projects({ projects }: { projects: string[] }) {
       setProjectList(res);
       setLoading(false);
     });
-  }, [projects.length]);
+  }, [projects, setLoading, setProjectList, workspace]);
 
   if (loading) {
     return <div>Loading...</div>;

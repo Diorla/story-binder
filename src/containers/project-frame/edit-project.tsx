@@ -23,7 +23,9 @@ export default function EditProject({ project }: { project: ProjectInfo }) {
   });
 
   const { updateProject } = useProject();
-  const { workspace } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const submit = (form: ProjectInfo) => {
     const dir = `${workspace}/${project.name}.${APP_FILE_EXT}`;
     window.fs

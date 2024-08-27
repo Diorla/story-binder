@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import AppContext from "./AppContext";
-import UserInfo from "@/types/UserInfo";
+import AppContextProps from "./AppContextProps";
 
 export default function useApp() {
-  const context = useContext<UserInfo>(AppContext);
+  const context = useContext<AppContextProps>(AppContext);
   if (context === undefined) {
     throw new Error("useAppContext must be used within a AppProvider");
   }

@@ -24,7 +24,9 @@ export default function CreateProject() {
     required: ["name"],
   });
 
-  const { workspace } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const submit = (form: ProjectInfo) => {
     const dir = `${workspace}/${form.name}.${APP_FILE_EXT}`;
     window.fs

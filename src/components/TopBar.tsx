@@ -1,3 +1,4 @@
+import useApp from "@/context/app/useApp";
 import useRouter from "@/context/router/useRouter";
 import { Add, Home, Workspaces } from "@mui/icons-material";
 import AppBar from "@mui/material/AppBar";
@@ -6,6 +7,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 export default function TopBar() {
   const { navigate, _lastPath } = useRouter();
+  const { changeWorkspace } = useApp();
 
   return (
     <AppBar
@@ -46,7 +48,7 @@ export default function TopBar() {
             </Button>
           )}
           <Button
-            onClick={() => console.log("change workspace")}
+            onClick={changeWorkspace}
             style={{ textTransform: "inherit" }}
             color="inherit"
             size="small"

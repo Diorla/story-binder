@@ -5,10 +5,13 @@ import Projects from "@/containers/projects";
 import useLocalState from "@/hooks/useLocalState";
 
 export default function Home() {
-  const { workspace } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const [projects, setProjects] = useLocalState("project-list", []);
   const [loading, setLoading] = useLocalState("project-list-loading", true);
   useEffect(() => {
+    setLoading(true);
     window.fs
       ?.sendMessage({
         type: "read-directory",
@@ -18,7 +21,7 @@ export default function Home() {
         setProjects(value.folders);
         setLoading(false);
       });
-  }, []);
+  }, [setLoading, setProjects, workspace]);
 
   if (loading) return <div>Loading</div>;
   if (projects.length) return <Projects projects={projects} />;

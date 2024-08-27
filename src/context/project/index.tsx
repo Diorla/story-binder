@@ -1,21 +1,11 @@
-import { createContext, useEffect } from "react";
-import ProjectContextProps, { ExpandedCollection } from "./ProjectContextProps";
+import { useEffect } from "react";
+import { ExpandedCollection } from "./ProjectContextProps";
 import ProjectInfo from "@/types/ProjectInfo";
 import addCollection from "@/scripts/add-collection";
 import useApp from "../app/useApp";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useContextState from "@/hooks/useContextState";
-
-export const ProjectContext = createContext<ProjectContextProps>({
-  project: null,
-  updateProject: null,
-  createCollection: null,
-  collection: [],
-  selected: null,
-  setSelected: null,
-  expandedCollection: null,
-  toggleExpanded: null,
-});
+import ProjectContext from "./ProjectContext";
 
 export default function ProjectProvider({
   children,
@@ -24,7 +14,9 @@ export default function ProjectProvider({
   children: React.ReactNode;
   projectInfo: ProjectInfo;
 }) {
-  const { workspace } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const [project, setProject] = useContextState("project-info", projectInfo);
   const [collection, setCollection] = useContextState("project-collection", []);
   const [selected, setSelected] = useContextState<{
@@ -85,7 +77,7 @@ export default function ProjectProvider({
         });
     }
     init();
-  }, [project]);
+  }, [project, setCollection, workspace]);
 
   return (
     <ProjectContext.Provider
