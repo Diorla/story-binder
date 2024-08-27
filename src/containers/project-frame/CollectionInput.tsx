@@ -1,7 +1,7 @@
 import { useProject } from "@/context/project/useProject";
 import { ClickAwayListener, TextField } from "@mui/material";
-import { useState } from "react";
 import toLowerCase from "./toLowerCase";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function CollectionInput({
   visible,
@@ -10,8 +10,11 @@ export default function CollectionInput({
   visible: boolean;
   closeForm: () => void;
 }) {
-  const [textField, setTextField] = useState("");
-  const [textFieldError, setTextFieldError] = useState("");
+  const [textField, setTextField] = useLocalState("collection-input-text", "");
+  const [textFieldError, setTextFieldError] = useLocalState(
+    "collection-input-error",
+    ""
+  );
   const { createCollection, collection } = useProject();
 
   if (visible)

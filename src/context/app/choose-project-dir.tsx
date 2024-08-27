@@ -1,19 +1,19 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
+import useContextState from "@/hooks/useContextState";
 import logError from "@/scripts/logError";
 import UserInfo from "@/types/UserInfo";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
-import { useState } from "react";
 
 export default function ChooseProjectDir({
   confirmDir,
 }: {
   confirmDir: (dir: string) => void;
 }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useContextState("open-file-directory", false);
   const openFile = async () => {
     setLoading(true);
     window.dialog

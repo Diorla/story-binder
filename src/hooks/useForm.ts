@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import useLocalState from "./useLocalState";
 
 const genObj = (arr: string[]) => {
   const obj: { [key: string]: string } = {};
@@ -22,8 +22,9 @@ export default function useForm<T extends object>({
   defaultValue: T;
   required?: (keyof T)[];
 }) {
-  const [form, setForm] = useState<T>({ ...defaultValue });
-  const [formState, setFormState] = useState(
+  const [form, setForm] = useLocalState<T>("use-form", { ...defaultValue });
+  const [formState, setFormState] = useLocalState(
+    "form-state",
     genObj(Object.keys(form as Record<string, any>))
   );
 

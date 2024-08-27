@@ -2,14 +2,14 @@ import ProjectProvider from "@/context/project";
 import MainWindow from "./main-window";
 import Sidebar from "./sidebar";
 import ProjectInfo from "@/types/ProjectInfo";
-import { useState } from "react";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function ProjectFrame({
   projectPath,
 }: {
   projectPath: ProjectInfo;
 }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useLocalState("project-frame-expanded", true);
   const toggleDrawer = () => {
     setExpanded(!expanded);
   };

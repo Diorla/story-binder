@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import RouterContext from "./RouterContext";
 import Router from "./Router";
 import Path from "@/types/Path";
 import Layout from "@/containers/layout";
 import ErrorBoundary from "@/containers/error-boundary";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function RouterProvider() {
-  const [path, setPath] = useState<Path>("home");
-  const [history, setHistory] = useState([]);
-  const [params, setParams] = useState(null);
-  const [error, setError] = useState(null);
-  const [isDirty, setIsDirty] = useState(false);
+  const [path, setPath] = useLocalState<Path>("current-path", "home");
+  const [history, setHistory] = useLocalState("path history", []);
+  const [params, setParams] = useLocalState("route params", null);
+  const [error, setError] = useLocalState("route error", null);
+  const [isDirty, setIsDirty] = useLocalState("route is dirty", false);
 
   useEffect(() => {
     const db = localStorage.getItem("route");

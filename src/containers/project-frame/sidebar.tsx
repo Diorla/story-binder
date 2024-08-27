@@ -4,10 +4,10 @@ import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import DrawerItem from "./DrawerItem";
 import { useProject } from "@/context/project/useProject";
-import { useState } from "react";
 import ProjectButton from "./ProjectButton";
 import SidebarControl from "./SidebarControl";
 import CollectionInput from "./CollectionInput";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function Sidebar({
   expanded,
@@ -17,7 +17,7 @@ export default function Sidebar({
   toggleDrawer: () => void;
 }) {
   const { collection, toggleExpanded, selected, setSelected } = useProject();
-  const [openForm, setOpenForm] = useState(false);
+  const [openForm, setOpenForm] = useLocalState("open-collection-form", false);
 
   const drawerWidth = expanded ? 180 : 40;
 

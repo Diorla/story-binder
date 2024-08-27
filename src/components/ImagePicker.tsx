@@ -1,5 +1,5 @@
-import { useState } from "react";
 import logError from "@/scripts/logError";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function ImagePicker({
   value,
@@ -12,7 +12,7 @@ export default function ImagePicker({
   style?: React.CSSProperties;
   alt?: string;
 }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useLocalState("image-picker-loading", false);
 
   const getImage = () => {
     setLoading(true);

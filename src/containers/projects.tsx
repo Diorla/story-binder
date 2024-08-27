@@ -1,13 +1,14 @@
 import ProjectCard from "@/components/ProjectCard";
 import useApp from "@/context/app/useApp";
+import useLocalState from "@/hooks/useLocalState";
 import ProjectInfo from "@/types/ProjectInfo";
 import { Box, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Projects({ projects }: { projects: string[] }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useLocalState("projects-loading", true);
   const { workspace } = useApp();
-  const [projectList, setProjectList] = useState([]);
+  const [projectList, setProjectList] = useLocalState("project-list", []);
 
   useEffect(() => {
     const getProjectInfo = async () => {

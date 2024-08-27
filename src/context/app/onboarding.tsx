@@ -1,18 +1,18 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
+import useLocalState from "@/hooks/useLocalState";
 import logError from "@/scripts/logError";
 import UserInfo from "@/types/UserInfo";
 import { Button, Card, Container } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useState } from "react";
 
 export default function Onboarding({
   onCompleteOnboarding,
 }: {
   onCompleteOnboarding: () => void;
 }) {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useLocalState("onboarding-page", 1);
   const isCompleted = page === 10;
 
   const completeOnboarding = () => {

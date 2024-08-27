@@ -1,9 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect } from "react";
 import ProjectContextProps, { ExpandedCollection } from "./ProjectContextProps";
 import ProjectInfo from "@/types/ProjectInfo";
 import addCollection from "@/scripts/add-collection";
 import useApp from "../app/useApp";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
+import useContextState from "@/hooks/useContextState";
 
 export const ProjectContext = createContext<ProjectContextProps>({
   project: null,
@@ -24,17 +25,17 @@ export default function ProjectProvider({
   projectInfo: ProjectInfo;
 }) {
   const { workspace } = useApp();
-  const [project, setProject] = useState(projectInfo);
-  const [collection, setCollection] = useState([]);
-  const [selected, setSelected] = useState<{
+  const [project, setProject] = useContextState("project-info", projectInfo);
+  const [collection, setCollection] = useContextState("project-collection", []);
+  const [selected, setSelected] = useContextState<{
     type: "project" | "collection" | "document";
     name: string;
-  }>({
+  }>("selected-sidebar", {
     type: "project",
     name: "",
   });
   const [expandedCollection, setExpandedCollection] =
-    useState<ExpandedCollection>({});
+    useContextState<ExpandedCollection>("expanded-sidebar", {});
 
   const updateProject = (currentProject: Partial<ProjectInfo>) => {
     setProject({ ...project, ...currentProject });

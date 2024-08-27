@@ -1,12 +1,13 @@
 import EmptyProject from "@/containers/empty-project";
 import useApp from "@/context/app/useApp";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Projects from "@/containers/projects";
+import useLocalState from "@/hooks/useLocalState";
 
 export default function Home() {
   const { workspace } = useApp();
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useLocalState("project-list", []);
+  const [loading, setLoading] = useLocalState("project-list-loading", true);
   useEffect(() => {
     window.fs
       ?.sendMessage({
