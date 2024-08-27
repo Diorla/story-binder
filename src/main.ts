@@ -7,6 +7,7 @@ import readDirectory from "./main/readDirectory";
 import writeDirectory from "./main/writeDirectory";
 import renameDirectory from "./main/renameDirectory";
 import selectFile from "./main/selectFile";
+import openPrompt from "./main/openPrompt";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -16,12 +17,12 @@ if (require("electron-squirrel-startup")) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
     autoHideMenuBar: true,
+    minWidth: 800,
+    minHeight: 600,
   });
 
   // and load the index.html of the app.
@@ -76,6 +77,10 @@ app.on("ready", () => {
 
   ipcMain.handle("select-file", (_e, args) => {
     return selectFile(args);
+  });
+
+  ipcMain.handle("prompt", (_e, args) => {
+    return openPrompt(args);
   });
   createWindow();
 });

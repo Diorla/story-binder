@@ -3,6 +3,8 @@ import MenuBar from "./MenuBar";
 import { Box, useTheme } from "@mui/material";
 import { extensions } from "./extensions";
 import Count from "./Count";
+import { useEffect } from "react";
+import useRouter from "@/context/router/useRouter";
 
 // TODO
 // Use dropdown to change between paragraphs and header (h1-h6)
@@ -13,6 +15,16 @@ const content = `Initial content here`;
 
 export default function Editor() {
   const theme = useTheme();
+  const { isDirty, setIsDirty } = useRouter();
+
+  useEffect(() => {
+    document.querySelectorAll(".tiptap").forEach((el) => {
+      el.addEventListener("input", () => {
+        if (!isDirty) setIsDirty(true);
+      });
+    });
+  }, []);
+
   return (
     <Box
       sx={{

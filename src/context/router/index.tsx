@@ -10,6 +10,7 @@ export default function RouterProvider() {
   const [history, setHistory] = useState([]);
   const [params, setParams] = useState(null);
   const [error, setError] = useState(null);
+  const [isDirty, setIsDirty] = useState(false);
 
   useEffect(() => {
     const db = localStorage.getItem("route");
@@ -22,15 +23,36 @@ export default function RouterProvider() {
   }, []);
 
   function navigate<T>(path: Path, params?: T) {
-    setError(null);
-    setPath(path);
-    const newHistory = [...history, path];
-    setHistory(newHistory);
-    localStorage.setItem(
-      "route",
-      JSON.stringify({ params, path, history: newHistory })
-    );
-    if (params) setParams(params);
+    const confirmNavigation = () => {
+      setError(null);
+      setPath(path);
+      const newHistory = [...history, path];
+      setHistory(newHistory);
+      localStorage.setItem(
+        "route",
+        JSON.stringify({ params, path, history: newHistory })
+      );
+      if (params) setParams(params);
+    };
+
+    if (isDirty) {
+      const prompt = async () => {
+        const navigateAway = await window.dialog.prompt({
+          title: "Unsaved changes",
+          message: "You have unsaved changes. Are you sure you want to leave?",
+        });
+        return navigateAway;
+      };
+      prompt().then((res) => {
+        if (res) {
+          confirmNavigation();
+          setIsDirty(false);
+        }
+      });
+      return;
+    } else {
+      confirmNavigation();
+    }
   }
 
   const goBack = () => {
@@ -55,7 +77,16 @@ export default function RouterProvider() {
   const _lastPath = history[history.length - 1] || "";
 
   return (
-    <RouterContext.Provider value={{ navigate, goBack, _lastPath, params }}>
+    <RouterContext.Provider
+      value={{
+        navigate,
+        goBack,
+        _lastPath,
+        params,
+        isDirty,
+        setIsDirty,
+      }}
+    >
       <Layout>
         <ErrorBoundary setError={setError}>
           <Router path={path} error={error} />

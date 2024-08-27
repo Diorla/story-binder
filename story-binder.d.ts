@@ -1,5 +1,6 @@
 import { FilterType } from "@/types/Filter";
 import Payload from "@/types/Payload";
+import PromptProps from "@/types/PromptProps";
 
 export interface IpcRenderer {
   sendMessage: (payload: Payload) => Promise<unknown>;
@@ -15,6 +16,7 @@ interface FS {
 interface Dialog {
   selectDir: () => Promise<string>;
   selectFile: (fileType: FilterType) => Promise<string>;
+  prompt: (value: PromptProps) => Promise<boolean>;
 }
 
 declare global {

@@ -6,6 +6,8 @@ const RouterContext = createContext<RouterContextProps<unknown>>({
   goBack: null,
   _lastPath: "",
   params: null,
+  setIsDirty: null,
+  isDirty: false,
 });
 
 export default RouterContext;
