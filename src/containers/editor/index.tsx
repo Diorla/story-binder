@@ -23,7 +23,7 @@ export default function Editor() {
         if (!isDirty) setIsDirty(true);
       });
     });
-  }, []);
+  }, [isDirty, setIsDirty]);
 
   return (
     <Box
