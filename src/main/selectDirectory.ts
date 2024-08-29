@@ -1,6 +1,6 @@
 import { dialog } from "electron";
 
-export default async function selectDir(): Promise<string> {
+export default async function selectDirectory(): Promise<string> {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ["openDirectory"],
   });

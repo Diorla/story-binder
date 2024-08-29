@@ -23,7 +23,7 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
     },
     autoHideMenuBar: true,
-    minWidth: 800,
+    minWidth: 600,
     minHeight: 600,
     frame: false,
     thickFrame: true,

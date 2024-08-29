@@ -3,6 +3,7 @@
 // import useContextState from "@/hooks/useContextState";
 // import logError from "@/scripts/logError";
 // import UserInfo from "@/types/UserInfo";
+import BROWSER from "@/constants/BROWSER";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -15,18 +16,17 @@ export default function ChooseWorkspace({
 }) {
   return (
     <Container
+      id="choose-workspace-container"
       maxWidth={false}
       disableGutters={true}
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: BROWSER.HEIGHT }}
     >
-      <Stack style={{ minHeight: "100vh" }}>
+      <Stack style={{ minHeight: BROWSER.HEIGHT }}>
         <Stack
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <Typography variant="h4">Select Workspace</Typography>
-          <Typography>
-            Hi there, please select a folder (directory) to save all your files
-          </Typography>
+          <Typography>Please select a folder to save all you work</Typography>
           <Button variant="contained" onClick={changeWorkspace}>
             Open folder
           </Button>

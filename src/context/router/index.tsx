@@ -36,24 +36,24 @@ export default function RouterProvider() {
       if (params) setParams(params);
     };
 
-    if (isDirty) {
-      const prompt = async () => {
-        const navigateAway = await window.dialog.prompt({
-          title: "Unsaved changes",
-          message: "You have unsaved changes. Are you sure you want to leave?",
-        });
-        return navigateAway;
-      };
-      prompt().then((res) => {
-        if (res) {
-          confirmNavigation();
-          setIsDirty(false);
-        }
-      });
-      return;
-    } else {
-      confirmNavigation();
-    }
+    // if (isDirty) {
+    //   const prompt = async () => {
+    //     const navigateAway = await window.dialog.prompt({
+    //       title: "Unsaved changes",
+    //       message: "You have unsaved changes. Are you sure you want to leave?",
+    //     });
+    //     return navigateAway;
+    //   };
+    //   prompt().then((res) => {
+    //     if (res) {
+    //       confirmNavigation();
+    //       setIsDirty(false);
+    //     }
+    //   });
+    //   return;
+    // } else {
+    //   confirmNavigation();
+    // }
   }
 
   const goBack = () => {

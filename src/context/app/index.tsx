@@ -6,16 +6,13 @@ import { useCallback, useEffect } from "react";
 import UserInfo from "@/types/UserInfo";
 import AppContext from "./AppContext";
 import useContextState from "@/hooks/useContextState";
+import logError from "@/scripts/logError";
 
 export default function AppProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [error, setError] = useContextState<null | Error>(
-    "app-context-error",
-    null
-  );
   const [loading, setLoading] = useContextState("app-context-loading", true);
   const [status, setStatus] = useContextState<UserInfo>(
     "app-context-status",
@@ -23,43 +20,47 @@ export default function AppProvider({
   );
 
   const getUserInfo = useCallback(() => {
-    const content = JSON.stringify(INITIAL_USER_INFO);
-    window.fs
+    const defaultContent = JSON.stringify(INITIAL_USER_INFO);
+    window.api
       ?.sendMessage({
         type: "read-file",
-        dir: USER_INFO_DIR,
-        content,
+        path: USER_INFO_DIR,
+        defaultContent,
       })
-      .then((value) => {
+      .then((value = {}) => {
         setStatus(JSON.parse(value as string));
         setLoading(false);
       })
       .catch((e) => {
-        setError(e);
+        logError(e);
         setLoading(false);
       });
-  }, [setError, setLoading, setStatus]);
+  }, [setLoading, setStatus]);
 
   const openFile = async () => {
     setLoading(true);
-    window.dialog
-      .selectDir()
+    window.api
+      .sendMessage({
+        type: "select-directory",
+      })
       .then((value) => {
         const newContent: UserInfo = {
           ...INITIAL_USER_INFO,
           workspace: value as string,
-          onboardCompleted: true,
         };
+
         localStorage.clear();
+        window.api
+          .sendMessage({
+            type: "write-file",
+            path: USER_INFO_DIR,
+            content: JSON.stringify(newContent),
+          })
+          .then(() => setLoading(false));
         setStatus(newContent);
-        window.fs.sendMessage({
-          type: "write-file",
-          dir: USER_INFO_DIR,
-          content: JSON.stringify(newContent),
-        });
       })
       .catch((err: Error) => {
-        setError(err);
+        logError(err);
         setLoading(false);
       });
     setLoading(false);
@@ -69,11 +70,20 @@ export default function AppProvider({
     getUserInfo();
   }, [getUserInfo]);
 
-  if (error) return <div>Error: {error.message}</div>;
+  const completeOnboarding = () => {
+    window.api
+      .sendMessage({
+        type: "write-file",
+        path: USER_INFO_DIR,
+        content: JSON.stringify({ ...status, onboardCompleted: true }),
+      })
+      .then(() => setStatus({ ...status, onboardCompleted: true }))
+      .then(() => setLoading(false));
+  };
   if (loading) return <div>Loading...</div>;
-  if (!status.onboardCompleted)
-    return <Onboarding onCompleteOnboarding={getUserInfo} />;
   if (!status.workspace) return <ChooseWorkspace changeWorkspace={openFile} />;
+  if (!status.onboardCompleted)
+    return <Onboarding completeOnboarding={completeOnboarding} />;
   return (
     <AppContext.Provider
       value={{ userInfo: status, changeWorkspace: openFile }}

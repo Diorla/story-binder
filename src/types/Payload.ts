@@ -14,28 +14,44 @@
 // }
 
 // used to hide the window
-type CollapseWindow = {
+export type CollapseWindow = {
   type: "collapse-window";
 };
 
 // Used to reduce window size
-type MinimizeWindow = {
+export type MinimizeWindow = {
   type: "minimize-window";
 };
 
 // Used to expand window size to max
-type MaximizeWindow = {
+export type MaximizeWindow = {
   type: "toggle-window";
 };
 
 // used to close window
-type CloseWindow = {
+export type CloseWindow = {
   type: "close-window";
 };
 
 // not if window is small or full
-type GetWindowInfo = {
+export type GetWindowInfo = {
   type: "get-window-info";
+};
+
+export type ReadFile = {
+  type: "read-file";
+  path: string;
+  defaultContent?: string;
+};
+
+export type WriteFile = {
+  type: "write-file";
+  path: string;
+  content: string;
+};
+
+export type SelectDirectory = {
+  type: "select-directory";
 };
 
 type Payload =
@@ -43,6 +59,9 @@ type Payload =
   | MinimizeWindow
   | MaximizeWindow
   | CloseWindow
-  | GetWindowInfo;
+  | GetWindowInfo
+  | ReadFile
+  | WriteFile
+  | SelectDirectory;
 
 export default Payload;

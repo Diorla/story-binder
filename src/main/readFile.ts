@@ -1,11 +1,18 @@
 import fs from "node:fs";
 import writeFile from "./writeFile";
+import { ReadFile } from "@/types/Payload";
 
-export default function readFile(dir: string, defaultContent?: Buffer): Buffer {
-  if (fs.existsSync(dir)) {
-    return fs.readFileSync(dir);
-  } else if (defaultContent) {
-    writeFile(dir, defaultContent);
+// TODO: Encrypt read write with safeStorage
+export default function readFile(payload: ReadFile) {
+  if (fs.existsSync(payload.path)) {
+    return fs.readFileSync(payload.path, { encoding: "utf-8" });
   }
-  return defaultContent;
+  if (payload.defaultContent) {
+    writeFile({
+      ...payload,
+      content: payload.defaultContent,
+      type: "write-file",
+    });
+  }
+  return payload.defaultContent;
 }
