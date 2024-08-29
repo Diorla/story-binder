@@ -32,7 +32,7 @@ export default function AppProvider({
         setLoading(false);
       })
       .catch((e) => {
-        logError(e);
+        logError("AppProvider", "getUserInfo", e);
         setLoading(false);
       });
   }, [setLoading, setStatus]);
@@ -60,7 +60,7 @@ export default function AppProvider({
         setStatus(newContent);
       })
       .catch((err: Error) => {
-        logError(err);
+        logError("AppProvider", "openFile", err);
         setLoading(false);
       });
     setLoading(false);

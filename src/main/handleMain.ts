@@ -6,6 +6,7 @@ import { app } from "electron";
 import readFile from "./readFile";
 import selectDirectory from "./selectDirectory";
 import writeFile from "./writeFile";
+import readDirectory from "./readDirectory";
 
 export default function handleMain(params: Payload) {
   const { type } = params;
@@ -27,6 +28,8 @@ export default function handleMain(params: Payload) {
       return selectDirectory();
     case "write-file":
       return writeFile(params);
+    case "read-directory":
+      return readDirectory(params.path);
     default:
       return null;
   }

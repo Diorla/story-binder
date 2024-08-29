@@ -75,7 +75,7 @@ export default function RouterProvider() {
     }
   };
 
-  const _lastPath = history[history.length - 1] || "";
+  const _lastPath = history[history.length - 1] || "home";
 
   return (
     <RouterContext.Provider

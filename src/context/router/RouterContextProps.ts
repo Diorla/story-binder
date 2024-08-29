@@ -18,7 +18,7 @@ export interface RouterContextProps<T> {
    * This is a private variable that should be used in router context alone
    * for errors
    */
-  _lastPath: string;
+  _lastPath: Path;
   /**
    * current params from navigate function
    */

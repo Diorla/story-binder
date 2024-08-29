@@ -1,6 +1,7 @@
 import useRouter from "@/context/router/useRouter";
 import { Box, Button, Typography } from "@mui/material";
 import folder from "@/assets/folder";
+import BROWSER from "@/constants/BROWSER";
 
 export default function EmptyProject() {
   const { navigate } = useRouter();
@@ -11,7 +12,7 @@ export default function EmptyProject() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "90vh",
+        height: BROWSER.HEIGHT,
       }}
     >
       <Box
@@ -20,7 +21,6 @@ export default function EmptyProject() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "90vh",
           maxWidth: 400,
           textAlign: "center",
         }}
@@ -33,8 +33,8 @@ export default function EmptyProject() {
         </Typography>
         <Button
           onClick={() => navigate("create-project")}
-          variant="outlined"
           sx={{ mt: 1 }}
+          variant="contained"
         >
           Add Project
         </Button>

@@ -54,6 +54,11 @@ export type SelectDirectory = {
   type: "select-directory";
 };
 
+export type ReadDirectory = {
+  type: "read-directory";
+  path: string;
+};
+
 type Payload =
   | CollapseWindow
   | MinimizeWindow
@@ -62,6 +67,7 @@ type Payload =
   | GetWindowInfo
   | ReadFile
   | WriteFile
-  | SelectDirectory;
+  | SelectDirectory
+  | ReadDirectory;
 
 export default Payload;

@@ -1,3 +1,10 @@
-type Path = "home" | "about" | "project" | "create-project";
+type Path =
+  | "home"
+  | "project"
+  | "create-project"
+  | "templates"
+  | "help"
+  | "trash"
+  | "settings";
 
 export default Path;

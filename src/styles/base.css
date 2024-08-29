@@ -44,3 +44,29 @@
       color-stop(0.7, #c86600),
       color-stop(0.8, #964b00));
 }
+
+/* Main background */
+
+#browser {
+  background-image: url("../assets/bkg.png");
+  background-size: 100% 100%;
+}
+
+/* Sidebar */
+
+.sidebar-button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  transition: 0.15s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(245, 245, 245);
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+
+.sidebar-button:hover {
+  background-color: rgb(200, 200, 200);
+}
