@@ -54,7 +54,7 @@ export default function Top() {
         backgroundColor: theme.palette.grey[100],
         justifyContent: "space-between",
         alignItems: "center",
-        height: BROWSER.TOP,
+        height: BROWSER.MARGIN,
       }}
       color="inherit"
     >
