@@ -81,12 +81,12 @@ export default function Top() {
           onClick={maximizeWindow}
         >
           {isFullScreen ? (
-            <CropSquare
+            <FilterNone
               fontSize="small"
-              style={{ rotate: "180deg", fontSize: 18 }}
+              style={{ rotate: "180deg", fontSize: 16 }}
             />
           ) : (
-            <FilterNone
+            <CropSquare
               fontSize="small"
               style={{ rotate: "180deg", fontSize: 16 }}
             />
