@@ -8,6 +8,8 @@ import selectDirectory from "./selectDirectory";
 import writeFile from "./writeFile";
 import readDirectory from "./readDirectory";
 import openPrompt from "./openPrompt";
+import selectFile from "./selectFile";
+import createDirectory from "./createDirectory";
 
 export default function handleMain(params: Payload) {
   const { type } = params;
@@ -33,6 +35,10 @@ export default function handleMain(params: Payload) {
       return readDirectory(params.path);
     case "prompt":
       return openPrompt(params);
+    case "create-directory":
+      return createDirectory(params.path);
+    case "select-file":
+      return selectFile(params.filter);
     default:
       return null;
   }

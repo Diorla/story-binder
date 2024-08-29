@@ -8,6 +8,8 @@
 //   | "delete-file"
 //   | "delete-directory";
 
+import { FilterType } from "./Filter";
+
 // export default interface Payload {
 //   type: PayloadType;
 //   data?: unknown;
@@ -69,6 +71,15 @@ export type Prompt = {
   };
 };
 
+export type CreateDirectory = {
+  type: "create-directory";
+  path: string;
+};
+
+export type SelectFile = {
+  type: "select-file";
+  filter: FilterType;
+};
 type Payload =
   | CollapseWindow
   | MinimizeWindow
@@ -79,6 +90,8 @@ type Payload =
   | WriteFile
   | SelectDirectory
   | ReadDirectory
-  | Prompt;
+  | Prompt
+  | CreateDirectory
+  | SelectFile;
 
 export default Payload;

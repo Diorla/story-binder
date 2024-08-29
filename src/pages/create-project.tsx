@@ -27,18 +27,20 @@ export default function CreateProject() {
   const {
     userInfo: { workspace },
   } = useApp();
+
   const submit = (form: ProjectInfo) => {
-    const dir = `${workspace}/${form.name}.${APP_FILE_EXT}`;
-    window.fs
+    const path = `${workspace}/${form.name}`;
+
+    window.api
       .sendMessage({
-        type: "write-directory",
-        dir,
+        type: "create-directory",
+        path,
       })
       .then(() => {
-        window.fs
+        window.api
           .sendMessage({
             type: "write-file",
-            dir: `${dir}/.config`,
+            path: `${path}/.config`,
             content: JSON.stringify(form),
           })
           .then(() => {
@@ -46,7 +48,7 @@ export default function CreateProject() {
           });
       })
       .catch((err) => {
-        logError(err);
+        logError("create-project", "submit", err);
       });
   };
   return (

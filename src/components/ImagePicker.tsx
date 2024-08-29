@@ -16,15 +16,20 @@ export default function ImagePicker({
 
   const getImage = () => {
     setLoading(true);
-    window.dialog
-      .selectFile("images")
-      .then((value) => {
-        onUpdate(value);
+    window.api
+      .sendMessage({
+        type: "select-file",
+        filter: "images",
+      })
+      .then((value: string) => {
+        if (value) {
+          onUpdate(value);
+        }
         setLoading(false);
       })
       .catch((err: Error) => {
         setLoading(false);
-        logError(err);
+        logError("image-picker", "getImage", err);
       });
   };
 
