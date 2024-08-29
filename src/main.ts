@@ -2,14 +2,6 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 import Payload from "./types/Payload";
 import handleMain from "./main/handleMain";
-// import readFile from "./main/readFile";
-// import writeFile from "./main/writeFile";
-// import selectDir from "./main/selectDir";
-// import readDirectory from "./main/readDirectory";
-// import writeDirectory from "./main/writeDirectory";
-// import renameDirectory from "./main/renameDirectory";
-// import selectFile from "./main/selectFile";
-// import openPrompt from "./main/openPrompt";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -43,40 +35,6 @@ app.on("ready", () => {
   ipcMain.handle("api", (_e, args: Payload) => {
     return handleMain(args);
   });
-  // ipcMain.handle("read-file", (_e, args) => {
-  //   const defaultContent = safeStorage.encryptString(args.content || "");
-  //   const value = readFile(args.dir, defaultContent);
-  //   return safeStorage.decryptString(value).toString();
-  // });
-  // ipcMain.handle("read-directory", (_e, args) => {
-  //   const dir = readDirectory(args.dir);
-  //   return dir;
-  // });
-  // ipcMain.handle("rename-directory", (_e, args) => {
-  //   const dir = renameDirectory(args.dir, args.content);
-  //   return dir;
-  // });
-  // ipcMain.handle("write-file", (_e, args) => {
-  //   const defaultContent = safeStorage.encryptString(args.content);
-  //   const value = writeFile(args.dir, defaultContent);
-  //   return safeStorage.decryptString(value).toString();
-  // });
-  // ipcMain.handle("write-directory", (_e, args) => {
-  //   const dir = writeDirectory(args.dir);
-  //   return dir;
-  // });
-
-  // ipcMain.handle("select-dir", () => {
-  //   return selectDir();
-  // });
-
-  // ipcMain.handle("select-file", (_e, args) => {
-  //   return selectFile(args);
-  // });
-
-  // ipcMain.handle("prompt", (_e, args) => {
-  //   return openPrompt(args);
-  // });
   createWindow();
 });
 

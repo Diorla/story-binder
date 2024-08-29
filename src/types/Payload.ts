@@ -59,6 +59,16 @@ export type ReadDirectory = {
   path: string;
 };
 
+export type Prompt = {
+  type: "prompt";
+  data: {
+    title: string;
+    message: string;
+    accept?: string;
+    cancel?: string;
+  };
+};
+
 type Payload =
   | CollapseWindow
   | MinimizeWindow
@@ -68,6 +78,7 @@ type Payload =
   | ReadFile
   | WriteFile
   | SelectDirectory
-  | ReadDirectory;
+  | ReadDirectory
+  | Prompt;
 
 export default Payload;

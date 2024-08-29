@@ -7,6 +7,7 @@ import readFile from "./readFile";
 import selectDirectory from "./selectDirectory";
 import writeFile from "./writeFile";
 import readDirectory from "./readDirectory";
+import openPrompt from "./openPrompt";
 
 export default function handleMain(params: Payload) {
   const { type } = params;
@@ -30,6 +31,8 @@ export default function handleMain(params: Payload) {
       return writeFile(params);
     case "read-directory":
       return readDirectory(params.path);
+    case "prompt":
+      return openPrompt(params);
     default:
       return null;
   }

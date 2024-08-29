@@ -1,10 +1,18 @@
-import PromptProps from "@/types/PromptProps";
-import { dialog } from "electron";
+import icon from "@/assets/icon";
+import { Prompt } from "@/types/Payload";
+import { dialog, nativeImage, Tray } from "electron";
 
-export default function openPrompt(args: PromptProps) {
+export default function openPrompt(args: Prompt) {
+  const {
+    data: { title, message, accept = "OK", cancel = "Cancel" },
+  } = args;
+
+  const iconImage = nativeImage.createFromDataURL(icon);
   return dialog.showMessageBoxSync({
-    title: args.title,
-    message: args.message,
-    buttons: ["Cancel", "Leave"],
+    title,
+    message,
+    buttons: [cancel, accept],
+    noLink: true,
+    icon: iconImage,
   });
 }
