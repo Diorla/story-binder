@@ -1,7 +1,7 @@
 import icon from "@/assets/icon";
 import BROWSER from "@/constants/BROWSER";
 import { Close, CropSquare, FilterNone, Remove } from "@mui/icons-material";
-import { useTheme } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Top() {
@@ -65,7 +65,7 @@ export default function Top() {
         }}
       >
         <img src={icon} style={{ height: 32, width: 32, marginLeft: 4 }} />
-        <div>Story binder</div>
+        <Typography>Story binder</Typography>
       </div>
       <div className="row">
         <button
