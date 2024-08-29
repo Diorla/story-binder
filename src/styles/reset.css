@@ -3,7 +3,14 @@ body {
     Arial, sans-serif;
 }
 
+#app-bar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
 
+button {
+  -webkit-app-region: no-drag;
+}
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126

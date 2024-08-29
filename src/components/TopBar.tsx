@@ -11,6 +11,7 @@ export default function TopBar() {
 
   return (
     <AppBar
+      id="app-bar"
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       color="secondary"

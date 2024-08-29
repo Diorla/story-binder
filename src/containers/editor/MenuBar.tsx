@@ -47,8 +47,6 @@ export default function MenuBar() {
 
   const chain = (type: FormatType) => formatFn(editor, type);
 
-  if (!editor) return null;
-
   useEffect(() => {
     document.body.addEventListener("paste", (e) => {
       const dT = e.clipboardData;
@@ -63,7 +61,8 @@ export default function MenuBar() {
         });
       }
     });
-  }, []);
+  }, [editor.commands]);
+  if (!editor) return null;
 
   const addImage = () => {
     window.dialog.selectFile("images").then((img) => {

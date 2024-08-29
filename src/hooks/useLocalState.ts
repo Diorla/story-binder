@@ -21,7 +21,7 @@ export default function useLocalState<T>(
     if (storedValue) {
       setState(JSON.parse(storedValue));
     }
-  }, [key]);
+  }, [_lastPath, key]);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));

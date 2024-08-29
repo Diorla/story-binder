@@ -21,7 +21,7 @@ export default function RouterProvider() {
       if (params) setParams(params);
       setHistory(history || []);
     }
-  }, []);
+  }, [setHistory, setParams, setPath]);
 
   function navigate<T>(path: Path, params?: T) {
     const confirmNavigation = () => {

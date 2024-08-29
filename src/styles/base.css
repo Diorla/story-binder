@@ -1,0 +1,46 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Window button */
+.window-button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  transition: 0.15s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(245, 245, 245);
+
+}
+
+.window-button:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.window-button.error:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Scroll */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f6e9e5;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f6e9e5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear,
+      left bottom,
+      left top,
+      color-stop(0.4, #e7ae89),
+      color-stop(0.7, #c86600),
+      color-stop(0.8, #964b00));
+}
