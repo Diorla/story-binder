@@ -15,7 +15,7 @@ export default function Nav() {
         <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
         {project?.name}
       </Link>
-      {selectedCollection && (
+      {selectedCollection.id && (
         <Link
           className="breadcrumbs"
           underline="hover"
@@ -23,10 +23,10 @@ export default function Nav() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {selectedCollection}
+          {selectedCollection.name}
         </Link>
       )}
-      {selectedDocument && (
+      {selectedDocument.id && (
         <Link
           className="breadcrumbs"
           underline="hover"
@@ -34,7 +34,7 @@ export default function Nav() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <TextSnippet style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {selectedDocument}
+          {selectedDocument.name}
         </Link>
       )}
     </Breadcrumbs>

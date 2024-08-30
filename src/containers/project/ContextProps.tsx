@@ -12,13 +12,15 @@ export interface ExpandedCollection {
 export default interface ProjectContextProps {
   project: ProjectInfo;
   collection: { name: string; note: string; id: string }[];
-  selectedCollection: string;
-  selectedDocument: string;
-  selectItem: (
-    type: "project" | "collection" | "document",
-    name: string
-  ) => void;
+  selectedCollection: { id: string; name: string };
+  selectedDocument: { id: string; name: string };
+  selectItem: (args: {
+    type: "project" | "collection" | "document";
+    id: string;
+    name: string;
+  }) => void;
   createCollection: (arg: { name: string; note: string; id?: string }) => void;
+  deleteCollection: (id: string) => void;
   // updateProject: (args: Partial<ProjectInfo>) => void;
   // createCollection: (collectionName: string) => void;
   // selected: Selected;

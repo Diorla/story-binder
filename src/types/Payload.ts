@@ -76,6 +76,11 @@ export type DeleteDirectory = {
   path: string;
 };
 
+export type DeleteFile = {
+  type: "delete-file";
+  path: string;
+};
+
 type Payload =
   | MinimizeWindow
   | MaximizeWindow
@@ -90,6 +95,7 @@ type Payload =
   | SelectFile
   | DuplicateDirectory
   | DuplicateFile
-  | DeleteDirectory;
+  | DeleteDirectory
+  | DeleteFile;
 
 export default Payload;

@@ -12,6 +12,7 @@ import selectFile from "./selectFile";
 import createDirectory from "./createDirectory";
 import duplicateDirectory from "./duplicateDirectory";
 import deleteDirectory from "./deleteDirectory";
+import deleteFile from "./deleteFile";
 
 export default function handleMain(params: Payload) {
   const { type } = params;
@@ -44,8 +45,9 @@ export default function handleMain(params: Payload) {
     case "duplicate-directory":
       return duplicateDirectory(params.path);
     case "delete-directory":
-      deleteDirectory(params.path);
-      break;
+      return deleteDirectory(params.path);
+    case "delete-file":
+      return deleteFile(params.path);
     default:
       return null;
   }

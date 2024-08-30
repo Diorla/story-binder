@@ -9,6 +9,11 @@ import useApp from "@/context/app/useApp";
 import { v4 } from "uuid";
 import init from "./init";
 
+const base = {
+  id: "",
+  name: "",
+};
+
 export default function ProjectProvider({
   children,
   projectInfo,
@@ -22,21 +27,23 @@ export default function ProjectProvider({
 
   const [project, setProject] = useContextState("project-info", projectInfo);
   const [collection, setCollection] = useContextState("project-collection", []);
-  const [selCol, setSelCol] = useContextState("selected-collection", "");
-  const [selDoc, setSelDoc] = useContextState("selected-document", "");
+  const [selCol, setSelCol] = useContextState("selected-collection", base);
+  const [selDoc, setSelDoc] = useContextState("selected-document", base);
 
-  const selectItem = (
-    type: "project" | "collection" | "document",
-    name: string
-  ) => {
+  const selectItem = (args: {
+    type: "project" | "collection" | "document";
+    name: string;
+    id: string;
+  }) => {
+    const { type } = args;
     if (type === "project") {
-      setSelCol("");
-      setSelDoc("");
+      setSelCol(base);
+      setSelDoc(base);
     } else if (type === "collection") {
-      setSelCol(name);
-      setSelDoc("");
+      setSelCol(args);
+      setSelDoc(base);
     } else if (type === "document") {
-      setSelDoc(name);
+      setSelDoc(args);
     }
   };
 
@@ -59,12 +66,22 @@ export default function ProjectProvider({
     });
   };
 
+  const deleteCollection = (id: string) => {
+    window.api.sendMessage({
+      type: "delete-file",
+      path: `${project.path}/${id}`,
+    });
+    init(project.path).then((list) => {
+      setCollection(list);
+    });
+  };
   useEffect(() => {
     init(project.path).then((list) => {
       setCollection(list);
     });
   }, [project, setCollection, workspace]);
 
+  console.log("selCol", selCol);
   return (
     <Context.Provider
       value={{
@@ -74,6 +91,7 @@ export default function ProjectProvider({
         selectedDocument: selDoc,
         selectItem,
         createCollection,
+        deleteCollection,
       }}
     >
       {children}
