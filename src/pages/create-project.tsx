@@ -83,8 +83,8 @@ export default function CreateProject() {
             label="Title"
             variant="standard"
             {...register("name")}
-            error={!!register("name").errortext}
-            helperText={register("name").errortext}
+            error={!!register("name").errorText}
+            helperText={register("name").errorText}
           />
           <TextField
             label="Summary"

@@ -32,7 +32,7 @@ export default function useForm<T extends object>({
    * This returns all the basic things a form needs
    * @example <Input label="Name" placeholder="John doe" {...register("name")}/>
    * @param value - the name of the field is being targetted
-   * @returns onChangeText, onUpdate, onBlur, onFocus, value, errortext
+   * @returns onChangeText, onUpdate, onBlur, onFocus, value, errorText
    */
   const register = (value: keyof T) => {
     return {
@@ -70,7 +70,7 @@ export default function useForm<T extends object>({
       value: form[value] as any,
 
       // if there is any error, or if it is required but not filled
-      errortext: formState[value as string],
+      errorText: formState[value as string],
     };
   };
 
