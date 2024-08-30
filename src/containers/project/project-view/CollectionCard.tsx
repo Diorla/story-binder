@@ -7,19 +7,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useProject } from "./useProject";
-import EditableContent from "./EditableContent";
 import ContextMenu from "@/components/ContextMenu";
 import { Folder } from "@mui/icons-material";
+import EditableContent from "@/components/EditableContent";
+import CollectionInfo from "@/types/CollectionInfo";
 
-export default function CollectionCard({
-  item,
-}: {
-  item: {
-    name: string;
-    note: string;
-    id: string;
-  };
-}) {
+export default function CollectionCard({ item }: { item: CollectionInfo }) {
   const { createCollection, deleteCollection, selectItem } = useProject();
 
   return (

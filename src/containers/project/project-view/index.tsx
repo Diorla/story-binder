@@ -1,6 +1,6 @@
 import { Box, Button, Card, Divider, Grid, IconButton } from "@mui/material";
 import { Add, GridView, Tune } from "@mui/icons-material";
-import Nav from "./Nav";
+import Nav from "../Nav";
 import { useState } from "react";
 import CollectionList from "./CollectionList";
 import Input from "@/components/Input";

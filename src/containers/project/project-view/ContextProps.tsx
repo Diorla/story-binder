@@ -1,3 +1,4 @@
+import CollectionInfo from "@/types/CollectionInfo";
 import ProjectInfo from "@/types/ProjectInfo";
 
 export interface Selected {
@@ -19,13 +20,7 @@ export default interface ProjectContextProps {
     id: string;
     name: string;
   }) => void;
-  createCollection: (arg: { name: string; note: string; id?: string }) => void;
+  createCollection: (arg: Partial<CollectionInfo>) => void;
   deleteCollection: (id: string) => void;
   setProject: (args: ProjectInfo) => void;
-  // updateProject: (args: Partial<ProjectInfo>) => void;
-  // createCollection: (collectionName: string) => void;
-  // selected: Selected;
-  // setSelected: (args: Selected) => void;
-  // expandedCollection: ExpandedCollection;
-  // toggleExpanded: (collection: string) => void;
 }

@@ -1,5 +1,5 @@
 import Project from "@/containers/project";
-import ProjectProvider from "@/containers/project/Provider";
+import ProjectProvider from "@/containers/project/project-view/Provider";
 import useRouter from "@/context/router/useRouter";
 import ProjectInfo from "@/types/ProjectInfo";
 

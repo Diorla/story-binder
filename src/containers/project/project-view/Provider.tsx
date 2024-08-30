@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-// import { ExpandedCollection } from "./ContextProps";
 import ProjectInfo from "@/types/ProjectInfo";
-// import addCollection from "@/scripts/add-collection";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useContextState from "@/hooks/useContextState";
 import Context from "./Context";
@@ -81,7 +79,6 @@ export default function ProjectProvider({
     });
   }, [project, setCollection, workspace]);
 
-  console.log("selCol", selCol);
   return (
     <Context.Provider
       value={{
