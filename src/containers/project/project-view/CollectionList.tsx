@@ -7,7 +7,7 @@ export default function CollectionList() {
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       {collection.map((item) => (
-        <CollectionCard item={item} />
+        <CollectionCard key={item.id} item={item} />
       ))}
     </Box>
   );
