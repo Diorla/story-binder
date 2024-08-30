@@ -5,7 +5,7 @@ import CollectionCard from "./CollectionCard";
 export default function CollectionList() {
   const { collection } = useProject();
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       {collection.map((item) => (
         <CollectionCard item={item} />
       ))}

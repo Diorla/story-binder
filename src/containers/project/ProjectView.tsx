@@ -6,6 +6,7 @@ import CollectionList from "./CollectionList";
 import Input from "@/components/Input";
 import { useProject } from "./useProject";
 import useForm from "@/hooks/useForm";
+import EditProject from "./EditProject";
 
 export default function ProjectView() {
   const [editing, setEditing] = useState(false);
@@ -18,19 +19,19 @@ export default function ProjectView() {
     required: ["name"],
   });
 
-  const { createCollection } = useProject();
+  const { createCollection, project } = useProject();
 
   return (
     <div>
       <Card
-        style={{
+        sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           position: "sticky",
           top: 0,
           backgroundColor: "white",
-          padding: 2,
+          p: 1,
           borderRadius: 0,
         }}
       >
@@ -39,7 +40,6 @@ export default function ProjectView() {
           style={{
             display: "flex",
             alignItems: "center",
-            width: 100,
             justifyContent: "space-evenly",
           }}
         >
@@ -96,7 +96,7 @@ export default function ProjectView() {
         </>
       )}
       <Grid sx={{ p: 1 }}>
-        {editing ? <div>Edit project</div> : <CollectionList />}
+        {editing ? <EditProject defaultValue={project} /> : <CollectionList />}
       </Grid>
     </div>
   );

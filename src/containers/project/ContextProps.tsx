@@ -21,6 +21,7 @@ export default interface ProjectContextProps {
   }) => void;
   createCollection: (arg: { name: string; note: string; id?: string }) => void;
   deleteCollection: (id: string) => void;
+  setProject: (args: ProjectInfo) => void;
   // updateProject: (args: Partial<ProjectInfo>) => void;
   // createCollection: (collectionName: string) => void;
   // selected: Selected;

@@ -2,12 +2,11 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card, Typography, Divider, TextField } from "@mui/material";
 import useForm from "@/hooks/useForm";
-import useApp from "@/context/app/useApp";
 import ProjectInfo from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
-import useRouter from "@/context/router/useRouter";
+import { useProject } from "./useProject";
 
 const { width, height } = BOOK_DIMENSION;
 
@@ -16,18 +15,14 @@ export default function EditProject({
 }: {
   defaultValue: ProjectInfo;
 }) {
-  const { navigate } = useRouter<ProjectInfo>();
   const { handleSubmit, register } = useForm<ProjectInfo>({
     defaultValue,
     required: ["name"],
   });
 
-  const {
-    userInfo: { workspace },
-  } = useApp();
-
+  const { setProject } = useProject();
   const submit = (form: ProjectInfo) => {
-    const path = `${workspace}/${form.name}`;
+    const path = defaultValue.path;
 
     window.api
       .sendMessage({
@@ -36,7 +31,7 @@ export default function EditProject({
         content: JSON.stringify(form),
       })
       .then(() => {
-        navigate("project", form);
+        setProject(form);
       })
       .catch((err) => {
         logError("update-project", "submit", err);

@@ -9,6 +9,7 @@ const Context = createContext<ContextProps>({
   selectItem: null,
   createCollection: null,
   deleteCollection: null,
+  setProject: null,
   // updateProject: null,
   // createCollection: null,
   // collection: [],

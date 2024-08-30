@@ -92,6 +92,7 @@ export default function ProjectProvider({
         selectItem,
         createCollection,
         deleteCollection,
+        setProject,
       }}
     >
       {children}
