@@ -6,7 +6,7 @@
 /* Window button */
 .window-button {
   height: 40px;
-  width: 40px;
+  width: 48px;
   border: none;
   transition: 0.15s linear;
   display: flex;
