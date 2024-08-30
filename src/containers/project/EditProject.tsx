@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card, Typography, Divider, TextField } from "@mui/material";
-import cover from "@/assets/placeholder";
 import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
 import ProjectInfo from "@/types/ProjectInfo";
@@ -12,15 +11,14 @@ import useRouter from "@/context/router/useRouter";
 
 const { width, height } = BOOK_DIMENSION;
 
-export default function CreateProject() {
+export default function EditProject({
+  defaultValue,
+}: {
+  defaultValue: ProjectInfo;
+}) {
   const { navigate } = useRouter<ProjectInfo>();
   const { handleSubmit, register } = useForm<ProjectInfo>({
-    defaultValue: {
-      name: "",
-      summary: "",
-      cover,
-      path: "",
-    },
+    defaultValue,
     required: ["name"],
   });
 
@@ -33,22 +31,15 @@ export default function CreateProject() {
 
     window.api
       .sendMessage({
-        type: "create-directory",
-        path,
+        type: "write-file",
+        path: `${path}/.config`,
+        content: JSON.stringify(form),
       })
       .then(() => {
-        window.api
-          .sendMessage({
-            type: "write-file",
-            path: `${path}/.config`,
-            content: JSON.stringify(form),
-          })
-          .then(() => {
-            navigate("project", form);
-          });
+        navigate("project", form);
       })
       .catch((err) => {
-        logError("create-project", "submit", err);
+        logError("update-project", "submit", err);
       });
   };
   return (

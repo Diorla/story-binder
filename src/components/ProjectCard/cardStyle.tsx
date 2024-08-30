@@ -9,7 +9,7 @@ const cardStyle = {
   textShadow: "0 0 1px white",
   backgroundSize: "200px 300px",
   fontWeight: "bold",
-  mb: 1,
+  m: 0.5,
 };
 
 export default cardStyle;

@@ -25,6 +25,7 @@ export default function RouterProvider() {
 
   function navigate<T>(path: Path, params?: T) {
     const confirmNavigation = () => {
+      localStorage.clear();
       setError(null);
       setPath(path);
       const newHistory = [...history, path];

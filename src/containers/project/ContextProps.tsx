@@ -11,13 +11,14 @@ export interface ExpandedCollection {
 
 export default interface ProjectContextProps {
   project: ProjectInfo;
-  collection: { name: string; description: string }[];
+  collection: { name: string; note: string; id: string }[];
   selectedCollection: string;
   selectedDocument: string;
   selectItem: (
     type: "project" | "collection" | "document",
     name: string
   ) => void;
+  createCollection: (arg: { name: string; note: string; id?: string }) => void;
   // updateProject: (args: Partial<ProjectInfo>) => void;
   // createCollection: (collectionName: string) => void;
   // selected: Selected;

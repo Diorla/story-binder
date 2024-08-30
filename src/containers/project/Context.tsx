@@ -7,6 +7,7 @@ const Context = createContext<ContextProps>({
   selectedCollection: null,
   selectedDocument: null,
   selectItem: null,
+  createCollection: null,
   // updateProject: null,
   // createCollection: null,
   // collection: [],

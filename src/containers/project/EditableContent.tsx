@@ -52,6 +52,8 @@ export default function EditableContent({
       onClick={handleClick}
       style={{
         ...textStyle,
+        minWidth: 100,
+        minHeight: 30,
       }}
     >
       {value}
