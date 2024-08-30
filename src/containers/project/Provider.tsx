@@ -46,7 +46,9 @@ export default function ProjectProvider({
     id?: string;
   }) => {
     const fileName = arg.id || v4();
-    const path = `${project.path}/${fileName}.${APP_FILE_EXT}`;
+    const path = fileName.endsWith(APP_FILE_EXT)
+      ? `${project.path}/${fileName}`
+      : `${project.path}/${fileName}.${APP_FILE_EXT}`;
     window.api.sendMessage({
       type: "write-file",
       content: JSON.stringify({ ...arg, id: fileName, path }),
