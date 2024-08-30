@@ -10,6 +10,8 @@ import readDirectory from "./readDirectory";
 import openPrompt from "./openPrompt";
 import selectFile from "./selectFile";
 import createDirectory from "./createDirectory";
+import duplicateDirectory from "./duplicateDirectory";
+import deleteDirectory from "./deleteDirectory";
 
 export default function handleMain(params: Payload) {
   const { type } = params;
@@ -39,6 +41,11 @@ export default function handleMain(params: Payload) {
       return createDirectory(params.path);
     case "select-file":
       return selectFile(params.filter);
+    case "duplicate-directory":
+      return duplicateDirectory(params.path);
+    case "delete-directory":
+      deleteDirectory(params.path);
+      break;
     default:
       return null;
   }

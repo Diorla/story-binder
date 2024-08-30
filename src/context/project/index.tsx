@@ -7,6 +7,14 @@ import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useContextState from "@/hooks/useContextState";
 import ProjectContext from "./ProjectContext";
 
+const init = async (path: string) => {
+  const data = await window.api.sendMessage({
+    type: "read-directory",
+    path,
+  });
+  const { files, folders } = data as { files: string[]; folders: string[] };
+  return { files, folders };
+};
 export default function ProjectProvider({
   children,
   projectInfo,
@@ -50,10 +58,10 @@ export default function ProjectProvider({
       setExpandedCollection(temp);
       return;
     }
-    window.fs
+    window.api
       .sendMessage({
         type: "read-directory",
-        dir: `${workspace}/${project.name}.${APP_FILE_EXT}/${name}`,
+        path: `${workspace}/${project.name}.${APP_FILE_EXT}/${name}`,
       })
       .then((res: { files: string[]; folders: string[] }) => {
         const files = res.files.filter((item) => item !== ".template");
@@ -65,18 +73,9 @@ export default function ProjectProvider({
   };
 
   useEffect(() => {
-    function init() {
-      window.fs
-        .sendMessage({
-          type: "read-directory",
-          dir: `${workspace}/${project.name}.${APP_FILE_EXT}`,
-        })
-        .then((res: { files: string[]; folders: string[] }) => {
-          const { folders } = res;
-          setCollection(folders);
-        });
-    }
-    init();
+    init(`${workspace}/${project.name}`).then(({ folders }) => {
+      setCollection(folders);
+    });
   }, [project, setCollection, workspace]);
 
   return (

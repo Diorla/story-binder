@@ -1,24 +1,4 @@
-// export type PayloadType =
-//   | "write-file"
-//   | "write-directory"
-//   | "read-file"
-//   | "read-directory"
-//   | "rename-file"
-//   | "rename-directory"
-//   | "delete-file"
-//   | "delete-directory";
-
 import { FilterType } from "./Filter";
-
-// export default interface Payload {
-//   type: PayloadType;
-//   data?: unknown;
-// }
-
-// used to hide the window
-export type CollapseWindow = {
-  type: "collapse-window";
-};
 
 // Used to reduce window size
 export type MinimizeWindow = {
@@ -80,8 +60,23 @@ export type SelectFile = {
   type: "select-file";
   filter: FilterType;
 };
+
+export type DuplicateDirectory = {
+  type: "duplicate-directory";
+  path: string;
+};
+
+export type DuplicateFile = {
+  type: "duplicate-file";
+  path: string;
+};
+
+export type DeleteDirectory = {
+  type: "delete-directory";
+  path: string;
+};
+
 type Payload =
-  | CollapseWindow
   | MinimizeWindow
   | MaximizeWindow
   | CloseWindow
@@ -92,6 +87,9 @@ type Payload =
   | ReadDirectory
   | Prompt
   | CreateDirectory
-  | SelectFile;
+  | SelectFile
+  | DuplicateDirectory
+  | DuplicateFile
+  | DeleteDirectory;
 
 export default Payload;

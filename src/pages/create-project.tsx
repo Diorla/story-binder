@@ -6,7 +6,6 @@ import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
 import ProjectInfo from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import logError from "@/scripts/logError";
 import useOpenProject from "@/hooks/useOpenProject";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
@@ -20,6 +19,7 @@ export default function CreateProject() {
       name: "",
       summary: "",
       cover,
+      path: "",
     },
     required: ["name"],
   });

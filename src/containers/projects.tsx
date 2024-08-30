@@ -2,7 +2,7 @@ import ProjectCard from "@/components/ProjectCard";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import ProjectInfo from "@/types/ProjectInfo";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useEffect } from "react";
 
 export default function Projects({ projects }: { projects: string[] }) {
@@ -13,20 +13,21 @@ export default function Projects({ projects }: { projects: string[] }) {
   const [projectList, setProjectList] = useLocalState("project-list", []);
 
   useEffect(() => {
-    const getProjectInfo = async () => {
+    const getProjectList = async () => {
       const list = [];
       for (const project of projects) {
-        const dir = `${workspace}/${project}/.config`;
-        const res = await window.fs.sendMessage({
+        const path = `${workspace}/${project}/.config`;
+        const res = await window.api.sendMessage({
           type: "read-file",
-          dir,
+          path,
         });
 
-        list.push(JSON.parse(res as string));
+        const obj = JSON.parse(res as string);
+        list.push({ ...obj, path: `${workspace}/${project}` });
       }
       return list;
     };
-    getProjectInfo().then((res: ProjectInfo[]) => {
+    getProjectList().then((res: ProjectInfo[]) => {
       setProjectList(res);
       setLoading(false);
     });
@@ -37,12 +38,18 @@ export default function Projects({ projects }: { projects: string[] }) {
   }
   return (
     <Box sx={{ p: 1 }}>
-      <Typography variant="h4" sx={{ textAlign: "center" }}>
-        Projects
-      </Typography>
-      {projectList.map((project, index) => {
-        return <ProjectCard {...project} key={index} />;
-      })}
+      <Grid
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+        }}
+      >
+        {projectList.map((project, index) => {
+          return <ProjectCard {...project} key={index} />;
+        })}
+      </Grid>
     </Box>
   );
 }
