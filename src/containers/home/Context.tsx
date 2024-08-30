@@ -1,6 +1,8 @@
 import { createContext } from "react";
 
-export const ProjectListContext = createContext({
+const Context = createContext({
   projects: [],
   reload: () => undefined,
 });
+
+export default Context;

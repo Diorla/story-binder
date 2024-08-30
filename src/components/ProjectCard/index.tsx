@@ -11,8 +11,8 @@ import useApp from "@/context/app/useApp";
 import duplicateProject from "./duplicateProject";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
-import useProjectList from "@/context/projectList/useProjectList";
 import contentStyle from "./contentStyle";
+import useProjects from "@/containers/home/useProjects";
 
 export default function ProjectCard({
   name,
@@ -22,7 +22,7 @@ export default function ProjectCard({
 }: ProjectInfo) {
   const openProject = useOpenProject();
   const { userInfo } = useApp();
-  const { reload } = useProjectList();
+  const { reload } = useProjects();
 
   const [position, setPosition] = useState({ left: 0, top: 0 });
   const [open, setOpen] = useState(false);

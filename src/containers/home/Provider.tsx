@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import useApp from "../app/useApp";
 import logError from "@/scripts/logError";
-import { ProjectListContext } from "./ProjectListContext";
+import Context from "./Context";
+import useApp from "@/context/app/useApp";
 
-export default function ProjectListProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Provider({ children }: { children: React.ReactNode }) {
   const {
     userInfo: { workspace },
   } = useApp();
@@ -42,13 +38,13 @@ export default function ProjectListProvider({
   };
 
   return (
-    <ProjectListContext.Provider
+    <Context.Provider
       value={{
         projects,
         reload,
       }}
     >
       {children}
-    </ProjectListContext.Provider>
+    </Context.Provider>
   );
 }

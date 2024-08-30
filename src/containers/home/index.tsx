@@ -1,9 +1,9 @@
-import EmptyProject from "@/containers/empty-project";
-import Projects from "@/containers/projects";
-import useProjectList from "@/context/projectList/useProjectList";
+import EmptyProject from "./empty-project";
+import Projects from "./projects";
+import useProjects from "./useProjects";
 
 export default function Home() {
-  const { projects } = useProjectList();
+  const { projects } = useProjects();
 
   if (projects.length) return <Projects projects={projects} />;
   return <EmptyProject />;

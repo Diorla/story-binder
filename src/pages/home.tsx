@@ -1,10 +1,10 @@
 import Home from "@/containers/home";
-import ProjectListProvider from "@/context/projectList";
+import Provider from "@/containers/home/Provider";
 
 export default function HomePage() {
   return (
-    <ProjectListProvider>
+    <Provider>
       <Home />
-    </ProjectListProvider>
+    </Provider>
   );
 }
