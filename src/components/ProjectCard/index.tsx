@@ -22,6 +22,7 @@ export default function ProjectCard(project: ProjectInfo) {
       <ContextMenu
         menuComponent={
           <>
+            <Typography sx={{ p: 1 }}>{project.name}</Typography>
             <MenuItem
               onClick={() =>
                 duplicateProject(`${userInfo.workspace}/${name}`).then(reload)
