@@ -45,7 +45,7 @@ export default function ProjectView() {
           borderRadius: 0,
         }}
       >
-        <Nav projectName={project.name} />
+        <Nav />
         <div
           style={{
             display: "flex",

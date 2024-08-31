@@ -3,12 +3,34 @@ import { Folder, TextSnippet, Workspaces } from "@mui/icons-material";
 import useApp from "@/context/app/useApp";
 import useRouter from "@/context/router/useRouter";
 import ProjectInfo from "@/types/ProjectInfo";
+import useLocalState from "@/hooks/useLocalState";
+import { useEffectOnce } from "react-use";
+import CollectionInfo from "@/types/CollectionInfo";
+import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
-export default function Nav({ projectName }: { projectName: string }) {
+export default function Nav() {
   const { dir, updateDir } = useApp();
-  const { navigate } = useRouter<ProjectInfo>();
+  const { navigate } = useRouter();
 
-  const openProject = () => {
+  const [projectInfo, setProjectInfo] = useLocalState<ProjectInfo>(
+    "project-info",
+    {
+      name: "",
+      summary: "",
+      cover: "",
+      path: "",
+    }
+  );
+  const [collectionInfo, setCollectionInfo] = useLocalState<CollectionInfo>(
+    "collection-info",
+    {
+      name: "",
+      id: "",
+      note: "",
+    }
+  );
+
+  useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-file",
@@ -16,9 +38,22 @@ export default function Nav({ projectName }: { projectName: string }) {
       })
       .then((data: string) => {
         const projectInfo = JSON.parse(data) as ProjectInfo;
-        navigate("project", projectInfo);
+        setProjectInfo(projectInfo);
       });
-  };
+  });
+
+  useEffectOnce(() => {
+    if (dir.folderName)
+      window.api
+        .sendMessage({
+          type: "read-file",
+          path: `${dir.projectPath}/${dir.folderName}.${APP_FILE_EXT}`,
+        })
+        .then((data: string) => {
+          const collectionInfo = JSON.parse(data) as CollectionInfo;
+          setCollectionInfo(collectionInfo);
+        });
+  });
 
   const openFolder = () => {
     updateDir("folderName", dir.folderName);
@@ -32,10 +67,10 @@ export default function Nav({ projectName }: { projectName: string }) {
         underline="hover"
         color="inherit"
         sx={{ display: "flex", alignItems: "center" }}
-        onClick={openProject}
+        onClick={() => navigate("project", projectInfo)}
       >
         <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-        {projectName}
+        {projectInfo.name}
       </Link>
       {dir.folderName && (
         <Link
@@ -46,7 +81,7 @@ export default function Nav({ projectName }: { projectName: string }) {
           onClick={openFolder}
         >
           <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {dir.folderName}
+          {collectionInfo.name}
         </Link>
       )}
       {dir.fileName && (
