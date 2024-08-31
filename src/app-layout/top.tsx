@@ -54,7 +54,7 @@ export default function Top() {
         backgroundColor: theme.palette.grey[100],
         justifyContent: "space-between",
         alignItems: "center",
-        height: BROWSER.MARGIN,
+        height: BROWSER.TOP,
       }}
       color="inherit"
     >
@@ -64,7 +64,7 @@ export default function Top() {
           alignItems: "center",
         }}
       >
-        <img src={icon} style={{ height: 32, width: 32, marginLeft: 4 }} />
+        <img src={icon} style={{ height: 32, width: 32, marginLeft: 2 }} />
         <Typography>Story binder</Typography>
       </div>
       <div className="row">
@@ -73,7 +73,7 @@ export default function Top() {
           className="window-button"
           onClick={minimizeWindow}
         >
-          <Remove fontSize="small" style={{ fontSize: 24 }} />
+          <Remove fontSize="small" style={{ fontSize: 18 }} />
         </button>
         <button
           tabIndex={-1}

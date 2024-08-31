@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -5,7 +9,7 @@
 
 /* Window button */
 .window-button {
-  height: 40px;
+  height: 32px;
   width: 48px;
   border: none;
   transition: 0.15s linear;
@@ -59,8 +63,8 @@ textarea::-webkit-scrollbar {
 /* Sidebar */
 
 .sidebar-button {
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
   border: none;
   transition: 0.15s linear;
   display: flex;

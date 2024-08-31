@@ -18,11 +18,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div
         style={{
           backgroundColor: theme.palette.grey[100],
-          width: BROWSER.MARGIN,
+          width: BROWSER.LEFT,
           position: "fixed",
           height: BROWSER.HEIGHT,
           left: 0,
-          top: BROWSER.MARGIN,
+          top: BROWSER.TOP,
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
@@ -34,13 +34,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}
         >
           <SidebarButton title="View all projects" path="home">
-            <HomeOutlined />
+            <HomeOutlined fontSize="small" style={{ fontSize: 18 }} />
           </SidebarButton>
           <SidebarButton title="Add projects" path="create-project">
-            <AddCircleOutline />
+            <AddCircleOutline fontSize="small" style={{ fontSize: 18 }} />
           </SidebarButton>
           <SidebarButton title="Templates" path="templates">
-            <FileCopyOutlined />
+            <FileCopyOutlined fontSize="small" style={{ fontSize: 18 }} />
           </SidebarButton>
         </div>
         <div
@@ -60,9 +60,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div
         style={{
           position: "fixed",
-          width: `calc(100vw - ${BROWSER.MARGIN}px)`,
-          left: BROWSER.MARGIN,
-          top: BROWSER.MARGIN,
+          width: `calc(100vw - ${BROWSER.LEFT}px)`,
+          left: BROWSER.LEFT,
+          top: BROWSER.TOP,
           height: BROWSER.HEIGHT,
           overflowY: "scroll",
           overflowX: "hidden",
