@@ -51,7 +51,7 @@ export default function Top() {
         position: "fixed",
         top: 0,
         width: "100%",
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.grey[50],
         justifyContent: "space-between",
         alignItems: "center",
         height: BROWSER.TOP,

@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <Box id="browser" style={{ minHeight: BROWSER.HEIGHT }}>
       <div
         style={{
-          backgroundColor: theme.palette.grey[100],
+          backgroundColor: theme.palette.grey[50],
           width: BROWSER.LEFT,
           position: "fixed",
           height: BROWSER.HEIGHT,

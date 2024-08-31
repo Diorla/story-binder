@@ -69,13 +69,13 @@ textarea::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(245, 245, 245);
+  background-color: #fafafa;
   transition: 0.2s linear;
   cursor: pointer;
 }
 
 .sidebar-button:hover {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(231, 230, 230);
 }
 
 /* Bread crumbs */

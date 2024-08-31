@@ -24,6 +24,7 @@ export default function SidebarButton({
         className="sidebar-button"
         style={style}
         onClick={() => navigate(path)}
+        tabIndex={-1}
       >
         {children}
       </button>
