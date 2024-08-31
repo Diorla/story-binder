@@ -1,3 +1,5 @@
+import CreateProject from "@/containers/create-project";
+
 export default function CreateProjectPage() {
-  return <div>Creating project</div>;
+  return <CreateProject />;
 }
