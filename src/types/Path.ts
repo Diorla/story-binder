@@ -5,6 +5,13 @@ type Path =
   | "templates"
   | "help"
   | "trash"
-  | "settings";
+  | "settings"
+  | "folder"
+  | "edit-project"
+  | "edit-folder"
+  | "edit-file"
+  | "file"
+  | "folder-template"
+  | "file-template";
 
 export default Path;

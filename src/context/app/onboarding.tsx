@@ -3,13 +3,11 @@ import useLocalState from "@/hooks/useLocalState";
 import { Button, Card, Container } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import useApp from "./useApp";
 
-export default function Onboarding({
-  completeOnboarding,
-}: {
-  completeOnboarding: () => void;
-}) {
+export default function Onboarding() {
   const [page, setPage] = useLocalState("onboarding-page", 1);
+  const { updateUserInfo } = useApp();
   const isCompleted = page === 10;
 
   return (
@@ -32,7 +30,9 @@ export default function Onboarding({
             onChange={(_e, page) => setPage(page)}
           />
           <Button
-            onClick={completeOnboarding}
+            onClick={() => {
+              updateUserInfo({ onboardCompletedAt: Date.now() });
+            }}
             variant="contained"
             sx={{ alignItems: "center", mt: 1 }}
           >

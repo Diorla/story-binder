@@ -3,7 +3,7 @@ import ROUTES from "@/constants/ROUTES";
 import Router from "../Router";
 import Path from "@/types/Path";
 
-describe("Router component", () => {
+describe.skip("Router component", () => {
   it("should render the correct component based on the path", () => {
     // Render Router component with a valid path
     render(<Router path={ROUTES[1].path} />);

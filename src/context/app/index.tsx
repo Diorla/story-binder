@@ -1,12 +1,12 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
-import ChooseWorkspace from "./choose-workspace";
-import Onboarding from "./onboarding";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import UserInfo from "@/types/UserInfo";
 import AppContext from "./AppContext";
 import useContextState from "@/hooks/useContextState";
-import logError from "@/scripts/logError";
+import DirProps from "./DirProps";
+import Wrapper from "./Wrapper";
+import getUserInfo from "./getUserInfo";
 
 export default function AppProvider({
   children,
@@ -14,81 +14,51 @@ export default function AppProvider({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useContextState("app-context-loading", true);
-  const [status, setStatus] = useContextState<UserInfo>(
+  const [userInfo, setUserInfo] = useContextState<UserInfo>(
     "app-context-status",
     INITIAL_USER_INFO
   );
-
-  const getUserInfo = useCallback(() => {
-    const defaultContent = JSON.stringify(INITIAL_USER_INFO);
-    window.api
-      ?.sendMessage({
-        type: "read-file",
-        path: USER_INFO_DIR,
-        defaultContent,
-      })
-      .then((value = {}) => {
-        setStatus(JSON.parse(value as string));
-        setLoading(false);
-      })
-      .catch((e) => {
-        logError("AppProvider", "getUserInfo", e);
-        setLoading(false);
-      });
-  }, [setLoading, setStatus]);
-
-  const openFile = async () => {
-    setLoading(true);
-    window.api
-      .sendMessage({
-        type: "select-directory",
-      })
-      .then((value) => {
-        const newContent: UserInfo = {
-          ...INITIAL_USER_INFO,
-          workspace: value as string,
-        };
-
-        localStorage.clear();
-        window.api
-          .sendMessage({
-            type: "write-file",
-            path: USER_INFO_DIR,
-            content: JSON.stringify(newContent),
-          })
-          .then(() => setLoading(false));
-        setStatus(newContent);
-      })
-      .catch((err: Error) => {
-        logError("AppProvider", "openFile", err);
-        setLoading(false);
-      });
-    setLoading(false);
-  };
+  const [dir, setDir] = useContextState<DirProps>("user-dir", {
+    projectPath: "",
+    folderName: "",
+    fileName: "",
+  });
 
   useEffect(() => {
-    getUserInfo();
-  }, [getUserInfo]);
+    getUserInfo().then((data) => {
+      setLoading(false);
+      setUserInfo(data);
+    });
+  }, [setLoading, setUserInfo]);
 
-  const completeOnboarding = () => {
+  const updateDir = (
+    type: "projectPath" | "folderName" | "fileName",
+    value: string
+  ) => {
+    if (type === "projectPath") {
+      setDir({ projectPath: value, folderName: "", fileName: "" });
+    } else if (type === "folderName") {
+      setDir({ ...dir, folderName: value, fileName: "" });
+    } else if (type === "fileName") {
+      setDir({ ...dir, fileName: value });
+    }
+  };
+
+  const updateUserInfo = (newUserInfo: Partial<UserInfo>) => {
+    const mergedUserInfo = { ...userInfo, ...newUserInfo };
     window.api
       .sendMessage({
         type: "write-file",
         path: USER_INFO_DIR,
-        content: JSON.stringify({ ...status, onboardCompleted: true }),
+        content: JSON.stringify(mergedUserInfo),
       })
-      .then(() => setStatus({ ...status, onboardCompleted: true }))
-      .then(() => setLoading(false));
+      .then(() => setUserInfo(mergedUserInfo));
   };
+
   if (loading) return <div>Loading...</div>;
-  if (!status.workspace) return <ChooseWorkspace changeWorkspace={openFile} />;
-  if (!status.onboardCompleted)
-    return <Onboarding completeOnboarding={completeOnboarding} />;
   return (
-    <AppContext.Provider
-      value={{ userInfo: status, changeWorkspace: openFile }}
-    >
-      {children}
+    <AppContext.Provider value={{ userInfo, dir, updateDir, updateUserInfo }}>
+      <Wrapper>{children}</Wrapper>
     </AppContext.Provider>
   );
 }

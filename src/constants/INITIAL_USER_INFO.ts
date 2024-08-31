@@ -1,8 +1,8 @@
 import UserInfo from "@/types/UserInfo";
 
 const INITIAL_USER_INFO: UserInfo = {
-  onboardCompleted: false,
-  appInitialised: Date.now(),
+  onboardCompletedAt: 0,
+  appInitialisedAt: Date.now(),
   workspace: "",
 };
 

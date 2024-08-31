@@ -4,7 +4,13 @@ import AppContextProps from "./AppContextProps";
 
 const AppContext = createContext<AppContextProps>({
   userInfo: INITIAL_USER_INFO,
-  changeWorkspace: () => "{}",
+  updateUserInfo: () => "",
+  dir: {
+    projectPath: "",
+    folderName: "",
+    fileName: "",
+  },
+  updateDir: () => "",
 });
 
 export default AppContext;

@@ -1,21 +1,66 @@
 import Path from "@/types/Path";
-import Home from "@/pages/home";
 import { ReactElement } from "react";
-import CreateProject from "@/pages/create-project";
-import Project from "@/pages/project";
+import NotFound from "@/pages/not-found";
+import HomePage from "@/pages/home";
+import CreateProjectPage from "@/pages/create-project";
+import ProjectPage from "@/pages/project";
 
 const ROUTES: { path: Path; element: ReactElement }[] = [
   {
     path: "home",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "create-project",
-    element: <CreateProject />,
+    element: <CreateProjectPage />,
+  },
+  {
+    path: "templates",
+    element: <NotFound />,
+  },
+  {
+    path: "help",
+    element: <NotFound />,
+  },
+  {
+    path: "trash",
+    element: <NotFound />,
+  },
+  {
+    path: "settings",
+    element: <NotFound />,
   },
   {
     path: "project",
-    element: <Project />,
+    element: <ProjectPage />,
+  },
+  {
+    path: "folder",
+    element: <NotFound />,
+  },
+  {
+    path: "edit-project",
+    element: <NotFound />,
+  },
+  {
+    path: "edit-folder",
+    element: <NotFound />,
+  },
+  {
+    path: "edit-file",
+    element: <NotFound />,
+  },
+  {
+    path: "file",
+    element: <NotFound />,
+  },
+  {
+    path: "folder-template",
+    element: <NotFound />,
+  },
+  {
+    path: "file-template",
+    element: <NotFound />,
   },
 ];
 

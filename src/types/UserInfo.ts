@@ -1,5 +1,5 @@
 export default interface UserInfo {
-  onboardCompleted: boolean;
-  appInitialised: number;
+  onboardCompletedAt: number;
+  appInitialisedAt: number;
   workspace: string;
 }
