@@ -6,39 +6,43 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useProject } from "./useProject";
 import ContextMenu from "@/components/ContextMenu";
 import { Folder } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import CollectionInfo from "@/types/CollectionInfo";
+import useApp from "@/context/app/useApp";
+import writeCollection from "./writeCollection";
+import useRouter from "@/context/router/useRouter";
+import { v4 } from "uuid";
+import deleteCollection from "./deleteCollection";
 
 export default function CollectionCard({ item }: { item: CollectionInfo }) {
-  const { createCollection, deleteCollection, selectItem } = useProject();
+  const { refresh, dir } = useApp();
+  const { navigate } = useRouter();
 
   return (
     <ContextMenu
       menuComponent={
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
-          <MenuItem
-            onClick={() =>
-              selectItem({
-                type: "collection",
-                id: item.id,
-                name: item.name,
-              })
-            }
-          >
+          <MenuItem onClick={() => navigate("folder", item)}>
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
             onClick={() =>
-              createCollection({ name: item.name, note: item.note })
+              writeCollection(
+                { name: item.name, note: item.note, id: v4() },
+                dir.projectPath
+              ).then(refresh)
             }
           >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
-          <MenuItem onClick={() => deleteCollection(item.id)}>
+          <MenuItem
+            onClick={() =>
+              deleteCollection(item.id, dir.projectPath).then(refresh)
+            }
+          >
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -47,29 +51,17 @@ export default function CollectionCard({ item }: { item: CollectionInfo }) {
       <Card
         key={item.id}
         sx={{ width: 240, height: 200, m: 1 }}
-        onDoubleClick={() =>
-          selectItem({
-            type: "collection",
-            id: item.id,
-            name: item.name,
-          })
-        }
+        onDoubleClick={() => navigate("folder", item)}
       >
         <CardContent>
           <Box className="row">
-            <Folder
-              onClick={() =>
-                selectItem({
-                  type: "collection",
-                  id: item.id,
-                  name: item.name,
-                })
-              }
-            />
+            <Folder onClick={() => navigate("folder", item)} />
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                createCollection({ ...item, name: value })
+                writeCollection({ ...item, name: value }, dir.projectPath).then(
+                  refresh
+                )
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -82,7 +74,11 @@ export default function CollectionCard({ item }: { item: CollectionInfo }) {
           <EditableContent
             value={item.note}
             multiline={true}
-            updateValue={(value) => createCollection({ ...item, note: value })}
+            updateValue={(value) =>
+              writeCollection({ ...item, note: value }, dir.projectPath).then(
+                refresh
+              )
+            }
             textStyle={{
               textOverflow: "ellipsis",
               overflow: "hidden",

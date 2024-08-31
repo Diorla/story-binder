@@ -6,7 +6,7 @@ import ProjectInfo from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
-import { useProject } from "./useProject";
+import useApp from "@/context/app/useApp";
 
 const { width, height } = BOOK_DIMENSION;
 
@@ -19,8 +19,8 @@ export default function EditProject({
     defaultValue,
     required: ["name"],
   });
+  const { refresh } = useApp();
 
-  const { setProject } = useProject();
   const submit = (form: ProjectInfo) => {
     const path = defaultValue.path;
 
@@ -30,9 +30,7 @@ export default function EditProject({
         path: `${path}/.config`,
         content: JSON.stringify(form),
       })
-      .then(() => {
-        setProject(form);
-      })
+      .then(refresh)
       .catch((err) => {
         logError("update-project", "submit", err);
       });
