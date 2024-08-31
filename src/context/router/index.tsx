@@ -5,6 +5,7 @@ import Path from "@/types/Path";
 import Layout from "@/containers/layout";
 import ErrorBoundary from "@/containers/error-boundary";
 import useLocalState from "@/hooks/useLocalState";
+import useApp from "../app/useApp";
 
 export default function RouterProvider() {
   const [path, setPath] = useLocalState<Path>("current-path", "home");
@@ -12,6 +13,7 @@ export default function RouterProvider() {
   const [params, setParams] = useLocalState("route params", null);
   const [error, setError] = useLocalState("route error", null);
   const [isDirty, setIsDirty] = useLocalState("route is dirty", false);
+  const { refresh } = useApp();
 
   useEffect(() => {
     const db = localStorage.getItem("route");
@@ -34,6 +36,7 @@ export default function RouterProvider() {
         "route",
         JSON.stringify({ params, path, history: newHistory })
       );
+      refresh();
       if (params) setParams(params);
     };
 
@@ -82,19 +85,17 @@ export default function RouterProvider() {
     }
   };
 
-  const _lastPath = history[history.length - 1] || "home";
+  const value = {
+    navigate,
+    goBack,
+    params,
+    isDirty,
+    setIsDirty,
+    _lastPath: history[history.length - 1] || "home",
+  };
 
   return (
-    <RouterContext.Provider
-      value={{
-        navigate,
-        goBack,
-        _lastPath,
-        params,
-        isDirty,
-        setIsDirty,
-      }}
-    >
+    <RouterContext.Provider value={value}>
       <Layout>
         <ErrorBoundary setError={setError}>
           <Router path={path} error={error} />
