@@ -1,22 +1,15 @@
-import { Tooltip, Button } from "@mui/material";
-import FormatButtonProps from "./FormatButtonProps";
+import { Tooltip } from "@mui/material";
+import { ReactElement } from "react";
 
-export default function FormatButton(props: FormatButtonProps) {
-  const { tooltip } = props;
+export default function FormatButton(props: {
+  tooltip: string;
+  children: ReactElement<unknown, any>;
+}) {
+  const { tooltip, children } = props;
+
   return (
-    <Tooltip title={tooltip}>
-      <Button
-        size="small"
-        {...props}
-        variant="contained"
-        sx={{
-          m: 0.5,
-          p: 0,
-          "& svg": {
-            fontSize: "1.2rem",
-          },
-        }}
-      />
+    <Tooltip title={tooltip} style={{ cursor: "pointer" }}>
+      {children}
     </Tooltip>
   );
 }

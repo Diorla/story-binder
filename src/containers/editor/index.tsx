@@ -1,8 +1,7 @@
 import { EditorProvider } from "@tiptap/react";
-import MenuBar from "./MenuBar";
+import ToolBar from "./ToolBar";
 import { Box, useTheme } from "@mui/material";
 import { extensions } from "./extensions";
-import Count from "./Count";
 import { useEffect } from "react";
 import useRouter from "@/context/router/useRouter";
 
@@ -31,14 +30,12 @@ export default function Editor() {
         mb: 2,
         backgroundColor: theme.palette.grey[50],
         flex: 1,
-        minHeight: "calc(100vh - 50px)",
       }}
     >
       <EditorProvider
-        slotBefore={<MenuBar />}
+        slotBefore={<ToolBar />}
         extensions={extensions}
         content={content}
-        slotAfter={<Count />}
       ></EditorProvider>
     </Box>
   );

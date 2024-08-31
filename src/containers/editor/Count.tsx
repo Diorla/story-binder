@@ -13,21 +13,8 @@ export default function Count() {
   const { editor } = useCurrentEditor();
 
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        padding: "0.5rem",
-        zIndex: 10000,
-      }}
-    >
-      <Typography>
-        {editor.storage.characterCount.characters()} characters
-      </Typography>
+    <div>
       <Typography>{editor.storage.characterCount.words()} words</Typography>
-      <Typography>{editor.storage.characterCount.words()} pages</Typography>
     </div>
   );
 }

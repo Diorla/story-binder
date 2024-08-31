@@ -49,9 +49,10 @@
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1;
   letter-spacing: 0.00938em;
-  margin-top: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .tiptap pre {
@@ -76,29 +77,15 @@ h6 {
 }
 
 .tiptap h1 {
-  font-size: 2.8rem;
-}
-
-.tiptap h2 {
   font-size: 2.4rem;
 }
 
-.tiptap h3 {
+.tiptap h2 {
   font-size: 2rem;
 }
 
-.tiptap h4 {
+.tiptap h3 {
   font-size: 1.6rem;
-}
-
-.tiptap h5 {
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-
-.tiptap h6 {
-  font-size: 1.2rem;
-  font-weight: bold;
 }
 
 .tiptap ul,
@@ -147,13 +134,11 @@ ol {
 }
 
 .tiptap>p::first-letter {
-  padding-left: 1rem;
+  padding-left: 0.2rem;
 }
 
 .tiptap blockquote {
-  background: #f1f1f1;
   margin: 1em;
-  border-radius: 0.33em;
 }
 
 .tiptap blockquote>p {

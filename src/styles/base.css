@@ -16,12 +16,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(245, 245, 245);
-
+  background-color: #fafafa;
 }
 
 .window-button:hover {
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(231, 230, 230);
 }
 
 .window-button.error:hover {
