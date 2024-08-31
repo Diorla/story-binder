@@ -10,10 +10,19 @@ import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
+import { useEffect, useRef } from "react";
+import clamp from "clamp-js";
 
 export default function ProjectCard({ project }: { project: ProjectInfo }) {
   const { navigate } = useRouter<ProjectInfo>();
   const { refresh } = useApp();
+  const summaryRef = useRef();
+  const headerRef = useRef();
+
+  useEffect(() => {
+    clamp(summaryRef?.current, { clamp: 6 });
+    clamp(headerRef?.current, { clamp: 2 });
+  }, []);
 
   return (
     <>
@@ -38,13 +47,17 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
               gutterBottom
               variant="h5"
               component="div"
-              sx={{ textAlign: "center", textOverflow: "ellipsis" }}
+              sx={{
+                textAlign: "center",
+              }}
+              ref={headerRef}
             >
               {project.name}
             </Typography>
             <Typography
               variant="body1"
-              sx={{ fontWeight: 500, textOverflow: "ellipsis" }}
+              sx={{ fontWeight: 500 }}
+              ref={summaryRef}
             >
               {project.summary}
             </Typography>
