@@ -15,6 +15,7 @@ export default function RouterProvider() {
   const [isDirty, setIsDirty] = useLocalState("route is dirty", false);
   const { refresh } = useApp();
 
+  const _lastPath = history[history.length - 1];
   useEffect(() => {
     const db = localStorage.getItem("route");
     if (db) {
@@ -26,6 +27,7 @@ export default function RouterProvider() {
   }, [setHistory, setParams, setPath]);
 
   function navigate<T>(path: Path, params?: T) {
+    if (_lastPath === path) return;
     const confirmNavigation = () => {
       localStorage.clear();
       setError(null);
@@ -61,9 +63,7 @@ export default function RouterProvider() {
         }
       });
       return;
-    } else {
-      confirmNavigation();
-    }
+    } else confirmNavigation();
   }
 
   const goBack = () => {
@@ -91,7 +91,7 @@ export default function RouterProvider() {
     params,
     isDirty,
     setIsDirty,
-    _lastPath: history[history.length - 1] || "home",
+    _lastPath,
   };
 
   return (
