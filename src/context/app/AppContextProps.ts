@@ -9,4 +9,5 @@ export default interface AppContextProps {
     type: "projectPath" | "folderName" | "fileName",
     value: string
   ) => void;
+  refresh: () => void;
 }

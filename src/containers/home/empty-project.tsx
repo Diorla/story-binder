@@ -35,6 +35,7 @@ export default function EmptyProject() {
           onClick={() => navigate("create-project")}
           sx={{ mt: 1 }}
           variant="contained"
+          tabIndex={-1}
         >
           Add Project
         </Button>

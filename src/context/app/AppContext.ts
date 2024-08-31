@@ -11,6 +11,7 @@ const AppContext = createContext<AppContextProps>({
     fileName: "",
   },
   updateDir: () => "",
+  refresh: () => "",
 });
 
 export default AppContext;

@@ -55,9 +55,19 @@ export default function AppProvider({
       .then(() => setUserInfo(mergedUserInfo));
   };
 
+  const refresh = () => {
+    setLoading(true);
+    getUserInfo().then((data) => {
+      setUserInfo(data);
+      setLoading(false);
+    });
+  };
+
   if (loading) return <div>Loading...</div>;
   return (
-    <AppContext.Provider value={{ userInfo, dir, updateDir, updateUserInfo }}>
+    <AppContext.Provider
+      value={{ userInfo, dir, updateDir, updateUserInfo, refresh }}
+    >
       <Wrapper>{children}</Wrapper>
     </AppContext.Provider>
   );

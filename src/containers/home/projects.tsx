@@ -1,33 +1,21 @@
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/containers/home/ProjectCard";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import ProjectInfo from "@/types/ProjectInfo";
 import { Box, Grid } from "@mui/material";
 import { useEffect } from "react";
+import getProjectList from "./getProjectList";
 
 export default function Projects({ projects }: { projects: string[] }) {
   const [loading, setLoading] = useLocalState("projects-loading", true);
+
   const {
     userInfo: { workspace },
   } = useApp();
   const [projectList, setProjectList] = useLocalState("project-list", []);
 
   useEffect(() => {
-    const getProjectList = async () => {
-      const list = [];
-      for (const project of projects) {
-        const path = `${workspace}/${project}/.config`;
-        const res = await window.api.sendMessage({
-          type: "read-file",
-          path,
-        });
-
-        const obj = JSON.parse(res as string);
-        list.push({ ...obj, path: `${workspace}/${project}` });
-      }
-      return list;
-    };
-    getProjectList().then((res: ProjectInfo[]) => {
+    getProjectList(projects, workspace).then((res: ProjectInfo[]) => {
       setProjectList(res);
       setLoading(false);
     });
@@ -43,11 +31,10 @@ export default function Projects({ projects }: { projects: string[] }) {
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
-          justifyContent: "space-evenly",
         }}
       >
         {projectList.map((project, index) => {
-          return <ProjectCard {...project} key={index} />;
+          return <ProjectCard project={project} key={index} />;
         })}
       </Grid>
     </Box>

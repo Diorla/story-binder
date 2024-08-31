@@ -2,20 +2,18 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions, ListItemText, MenuItem } from "@mui/material";
-import ContextMenu from "../ContextMenu";
+import ContextMenu from "@/components/ContextMenu";
 import ProjectInfo from "@/types/ProjectInfo";
-import useApp from "@/context/app/useApp";
 import duplicateProject from "./duplicateProject";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";
-import useProjects from "@/containers/home/useProjects";
 import useRouter from "@/context/router/useRouter";
+import useApp from "@/context/app/useApp";
 
-export default function ProjectCard(project: ProjectInfo) {
+export default function ProjectCard({ project }: { project: ProjectInfo }) {
   const { navigate } = useRouter<ProjectInfo>();
-  const { userInfo } = useApp();
-  const { reload } = useProjects();
+  const { refresh } = useApp();
 
   return (
     <>
@@ -24,13 +22,11 @@ export default function ProjectCard(project: ProjectInfo) {
           <>
             <Typography sx={{ p: 1 }}>{project.name}</Typography>
             <MenuItem
-              onClick={() =>
-                duplicateProject(`${userInfo.workspace}/${name}`).then(reload)
-              }
+              onClick={() => duplicateProject(`${project.path}`).then(refresh)}
             >
               <ListItemText>Duplicate</ListItemText>
             </MenuItem>
-            <MenuItem onClick={() => deleteProject(project.path).then(reload)}>
+            <MenuItem onClick={() => deleteProject(project.path).then(refresh)}>
               <ListItemText>Delete</ListItemText>
             </MenuItem>
           </>
