@@ -11,7 +11,6 @@ type Path =
   | "edit-folder"
   | "edit-file"
   | "file"
-  | "folder-template"
-  | "file-template";
+  | "create-template";
 
 export default Path;

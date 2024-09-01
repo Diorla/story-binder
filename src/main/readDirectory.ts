@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 export default function readDirectory(dir: string) {
+  if (!fs.existsSync(dir)) {
+    return { files: [], folders: [] };
+  }
   const content = fs.readdirSync(dir);
   const files = content.filter((item) =>
     fs.statSync(path.join(dir, item)).isFile()
