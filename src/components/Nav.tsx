@@ -57,7 +57,7 @@ export default function Nav() {
 
   const openCollection = () => {
     updateDir("collectionName", dir.collectionName);
-    navigate("collection");
+    navigate("collection", { id: dir.collectionName });
   };
 
   const documents = collectionInfo.document || {};
@@ -74,7 +74,7 @@ export default function Nav() {
         <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
         {projectInfo.name}
       </Link>
-      {dir.collectionName && (
+      {collectionInfo.name && (
         <Link
           className="breadcrumbs"
           underline="hover"
@@ -86,7 +86,7 @@ export default function Nav() {
           {collectionInfo.name}
         </Link>
       )}
-      {dir.documentId && (
+      {document?.name && collectionInfo.name && (
         <Link
           className="breadcrumbs"
           underline="hover"
@@ -94,7 +94,7 @@ export default function Nav() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <TextSnippet style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {document?.name || dir.documentId}
+          {document?.name}
         </Link>
       )}
     </Breadcrumbs>
