@@ -6,7 +6,7 @@ export default interface AppContextProps {
   updateUserInfo: (userInfo: Partial<UserInfo>) => void;
   dir: DirProps;
   updateDir: (
-    type: "projectPath" | "collectionName" | "documentName",
+    type: "projectPath" | "collectionName" | "documentId",
     value: string
   ) => void;
   refresh: () => void;

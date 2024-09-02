@@ -5,5 +5,5 @@ export default interface DocumentInfo {
   name: string;
   note: string;
   template?: Template;
-  content?: object;
+  content?: string;
 }

@@ -7,6 +7,7 @@ import ProjectPage from "@/pages/project";
 import CollectionPage from "@/pages/collection";
 import Templates from "@/pages/templates";
 import CreateTemplatePage from "@/pages/create-template";
+import DocumentPage from "@/pages/document";
 
 const ROUTES: { path: Path; element: ReactElement }[] = [
   {
@@ -55,7 +56,7 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
   },
   {
     path: "document",
-    element: <NotFound />,
+    element: <DocumentPage />,
   },
   {
     path: "create-template",

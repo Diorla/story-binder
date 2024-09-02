@@ -21,7 +21,7 @@ export default function AppProvider({
   const [dir, setDir] = useContextState<DirProps>("user-dir", {
     projectPath: "",
     collectionName: "",
-    documentName: "",
+    documentId: "",
   });
 
   useEffect(() => {
@@ -32,15 +32,15 @@ export default function AppProvider({
   }, [setLoading, setUserInfo]);
 
   const updateDir = (
-    type: "projectPath" | "collectionName" | "documentName",
+    type: "projectPath" | "collectionName" | "documentId",
     value: string
   ) => {
     if (type === "projectPath") {
-      setDir({ projectPath: value, collectionName: "", documentName: "" });
+      setDir({ projectPath: value, collectionName: "", documentId: "" });
     } else if (type === "collectionName") {
-      setDir({ ...dir, collectionName: value, documentName: "" });
-    } else if (type === "documentName") {
-      setDir({ ...dir, documentName: value });
+      setDir({ ...dir, collectionName: value, documentId: "" });
+    } else if (type === "documentId") {
+      setDir({ ...dir, documentId: value });
     }
   };
 

@@ -8,7 +8,7 @@ const AppContext = createContext<AppContextProps>({
   dir: {
     projectPath: "",
     collectionName: "",
-    fileName: "",
+    documentId: "",
   },
   updateDir: () => "",
   refresh: () => "",

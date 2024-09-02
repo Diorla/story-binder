@@ -51,12 +51,6 @@ export default function ToolBar({
   });
 
   useEffect(() => {
-    editor.on("destroy", () => {
-      updateFn(localData);
-    });
-  }, [editor, localData, updateFn]);
-
-  useEffect(() => {
     const id = setTimeout(() => {
       updateFn(localData);
     }, 2000);
