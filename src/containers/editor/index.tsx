@@ -4,9 +4,14 @@ import { Box, useTheme } from "@mui/material";
 import { extensions } from "./extensions";
 import useRouter from "@/context/router/useRouter";
 import { useEffectOnce } from "react-use";
-import Template from "@/types/Template";
 
-export default function Editor({ template }: { template: Template }) {
+export default function Editor({
+  initialContent,
+  updateFn,
+}: {
+  initialContent: string;
+  updateFn: (value: string) => void;
+}) {
   const theme = useTheme();
   const { isDirty, setIsDirty } = useRouter();
 
@@ -27,9 +32,11 @@ export default function Editor({ template }: { template: Template }) {
       }}
     >
       <EditorProvider
-        slotAfter={<ToolBar template={template} />}
+        slotAfter={
+          <ToolBar initialContent={initialContent} updateFn={updateFn} />
+        }
         extensions={extensions}
-        content={template.template}
+        content={initialContent}
       ></EditorProvider>
     </Box>
   );

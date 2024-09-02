@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import Picker from "@/components/Picker";
 import useForm from "@/hooks/useForm";
 import Template from "@/types/Template";
@@ -39,6 +40,19 @@ export default function TemplateForm() {
       })
       .then(() => register("id").onUpdate(id));
   };
+
+  const updateEditor = (data: string) => {
+    const value = {
+      ...form,
+      template: data,
+    };
+    window.api.sendMessage({
+      type: "write-file",
+      path: `./templates/${form.id}`,
+      content: JSON.stringify(value, null, 2),
+    });
+  };
+
   if (!form.id || isSelect)
     return (
       <Box sx={formStyle}>
@@ -92,7 +106,7 @@ export default function TemplateForm() {
             <Button onClick={() => setIsSelect(true)}>Change basic info</Button>
           </Box>
         </div>
-        <Editor template={form} />
+        <Editor updateFn={updateEditor} initialContent={form.template} />
       </Box>
     );
   return <div>No template</div>;

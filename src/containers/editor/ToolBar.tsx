@@ -23,14 +23,19 @@ import ToolbarIconsWrapper from "./ToolbarIconsWrapper";
 import { useEffectOnce } from "react-use";
 import handlePaste from "./handlePaste";
 import { useEffect, useState } from "react";
-import Template from "@/types/Template";
 
-export default function ToolBar({ template }: { template: Template }) {
+export default function ToolBar({
+  initialContent,
+  updateFn,
+}: {
+  initialContent: string;
+  updateFn: (value: string) => void;
+}) {
   const { editor } = useCurrentEditor();
 
   const chain = (type: FormatType) => formatToolbar(editor, type);
 
-  const [localData, setLocalData] = useState(template.template);
+  const [localData, setLocalData] = useState(initialContent);
 
   useEffectOnce(() => {
     document.body.addEventListener("paste", handlePaste(editor));
@@ -39,40 +44,24 @@ export default function ToolBar({ template }: { template: Template }) {
       document.body.removeEventListener("paste", handlePaste(editor));
   });
 
-  const path = `./templates/${template.id}`;
-
   useEffectOnce(() => {
-    editor.on("destroy", () => {
-      const value = {
-        ...template,
-        template: localData,
-      };
-      window.api.sendMessage({
-        type: "write-file",
-        path,
-        content: JSON.stringify(value, null, 2),
-      });
-    });
-
     editor.on("update", () => {
       setLocalData(editor.getHTML());
     });
   });
 
   useEffect(() => {
+    editor.on("destroy", () => {
+      updateFn(localData);
+    });
+  }, [editor, localData, updateFn]);
+
+  useEffect(() => {
     const id = setTimeout(() => {
-      const value = {
-        ...template,
-        template: localData,
-      };
-      window.api.sendMessage({
-        type: "write-file",
-        path,
-        content: JSON.stringify(value, null, 2),
-      });
+      updateFn(localData);
     }, 2000);
     return () => clearTimeout(id);
-  }, [localData, path, template]);
+  }, [localData, updateFn]);
 
   if (!editor) return null;
 
