@@ -56,8 +56,10 @@ export default function AppProvider({
   };
 
   const refresh = () => {
+    setLoading(true);
     getUserInfo().then((data) => {
       setUserInfo(data);
+      setLoading(false);
     });
   };
 

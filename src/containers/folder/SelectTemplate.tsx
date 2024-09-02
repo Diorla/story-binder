@@ -2,11 +2,13 @@ import logError from "@/scripts/logError";
 import useApp from "@/context/app/useApp";
 import CollectionInfo from "@/types/CollectionInfo";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import Picker from "@/components/Picker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useEffectOnce } from "react-use";
 import useRouter from "@/context/router/useRouter";
+import getTemplates from "@/services/get-templates";
+import Template from "@/types/Template";
 
 const formStyle = {
   display: "flex",
@@ -25,49 +27,26 @@ export default function SelectTemplate({
   const { dir, refresh } = useApp();
   const [templateId, setTemplateId] = useState("");
   const [loading, setLoading] = useState(true);
-  const [templateList, setTemplateList] = useState<
-    {
-      value: string;
-      label: string;
-      description?: string;
-    }[]
-  >([]);
+  const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
 
   useEffectOnce(() => {
-    window.api
-      .sendMessage({
-        type: "read-directory",
-        path: `./templates`,
-      })
-      .then((data: { files: string[] }) => {
-        /**
-         * read template item to get id, name and description
-         * note, template id will match template file name
-         */
-        const templateList = data.files.map((file) => {
-          const [value, label, description] = file.split(".");
-          return { value, label, description };
-        });
-        setTemplateList(templateList);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    getTemplates()
+      .then(setTemplateList)
+      .then(() => setLoading(false));
   });
+
+  useEffect(() => {
+    setTemplateId(collection.template?.id || "");
+  }, [collection.template?.id]);
 
   const submit = () => {
     if (templateId) {
       const path = `${dir.projectPath}/${dir.folderName}.${APP_FILE_EXT}`;
+      const template = templateList.find((item) => item.id === templateId);
       const tempCollection: CollectionInfo = {
         ...collection,
-        template: {
-          type: "editor",
-          id: templateId,
-          description: "",
-          template: "",
-        },
+        template,
       };
 
       window.api
@@ -99,9 +78,25 @@ export default function SelectTemplate({
         value={templateId}
         onUpdate={(value) => setTemplateId(value)}
         label={""}
-        list={templateList}
+        list={templateList.map((item) => {
+          return {
+            value: item.id,
+            label: item.name,
+            description: item.description,
+          };
+        })}
       />
       <Button onClick={submit}>Save</Button>
+      <Typography>
+        Don't find what you are looking for,{" "}
+        <Link
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("create-template")}
+        >
+          Create here
+        </Link>{" "}
+        to create more
+      </Typography>
     </Box>
   );
 }

@@ -30,6 +30,7 @@ export default function RouterProvider() {
     if (_lastPath === path) return;
     const confirmNavigation = () => {
       localStorage.clear();
+      setParams(null);
       setError(null);
       setPath(path);
       const newHistory = [...history, path];

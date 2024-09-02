@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
-import { Folder } from "@mui/icons-material";
+import { InsertDriveFile } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
@@ -52,7 +52,7 @@ export default function DocumentCard({
       >
         <CardContent>
           <Box className="row">
-            <Folder onClick={() => navigate("folder", item)} />
+            <InsertDriveFile onClick={() => navigate("folder", item)} />
             <EditableContent
               value={item.name}
               updateValue={(value) => writeDocument({ ...item, name: value })}

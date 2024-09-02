@@ -23,13 +23,17 @@ export default function NewCollectionForm({
   });
 
   const writeDocument = (data: DocumentInfo) => {
-    const tempCollection = { ...collection };
+    const tempCollection: CollectionInfo = { ...collection };
     const document = tempCollection?.document || {};
     const tempDocument = document[data.id] || {};
 
     tempCollection.document = {
       ...document,
-      [data.id]: { ...tempDocument, ...data },
+      [data.id]: {
+        ...tempDocument,
+        ...data,
+        template: tempCollection.template,
+      },
     };
 
     window.api

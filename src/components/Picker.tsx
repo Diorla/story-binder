@@ -16,6 +16,10 @@ export default function Picker({
   list: { value: string; label: string; description?: string }[];
 }) {
   const currentItem = list.find((item) => item.value === value);
+  let description = "Nothing selected";
+  if (currentItem) {
+    description = currentItem.description;
+  }
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
@@ -37,9 +41,7 @@ export default function Picker({
           </MenuItem>
         ))}
       </Select>
-      <FormHelperText>
-        {currentItem?.description || "Nothing selected"}
-      </FormHelperText>
+      <FormHelperText>{description}</FormHelperText>
     </FormControl>
   );
 }
