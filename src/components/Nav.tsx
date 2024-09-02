@@ -10,7 +10,7 @@ import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
 export default function Nav() {
   const { dir, updateDir } = useApp();
-  const { navigate } = useRouter();
+  const { navigate, _lastPath } = useRouter();
 
   const [projectInfo, setProjectInfo] = useLocalState<ProjectInfo>(
     "project-info",
@@ -60,12 +60,14 @@ export default function Nav() {
     navigate("collection");
   };
 
+  const documents = collectionInfo.document || {};
+  const document = documents[dir.documentId];
   return (
     <Breadcrumbs>
       <Link
         className="breadcrumbs"
         underline="hover"
-        color="inherit"
+        color={_lastPath === "project" ? "primary" : "inherit"}
         sx={{ display: "flex", alignItems: "center" }}
         onClick={() => navigate("project", projectInfo)}
       >
@@ -76,7 +78,7 @@ export default function Nav() {
         <Link
           className="breadcrumbs"
           underline="hover"
-          color="inherit"
+          color={_lastPath === "collection" ? "primary" : "inherit"}
           sx={{ display: "flex", alignItems: "center" }}
           onClick={openCollection}
         >
@@ -84,15 +86,15 @@ export default function Nav() {
           {collectionInfo.name}
         </Link>
       )}
-      {dir.documentName && (
+      {dir.documentId && (
         <Link
           className="breadcrumbs"
           underline="hover"
-          color="inherit"
+          color={_lastPath === "document" ? "primary" : "inherit"}
           sx={{ display: "flex", alignItems: "center" }}
         >
           <TextSnippet style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {dir.documentName}
+          {document?.name || dir.documentId}
         </Link>
       )}
     </Breadcrumbs>
