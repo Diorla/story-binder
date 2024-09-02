@@ -1,33 +1,23 @@
 import Template from "@/types/Template";
 import { useState } from "react";
 import { useEffectOnce } from "react-use";
-import readTemplate from "./readTemplate";
-import logError from "@/scripts/logError";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Card, Divider } from "@mui/material";
 import useRouter from "@/context/router/useRouter";
+import getTemplates from "@/services/get-templates";
+import useApp from "@/context/app/useApp";
 
 export default function Templates() {
   const [loading, setLoading] = useState(true);
   const [templates, setTemplates] = useState<Template[]>([]);
   const { navigate } = useRouter();
+  const { refresh } = useApp();
 
   useEffectOnce(() => {
-    window.api
-      .sendMessage({
-        type: "read-directory",
-        path: "./templates",
-      })
-      .then((val: { files: string[] }) => {
-        readTemplate(val.files).then((list) => {
-          setTemplates(list);
-          setLoading(false);
-        });
-      })
-      .catch((err) => {
-        logError("templates", "useEffectOnce", err);
-        setLoading(false);
-      });
+    getTemplates().then((list) => {
+      setTemplates(list);
+      setLoading(false);
+    });
   });
 
   if (loading) return <div>Loading</div>;
@@ -85,7 +75,19 @@ export default function Templates() {
             <div>
               <Divider />
               <Box className="row" sx={{ justifyContent: "space-between" }}>
-                <Button color="error">Delete</Button>
+                <Button
+                  color="error"
+                  onClick={() => {
+                    window.api
+                      .sendMessage({
+                        type: "delete-file",
+                        path: `./templates/${template.id}`,
+                      })
+                      .then(refresh);
+                  }}
+                >
+                  Delete
+                </Button>
                 <Button onClick={() => navigate("create-template", template)}>
                   Edit
                 </Button>
