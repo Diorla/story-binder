@@ -9,7 +9,7 @@ body {
 
 /* Window button */
 .window-button {
-  height: 32px;
+  height: 40px;
   width: 48px;
   border: none;
   transition: 0.15s linear;
@@ -24,7 +24,7 @@ body {
 }
 
 .window-button.error:hover {
-  background-color: red;
+  background-color: rgb(170, 3, 3);
   color: white;
 }
 
