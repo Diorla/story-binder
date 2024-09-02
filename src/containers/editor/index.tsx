@@ -2,27 +2,21 @@ import { EditorProvider } from "@tiptap/react";
 import ToolBar from "./ToolBar";
 import { Box, useTheme } from "@mui/material";
 import { extensions } from "./extensions";
-import { useEffect } from "react";
 import useRouter from "@/context/router/useRouter";
+import { useEffectOnce } from "react-use";
+import Template from "@/types/Template";
 
-// TODO
-// Use dropdown to change between paragraphs and header (h1-h6)
-// May be cut down the headers to 3
-// Enable indenting
-
-const content = `Initial content here`;
-
-export default function Editor() {
+export default function Editor({ template }: { template: Template }) {
   const theme = useTheme();
   const { isDirty, setIsDirty } = useRouter();
 
-  useEffect(() => {
+  useEffectOnce(() => {
     document.querySelectorAll(".tiptap").forEach((el) => {
       el.addEventListener("input", () => {
         if (!isDirty) setIsDirty(true);
       });
     });
-  }, [isDirty, setIsDirty]);
+  });
 
   return (
     <Box
@@ -33,9 +27,9 @@ export default function Editor() {
       }}
     >
       <EditorProvider
-        slotBefore={<ToolBar />}
+        slotAfter={<ToolBar template={template} />}
         extensions={extensions}
-        content={content}
+        content={template.template}
       ></EditorProvider>
     </Box>
   );

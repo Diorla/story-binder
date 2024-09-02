@@ -62,6 +62,7 @@
   border-radius: 0.33em;
 }
 
+/* TODO: Remove unused styles like blockquote */
 .tiptap h1,
 h2,
 h3,
@@ -167,4 +168,18 @@ ol {
 
 .control-group .MuiIconButton-colorSecondary {
   color: #00a59d;
+}
+
+.editor-top {
+  position: fixed;
+  top: 36px;
+  background: white;
+  width: 100%;
+  z-index: 10;
+}
+
+.tiptap {
+  top: 0;
+  height: calc(100vh - 136px);
+  overflow-y: scroll;
 }

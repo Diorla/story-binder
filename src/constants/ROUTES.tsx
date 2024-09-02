@@ -6,6 +6,7 @@ import CreateProjectPage from "@/pages/create-project";
 import ProjectPage from "@/pages/project";
 import FolderPage from "@/pages/folder";
 import Templates from "@/pages/templates";
+import CreateTemplatePage from "@/pages/create-template";
 
 const ROUTES: { path: Path; element: ReactElement }[] = [
   {
@@ -58,7 +59,7 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
   },
   {
     path: "create-template",
-    element: <NotFound />,
+    element: <CreateTemplatePage />,
   },
 ];
 

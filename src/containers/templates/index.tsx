@@ -4,7 +4,7 @@ import { useEffectOnce } from "react-use";
 import readTemplate from "./readTemplate";
 import logError from "@/scripts/logError";
 import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
+import { Box, Button, Card, Divider } from "@mui/material";
 import useRouter from "@/context/router/useRouter";
 
 export default function Templates() {
@@ -54,7 +54,31 @@ export default function Templates() {
     );
   return (
     <div>
-      <h1>Templates</h1>
+      <Box className="row" sx={{ justifyContent: "space-between" }}>
+        <Typography variant="h5">Templates</Typography>
+        <Button
+          variant="outlined"
+          onClick={() => navigate("create-template")}
+          size="small"
+        >
+          New template
+        </Button>
+      </Box>
+      <Box>
+        {templates.map((template) => (
+          <Card key={template.id} sx={{ maxWidth: 240, p: 0.5, m: 0.5 }}>
+            <Typography>{template.name}</Typography>
+            <Typography>{template.description}</Typography>
+            <Divider />
+            <Box className="row" sx={{ justifyContent: "space-between" }}>
+              <Button color="error">Delete</Button>
+              <Button onClick={() => navigate("create-template", template)}>
+                Edit
+              </Button>
+            </Box>
+          </Card>
+        ))}
+      </Box>
     </div>
   );
 }

@@ -12,15 +12,13 @@ export default function ToolbarIconsWrapper({
       sx={{
         backgroundColor: theme.palette.grey[50],
         flexDirection: "row",
-        ml: 1,
-        mr: 1,
         [`& > svg`]: {
-          ml: 1,
-          mr: 1,
+          ml: 0.4,
+          mr: 0.4,
         },
         [`& > span`]: {
-          pl: 1,
-          pr: 1,
+          pl: 0.4,
+          pr: 0.4,
         },
       }}
     >

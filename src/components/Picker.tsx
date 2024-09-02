@@ -16,17 +16,21 @@ export default function Picker({
   list: { value: string; label: string; description?: string }[];
 }) {
   const currentItem = list.find((item) => item.value === value);
+
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
       <InputLabel>{label}</InputLabel>
       <Select
         value={value}
         label={label}
         onChange={(e) => onUpdate(e.target.value)}
+        size="small"
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
+        {value ? null : (
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+        )}
         {list.map((item) => (
           <MenuItem key={item.value} value={item.value}>
             {item.label}
@@ -34,7 +38,7 @@ export default function Picker({
         ))}
       </Select>
       <FormHelperText>
-        {currentItem?.description || "No template selected"}
+        {currentItem?.description || "Nothing selected"}
       </FormHelperText>
     </FormControl>
   );

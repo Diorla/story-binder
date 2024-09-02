@@ -1,56 +1,79 @@
 /* eslint-disable max-lines */
 import {
-  AutoFixNormal,
-  Clear,
   FormatAlignCenter,
-  FormatAlignJustify,
   FormatAlignLeft,
   FormatAlignRight,
   FormatBold,
+  FormatClear,
   FormatItalic,
   FormatListBulleted,
   FormatListNumbered,
-  FormatQuote,
-  FormatStrikethrough,
   FormatUnderlined,
   InsertPhoto,
   LinkOff,
-  Redo,
-  TextFields,
   Texture,
-  Undo,
 } from "@mui/icons-material";
 import { useCurrentEditor } from "@tiptap/react";
 import FormatType from "./FormatType";
 import formatToolbar from "./formatToolbar";
 import FormatButton from "./FormatButton";
-import { useEffect } from "react";
-import convertImageToDataUri from "./convertImageToDataUri";
-import { Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import Count from "./Count";
-import BROWSER from "@/constants/BROWSER";
 import ToolbarIconsWrapper from "./ToolbarIconsWrapper";
+import { useEffectOnce } from "react-use";
+import handlePaste from "./handlePaste";
+import { useEffect, useState } from "react";
+import Template from "@/types/Template";
 
-export default function ToolBar() {
+export default function ToolBar({ template }: { template: Template }) {
   const { editor } = useCurrentEditor();
 
   const chain = (type: FormatType) => formatToolbar(editor, type);
 
-  useEffect(() => {
-    document.body.addEventListener("paste", (e) => {
-      const dT = e.clipboardData;
-      const file = dT.files[0];
+  const [localData, setLocalData] = useState(template.template);
 
-      if (file) {
-        convertImageToDataUri(file, (dataUri) => {
-          editor.commands.setImage({
-            src: dataUri as string,
-            alt: file.name,
-          });
-        });
-      }
+  useEffectOnce(() => {
+    document.body.addEventListener("paste", handlePaste(editor));
+
+    return () =>
+      document.body.removeEventListener("paste", handlePaste(editor));
+  });
+
+  const path = `./templates/${template.id}`;
+
+  useEffectOnce(() => {
+    editor.on("destroy", () => {
+      const value = {
+        ...template,
+        template: localData,
+      };
+      window.api.sendMessage({
+        type: "write-file",
+        path,
+        content: JSON.stringify(value, null, 2),
+      });
     });
-  }, [editor.commands]);
+
+    editor.on("update", () => {
+      setLocalData(editor.getHTML());
+    });
+  });
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      const value = {
+        ...template,
+        template: localData,
+      };
+      window.api.sendMessage({
+        type: "write-file",
+        path,
+        content: JSON.stringify(value, null, 2),
+      });
+    }, 2000);
+    return () => clearTimeout(id);
+  }, [localData, path, template]);
+
   if (!editor) return null;
 
   const addImage = () => {
@@ -66,10 +89,15 @@ export default function ToolBar() {
   return (
     <div
       style={{
-        backgroundColor: "white",
-        position: "sticky",
-        top: BROWSER.TOP,
         zIndex: 1000,
+        position: "fixed",
+        bottom: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "auto",
+        flex: 1,
+        width: "100%",
       }}
     >
       <div
@@ -92,15 +120,9 @@ export default function ToolBar() {
           <FormatButton tooltip="Underline">
             <FormatUnderlined {...chain("underline")} />
           </FormatButton>
-          <FormatButton tooltip="Strike through">
-            <FormatStrikethrough {...chain("strike")} />
-          </FormatButton>
         </ToolbarIconsWrapper>
 
         <ToolbarIconsWrapper>
-          <FormatButton tooltip="Paragraph">
-            <TextFields {...chain("paragraph")} />
-          </FormatButton>
           <FormatButton tooltip="Heading 1">
             <Typography {...chain("heading-1")} variant="button">
               H1
@@ -128,9 +150,6 @@ export default function ToolBar() {
         </ToolbarIconsWrapper>
 
         <ToolbarIconsWrapper>
-          <FormatButton tooltip="Blockquote">
-            <FormatQuote {...chain("blockquote")} />
-          </FormatButton>
           <FormatButton tooltip="Add image">
             <InsertPhoto onClick={() => addImage()} color="inherit" />
           </FormatButton>
@@ -138,10 +157,7 @@ export default function ToolBar() {
 
         <ToolbarIconsWrapper>
           <FormatButton tooltip="Clear formatting">
-            <AutoFixNormal {...chain("clear-text")} />
-          </FormatButton>
-          <FormatButton tooltip="Clear all" {...chain("clear-all")}>
-            <Clear />
+            <FormatClear {...chain("clear-text")} />
           </FormatButton>
           <FormatButton tooltip="Unlink">
             <LinkOff {...chain("link")} />
@@ -164,22 +180,10 @@ export default function ToolBar() {
           <FormatButton tooltip="Align right">
             <FormatAlignRight {...chain("align-right")} />
           </FormatButton>
-          <FormatButton tooltip="Align justify">
-            <FormatAlignJustify {...chain("align-justify")} />
-          </FormatButton>
         </ToolbarIconsWrapper>
-
-        <ToolbarIconsWrapper>
-          <FormatButton tooltip="Undo">
-            <Undo {...chain("undo")} />
-          </FormatButton>
-          <FormatButton tooltip="Redo">
-            <Redo {...chain("redo")} />
-          </FormatButton>
-        </ToolbarIconsWrapper>
-      </div>
-      <div className="row" style={{ justifyContent: "center" }}>
-        <Count />
+        <Link underline="none" sx={{ pl: 0.5 }}>
+          <Count />
+        </Link>
       </div>
     </div>
   );

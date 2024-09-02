@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { Editor } from "@tiptap/react";
 import FormatType from "./FormatType";
 import ChainType from "./ChainType";
@@ -21,24 +20,9 @@ export default function formatToolbar(
         onClick: () => focus.toggleItalic().run(),
         color,
       };
-    case "strike":
-      return {
-        onClick: () => focus.toggleStrike().run(),
-        color,
-      };
     case "clear-text":
       return {
         onClick: () => focus.unsetAllMarks().run(),
-        color,
-      };
-    case "clear-all":
-      return {
-        onClick: () => focus.clearNodes().run(),
-        color,
-      };
-    case "paragraph":
-      return {
-        onClick: () => focus.setParagraph().run(),
         color,
       };
     case "heading-1":
@@ -64,21 +48,6 @@ export default function formatToolbar(
     case "orderedList":
       return {
         onClick: () => focus.toggleOrderedList().run(),
-        color,
-      };
-    case "blockquote":
-      return {
-        onClick: () => focus.toggleBlockquote().run(),
-        color,
-      };
-    case "undo":
-      return {
-        onClick: () => focus.undo().run(),
-        color,
-      };
-    case "redo":
-      return {
-        onClick: () => focus.redo().run(),
         color,
       };
     case "underline":
@@ -110,13 +79,6 @@ export default function formatToolbar(
       return {
         onClick: () => focus.setTextAlign("center").run(),
         color: editor.isActive({ textAlign: "center" }) ? "primary" : "inherit",
-      };
-    case "align-justify":
-      return {
-        onClick: () => focus.setTextAlign("justify").run(),
-        color: editor.isActive({ textAlign: "justify" })
-          ? "primary"
-          : "inherit",
       };
 
     default:

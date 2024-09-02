@@ -12,6 +12,7 @@ export default function Input(props: InputProps) {
       error={!!errorText}
       helperText={errorText}
       size="small"
+      sx={{ width: "100%", ...props.sx }}
     />
   );
 }
