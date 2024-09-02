@@ -64,18 +64,33 @@ export default function Templates() {
           New template
         </Button>
       </Box>
-      <Box>
+      <Divider sx={{ my: 1 }} />
+      <Box className="row">
         {templates.map((template) => (
-          <Card key={template.id} sx={{ maxWidth: 240, p: 0.5, m: 0.5 }}>
-            <Typography>{template.name}</Typography>
-            <Typography>{template.description}</Typography>
-            <Divider />
-            <Box className="row" sx={{ justifyContent: "space-between" }}>
-              <Button color="error">Delete</Button>
-              <Button onClick={() => navigate("create-template", template)}>
-                Edit
-              </Button>
-            </Box>
+          <Card
+            key={template.id}
+            sx={{
+              width: 240,
+              p: 0.5,
+              m: 0.5,
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "column",
+            }}
+          >
+            <div>
+              <Typography>{template.name}</Typography>
+              <Typography>{template.description}</Typography>
+            </div>
+            <div>
+              <Divider />
+              <Box className="row" sx={{ justifyContent: "space-between" }}>
+                <Button color="error">Delete</Button>
+                <Button onClick={() => navigate("create-template", template)}>
+                  Edit
+                </Button>
+              </Box>
+            </div>
           </Card>
         ))}
       </Box>
