@@ -1,6 +1,6 @@
 import icon from "@/assets/icon";
 import { Prompt } from "@/types/Payload";
-import { dialog, nativeImage, Tray } from "electron";
+import { dialog, nativeImage } from "electron";
 
 export default function openPrompt(args: Prompt) {
   const {

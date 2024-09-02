@@ -11,7 +11,7 @@ import CollectionInfo from "@/types/CollectionInfo";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import Nav from "@/components/Nav";
 
-export default function FolderView() {
+export default function CollectionView() {
   const [editing, setEditing] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [collection, setCollection] = useLocalState<CollectionInfo>(
@@ -29,7 +29,7 @@ export default function FolderView() {
     window.api
       .sendMessage({
         type: "read-file",
-        path: `${dir.projectPath}/${dir.folderName}.${APP_FILE_EXT}`,
+        path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
       })
       .then((data) => setCollection(JSON.parse(data as string)));
   });

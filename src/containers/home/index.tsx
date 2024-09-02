@@ -4,6 +4,7 @@ import Projects from "./projects";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import logError from "@/scripts/logError";
+import Directory from "@/types/Directory";
 
 export default function Home() {
   const {
@@ -18,7 +19,7 @@ export default function Home() {
         type: "read-directory",
         path: workspace,
       })
-      .then((value: { files: string[]; folders: string[] }) => {
+      .then((value: Directory) => {
         setProjects(value.folders);
         setLoading(false);
       })

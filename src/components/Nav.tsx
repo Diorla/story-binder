@@ -43,11 +43,11 @@ export default function Nav() {
   });
 
   useEffectOnce(() => {
-    if (dir.folderName)
+    if (dir.collectionName)
       window.api
         .sendMessage({
           type: "read-file",
-          path: `${dir.projectPath}/${dir.folderName}.${APP_FILE_EXT}`,
+          path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
         })
         .then((data: string) => {
           const collectionInfo = JSON.parse(data) as CollectionInfo;
@@ -55,9 +55,9 @@ export default function Nav() {
         });
   });
 
-  const openFolder = () => {
-    updateDir("folderName", dir.folderName);
-    navigate("folder");
+  const openCollection = () => {
+    updateDir("collectionName", dir.collectionName);
+    navigate("collection");
   };
 
   return (
@@ -72,19 +72,19 @@ export default function Nav() {
         <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
         {projectInfo.name}
       </Link>
-      {dir.folderName && (
+      {dir.collectionName && (
         <Link
           className="breadcrumbs"
           underline="hover"
           color="inherit"
           sx={{ display: "flex", alignItems: "center" }}
-          onClick={openFolder}
+          onClick={openCollection}
         >
           <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
           {collectionInfo.name}
         </Link>
       )}
-      {dir.fileName && (
+      {dir.documentName && (
         <Link
           className="breadcrumbs"
           underline="hover"
@@ -92,7 +92,7 @@ export default function Nav() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <TextSnippet style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {dir.fileName}
+          {dir.documentName}
         </Link>
       )}
     </Breadcrumbs>

@@ -20,7 +20,7 @@ export default function CollectionList() {
         type: "read-directory",
         path: `${params.path}`,
       })
-      .then((data: { files: string[]; folders: string[] }) => {
+      .then((data: { files: string[]; collections: string[] }) => {
         readCollectionList(data.files, params.path).then((list) => {
           setCollection(list);
         });

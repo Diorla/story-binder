@@ -25,7 +25,7 @@ export default function CollectionCard({ item }: { item: CollectionInfo }) {
       menuComponent={
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
-          <MenuItem onClick={() => navigate("folder", item)}>
+          <MenuItem onClick={() => navigate("collection", item)}>
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
@@ -51,11 +51,11 @@ export default function CollectionCard({ item }: { item: CollectionInfo }) {
       <Card
         key={item.id}
         sx={{ width: 240, height: 200, m: 1 }}
-        onDoubleClick={() => navigate("folder", item)}
+        onDoubleClick={() => navigate("collection", item)}
       >
         <CardContent>
           <Box className="row">
-            <Folder onClick={() => navigate("folder", item)} />
+            <Folder onClick={() => navigate("collection", item)} />
             <EditableContent
               value={item.name}
               updateValue={(value) =>

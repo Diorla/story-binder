@@ -29,7 +29,7 @@ export default function DocumentCard({
       menuComponent={
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
-          <MenuItem onClick={() => navigate("folder", item)}>
+          <MenuItem onClick={() => navigate("document", item)}>
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
@@ -48,11 +48,11 @@ export default function DocumentCard({
       <Card
         key={item.id}
         sx={{ width: 240, height: 200, m: 1 }}
-        onDoubleClick={() => navigate("folder", item)}
+        onDoubleClick={() => navigate("document", item)}
       >
         <CardContent>
           <Box className="row">
-            <InsertDriveFile onClick={() => navigate("folder", item)} />
+            <InsertDriveFile onClick={() => navigate("document", item)} />
             <EditableContent
               value={item.name}
               updateValue={(value) => writeDocument({ ...item, name: value })}

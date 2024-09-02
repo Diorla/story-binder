@@ -4,7 +4,7 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import CreateProjectPage from "@/pages/create-project";
 import ProjectPage from "@/pages/project";
-import FolderPage from "@/pages/folder";
+import CollectionPage from "@/pages/collection";
 import Templates from "@/pages/templates";
 import CreateTemplatePage from "@/pages/create-template";
 
@@ -38,23 +38,23 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
     element: <ProjectPage />,
   },
   {
-    path: "folder",
-    element: <FolderPage />,
+    path: "collection",
+    element: <CollectionPage />,
   },
   {
     path: "edit-project",
     element: <NotFound />,
   },
   {
-    path: "edit-folder",
+    path: "edit-collection",
     element: <NotFound />,
   },
   {
-    path: "edit-file",
+    path: "edit-document",
     element: <NotFound />,
   },
   {
-    path: "file",
+    path: "document",
     element: <NotFound />,
   },
   {

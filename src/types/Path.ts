@@ -6,11 +6,11 @@ type Path =
   | "help"
   | "trash"
   | "settings"
-  | "folder"
+  | "collection"
   | "edit-project"
-  | "edit-folder"
-  | "edit-file"
-  | "file"
+  | "edit-collection"
+  | "edit-document"
+  | "document"
   | "create-template";
 
 export default Path;
