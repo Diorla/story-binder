@@ -1,18 +1,24 @@
 import FormTemplate from "./FormTemplate";
 
-export type FormType = {
+type BaseTemplate = {
+  id: string;
+  description: string;
+  type: "form" | "editor";
+};
+
+export interface FormType extends BaseTemplate {
   id: string;
   description: string;
   type: "form";
   template: FormTemplate;
-};
+}
 
-export type EditorType = {
+export interface EditorType extends BaseTemplate {
   id: string;
   type: "editor";
   description: string;
   template: string;
-};
+}
 
 type Template = FormType | EditorType;
 

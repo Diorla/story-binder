@@ -55,7 +55,6 @@ textarea::-webkit-scrollbar {
 /* Main background */
 
 #browser {
-  background-image: url("../assets/bkg.png");
   background-size: 100% 100%;
 }
 
@@ -82,4 +81,28 @@ textarea::-webkit-scrollbar {
 
 .breadcrumbs {
   cursor: pointer;
+}
+
+/* Template */
+
+#empty-template {
+  background-image: url("../assets/stack.png");
+  height: 100%;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.empty-template-wrapper {
+  padding: 20px;
+}
+
+.empty-template-wrapper>p {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
