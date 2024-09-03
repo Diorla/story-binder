@@ -1,10 +1,14 @@
 import logError from "@/scripts/logError";
+import Directory from "@/types/Directory";
 import ProjectInfo from "@/types/ProjectInfo";
 
-export default async function getProjectList(
-  projects: string[],
-  workspace: string
-) {
+export default async function getProjectList(workspace: string) {
+  const dirNames = (await window.api?.sendMessage({
+    type: "read-directory",
+    path: workspace,
+  })) as Directory;
+
+  const projects = dirNames.folders;
   const list = [];
   try {
     for (const project of projects) {

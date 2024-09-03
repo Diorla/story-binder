@@ -11,16 +11,17 @@ import useApp from "@/context/app/useApp";
 import { useEffect, useRef } from "react";
 import clamp from "clamp-js";
 import useOpenDir from "@/hooks/useOpenDir";
-import duplicateProject from "@/scripts/duplicateProject";
+import duplicateProject from "./duplicateProject";
+import useHomeContext from "../useHomeContext";
 
 export default function ProjectCard({ project }: { project: ProjectInfo }) {
   const navigate = useOpenDir();
   const {
-    refresh,
     userInfo: { workspace },
   } = useApp();
   const summaryRef = useRef();
   const headerRef = useRef();
+  const { reloadProjects } = useHomeContext();
 
   useEffect(() => {
     clamp(summaryRef?.current, { clamp: 6 });
@@ -35,12 +36,14 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
             <Typography sx={{ p: 1 }}>{project.name}</Typography>
             <MenuItem
               onClick={() =>
-                duplicateProject({ ...project }, workspace).then(refresh)
+                duplicateProject({ ...project }, workspace).then(reloadProjects)
               }
             >
               <ListItemText>Duplicate</ListItemText>
             </MenuItem>
-            <MenuItem onClick={() => deleteProject(project.path).then(refresh)}>
+            <MenuItem
+              onClick={() => deleteProject(project.path).then(reloadProjects)}
+            >
               <ListItemText>Delete</ListItemText>
             </MenuItem>
           </>

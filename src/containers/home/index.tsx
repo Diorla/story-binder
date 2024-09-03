@@ -3,33 +3,37 @@ import EmptyProject from "./empty-project";
 import Projects from "./projects";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
-import logError from "@/scripts/logError";
-import Directory from "@/types/Directory";
+import getProjectList from "./getProjectList";
+import ProjectInfo from "@/types/ProjectInfo";
+import { HomeContext } from "./HomeContext";
 
 export default function Home() {
   const {
     userInfo: { workspace },
   } = useApp();
   const [loading, setLoading] = useState(true);
-  const [projects, setProjects] = useLocalState(workspace, []);
+  const [projects, setProjects] = useLocalState<ProjectInfo[]>(
+    "project-list",
+    []
+  );
 
   useEffect(() => {
-    window.api
-      ?.sendMessage({
-        type: "read-directory",
-        path: workspace,
-      })
-      .then((value: Directory) => {
-        setProjects(value.folders);
-        setLoading(false);
-      })
-      .catch((err) => {
-        logError("Home", "useEffect", err);
-        setLoading(false);
-      });
-  }, [setProjects, workspace]);
+    getProjectList(workspace).then((res: ProjectInfo[]) => {
+      setProjects(res);
+      setLoading(false);
+    });
+  }, [setLoading, setProjects, workspace]);
 
+  const reloadProjects = () => {
+    getProjectList(workspace).then((res: ProjectInfo[]) => {
+      setProjects(res);
+    });
+  };
   if (loading) return <div>Loading</div>;
-  if (projects.length) return <Projects projects={projects} />;
-  return <EmptyProject />;
+
+  return (
+    <HomeContext.Provider value={{ projects, reloadProjects }}>
+      {projects.length ? <Projects /> : <EmptyProject />}
+    </HomeContext.Provider>
+  );
 }
