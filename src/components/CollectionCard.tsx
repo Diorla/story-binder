@@ -11,37 +11,43 @@ import { Folder } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import FolderConfig from "@/types/FolderConfig";
 import useApp from "@/context/app/useApp";
-import writeCollection from "./writeCollection";
+import writeCollection from "../scripts/writeCollection";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
-import deleteCollection from "./deleteCollection";
+import deleteCollection from "../containers/project/deleteCollection";
+import useOpenDir from "@/hooks/useOpenDir";
 
 export default function CollectionCard({ item }: { item: FolderConfig }) {
-  const { refresh, dir } = useApp();
-  const { navigate } = useRouter();
+  const {
+    refresh,
+    userInfo: { workspace },
+  } = useApp();
+  const { params } = useRouter<{ dir: string[] }>();
+  const navigate = useOpenDir();
 
+  const path = `${workspace}/${params.dir.join("/")}`;
   return (
     <ContextMenu
       menuComponent={
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
-          <MenuItem onClick={() => navigate("folder", item)}>
+          <MenuItem
+            onClick={() => navigate("folder", [...params.dir, item.name])}
+          >
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
             onClick={() =>
               writeCollection(
                 { name: item.name, note: item.note, id: v4() },
-                dir.projectPath
+                path
               ).then(refresh)
             }
           >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              deleteCollection(item.id, dir.projectPath).then(refresh)
-            }
+            onClick={() => deleteCollection(item.id, path).then(refresh)}
           >
             <ListItemText>Delete</ListItemText>
           </MenuItem>
@@ -51,17 +57,17 @@ export default function CollectionCard({ item }: { item: FolderConfig }) {
       <Card
         key={item.id}
         sx={{ width: 240, height: 200, m: 1 }}
-        onDoubleClick={() => navigate("folder", item)}
+        onDoubleClick={() => navigate("folder", [...params.dir, item.name])}
       >
         <CardContent>
           <Box className="row">
-            <Folder onClick={() => navigate("folder", item)} />
+            <Folder
+              onClick={() => navigate("folder", [...params.dir, item.name])}
+            />
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                writeCollection({ ...item, name: value }, dir.projectPath).then(
-                  refresh
-                )
+                writeCollection({ ...item, name: value }, path).then(refresh)
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -75,9 +81,7 @@ export default function CollectionCard({ item }: { item: FolderConfig }) {
             value={item.note}
             multiline={true}
             updateValue={(value) =>
-              writeCollection({ ...item, note: value }, dir.projectPath).then(
-                refresh
-              )
+              writeCollection({ ...item, note: value }, path).then(refresh)
             }
             textStyle={{
               textOverflow: "ellipsis",

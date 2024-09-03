@@ -1,13 +1,17 @@
 import { Box, Button, Divider } from "@mui/material";
 import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
-import writeCollection from "./writeCollection";
+import writeCollection from "../scripts/writeCollection";
 import useApp from "@/context/app/useApp";
 import FolderConfig from "@/types/FolderConfig";
 import { v4 } from "uuid";
 
-export default function NewCollectionForm() {
-  const { dir, refresh } = useApp();
+export default function NewCollectionForm({
+  currentDir,
+}: {
+  currentDir: string;
+}) {
+  const { refresh } = useApp();
   const { register, handleSubmit } = useForm<FolderConfig>({
     defaultValue: {
       name: "",
@@ -41,7 +45,7 @@ export default function NewCollectionForm() {
         <Button
           type="submit"
           onClick={handleSubmit((data) => {
-            writeCollection(data, dir.projectPath).then(() => {
+            writeCollection(data, currentDir).then(() => {
               refresh();
             });
           })}

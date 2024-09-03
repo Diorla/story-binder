@@ -8,15 +8,14 @@ import ProjectInfo from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
-import useRouter from "@/context/router/useRouter";
 import Input from "@/components/Input";
 import SAMPLE from "@/constants/SAMPLE";
 import createProject from "./createProject";
+import useOpenDir from "../../hooks/useOpenDir";
 
 const { width, height } = BOOK_DIMENSION;
-
 export default function CreateProject() {
-  const { navigate } = useRouter<ProjectInfo>();
+  const navigate = useOpenDir();
   const { handleSubmit, register } = useForm<ProjectInfo>({
     defaultValue: {
       name: "",
@@ -34,7 +33,7 @@ export default function CreateProject() {
   const submit = (form: ProjectInfo) => {
     createProject(form, workspace)
       .then(() => {
-        navigate("project", form);
+        navigate("project", [form.name]);
       })
       .catch((err) => {
         logError("create-project", "submit", err);

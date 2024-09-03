@@ -1,14 +1,15 @@
 import { Card, Grid, IconButton } from "@mui/material";
-import { Add, GridView, Tune } from "@mui/icons-material";
+import { CreateNewFolderOutlined, GridView, Tune } from "@mui/icons-material";
 import { useState } from "react";
 import CollectionList from "./CollectionList";
 import EditProject from "./EditProject";
-import NewCollectionForm from "./NewCollectionForm";
+import NewCollectionForm from "../../components/NewCollectionForm";
 import { useEffectOnce } from "react-use";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import ProjectInfo from "@/types/ProjectInfo";
-import Nav from "@/components/Nav";
+import Nav from "./Nav";
+import useRouter from "@/context/router/useRouter";
 
 export default function ProjectView() {
   const [editing, setEditing] = useState(false);
@@ -19,14 +20,18 @@ export default function ProjectView() {
     cover: "",
     path: "",
   });
+  const { params } = useRouter<{ dir: string[] }>();
 
-  const { dir } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
+  const path = `${workspace}/${params.dir.join("/")}`;
 
   useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-file",
-        path: `${dir.projectPath}/.config`,
+        path: `${path}/.config`,
       })
       .then((data) => setProject(data as ProjectInfo));
   });
@@ -54,7 +59,9 @@ export default function ProjectView() {
           }}
         >
           <IconButton onClick={() => setOpenForm(!openForm)}>
-            <Add style={{ fontSize: 21, cursor: "pointer" }} />
+            <CreateNewFolderOutlined
+              style={{ fontSize: 21, cursor: "pointer" }}
+            />
           </IconButton>
           <IconButton onClick={() => setEditing(!editing)}>
             {editing ? (
@@ -65,7 +72,7 @@ export default function ProjectView() {
           </IconButton>
         </div>
       </Card>
-      {openForm && <NewCollectionForm />}
+      {openForm && <NewCollectionForm currentDir={path} />}
       <Grid sx={{ p: 1 }}>
         {editing ? <EditProject defaultValue={project} /> : <CollectionList />}
       </Grid>

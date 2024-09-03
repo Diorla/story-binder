@@ -1,27 +1,28 @@
 import { Box } from "@mui/material";
-import CollectionCard from "./CollectionCard";
+import CollectionCard from "../../components/CollectionCard";
 import useLocalState from "@/hooks/useLocalState";
 import useRouter from "@/context/router/useRouter";
-import ProjectInfo from "@/types/ProjectInfo";
 import FolderConfig from "@/types/FolderConfig";
 import { useEffectOnce } from "react-use";
-import readCollectionList from "./readCollectionList";
+import readCollectionList from "../../scripts/readCollectionList";
+import useApp from "@/context/app/useApp";
 
 export default function CollectionList() {
-  const { params } = useRouter<ProjectInfo>();
-  const [collection, setCollection] = useLocalState<FolderConfig[]>(
-    params.path,
-    []
-  );
+  const {
+    userInfo: { workspace },
+  } = useApp();
+  const { params } = useRouter<{ dir: string[] }>();
+  const path = `${workspace}/${params.dir.join("/")}`;
+  const [collection, setCollection] = useLocalState<FolderConfig[]>(path, []);
 
   useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-directory",
-        path: `${params.path}`,
+        path,
       })
-      .then((data: { files: string[]; collections: string[] }) => {
-        readCollectionList(data.files, params.path).then((list) => {
+      .then((data: { files: string[]; folders: string[] }) => {
+        readCollectionList(data.folders, path).then((list) => {
           setCollection(list);
         });
       });

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import UserInfo from "@/types/UserInfo";
 import AppContext from "./AppContext";
 import useContextState from "@/hooks/useContextState";
-import DirProps from "./DirProps";
 import Wrapper from "./Wrapper";
 import getUserInfo from "./getUserInfo";
 
@@ -18,11 +17,6 @@ export default function AppProvider({
     "app-context-status",
     INITIAL_USER_INFO
   );
-  const [dir, setDir] = useContextState<DirProps>("user-dir", {
-    projectPath: "",
-    folderPath: "",
-    documentId: "",
-  });
 
   useEffect(() => {
     getUserInfo().then((data) => {
@@ -30,19 +24,6 @@ export default function AppProvider({
       setUserInfo(data);
     });
   }, [setLoading, setUserInfo]);
-
-  const updateDir = (
-    type: "projectPath" | "folderPath" | "documentId",
-    value: string
-  ) => {
-    if (type === "projectPath") {
-      setDir({ projectPath: value, folderPath: "", documentId: "" });
-    } else if (type === "folderPath") {
-      setDir({ ...dir, folderPath: value, documentId: "" });
-    } else if (type === "documentId") {
-      setDir({ ...dir, documentId: value });
-    }
-  };
 
   const updateUserInfo = (newUserInfo: Partial<UserInfo>) => {
     const mergedUserInfo = { ...userInfo, ...newUserInfo };
@@ -65,9 +46,7 @@ export default function AppProvider({
 
   if (loading) return <div>Loading...</div>;
   return (
-    <AppContext.Provider
-      value={{ userInfo, dir, updateDir, updateUserInfo, refresh }}
-    >
+    <AppContext.Provider value={{ userInfo, updateUserInfo, refresh }}>
       <Wrapper>{children}</Wrapper>
     </AppContext.Provider>
   );

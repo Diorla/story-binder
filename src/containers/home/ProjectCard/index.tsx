@@ -8,13 +8,13 @@ import duplicateProject from "./duplicateProject";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";
-import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import { useEffect, useRef } from "react";
 import clamp from "clamp-js";
+import useOpenDir from "@/hooks/useOpenDir";
 
 export default function ProjectCard({ project }: { project: ProjectInfo }) {
-  const { navigate } = useRouter<ProjectInfo>();
+  const navigate = useOpenDir();
   const { refresh } = useApp();
   const summaryRef = useRef();
   const headerRef = useRef();
@@ -66,7 +66,7 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
                 size="small"
                 color="primary"
                 variant="contained"
-                onClick={() => navigate("project", project)}
+                onClick={() => navigate("project", [project.name])}
               >
                 Open
               </Button>
