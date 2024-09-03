@@ -31,7 +31,7 @@ export default function CollectionView() {
         type: "read-file",
         path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
       })
-      .then((data) => setCollection(JSON.parse(data as string)));
+      .then((data) => setCollection(data as FolderConfig));
   });
 
   return (

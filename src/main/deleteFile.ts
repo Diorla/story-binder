@@ -1,7 +1,6 @@
-import fs from "node:fs";
+import { removeSync } from "fs-extra";
 
 export default function deleteFile(dir: string) {
-  if (fs.existsSync(dir)) {
-    fs.unlinkSync(dir);
-  }
+  removeSync(dir);
+  return dir;
 }

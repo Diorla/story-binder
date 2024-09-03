@@ -50,7 +50,7 @@ export default function AppProvider({
       .sendMessage({
         type: "write-file",
         path: USER_INFO_DIR,
-        content: JSON.stringify(mergedUserInfo),
+        content: mergedUserInfo,
       })
       .then(() => setUserInfo(mergedUserInfo));
   };

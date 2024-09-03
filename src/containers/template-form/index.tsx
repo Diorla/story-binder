@@ -36,7 +36,7 @@ export default function TemplateForm() {
       .sendMessage({
         type: "write-file",
         path: `./templates/${id}`,
-        content: JSON.stringify(value, null, 2),
+        content: value,
       })
       .then(() => register("id").onUpdate(id));
   };
@@ -49,7 +49,7 @@ export default function TemplateForm() {
     window.api.sendMessage({
       type: "write-file",
       path: `./templates/${form.id}`,
-      content: JSON.stringify(value, null, 2),
+      content: value,
     });
   };
 

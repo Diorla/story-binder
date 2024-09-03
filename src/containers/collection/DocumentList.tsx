@@ -20,7 +20,7 @@ export default function DocumentList({
       .sendMessage({
         type: "write-file",
         path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
-        content: JSON.stringify(tempCollection, null, 2),
+        content: tempCollection,
       })
       .then(refresh);
   };
@@ -33,7 +33,7 @@ export default function DocumentList({
       .sendMessage({
         type: "write-file",
         path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
-        content: JSON.stringify(tempCollection, null, 2),
+        content: tempCollection,
       })
       .then(refresh);
   };

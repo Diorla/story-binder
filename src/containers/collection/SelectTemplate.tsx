@@ -53,7 +53,7 @@ export default function SelectTemplate({
         .sendMessage({
           type: "write-file",
           path,
-          content: JSON.stringify(tempCollection),
+          content: tempCollection,
         })
         .then(refresh)
         .catch((err) => {

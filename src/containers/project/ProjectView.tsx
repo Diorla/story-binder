@@ -28,7 +28,7 @@ export default function ProjectView() {
         type: "read-file",
         path: `${dir.projectPath}/.config`,
       })
-      .then((data) => setProject(JSON.parse(data as string)));
+      .then((data) => setProject(data as ProjectInfo));
   });
 
   return (

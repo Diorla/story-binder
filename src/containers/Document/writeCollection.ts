@@ -12,7 +12,7 @@ export default function writeCollection(
   const content: FolderConfig = { ...arg, id };
   return window.api.sendMessage({
     type: "write-file",
-    content: JSON.stringify(content),
+    content,
     path,
   });
 }

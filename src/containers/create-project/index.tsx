@@ -43,7 +43,7 @@ export default function CreateProject() {
           .sendMessage({
             type: "write-file",
             path: `${path}/.config`,
-            content: JSON.stringify(form),
+            content: form,
           })
           .then(() => {
             navigate("project", form);

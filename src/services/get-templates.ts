@@ -7,8 +7,8 @@ export async function readTemplate(files: string[]) {
     const info = (await window.api.sendMessage({
       type: "read-file",
       path: `./templates/${file}`,
-    })) as string;
-    list.push(JSON.parse(info));
+    })) as Template;
+    list.push(info);
   }
   return list;
 }

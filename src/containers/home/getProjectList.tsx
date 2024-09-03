@@ -1,4 +1,5 @@
 import logError from "@/scripts/logError";
+import ProjectInfo from "@/types/ProjectInfo";
 
 export default async function getProjectList(
   projects: string[],
@@ -8,13 +9,12 @@ export default async function getProjectList(
   try {
     for (const project of projects) {
       const path = `${workspace}/${project}/.config`;
-      const res = await window.api.sendMessage({
+      const res = (await window.api.sendMessage({
         type: "read-file",
         path,
-      });
+      })) as ProjectInfo;
 
-      const obj = JSON.parse(res as string);
-      list.push({ ...obj, path: `${workspace}/${project}` });
+      list.push({ ...res, path: `${workspace}/${project}` });
     }
   } catch (error) {
     logError("Projects", "getProjectList", error);

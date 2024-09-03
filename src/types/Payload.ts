@@ -23,13 +23,13 @@ export type GetWindowInfo = {
 export type ReadFile = {
   type: "read-file";
   path: string;
-  defaultContent?: string;
+  defaultContent?: object;
 };
 
 export type WriteFile = {
   type: "write-file";
   path: string;
-  content: string;
+  content: object;
 };
 
 export type SelectDirectory = {

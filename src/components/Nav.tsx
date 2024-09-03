@@ -36,9 +36,8 @@ export default function Nav() {
         type: "read-file",
         path: `${dir.projectPath}/.config`,
       })
-      .then((data: string) => {
-        const projectInfo = JSON.parse(data) as ProjectInfo;
-        setProjectInfo(projectInfo);
+      .then((data) => {
+        setProjectInfo(data as ProjectInfo);
       });
   });
 
@@ -49,9 +48,8 @@ export default function Nav() {
           type: "read-file",
           path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
         })
-        .then((data: string) => {
-          const collectionInfo = JSON.parse(data) as FolderConfig;
-          setCollectionInfo(collectionInfo);
+        .then((data) => {
+          setCollectionInfo(data as FolderConfig);
         });
   });
 
