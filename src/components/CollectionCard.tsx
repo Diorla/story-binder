@@ -32,7 +32,7 @@ export default function CollectionCard({ item }: { item: FolderConfig }) {
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
           <MenuItem
-            onClick={() => navigate("folder", [...params.dir, item.name])}
+            onClick={() => navigate("folder", [...params.dir, item.id])}
           >
             <ListItemText>Open</ListItemText>
           </MenuItem>
@@ -56,13 +56,13 @@ export default function CollectionCard({ item }: { item: FolderConfig }) {
     >
       <Card
         key={item.id}
-        sx={{ width: 240, height: 200, m: 1 }}
-        onDoubleClick={() => navigate("folder", [...params.dir, item.name])}
+        sx={{ width: 240, m: 1 }}
+        onDoubleClick={() => navigate("folder", [...params.dir, item.id])}
       >
         <CardContent>
           <Box className="row">
             <Folder
-              onClick={() => navigate("folder", [...params.dir, item.name])}
+              onClick={() => navigate("folder", [...params.dir, item.id])}
             />
             <EditableContent
               value={item.name}

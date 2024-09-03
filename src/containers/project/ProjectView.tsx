@@ -1,15 +1,15 @@
 import { Card, Grid, IconButton } from "@mui/material";
 import { CreateNewFolderOutlined, GridView, Tune } from "@mui/icons-material";
 import { useState } from "react";
-import CollectionList from "./CollectionList";
+import CollectionList from "../../components/CollectionList";
 import EditProject from "./EditProject";
-import NewCollectionForm from "../../components/NewCollectionForm";
 import { useEffectOnce } from "react-use";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import ProjectInfo from "@/types/ProjectInfo";
 import Nav from "./Nav";
 import useRouter from "@/context/router/useRouter";
+import NewCollectionForm from "@/components/NewCollectionForm";
 
 export default function ProjectView() {
   const [editing, setEditing] = useState(false);

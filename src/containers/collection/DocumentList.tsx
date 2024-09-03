@@ -1,58 +1,40 @@
 import { Box } from "@mui/material";
-import DocumentCard from "./DocumentCard";
-import FolderConfig from "@/types/FolderConfig";
-import DocumentInfo from "@/types/DocumentInfo";
+import useLocalState from "@/hooks/useLocalState";
+import useRouter from "@/context/router/useRouter";
+import { useEffectOnce } from "react-use";
 import useApp from "@/context/app/useApp";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
+import readDocumentList from "@/scripts/readDocumentList";
+import DocumentInfo from "@/types/DocumentInfo";
+import DocumentCard from "./DocumentCard";
 
-export default function DocumentList({
-  collection,
-}: {
-  collection: FolderConfig;
-}) {
-  const { dir, refresh } = useApp();
+export default function DocumentList() {
+  const {
+    userInfo: { workspace },
+  } = useApp();
+  const { params } = useRouter<{ dir: string[] }>();
+  const path = `${workspace}/${params.dir.join("/")}`;
+  const [documentList, setDocumentList] = useLocalState<DocumentInfo[]>(
+    path,
+    []
+  );
 
-  const writeDocument = (data: DocumentInfo) => {
-    const tempCollection = { ...collection };
-    const tempDocument = tempCollection?.document[data.id] || {};
-    tempCollection.document[data.id] = { ...tempDocument, ...data };
+  useEffectOnce(() => {
     window.api
       .sendMessage({
-        type: "write-file",
-        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
-        content: tempCollection,
+        type: "read-directory",
+        path,
       })
-      .then(refresh);
-  };
-
-  const deleteDocument = (id: string) => {
-    const tempCollection = { ...collection };
-    delete tempCollection.document[id];
-
-    window.api
-      .sendMessage({
-        type: "write-file",
-        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
-        content: tempCollection,
-      })
-      .then(refresh);
-  };
-
-  const documentObj = collection.document || {};
-  const documents: DocumentInfo[] = Object.keys(documentObj).map((item) => {
-    return {
-      ...documentObj[item],
-    };
+      .then((data: { files: string[]; folders: string[] }) => {
+        readDocumentList(data.files, path).then((list) => {
+          setDocumentList(list);
+        });
+      });
   });
+
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-      {documents.map((item) => (
-        <DocumentCard
-          key={item.id}
-          item={item}
-          writeDocument={writeDocument}
-          deleteDocument={deleteDocument}
-        />
+      {documentList.map((item) => (
+        <DocumentCard key={item.id} item={item} />
       ))}
     </Box>
   );

@@ -15,6 +15,7 @@ export default function Nav() {
   const [projectInfo, setProjectInfo] = useLocalState<ProjectInfo>(
     "project-info",
     {
+      id: "",
       name: "",
       summary: "",
       cover: "",

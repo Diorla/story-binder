@@ -1,19 +1,31 @@
-import { Card, Grid, IconButton } from "@mui/material";
-import { Add, GridView, Tune } from "@mui/icons-material";
+import { Card, Divider, Grid, IconButton } from "@mui/material";
+import {
+  CreateNewFolderOutlined,
+  GridView,
+  NoteAddOutlined,
+  Tune,
+} from "@mui/icons-material";
 import { useState } from "react";
 import DocumentList from "./DocumentList";
 import SelectTemplate from "./SelectTemplate";
-import NewCollectionForm from "./NewCollectionForm";
+import NewDocumentForm from "./NewDocumentForm";
 import { useEffectOnce } from "react-use";
-import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import FolderConfig from "@/types/FolderConfig";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import Nav from "@/components/Nav";
+import useRouter from "@/context/router/useRouter";
+import useApp from "@/context/app/useApp";
+import Nav from "./Nav";
+import NewCollectionForm from "@/components/NewCollectionForm";
+import CollectionList from "@/components/CollectionList";
+import { cardStyle } from "./cardStyle";
 
 export default function CollectionView() {
   const [editing, setEditing] = useState(false);
-  const [openForm, setOpenForm] = useState(false);
+  const [openForm, setOpenForm] = useState<"note" | "folder" | "">("");
+  const { params } = useRouter<{ dir: string[] }>();
+  const {
+    userInfo: { workspace },
+  } = useApp();
   const [collection, setCollection] = useLocalState<FolderConfig>(
     "collection",
     {
@@ -23,31 +35,19 @@ export default function CollectionView() {
     }
   );
 
-  const { dir } = useApp();
-
+  const path = params.dir.join("/");
   useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-file",
-        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
+        path: `${workspace}/${path}/.config`,
       })
       .then((data) => setCollection(data as FolderConfig));
   });
 
   return (
     <div>
-      <Card
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          position: "sticky",
-          top: 0,
-          backgroundColor: "white",
-          p: 1,
-          borderRadius: 0,
-        }}
-      >
+      <Card sx={cardStyle}>
         <Nav />
         <div
           style={{
@@ -56,8 +56,13 @@ export default function CollectionView() {
             justifyContent: "space-evenly",
           }}
         >
-          <IconButton onClick={() => setOpenForm(!openForm)}>
-            <Add style={{ fontSize: 21, cursor: "pointer" }} />
+          <IconButton onClick={() => setOpenForm(openForm ? "" : "note")}>
+            <NoteAddOutlined style={{ fontSize: 21, cursor: "pointer" }} />
+          </IconButton>
+          <IconButton onClick={() => setOpenForm(openForm ? "" : "folder")}>
+            <CreateNewFolderOutlined
+              style={{ fontSize: 21, cursor: "pointer" }}
+            />
           </IconButton>
           <IconButton onClick={() => setEditing(!editing)}>
             {editing ? (
@@ -68,12 +73,21 @@ export default function CollectionView() {
           </IconButton>
         </div>
       </Card>
-      {openForm && <NewCollectionForm collection={collection} />}
+      {openForm === "note" && (
+        <NewDocumentForm currentDir={`${workspace}/${path}`} />
+      )}
+      {openForm === "folder" && (
+        <NewCollectionForm currentDir={`${workspace}/${path}`} />
+      )}
       <Grid sx={{ p: 1 }}>
         {editing ? (
           <SelectTemplate collection={collection} />
         ) : (
-          <DocumentList collection={collection} />
+          <>
+            <CollectionList />
+            <Divider />
+            <DocumentList />
+          </>
         )}
       </Grid>
     </div>

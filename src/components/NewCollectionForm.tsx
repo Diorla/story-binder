@@ -50,7 +50,7 @@ export default function NewCollectionForm({
             });
           })}
         >
-          Submit
+          Save folder
         </Button>
       </Box>
       <Divider />

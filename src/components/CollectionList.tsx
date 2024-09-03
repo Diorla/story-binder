@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import CollectionCard from "../../components/CollectionCard";
+import CollectionCard from "./CollectionCard";
 import useLocalState from "@/hooks/useLocalState";
 import useRouter from "@/context/router/useRouter";
 import FolderConfig from "@/types/FolderConfig";
 import { useEffectOnce } from "react-use";
-import readCollectionList from "../../scripts/readCollectionList";
+import readCollectionList from "../scripts/readCollectionList";
 import useApp from "@/context/app/useApp";
 
 export default function CollectionList() {

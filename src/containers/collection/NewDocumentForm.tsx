@@ -4,43 +4,30 @@ import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
 import DocumentInfo from "@/types/DocumentInfo";
 import { v4 } from "uuid";
-import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
-export default function NewCollectionForm({
-  collection,
+export default function NewDocumentForm({
+  currentDir,
 }: {
-  collection: FolderConfig;
+  currentDir: string;
 }) {
-  const { dir, refresh } = useApp();
+  const { refresh } = useApp();
   const { register, handleSubmit } = useForm<DocumentInfo>({
     defaultValue: {
       name: "",
       note: "",
-      id: v4(),
+      id: "",
     },
     required: ["name"],
   });
 
   const writeDocument = (data: DocumentInfo) => {
-    const tempCollection: FolderConfig = { ...collection };
-    const document = tempCollection?.document || {};
-    const tempDocument = document[data.id] || {};
-
-    tempCollection.document = {
-      ...document,
-      [data.id]: {
-        ...tempDocument,
-        ...data,
-        template: tempCollection.template,
-      },
-    };
-
+    const id = v4();
     window.api
       .sendMessage({
         type: "write-file",
-        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
-        content: tempCollection,
+        path: `${currentDir}/${id}.${APP_FILE_EXT}`,
+        content: { ...data, id },
       })
       .then(refresh);
   };
@@ -72,7 +59,7 @@ export default function NewCollectionForm({
             writeDocument(data);
           })}
         >
-          Submit
+          Save Document
         </Button>
       </Box>
       <Divider />
