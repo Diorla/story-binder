@@ -39,7 +39,7 @@ export default function NewCollectionForm({
     window.api
       .sendMessage({
         type: "write-file",
-        path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
+        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
         content: JSON.stringify(tempCollection, null, 2),
       })
       .then(refresh);

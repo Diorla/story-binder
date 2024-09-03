@@ -29,7 +29,7 @@ export default function CollectionView() {
     window.api
       .sendMessage({
         type: "read-file",
-        path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
+        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
       })
       .then((data) => setCollection(JSON.parse(data as string)));
   });

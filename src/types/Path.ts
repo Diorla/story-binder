@@ -6,9 +6,9 @@ type Path =
   | "help"
   | "trash"
   | "settings"
-  | "collection"
+  | "folder"
   | "edit-project"
-  | "edit-collection"
+  | "edit-folder"
   | "edit-document"
   | "document"
   | "create-template";

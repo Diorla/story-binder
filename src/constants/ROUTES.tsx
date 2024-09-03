@@ -39,7 +39,7 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
     element: <ProjectPage />,
   },
   {
-    path: "collection",
+    path: "folder",
     element: <CollectionPage />,
   },
   {
@@ -47,7 +47,7 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
     element: <NotFound />,
   },
   {
-    path: "edit-collection",
+    path: "edit-folder",
     element: <NotFound />,
   },
   {

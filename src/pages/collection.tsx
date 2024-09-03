@@ -11,7 +11,7 @@ export default function CollectionPage() {
   const [loading, setLoading] = useState(true);
 
   useEffectOnce(() => {
-    updateDir("collectionName", params.id);
+    updateDir("folderPath", params.id);
     setLoading(false);
   });
 

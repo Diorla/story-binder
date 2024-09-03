@@ -7,7 +7,7 @@ const AppContext = createContext<AppContextProps>({
   updateUserInfo: () => "",
   dir: {
     projectPath: "",
-    collectionName: "",
+    folderPath: "",
     documentId: "",
   },
   updateDir: () => "",

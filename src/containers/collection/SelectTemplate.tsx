@@ -42,7 +42,7 @@ export default function SelectTemplate({
 
   const submit = () => {
     if (templateId) {
-      const path = `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`;
+      const path = `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`;
       const template = templateList.find((item) => item.id === templateId);
       const tempCollection: FolderConfig = {
         ...collection,

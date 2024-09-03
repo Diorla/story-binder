@@ -1,5 +1,5 @@
 export default interface DirProps {
   projectPath: string;
-  collectionName: string;
+  folderPath: string;
   documentId: string;
 }

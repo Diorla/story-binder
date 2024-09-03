@@ -43,11 +43,11 @@ export default function Nav() {
   });
 
   useEffectOnce(() => {
-    if (dir.collectionName)
+    if (dir.folderPath)
       window.api
         .sendMessage({
           type: "read-file",
-          path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
+          path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
         })
         .then((data: string) => {
           const collectionInfo = JSON.parse(data) as FolderConfig;
@@ -56,8 +56,8 @@ export default function Nav() {
   });
 
   const openCollection = () => {
-    updateDir("collectionName", dir.collectionName);
-    navigate("collection", { id: dir.collectionName });
+    updateDir("folderPath", dir.folderPath);
+    navigate("folder", { id: dir.folderPath });
   };
 
   const documents = collectionInfo.document || {};
@@ -78,7 +78,7 @@ export default function Nav() {
         <Link
           className="breadcrumbs"
           underline="hover"
-          color={_lastPath === "collection" ? "primary" : "inherit"}
+          color={_lastPath === "folder" ? "primary" : "inherit"}
           sx={{ display: "flex", alignItems: "center" }}
           onClick={openCollection}
         >
