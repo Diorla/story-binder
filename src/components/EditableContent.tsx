@@ -45,6 +45,8 @@ export default function EditableContent({
         ref={ref}
         multiline={multiline}
         rows={5}
+        onClick={(e) => e.stopPropagation()}
+        onDoubleClick={(e) => e.stopPropagation()}
       />
     );
   return (
