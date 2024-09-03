@@ -13,6 +13,7 @@ import SAMPLE from "@/constants/SAMPLE";
 import writeProject from "../../scripts/writeProject";
 import useOpenDir from "@/hooks/useOpenDir";
 import { v4 } from "uuid";
+import { validateProject } from "@/scripts/validateProject";
 
 const { width, height } = BOOK_DIMENSION;
 export default function CreateProject() {
@@ -32,15 +33,18 @@ export default function CreateProject() {
     userInfo: { workspace },
   } = useApp();
 
-  const submit = (form: ProjectInfo) => {
-    const id = v4();
-    writeProject({ ...form, id }, workspace)
-      .then(() => {
-        navigate("project", [id]);
-      })
-      .catch((err) => {
-        logError("create-project", "submit", err);
-      });
+  const submit = (form?: ProjectInfo) => {
+    if (form) {
+      const id = v4();
+      if (validateProject({ ...form, id }))
+        writeProject({ ...form, id }, workspace)
+          .then(() => {
+            navigate("project", [id]);
+          })
+          .catch((err) => {
+            logError("create-project", "submit", err);
+          });
+    }
   };
   return (
     <Box
