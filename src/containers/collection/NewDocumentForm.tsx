@@ -5,11 +5,14 @@ import useApp from "@/context/app/useApp";
 import DocumentInfo from "@/types/DocumentInfo";
 import { v4 } from "uuid";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
+import Template from "@/types/Template";
 
 export default function NewDocumentForm({
   currentDir,
+  template,
 }: {
   currentDir: string;
+  template?: Template;
 }) {
   const { refresh } = useApp();
   const { register, handleSubmit } = useForm<DocumentInfo>({
@@ -27,7 +30,7 @@ export default function NewDocumentForm({
       .sendMessage({
         type: "write-file",
         path: `${currentDir}/${id}.${APP_FILE_EXT}`,
-        content: { ...data, id },
+        content: { ...data, id, template },
       })
       .then(refresh);
   };

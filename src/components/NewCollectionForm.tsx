@@ -5,11 +5,14 @@ import writeCollection from "../scripts/writeCollection";
 import useApp from "@/context/app/useApp";
 import FolderConfig from "@/types/FolderConfig";
 import { v4 } from "uuid";
+import Template from "@/types/Template";
 
 export default function NewCollectionForm({
   currentDir,
+  template,
 }: {
   currentDir: string;
+  template?: Template;
 }) {
   const { refresh } = useApp();
   const { register, handleSubmit } = useForm<FolderConfig>({
@@ -45,7 +48,7 @@ export default function NewCollectionForm({
         <Button
           type="submit"
           onClick={handleSubmit((data) => {
-            writeCollection(data, currentDir).then(() => {
+            writeCollection({ ...data, template }, currentDir).then(() => {
               refresh();
             });
           })}

@@ -1,7 +1,6 @@
 import logError from "@/scripts/logError";
 import useApp from "@/context/app/useApp";
 import FolderConfig from "@/types/FolderConfig";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import { Box, Button, Link, Typography } from "@mui/material";
 import Picker from "@/components/Picker";
 import { useEffect, useState } from "react";
@@ -24,11 +23,15 @@ export default function SelectTemplate({
 }: {
   collection: FolderConfig;
 }) {
-  const { dir, refresh } = useApp();
+  const { refresh } = useApp();
   const [templateId, setTemplateId] = useState("");
   const [loading, setLoading] = useState(true);
   const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
+  const {
+    userInfo: { workspace },
+  } = useApp();
+  const { params } = useRouter<{ dir: string[] }>();
 
   useEffectOnce(() => {
     getTemplates()
@@ -42,7 +45,7 @@ export default function SelectTemplate({
 
   const submit = () => {
     if (templateId) {
-      const path = `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`;
+      const path = `${workspace}/${params.dir.join("/")}/.config`;
       const template = templateList.find((item) => item.id === templateId);
       const tempCollection: FolderConfig = {
         ...collection,

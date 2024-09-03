@@ -74,10 +74,16 @@ export default function CollectionView() {
         </div>
       </Card>
       {openForm === "note" && (
-        <NewDocumentForm currentDir={`${workspace}/${path}`} />
+        <NewDocumentForm
+          currentDir={`${workspace}/${path}`}
+          template={collection.template}
+        />
       )}
       {openForm === "folder" && (
-        <NewCollectionForm currentDir={`${workspace}/${path}`} />
+        <NewCollectionForm
+          currentDir={`${workspace}/${path}`}
+          template={collection.template}
+        />
       )}
       <Grid sx={{ p: 1 }}>
         {editing ? (
