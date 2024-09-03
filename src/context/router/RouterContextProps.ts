@@ -23,16 +23,4 @@ export interface RouterContextProps<T> {
    * current params from navigate function
    */
   params: T;
-  /**
-   * Used to indicate if the current screen is dirty
-   * and the user should be prompted to save changes
-   * before navigating away
-   * @param params boolean
-   * @returns void
-   */
-  setIsDirty: (params: boolean) => void;
-  /**
-   * Well, I don't want to be updating setDirty all the time
-   */
-  isDirty: boolean;
 }

@@ -6,13 +6,13 @@ import Layout from "@/containers/layout";
 import ErrorBoundary from "@/containers/error-boundary";
 import useLocalState from "@/hooks/useLocalState";
 import useApp from "../app/useApp";
+import deepEqual from "deep-equal";
 
 export default function RouterProvider() {
   const [path, setPath] = useLocalState<Path>("current-path", "home");
   const [history, setHistory] = useLocalState("path history", []);
   const [params, setParams] = useLocalState("route params", null);
   const [error, setError] = useLocalState("route error", null);
-  const [isDirty, setIsDirty] = useLocalState("route is dirty", false);
   const { refresh } = useApp();
 
   const _lastPath = history[history.length - 1];
@@ -26,8 +26,8 @@ export default function RouterProvider() {
     }
   }, [setHistory, setParams, setPath]);
 
-  function navigate<T>(path: Path, params?: T) {
-    if (_lastPath === path) return;
+  function navigate<T>(path: Path, newParams?: T) {
+    if (_lastPath === path && deepEqual(params, newParams)) return;
     const confirmNavigation = () => {
       localStorage.clear();
       setParams(null);
@@ -37,34 +37,13 @@ export default function RouterProvider() {
       setHistory(newHistory);
       localStorage.setItem(
         "route",
-        JSON.stringify({ params, path, history: newHistory })
+        JSON.stringify({ params: newParams, path, history: newHistory })
       );
       refresh();
-      if (params) setParams(params);
+      if (newParams) setParams(newParams);
     };
 
-    if (isDirty) {
-      const prompt = async () => {
-        const navigateAway = await window.api.sendMessage({
-          type: "prompt",
-          data: {
-            title: "Unsaved changes",
-            message:
-              "You have unsaved changes. Are you sure you want to leave?",
-            accept: "Leave",
-            cancel: "Stay",
-          },
-        });
-        return navigateAway;
-      };
-      prompt().then((res) => {
-        if (res) {
-          confirmNavigation();
-          setIsDirty(false);
-        }
-      });
-      return;
-    } else confirmNavigation();
+    confirmNavigation();
   }
 
   const goBack = () => {
@@ -90,8 +69,6 @@ export default function RouterProvider() {
     navigate,
     goBack,
     params,
-    isDirty,
-    setIsDirty,
     _lastPath,
   };
 
