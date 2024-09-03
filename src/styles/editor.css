@@ -1,4 +1,5 @@
-.tiptap:first-child {
+.tiptap:first-child,
+.preview:first-child {
   margin-top: 0;
 }
 
@@ -7,44 +8,52 @@
   top: 30px;
 }
 
-.tiptap {
+.tiptap,
+.preview {
   padding: 4px;
   outline: none;
 }
 
 /* Inline styles */
 
-.tiptap strong {
+.tiptap strong,
+.preview strong {
   font-weight: bold;
 }
 
-.tiptap em {
+.tiptap em,
+.preview em {
   font-style: italic;
 }
 
-.tiptap sup {
+.tiptap sup,
+.preview sup {
   vertical-align: super;
   font-size: small;
 }
 
-.tiptap sub {
+.tiptap sub,
+.preview sub {
   vertical-align: sub;
   font-size: small;
 }
 
-.tiptap code {
+.tiptap code,
+.preview code {
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
   font-size: "smaller";
 }
 
-.tiptap p>code {
+.tiptap p>code,
+.preview p>code {
   background-color: #e0f2f1;
   color: #00a59d;
 }
 
 /* Display styles */
 
-.tiptap p {
+.tiptap p,
+.preview p {
   margin: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400;
@@ -55,7 +64,8 @@
   margin-bottom: 0.5rem;
 }
 
-.tiptap pre {
+.tiptap pre,
+.preview pre {
   display: block;
   background: #f1f1f1;
   padding: 1em;
@@ -63,7 +73,8 @@
 }
 
 /* TODO: Remove unused styles like blockquote */
-.tiptap h1,
+.tiptap,
+.preview h1,
 h2,
 h3,
 h4,
@@ -77,72 +88,101 @@ h6 {
 
 }
 
-.tiptap h1 {
+/* .preview h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+
+} */
+
+.tiptap,
+.preview h1 {
   font-size: 2.4rem;
 }
 
-.tiptap h2 {
+.tiptap,
+.preview h2 {
   font-size: 2rem;
 }
 
-.tiptap h3 {
+.tiptap,
+.preview h3 {
   font-size: 1.6rem;
 }
 
-.tiptap ul,
+.tiptap,
+.preview ul,
 ol {
   margin-left: 2rem;
 }
 
-.tiptap ul li {
+.tiptap,
+.preview ul li {
   list-style: square;
   margin: 0;
 }
 
-.tiptap ul ul li {
+.tiptap,
+.preview ul ul li {
   list-style: disc;
   margin: 0;
 }
 
-.tiptap ul ul ul li {
+.tiptap,
+.preview ul ul ul li {
   list-style: circle;
   margin: 0;
 }
 
-.tiptap ol li {
+.tiptap,
+.preview ol li {
   list-style: decimal;
   margin: 0;
 }
 
-.tiptap ol ol li {
+.tiptap,
+.preview ol ol li {
   list-style: upper-roman;
   margin: 0;
 }
 
-.tiptap ol ol ol li {
+.tiptap,
+.preview ol ol ol li {
   list-style: lower-roman;
   margin: 0;
 }
 
-.tiptap ol ol ol ol li {
+.tiptap,
+.preview ol ol ol ol li {
   list-style: lower-latin;
   margin: 0;
 }
 
-.tiptap ol ol ol ol ol li {
+.tiptap,
+.preview ol ol ol ol ol li {
   list-style: upper-latin;
   margin: 0;
 }
 
-.tiptap>p::first-letter {
+.tiptap,
+.preview>p::first-letter {
   padding-left: 0.2rem;
 }
 
-.tiptap blockquote {
+.tiptap,
+.preview blockquote {
   margin: 1em;
 }
 
-.tiptap blockquote>p {
+.tiptap,
+.preview blockquote>p {
   display: block;
   padding: 0.2rem;
   margin: 0;

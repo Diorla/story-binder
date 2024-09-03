@@ -2,38 +2,33 @@ import { Card, Grid, IconButton } from "@mui/material";
 import { Mode, Visibility } from "@mui/icons-material";
 import { useState } from "react";
 import { useEffectOnce } from "react-use";
-import useApp from "@/context/app/useApp";
-import useLocalState from "@/hooks/useLocalState";
-import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import Nav from "@/components/Nav";
 import Edit from "./Edit";
 import Preview from "./Preview";
+import DocumentInfo from "@/types/DocumentInfo";
+import useRouter from "@/context/router/useRouter";
+import useApp from "@/context/app/useApp";
+import Nav from "./Nav";
 
 export default function DocumentView() {
   const [editing, setEditing] = useState(false);
-  const [collection, setCollection] = useLocalState<FolderConfig>(
-    "collection",
-    {
-      name: "",
-      id: "",
-      note: "",
-    }
-  );
-
-  const { dir } = useApp();
+  const [document, setDocument] = useState<DocumentInfo>(null);
+  const { params } = useRouter<{ dir: string[] }>();
+  const {
+    userInfo: { workspace },
+  } = useApp();
+  const path = `${workspace}/${params.dir.join("/")}.${APP_FILE_EXT}`;
 
   useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-file",
-        path: `${dir.projectPath}/${dir.folderPath}.${APP_FILE_EXT}`,
+        path,
       })
-      .then((data) => setCollection(data as FolderConfig));
+      .then((data) => setDocument(data as DocumentInfo));
   });
 
-  const documents = collection.document || {};
-  const document = documents[dir.documentId];
+  if (!document) return null;
 
   return (
     <div>
@@ -66,13 +61,7 @@ export default function DocumentView() {
           </IconButton>
         </div>
       </Card>
-      <Grid sx={{ p: 1 }}>
-        {editing ? (
-          <Preview document={document} />
-        ) : (
-          <Edit collection={collection} />
-        )}
-      </Grid>
+      <Grid sx={{ p: 1 }}>{editing ? <Preview /> : <Edit />}</Grid>
     </div>
   );
 }
