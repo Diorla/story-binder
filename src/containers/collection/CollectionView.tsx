@@ -16,7 +16,7 @@ import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import Nav from "./Nav";
 import NewCollectionForm from "@/components/NewCollectionForm";
-import CollectionList from "@/components/CollectionList";
+import CollectionList from "@/containers/collection/CollectionList";
 import { cardStyle } from "./cardStyle";
 
 export default function CollectionView() {
