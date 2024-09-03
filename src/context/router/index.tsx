@@ -72,7 +72,6 @@ export default function RouterProvider() {
     _lastPath,
   };
 
-  console.log("params", params);
   return (
     <RouterContext.Provider value={value}>
       <Layout>
