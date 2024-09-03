@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import DocumentCard from "./DocumentCard";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import DocumentInfo from "@/types/DocumentInfo";
 import useApp from "@/context/app/useApp";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
@@ -8,7 +8,7 @@ import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 export default function DocumentList({
   collection,
 }: {
-  collection: CollectionInfo;
+  collection: FolderConfig;
 }) {
   const { dir, refresh } = useApp();
 

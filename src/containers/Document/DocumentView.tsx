@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffectOnce } from "react-use";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import Nav from "@/components/Nav";
 import Edit from "./Edit";
@@ -12,7 +12,7 @@ import Preview from "./Preview";
 
 export default function DocumentView() {
   const [editing, setEditing] = useState(false);
-  const [collection, setCollection] = useLocalState<CollectionInfo>(
+  const [collection, setCollection] = useLocalState<FolderConfig>(
     "collection",
     {
       name: "",

@@ -5,7 +5,7 @@ import useRouter from "@/context/router/useRouter";
 import ProjectInfo from "@/types/ProjectInfo";
 import useLocalState from "@/hooks/useLocalState";
 import { useEffectOnce } from "react-use";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
 export default function Nav() {
@@ -21,7 +21,7 @@ export default function Nav() {
       path: "",
     }
   );
-  const [collectionInfo, setCollectionInfo] = useLocalState<CollectionInfo>(
+  const [collectionInfo, setCollectionInfo] = useLocalState<FolderConfig>(
     "collection-info",
     {
       name: "",
@@ -50,7 +50,7 @@ export default function Nav() {
           path: `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`,
         })
         .then((data: string) => {
-          const collectionInfo = JSON.parse(data) as CollectionInfo;
+          const collectionInfo = JSON.parse(data) as FolderConfig;
           setCollectionInfo(collectionInfo);
         });
   });

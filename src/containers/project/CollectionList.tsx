@@ -3,13 +3,13 @@ import CollectionCard from "./CollectionCard";
 import useLocalState from "@/hooks/useLocalState";
 import useRouter from "@/context/router/useRouter";
 import ProjectInfo from "@/types/ProjectInfo";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import { useEffectOnce } from "react-use";
 import readCollectionList from "./readCollectionList";
 
 export default function CollectionList() {
   const { params } = useRouter<ProjectInfo>();
-  const [collection, setCollection] = useLocalState<CollectionInfo[]>(
+  const [collection, setCollection] = useLocalState<FolderConfig[]>(
     params.path,
     []
   );

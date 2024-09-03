@@ -3,12 +3,12 @@ import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
 import writeCollection from "./writeCollection";
 import useApp from "@/context/app/useApp";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import { v4 } from "uuid";
 
 export default function NewCollectionForm() {
   const { dir, refresh } = useApp();
-  const { register, handleSubmit } = useForm<CollectionInfo>({
+  const { register, handleSubmit } = useForm<FolderConfig>({
     defaultValue: {
       name: "",
       note: "",

@@ -1,7 +1,7 @@
 import DocumentInfo from "./DocumentInfo";
 import Template from "./Template";
 
-export default interface CollectionInfo {
+export default interface FolderConfig {
   id: string;
   name: string;
   note: string;

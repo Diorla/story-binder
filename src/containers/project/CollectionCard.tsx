@@ -9,14 +9,14 @@ import {
 import ContextMenu from "@/components/ContextMenu";
 import { Folder } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import useApp from "@/context/app/useApp";
 import writeCollection from "./writeCollection";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
 import deleteCollection from "./deleteCollection";
 
-export default function CollectionCard({ item }: { item: CollectionInfo }) {
+export default function CollectionCard({ item }: { item: FolderConfig }) {
   const { refresh, dir } = useApp();
   const { navigate } = useRouter();
 

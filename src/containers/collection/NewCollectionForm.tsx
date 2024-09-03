@@ -4,13 +4,13 @@ import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
 import DocumentInfo from "@/types/DocumentInfo";
 import { v4 } from "uuid";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
 export default function NewCollectionForm({
   collection,
 }: {
-  collection: CollectionInfo;
+  collection: FolderConfig;
 }) {
   const { dir, refresh } = useApp();
   const { register, handleSubmit } = useForm<DocumentInfo>({
@@ -23,7 +23,7 @@ export default function NewCollectionForm({
   });
 
   const writeDocument = (data: DocumentInfo) => {
-    const tempCollection: CollectionInfo = { ...collection };
+    const tempCollection: FolderConfig = { ...collection };
     const document = tempCollection?.document || {};
     const tempDocument = document[data.id] || {};
 

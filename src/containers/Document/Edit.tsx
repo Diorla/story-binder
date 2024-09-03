@@ -1,9 +1,9 @@
 import useApp from "@/context/app/useApp";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import Editor from "../editor";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
-export default function Edit({ collection }: { collection: CollectionInfo }) {
+export default function Edit({ collection }: { collection: FolderConfig }) {
   const { dir } = useApp();
 
   const documents = collection?.document || {};

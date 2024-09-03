@@ -1,6 +1,6 @@
 import logError from "@/scripts/logError";
 import useApp from "@/context/app/useApp";
-import CollectionInfo from "@/types/CollectionInfo";
+import FolderConfig from "@/types/FolderConfig";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import { Box, Button, Link, Typography } from "@mui/material";
 import Picker from "@/components/Picker";
@@ -22,7 +22,7 @@ const formStyle = {
 export default function SelectTemplate({
   collection,
 }: {
-  collection: CollectionInfo;
+  collection: FolderConfig;
 }) {
   const { dir, refresh } = useApp();
   const [templateId, setTemplateId] = useState("");
@@ -44,7 +44,7 @@ export default function SelectTemplate({
     if (templateId) {
       const path = `${dir.projectPath}/${dir.collectionName}.${APP_FILE_EXT}`;
       const template = templateList.find((item) => item.id === templateId);
-      const tempCollection: CollectionInfo = {
+      const tempCollection: FolderConfig = {
         ...collection,
         template,
       };
