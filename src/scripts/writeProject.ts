@@ -1,4 +1,5 @@
 import ProjectInfo from "@/types/ProjectInfo";
+import { validateProject } from "./validateProject";
 
 export default async function writeProject(
   projectInfo: ProjectInfo,
@@ -9,10 +10,11 @@ export default async function writeProject(
     type: "create-directory",
     path,
   });
-  await window.api.sendMessage({
-    type: "write-file",
-    path: `${path}/.config`,
-    content: projectInfo,
-  });
+  if (validateProject(projectInfo))
+    await window.api.sendMessage({
+      type: "write-file",
+      path: `${path}/.config`,
+      content: projectInfo,
+    });
   return true;
 }

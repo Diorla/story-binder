@@ -48,9 +48,10 @@ export default function NewCollectionForm({
         <Button
           type="submit"
           onClick={handleSubmit((data) => {
-            writeCollection({ ...data, template }, currentDir).then(() => {
-              refresh();
-            });
+            if (data)
+              writeCollection({ ...data, template }, currentDir).then(() => {
+                refresh();
+              });
           })}
         >
           Save folder

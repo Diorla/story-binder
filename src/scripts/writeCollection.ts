@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 import FolderConfig from "@/types/FolderConfig";
+import validateCollection from "./validateCollection";
 
 export default function writeCollection(arg: FolderConfig, folderPath: string) {
   const id = arg.id || v4();
@@ -7,9 +8,11 @@ export default function writeCollection(arg: FolderConfig, folderPath: string) {
   const path = `${folderPath}/${id}/.config`;
 
   const content: FolderConfig = { ...arg, id };
-  return window.api.sendMessage({
-    type: "write-file",
-    content,
-    path,
-  });
+  if (validateCollection(content))
+    return window.api.sendMessage({
+      type: "write-file",
+      content,
+      path,
+    });
+  else throw new Error("Invalid collection");
 }

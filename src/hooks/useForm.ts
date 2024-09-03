@@ -104,24 +104,23 @@ export default function useForm<T extends object>({
    * @param fn - the function to be called if the form is valid
    * @returns a function that can be called to submit the form
    */
-  const handleSubmit = (fn: (value?: T) => void) => {
+  function handleSubmit(fn: (value: T) => void) {
     return () => {
       if (required.some((key) => !form[key])) {
-        required.forEach((key) => {
-          if (!form[key]) {
-            setFormState((prev) => ({
-              ...prev,
-              [key]: "This field is required",
-            }));
-          }
-        });
-        return () => {
-          fn();
-        };
+        return (() => {
+          required.forEach((key) => {
+            if (!form[key]) {
+              setFormState((prev) => ({
+                ...prev,
+                [key]: "This field is required",
+              }));
+            }
+          });
+        })();
       }
       fn(form);
     };
-  };
+  }
 
   const resetForm = (value?: Partial<T>) => {
     const resetValue = value || {};

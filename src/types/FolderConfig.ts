@@ -1,4 +1,3 @@
-import DocumentInfo from "./DocumentInfo";
 import Template from "./Template";
 
 export default interface FolderConfig {
@@ -6,7 +5,4 @@ export default interface FolderConfig {
   name: string;
   note: string;
   template?: Template;
-  document?: {
-    [key: string]: DocumentInfo;
-  };
 }

@@ -7,33 +7,34 @@ import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
 import useApp from "@/context/app/useApp";
+import useProjectContext from "./useProjectContext";
+import writeProject from "@/scripts/writeProject";
 
 const { width, height } = BOOK_DIMENSION;
 
-export default function EditProject({
-  defaultValue,
-}: {
-  defaultValue: ProjectInfo;
-}) {
+// TODO: Add toast
+/*
+To confirm an updated state after clicking submit, especially for cover
+and summary
+*/
+export default function EditProject() {
+  const { project, reload } = useProjectContext();
   const { handleSubmit, register } = useForm<ProjectInfo>({
-    defaultValue,
+    defaultValue: project,
     required: ["name"],
   });
-  const { refresh } = useApp();
+  const {
+    userInfo: { workspace },
+  } = useApp();
 
-  const submit = (form: ProjectInfo) => {
-    const path = defaultValue.path;
-
-    window.api
-      .sendMessage({
-        type: "write-file",
-        path: `${path}/.config`,
-        content: form,
-      })
-      .then(refresh)
-      .catch((err) => {
-        logError("update-project", "submit", err);
-      });
+  const submit = (form?: ProjectInfo) => {
+    if (form) {
+      writeProject(form, workspace)
+        .then(reload)
+        .catch((err) => {
+          logError("update-project", "submit", err);
+        });
+    }
   };
   return (
     <Box
@@ -79,9 +80,7 @@ export default function EditProject({
             multiline
           />
         </Box>
-        <Box
-          sx={{ display: "flex", justifyContent: "center", marginBottom: 4 }}
-        >
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
           <Button onClick={handleSubmit((data) => submit(data))}>Submit</Button>
         </Box>
       </Card>
