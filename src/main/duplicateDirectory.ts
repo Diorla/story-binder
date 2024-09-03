@@ -6,6 +6,7 @@ export default function duplicateDirectory(src: string, des?: string) {
   while (fs.existsSync(destination)) {
     destination += "-copy";
   }
+
   copySync(src, destination);
   return destination;
 }

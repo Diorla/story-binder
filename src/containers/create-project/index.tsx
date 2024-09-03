@@ -10,14 +10,16 @@ import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
 import Input from "@/components/Input";
 import SAMPLE from "@/constants/SAMPLE";
-import createProject from "./createProject";
-import useOpenDir from "../../hooks/useOpenDir";
+import writeProject from "../../scripts/writeProject";
+import useOpenDir from "@/hooks/useOpenDir";
+import { v4 } from "uuid";
 
 const { width, height } = BOOK_DIMENSION;
 export default function CreateProject() {
   const navigate = useOpenDir();
   const { handleSubmit, register } = useForm<ProjectInfo>({
     defaultValue: {
+      id: "",
       name: "",
       summary: "",
       cover,
@@ -31,9 +33,10 @@ export default function CreateProject() {
   } = useApp();
 
   const submit = (form: ProjectInfo) => {
-    createProject(form, workspace)
+    const id = v4();
+    writeProject({ ...form, id }, workspace)
       .then(() => {
-        navigate("project", [form.name]);
+        navigate("project", [id]);
       })
       .catch((err) => {
         logError("create-project", "submit", err);

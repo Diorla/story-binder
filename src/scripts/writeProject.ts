@@ -1,10 +1,10 @@
 import ProjectInfo from "@/types/ProjectInfo";
 
-export default async function createProject(
+export default async function writeProject(
   projectInfo: ProjectInfo,
   workspace: string
 ) {
-  const path = `${workspace}/${projectInfo.name}`;
+  const path = `${workspace}/${projectInfo.id}`;
   await window.api.sendMessage({
     type: "create-directory",
     path,

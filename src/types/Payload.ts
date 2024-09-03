@@ -64,6 +64,7 @@ export type SelectFile = {
 export type DuplicateDirectory = {
   type: "duplicate-directory";
   path: string;
+  newPath?: string;
 };
 
 export type DuplicateFile = {

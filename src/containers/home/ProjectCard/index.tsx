@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActions, ListItemText, MenuItem } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
 import ProjectInfo from "@/types/ProjectInfo";
-import duplicateProject from "./duplicateProject";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";
@@ -12,10 +11,14 @@ import useApp from "@/context/app/useApp";
 import { useEffect, useRef } from "react";
 import clamp from "clamp-js";
 import useOpenDir from "@/hooks/useOpenDir";
+import duplicateProject from "@/scripts/duplicateProject";
 
 export default function ProjectCard({ project }: { project: ProjectInfo }) {
   const navigate = useOpenDir();
-  const { refresh } = useApp();
+  const {
+    refresh,
+    userInfo: { workspace },
+  } = useApp();
   const summaryRef = useRef();
   const headerRef = useRef();
 
@@ -31,7 +34,9 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
           <>
             <Typography sx={{ p: 1 }}>{project.name}</Typography>
             <MenuItem
-              onClick={() => duplicateProject(`${project.path}`).then(refresh)}
+              onClick={() =>
+                duplicateProject({ ...project }, workspace).then(refresh)
+              }
             >
               <ListItemText>Duplicate</ListItemText>
             </MenuItem>
@@ -66,7 +71,7 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
                 size="small"
                 color="primary"
                 variant="contained"
-                onClick={() => navigate("project", [project.name])}
+                onClick={() => navigate("project", [project.id])}
               >
                 Open
               </Button>

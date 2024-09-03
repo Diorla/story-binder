@@ -43,7 +43,7 @@ export default function handleMain(params: Payload) {
     case "select-file":
       return selectFile(params.filter);
     case "duplicate-directory":
-      return duplicateDirectory(params.path);
+      return duplicateDirectory(params.path, params.newPath);
     case "delete-directory":
       return deleteDirectory(params.path);
     case "delete-file":

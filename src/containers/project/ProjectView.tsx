@@ -15,6 +15,7 @@ export default function ProjectView() {
   const [editing, setEditing] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [project, setProject] = useLocalState<ProjectInfo>("project", {
+    id: "",
     name: "",
     summary: "",
     cover: "",
