@@ -59,4 +59,5 @@ This is where all the projects will be saved. It follows this pattern
         ├── 📄 Aragon
         ├── 📄 Frodo
         ├── 📄 Galadriel
+⚙️ .index
 ```

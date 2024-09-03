@@ -6,6 +6,6 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
   const { userInfo } = useApp();
 
   if (!userInfo.workspace) return <ChooseWorkspace />;
-  if (!userInfo.onboardCompletedAt) return <Onboarding />;
+  if (!userInfo.onboardingCompletedAt) return <Onboarding />;
   return <>{children}</>;
 }

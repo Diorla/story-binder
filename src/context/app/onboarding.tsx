@@ -31,7 +31,7 @@ export default function Onboarding() {
           />
           <Button
             onClick={() => {
-              updateUserInfo({ onboardCompletedAt: Date.now() });
+              updateUserInfo({ onboardingCompletedAt: Date.now() });
             }}
             variant="contained"
             sx={{ alignItems: "center", mt: 1 }}
