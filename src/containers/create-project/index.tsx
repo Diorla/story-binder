@@ -11,6 +11,7 @@ import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
 import useRouter from "@/context/router/useRouter";
 import Input from "@/components/Input";
 import SAMPLE from "@/constants/SAMPLE";
+import createProject from "./createProject";
 
 const { width, height } = BOOK_DIMENSION;
 
@@ -31,23 +32,9 @@ export default function CreateProject() {
   } = useApp();
 
   const submit = (form: ProjectInfo) => {
-    const path = `${workspace}/${form.name}`;
-
-    window.api
-      .sendMessage({
-        type: "create-directory",
-        path,
-      })
+    createProject(form, workspace)
       .then(() => {
-        window.api
-          .sendMessage({
-            type: "write-file",
-            path: `${path}/.config`,
-            content: form,
-          })
-          .then(() => {
-            navigate("project", form);
-          });
+        navigate("project", form);
       })
       .catch((err) => {
         logError("create-project", "submit", err);
