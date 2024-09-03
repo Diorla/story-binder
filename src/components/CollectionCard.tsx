@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
-import { Folder } from "@mui/icons-material";
+import { FolderOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import FolderConfig from "@/types/FolderConfig";
 import useApp from "@/context/app/useApp";
@@ -61,7 +61,8 @@ export default function CollectionCard({ item }: { item: FolderConfig }) {
       >
         <CardContent>
           <Box className="row">
-            <Folder
+            <FolderOutlined
+              sx={{ cursor: "pointer" }}
               onClick={() => navigate("folder", [...params.dir, item.id])}
             />
             <EditableContent

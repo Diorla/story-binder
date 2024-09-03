@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
-import { InsertDriveFile } from "@mui/icons-material";
+import { InsertDriveFileOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
@@ -63,7 +63,8 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
       >
         <CardContent>
           <Box className="row">
-            <InsertDriveFile
+            <InsertDriveFileOutlined
+              sx={{ cursor: "pointer" }}
               onClick={() => navigate("document", [...params.dir, item.id])}
             />
             <EditableContent
