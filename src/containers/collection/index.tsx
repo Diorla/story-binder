@@ -64,6 +64,9 @@ export default function Collection() {
     readCollectionList(currentDir).then((list) => {
       setCollectionList(list);
     });
+    readDocumentList(currentDir).then((list) => {
+      setDocumentList(list);
+    });
   };
   return (
     <CollectionContext.Provider
