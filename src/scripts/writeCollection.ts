@@ -1,6 +1,5 @@
 import { v4 } from "uuid";
 import FolderConfig from "@/types/FolderConfig";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import validateCollection from "@/scripts/validateCollection";
 
 export default function writeCollection(
@@ -9,7 +8,7 @@ export default function writeCollection(
 ) {
   const id = arg.id || v4();
 
-  const path = `${projectPath}/${id}.${APP_FILE_EXT}`;
+  const path = `${projectPath}/${id}/.config`;
   const content: FolderConfig = { ...arg, id };
 
   if (validateCollection(content))
