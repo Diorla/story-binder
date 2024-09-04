@@ -86,7 +86,6 @@ textarea::-webkit-scrollbar {
 /* Template */
 
 #empty-template {
-  background-image: url("../assets/stack.png");
   height: 100%;
   background-size: 240px;
   background-repeat: no-repeat;
@@ -105,4 +104,81 @@ textarea::-webkit-scrollbar {
 .empty-template-wrapper>p {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.onboarding {
+  background-size: 100% 100%;
+}
+
+.onboarding-1 {
+  background-image: url(../assets/onboarding/home-empty.png);
+  background-color: transparent !important;
+}
+
+.onboarding-2 {
+  background-image: url(../assets/onboarding/create-project.png);
+  background-color: transparent !important;
+}
+
+.onboarding-3 {
+  background-image: url(../assets/onboarding/project-list.png);
+  background-color: transparent !important;
+}
+
+.onboarding-4 {
+  background-image: url(../assets/onboarding/no-templates.png);
+  background-color: transparent !important;
+}
+
+.onboarding-5 {
+  background-image: url(../assets/onboarding/template-editing.png);
+  background-color: transparent !important;
+}
+
+.onboarding-6 {
+  background-image: url(../assets/onboarding/template-list.png);
+  background-color: transparent !important;
+}
+
+.onboarding-7 {
+  background-image: url(../assets/onboarding/project-view-empty.png);
+  background-color: transparent !important;
+}
+
+.onboarding-8 {
+  background-image: url(../assets/onboarding/project-folder-children.png);
+  background-color: transparent !important;
+}
+
+.onboarding-9 {
+  background-image: url(../assets/onboarding/nested-category.png);
+  background-color: transparent !important;
+}
+
+.onboarding-10 {
+  background-image: url(../assets/onboarding/select-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-11 {
+  background-image: url(../assets/onboarding/nested-category-inherit-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-12 {
+  background-image: url(../assets/onboarding/inherited-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-13 {
+  background-image: url(../assets/onboarding/item-preview.png);
+  background-color: transparent !important;
+}
+
+.onboarding-14 {
+  background-image: url(../assets/onboarding/bravo.png);
+  background-color: transparent !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
