@@ -21,7 +21,7 @@ export default function TemplateProvider({
   const [loading, setLoading] = useState(true);
 
   useEffectOnce(() => {
-    if (params.id) {
+    if (params?.id) {
       window.api
         .sendMessage({
           type: "read-file",
@@ -33,6 +33,8 @@ export default function TemplateProvider({
         .then(() => {
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   });
 
