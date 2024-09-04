@@ -102,86 +102,87 @@ h6 {
 
 } */
 
-.tiptap,
+.tiptap h1,
 .preview h1 {
   font-size: 2.4rem;
 }
 
-.tiptap,
+.tiptap h2,
 .preview h2 {
   font-size: 2rem;
 }
 
-.tiptap,
+.tiptap h3,
 .preview h3 {
   font-size: 1.6rem;
 }
 
-.tiptap,
+.tiptap ul,
+ol,
 .preview ul,
 ol {
   margin-left: 2rem;
 }
 
-.tiptap,
+.tiptap ul li,
 .preview ul li {
   list-style: square;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ul ul li,
 .preview ul ul li {
   list-style: disc;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ul ul ul li,
 .preview ul ul ul li {
   list-style: circle;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ol li,
 .preview ol li {
   list-style: decimal;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ol ol li,
 .preview ol ol li {
   list-style: upper-roman;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ol ol ol li,
 .preview ol ol ol li {
   list-style: lower-roman;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ol ol ol ol li,
 .preview ol ol ol ol li {
   list-style: lower-latin;
   margin: 0;
 }
 
-.tiptap,
+.tiptap ol ol ol ol ol li,
 .preview ol ol ol ol ol li {
   list-style: upper-latin;
   margin: 0;
 }
 
-.tiptap,
+.tiptap>p::first-letter,
 .preview>p::first-letter {
   padding-left: 0.2rem;
 }
 
-.tiptap,
+.tiptap blockquote,
 .preview blockquote {
   margin: 1em;
 }
 
-.tiptap,
+.tiptap blockquote>p,
 .preview blockquote>p {
   display: block;
   padding: 0.2rem;
