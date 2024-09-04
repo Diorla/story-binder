@@ -1,26 +1,23 @@
-/* eslint-disable max-lines */
 import Picker from "@/components/Picker";
 import useForm from "@/hooks/useForm";
-import Template from "@/types/Template";
+import Template, { EditorType } from "@/types/Template";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Editor from "../editor";
 import { useState } from "react";
 import Input from "@/components/Input";
 import { v4 } from "uuid";
 import { list } from "./list";
 import formStyle from "./formStyle";
 import useRouter from "@/context/router/useRouter";
+import EditorTemplate from "./EditorTemplate";
+import { defaultTemplate } from "./defaultTemplate";
 
 export default function TemplateForm() {
-  const { params } = useRouter<Template>();
+  const { params } = useRouter<Template | null>();
   const [isSelect, setIsSelect] = useState(false);
   const { register, form, handleSubmit } = useForm<Template>({
     defaultValue: {
-      id: "",
-      type: "editor",
-      description: "",
-      template: "",
+      ...defaultTemplate,
       ...params,
     },
     required: ["name"],
@@ -42,15 +39,12 @@ export default function TemplateForm() {
   };
 
   const updateEditor = (data: string) => {
-    const value = {
+    const value: EditorType = {
       ...form,
+      type: "editor",
       template: data,
     };
-    window.api.sendMessage({
-      type: "write-file",
-      path: `./templates/${form.id}`,
-      content: value,
-    });
+    submit(value);
   };
 
   if (!form.id || isSelect)
@@ -82,6 +76,9 @@ export default function TemplateForm() {
         >
           Save
         </Button>
+        {form.id ? (
+          <Button onClick={() => setIsSelect(false)}>Close</Button>
+        ) : null}
       </Box>
     );
 
@@ -97,17 +94,12 @@ export default function TemplateForm() {
         <Typography>Template editor</Typography>
       </Box>
     );
-  if (form?.type === "editor")
-    return (
-      <Box className="editor-top">
-        <div>
-          <Typography>{form.name}</Typography>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Button onClick={() => setIsSelect(true)}>Change basic info</Button>
-          </Box>
-        </div>
-        <Editor updateFn={updateEditor} initialContent={form.template} />
-      </Box>
-    );
-  return <div>No template</div>;
+
+  return (
+    <EditorTemplate
+      updateEditor={updateEditor}
+      form={form}
+      setIsSelect={setIsSelect}
+    />
+  );
 }
