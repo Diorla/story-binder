@@ -56,7 +56,7 @@ export default function ToolBar({
       if (previous !== localData) {
         updateFn(localData);
       }
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(id);
   }, [localData, previous, updateFn]);
 

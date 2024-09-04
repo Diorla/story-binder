@@ -1,0 +1,82 @@
+import Picker from "@/components/Picker";
+import Template from "@/types/Template";
+import { Box, Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import Input from "@/components/Input";
+import { v4 } from "uuid";
+import { list } from "./list";
+import formStyle from "./formStyle";
+import EditorTemplate from "./EditorTemplate";
+import useTemplateContext from "./useTemplateContext";
+
+export default function Form() {
+  const [isSelect, setIsSelect] = useState(false);
+  const { register, form, handleSubmit, resetForm } = useTemplateContext();
+
+  const submit = (data: Template) => {
+    const id = data.id || v4();
+    const value = {
+      ...data,
+      id,
+    };
+    resetForm(value);
+    // window.api
+    //   .sendMessage({
+    //     type: "write-file",
+    //     path: `./templates/${id}`,
+    //     content: value,
+    //   })
+    //   .then(() => resetForm(value));
+  };
+
+  if (!form.id || isSelect)
+    return (
+      <Box sx={formStyle}>
+        <Box
+          sx={{
+            width: 300,
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Input {...register("name")} sx={{ mb: 2 }} label="Name" />
+          <Picker
+            value={form?.type}
+            label="Select template"
+            list={list}
+            onUpdate={(value) => {
+              register("type").onUpdate(value);
+            }}
+          />
+        </Box>
+        <Button
+          onClick={handleSubmit((data) => {
+            if (form.id) setIsSelect(false);
+            submit(data);
+          })}
+        >
+          Save
+        </Button>
+        {form.id ? (
+          <Button onClick={() => setIsSelect(false)}>Close</Button>
+        ) : null}
+      </Box>
+    );
+
+  if (form?.type === "form")
+    return (
+      <Box>
+        <div>
+          <Typography>{form.name}</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={() => setIsSelect(true)}>Change basic info</Button>
+          </Box>
+        </div>
+        <Typography>Template editor</Typography>
+      </Box>
+    );
+
+  return <EditorTemplate setIsSelect={setIsSelect} />;
+}
