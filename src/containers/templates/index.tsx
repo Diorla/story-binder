@@ -40,7 +40,7 @@ export default function Templates() {
         </Button>
       </Box>
       <Divider sx={{ my: 1 }} />
-      <Box className="row">
+      <Box className="row" sx={{ flexWrap: "wrap" }}>
         {templates.map((template) => (
           <Card
             key={template.id}
