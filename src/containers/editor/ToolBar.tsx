@@ -20,7 +20,7 @@ import FormatButton from "./FormatButton";
 import { Link, Typography } from "@mui/material";
 import Count from "./Count";
 import ToolbarIconsWrapper from "./ToolbarIconsWrapper";
-import { useEffectOnce } from "react-use";
+import { useEffectOnce, usePrevious } from "react-use";
 import handlePaste from "./handlePaste";
 import { useEffect, useState } from "react";
 
@@ -36,6 +36,7 @@ export default function ToolBar({
   const chain = (type: FormatType) => formatToolbar(editor, type);
 
   const [localData, setLocalData] = useState(initialContent);
+  const previous = usePrevious(localData);
 
   useEffectOnce(() => {
     document.body.addEventListener("paste", handlePaste(editor));
@@ -52,10 +53,12 @@ export default function ToolBar({
 
   useEffect(() => {
     const id = setTimeout(() => {
-      updateFn(localData);
+      if (previous !== localData) {
+        updateFn(localData);
+      }
     }, 2000);
     return () => clearTimeout(id);
-  }, [localData, updateFn]);
+  }, [localData, previous, updateFn]);
 
   if (!editor) return null;
 
