@@ -1,20 +1,17 @@
 import { Box, Button, Divider } from "@mui/material";
 import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
-import useApp from "@/context/app/useApp";
 import DocumentInfo from "@/types/DocumentInfo";
 import { v4 } from "uuid";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import Template from "@/types/Template";
+import useCollectionContext from "./useCollectionContext";
 
-export default function NewDocumentForm({
-  currentDir,
-  template,
-}: {
-  currentDir: string;
-  template?: Template;
-}) {
-  const { refresh } = useApp();
+export default function NewDocumentForm() {
+  const {
+    currentDir,
+    collection: { template },
+    reload,
+  } = useCollectionContext();
   const { register, handleSubmit } = useForm<DocumentInfo>({
     defaultValue: {
       name: "",
@@ -32,7 +29,7 @@ export default function NewDocumentForm({
         path: `${currentDir}/${id}.${APP_FILE_EXT}`,
         content: { ...data, id, template },
       })
-      .then(refresh);
+      .then(reload);
   };
 
   return (

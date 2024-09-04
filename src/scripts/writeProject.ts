@@ -11,10 +11,12 @@ export default async function writeProject(
     path,
   });
   if (validateProject(projectInfo))
-    await window.api.sendMessage({
+    return await window.api.sendMessage({
       type: "write-file",
       path: `${path}/.config`,
       content: projectInfo,
     });
-  return true;
+  else {
+    throw new Error(JSON.stringify(validateProject.errors));
+  }
 }

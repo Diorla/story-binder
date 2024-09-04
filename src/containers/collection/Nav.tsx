@@ -7,6 +7,7 @@ import { useEffectOnce } from "react-use";
 import FolderConfig from "@/types/FolderConfig";
 import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
+import { truncateText } from "@/scripts/truncateText";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -25,8 +26,8 @@ export default function Nav() {
       path: "",
     }
   );
-  const [collectionList, setCollectionList] = useLocalState<FolderConfig[]>(
-    "collection-list",
+  const [collectionPaths, setCollectionPaths] = useLocalState<FolderConfig[]>(
+    "collection-paths",
     []
   );
 
@@ -58,7 +59,7 @@ export default function Nav() {
           list.push(data as FolderConfig);
         })
         .then(() => {
-          setCollectionList(list);
+          setCollectionPaths(list);
         });
     });
   });
@@ -75,9 +76,9 @@ export default function Nav() {
           onClick={() => navigate("project", [projectInfo.id])}
         >
           <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {projectInfo.name}
+          {truncateText(projectInfo.name, 15)}
         </Link>
-        {collectionList.map((item, idx) => (
+        {collectionPaths.map((item, idx) => (
           <Link
             key={item.id}
             className="breadcrumbs"
@@ -92,7 +93,7 @@ export default function Nav() {
             }
           >
             <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-            {item.name}
+            {truncateText(item.name, 15)}
           </Link>
         ))}
       </Breadcrumbs>

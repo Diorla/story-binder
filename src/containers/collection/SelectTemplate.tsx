@@ -1,5 +1,4 @@
 import logError from "@/scripts/logError";
-import useApp from "@/context/app/useApp";
 import FolderConfig from "@/types/FolderConfig";
 import { Box, Button, Link, Typography } from "@mui/material";
 import Picker from "@/components/Picker";
@@ -8,30 +7,17 @@ import { useEffectOnce } from "react-use";
 import useRouter from "@/context/router/useRouter";
 import getTemplates from "@/services/get-templates";
 import Template from "@/types/Template";
+import useCollectionContext from "./useCollectionContext";
+import writeCollection from "@/scripts/writeCollection";
+import { formStyle } from "./formStyle";
 
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 1,
-  p: 1,
-  maxWidth: 360,
-  margin: "auto",
-  backgroundColor: "background.paper",
-};
-export default function SelectTemplate({
-  collection,
-}: {
-  collection: FolderConfig;
-}) {
-  const { refresh } = useApp();
+export default function SelectTemplate() {
+  const { reload, currentDir } = useCollectionContext();
   const [templateId, setTemplateId] = useState("");
   const [loading, setLoading] = useState(true);
   const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
-  const {
-    userInfo: { workspace },
-  } = useApp();
-  const { params } = useRouter<{ dir: string[] }>();
+  const { collection } = useCollectionContext();
 
   useEffectOnce(() => {
     getTemplates()
@@ -45,24 +31,31 @@ export default function SelectTemplate({
 
   const submit = () => {
     if (templateId) {
-      const path = `${workspace}/${params.dir.join("/")}/.config`;
       const template = templateList.find((item) => item.id === templateId);
       const tempCollection: FolderConfig = {
         ...collection,
         template,
       };
 
-      window.api
-        .sendMessage({
-          type: "write-file",
-          path,
-          content: tempCollection,
-        })
-        .then(refresh)
+      writeCollection(tempCollection, currentDir)
+        .then(reload)
         .catch((err) => {
           logError("update-collection", "submit", err);
         });
     }
+  };
+
+  const removeTemplate = () => {
+    const tempCollection: FolderConfig = {
+      ...collection,
+      template: undefined,
+    };
+
+    writeCollection(tempCollection, currentDir)
+      .then(reload)
+      .catch((err) => {
+        logError("update-collection", "remove-template", err);
+      });
   };
 
   if (loading) return <div>Loading</div>;
@@ -90,6 +83,7 @@ export default function SelectTemplate({
         })}
       />
       <Button onClick={submit}>Save</Button>
+      <Button onClick={removeTemplate}>Remove template</Button>
       <Typography>
         Don't find what you are looking for,{" "}
         <Link

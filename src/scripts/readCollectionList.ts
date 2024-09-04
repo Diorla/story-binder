@@ -1,6 +1,7 @@
 import FolderConfig from "@/types/FolderConfig";
 import validateCollection from "./validateCollection";
 import Directory from "@/types/Directory";
+import logError from "./logError";
 
 export default async function readCollectionList(path: string) {
   const dir = (await window.api.sendMessage({
@@ -17,8 +18,11 @@ export default async function readCollectionList(path: string) {
 
     if (validateCollection(info)) list.push(info);
     else {
-      console.log("data", info);
-      console.log("ajv validation error:", validateCollection.errors);
+      logError(
+        "read collection list",
+        "ajv validation",
+        new Error(JSON.stringify(validateCollection.errors))
+      );
     }
   }
   return list;

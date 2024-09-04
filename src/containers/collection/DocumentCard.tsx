@@ -13,29 +13,14 @@ import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
 import DocumentInfo from "@/types/DocumentInfo";
 import deleteDocument from "../project/deleteDocument";
-import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
+import useCollectionContext from "./useCollectionContext";
+import writeDocument from "./writeDocument";
 
 export default function DocumentCard({ item }: { item: DocumentInfo }) {
   const { params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
-  const {
-    refresh,
-    userInfo: { workspace },
-  } = useApp();
-  const dir = params.dir.join("/");
-  const path = `${workspace}/${dir}`;
-
-  const writeDocument = (data: DocumentInfo) => {
-    window.api
-      .sendMessage({
-        type: "write-file",
-        path: `${path}/${data.id}.${APP_FILE_EXT}`,
-        content: { ...data },
-      })
-      .then(refresh);
-  };
+  const { currentDir, reload } = useCollectionContext();
 
   return (
     <ContextMenu
@@ -47,10 +32,16 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
           >
             <ListItemText>Open</ListItemText>
           </MenuItem>
-          <MenuItem onClick={() => writeDocument({ ...item, id: v4() })}>
+          <MenuItem
+            onClick={() =>
+              writeDocument({ ...item, id: v4() }, currentDir).then(reload)
+            }
+          >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
-          <MenuItem onClick={() => deleteDocument(item.id, path).then(refresh)}>
+          <MenuItem
+            onClick={() => deleteDocument(item.id, currentDir).then(reload)}
+          >
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -69,7 +60,9 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
             />
             <EditableContent
               value={item.name}
-              updateValue={(value) => writeDocument({ ...item, name: value })}
+              updateValue={(value) =>
+                writeDocument({ ...item, name: value }, currentDir).then(reload)
+              }
               textStyle={{
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
@@ -81,7 +74,9 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
           <EditableContent
             value={item.note}
             multiline={true}
-            updateValue={(value) => writeDocument({ ...item, note: value })}
+            updateValue={(value) =>
+              writeDocument({ ...item, note: value }, currentDir).then(reload)
+            }
             textStyle={{
               textOverflow: "ellipsis",
               overflow: "hidden",
