@@ -5,6 +5,8 @@ import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import TextTemplate from "@/types/Template/TextTemplate";
 import NumberInput from "./inputs/NumberInput";
 import NumberTemplate from "@/types/Template/NumberTemplate";
+import SelectInput from "./inputs/SelectInput";
+import SelectTemplate from "@/types/Template/SelectTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -30,6 +32,14 @@ export default function QuestionRenderer({
     return (
       <NumberInput
         questionItem={questionItem as TemplateFormContentType<NumberTemplate>}
+        submit={submit}
+      />
+    );
+
+  if (questionItem.answer.type === "select")
+    return (
+      <SelectInput
+        questionItem={questionItem as TemplateFormContentType<SelectTemplate>}
         submit={submit}
       />
     );

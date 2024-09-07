@@ -46,6 +46,7 @@ export default function AddQuestion({ page }: { page: number }) {
         bottom: 24,
         backgroundColor: "white",
         width: "100%",
+        zIndex: 2,
       }}
     >
       <Box

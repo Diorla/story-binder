@@ -39,12 +39,22 @@ export default function generateQuestionnaire(
       },
     };
   }
-  const answer: TextTemplate = {
-    value: "",
-    type: "text",
-  };
+
+  if (type === "select") {
+    return {
+      ...base,
+      answer: {
+        value: "",
+        type,
+      },
+    };
+  }
+
   return {
     ...base,
-    answer,
+    answer: {
+      value: "",
+      type: "text",
+    },
   };
 }
