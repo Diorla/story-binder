@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import Input from "@/components/Input";
 import {
   Box,
@@ -64,6 +65,7 @@ export default function NumberInput({
       <Input
         label="Maximum value"
         value={questionItem.answer.maxValue}
+        type="number"
         onChange={(e) => {
           submit({
             ...questionItem,
@@ -99,6 +101,5 @@ export default function NumberInput({
         </IconButton>
       </Box>
     </Box>
-    // eslint-disable-next-line max-lines
   );
 }
