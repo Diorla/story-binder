@@ -11,6 +11,8 @@ import MultipleSelectInput from "./inputs/MultipleSelectInput";
 import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 import DateInput from "./inputs/DateInput";
 import DateTemplate from "@/types/Template/DateTemplate";
+import TimeInput from "./inputs/TimeInput";
+import TimeTemplate from "@/types/Template/TimeTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -60,6 +62,13 @@ export default function QuestionRenderer({
     return (
       <DateInput
         questionItem={questionItem as TemplateFormContentType<DateTemplate>}
+        submit={submit}
+      />
+    );
+  if (questionItem.answer.type === "time")
+    return (
+      <TimeInput
+        questionItem={questionItem as TemplateFormContentType<TimeTemplate>}
         submit={submit}
       />
     );

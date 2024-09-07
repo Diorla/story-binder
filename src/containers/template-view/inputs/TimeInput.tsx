@@ -3,20 +3,20 @@ import { Box, Typography, Button, IconButton } from "@mui/material";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
-import DateTemplate from "@/types/Template/DateTemplate";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
+import TimeTemplate from "@/types/Template/TimeTemplate";
 
-export default function DateInput({
+export default function TimeInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<DateTemplate>;
-  submit: (value: TemplateFormContentType<DateTemplate>) => void;
+  questionItem: TemplateFormContentType<TimeTemplate>;
+  submit: (value: TemplateFormContentType<TimeTemplate>) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
-      <Typography variant="h5">Date</Typography>
+      <Typography variant="h5">Time</Typography>
       <Input
         sx={{ my: 2 }}
         label="Question"
@@ -40,30 +40,40 @@ export default function DateInput({
       />
       <Box className="row" sx={{ my: 2 }}>
         <Input
-          label="Minimum date"
-          type="date"
-          value={format(questionItem.answer.minValue, "yyyy-MM-dd")}
+          label="Minimum time"
+          type="time"
+          value={format(questionItem.answer.minValue, "HH:mm")}
           onChange={(e) => {
+            const [h, m] = e.target.value.split(":").map(Number);
+            const val = set(questionItem.answer.minValue, {
+              hours: h,
+              minutes: m,
+            });
             submit({
               ...questionItem,
               answer: {
                 ...questionItem.answer,
-                minValue: +new Date(e.target.value),
+                minValue: +val,
               },
             });
           }}
           sx={{ mr: 2 }}
         />
         <Input
-          label="Maximum date"
-          type="date"
-          value={format(questionItem.answer.maxValue, "yyyy-MM-dd")}
+          label="Maximum time"
+          type="time"
+          value={format(questionItem.answer.maxValue, "HH:mm")}
           onChange={(e) => {
+            const [h, m] = e.target.value.split(":").map(Number);
+            const val = set(questionItem.answer.minValue, {
+              hours: h,
+              minutes: m,
+            });
             submit({
               ...questionItem,
               answer: {
                 ...questionItem.answer,
-                maxValue: +new Date(e.target.value),
+                maxValue: +val,
               },
             });
           }}
