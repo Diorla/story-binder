@@ -37,6 +37,7 @@ export default function FormWrapper({
           flex: 1,
           width: "100%",
           backgroundColor: "white",
+          zIndex: 2,
         }}
       >
         <Pagination
