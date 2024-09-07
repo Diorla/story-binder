@@ -1,10 +1,10 @@
-import { EditorType } from "@/types/Template";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Editor from "../editor";
 import useTemplateContext from "./useTemplateContext";
+import { EditorType } from "@/types/Template";
 
-export default function EditorTemplate({
+export default function EditorWrapper({
   setIsSelect,
 }: {
   setIsSelect: (value: boolean) => void;
@@ -15,7 +15,7 @@ export default function EditorTemplate({
     const value: EditorType = {
       ...form,
       type: "editor",
-      template: data,
+      content: data,
     };
     resetForm(value);
   };
@@ -25,10 +25,7 @@ export default function EditorTemplate({
         <Typography variant="h6">{form.name}</Typography>
         <Button onClick={() => setIsSelect(true)}>Change basic info</Button>
       </Box>
-      <Editor
-        updateFn={updateEditor}
-        initialContent={form.template as string}
-      />
+      <Editor updateFn={updateEditor} initialContent={form.content as string} />
     </Box>
   );
 }
