@@ -2,28 +2,30 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { FormHelperText } from "@mui/material";
+import { FormHelperText, SxProps, Theme } from "@mui/material";
 
 export default function Picker({
   value,
   onUpdate,
   label,
   list,
+  sx,
 }: {
   value: string;
   onUpdate: (value: string) => void;
   label: string;
   list: { value: string; label: string; description?: string }[];
+  sx?: SxProps<Theme>;
 }) {
   const currentItem = list.find((item) => item.value === value);
   let description = "Nothing selected";
-  if (currentItem) {
+  if (currentItem?.description) {
     description = currentItem.description;
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120, width: "100%" }}>
-      <InputLabel>{label}</InputLabel>
+    <FormControl sx={{ m: 1, minWidth: 120, width: "100%", ...sx }}>
+      <InputLabel size="small">{label}</InputLabel>
       <Select
         value={value}
         label={label}

@@ -1,9 +1,9 @@
-import { BaseTextFieldProps, TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 
-export interface InputProps extends BaseTextFieldProps {
+export interface InputProps extends TextFieldProps<"filled"> {
   errorText?: string;
 }
-export default function Input(props: InputProps) {
+export default function Input(props: Partial<InputProps>) {
   const { errorText } = props;
 
   return (
@@ -13,6 +13,7 @@ export default function Input(props: InputProps) {
       helperText={errorText}
       size="small"
       sx={{ width: "100%", ...props.sx }}
+      onChange={props.onChange}
     />
   );
 }
