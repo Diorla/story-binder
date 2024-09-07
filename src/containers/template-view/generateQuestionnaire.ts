@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import TextTemplate from "@/types/Template/TextTemplate";
@@ -91,6 +92,18 @@ export default function generateQuestionnaire(
         isInteger: true,
         minValue: 0,
         maxValue: 1,
+      },
+    };
+  if (type === "unit")
+    return {
+      ...base,
+      answer: {
+        type,
+        value: 0,
+        unit: "",
+        minValue: 0,
+        maxValue: 1,
+        isInteger: true,
       },
     };
   return {

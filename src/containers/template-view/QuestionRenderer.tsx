@@ -15,6 +15,8 @@ import TimeInput from "./inputs/TimeInput";
 import TimeTemplate from "@/types/Template/TimeTemplate";
 import RangeInput from "./inputs/RangeInput";
 import RangeTemplate from "@/types/Template/RangeTemplate";
+import UnitInput from "./inputs/UnitInput";
+import UnitTemplate from "@/types/Template/UnitTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -78,6 +80,13 @@ export default function QuestionRenderer({
     return (
       <RangeInput
         questionItem={questionItem as TemplateFormContentType<RangeTemplate>}
+        submit={submit}
+      />
+    );
+  if (questionItem.answer.type === "unit")
+    return (
+      <UnitInput
+        questionItem={questionItem as TemplateFormContentType<UnitTemplate>}
         submit={submit}
       />
     );
