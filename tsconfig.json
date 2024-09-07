@@ -12,7 +12,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    // "strictNullChecks": true,
+    "strictNullChecks": true,
     "paths": {
       "*": ["node_modules/*"],
       "@/*": ["src/*"]
