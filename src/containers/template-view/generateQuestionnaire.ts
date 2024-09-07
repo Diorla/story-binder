@@ -61,6 +61,17 @@ export default function generateQuestionnaire(
       },
     };
   }
+
+  if (type === "date")
+    return {
+      ...base,
+      answer: {
+        value: +new Date(),
+        type,
+        minValue: 0,
+        maxValue: +new Date() * 2,
+      },
+    };
   return {
     ...base,
     answer: {

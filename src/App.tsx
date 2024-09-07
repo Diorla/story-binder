@@ -12,7 +12,7 @@ import "./styles/editor.css";
 import "./styles/base.css";
 import AppLayout from "./app-layout";
 
-const root = createRoot(document.getElementById("app"));
+const root = createRoot(document.getElementById("app") as HTMLElement);
 
 root.render(
   <ThemeProvider theme={THEME}>
