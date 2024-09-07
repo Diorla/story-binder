@@ -1,26 +1,20 @@
 import AnswerTemplate from "./AnswerTemplate";
 import TemplateFormContentType from "./TemplateFormContentType";
 
-type BaseTemplate = {
+export type BaseTemplate = {
   id: string;
   name: string;
   description: string;
 };
 
-// type FormType = BaseTemplate & {
-//   type: "form";
-//   content: {
-//     [id: string]: TemplateFormContentType;
-//   };
-// };
-interface FormType<T extends AnswerTemplate> extends BaseTemplate {
+export interface FormType<T extends AnswerTemplate> extends BaseTemplate {
   type: "form";
   content: {
     [id: string]: TemplateFormContentType<T>;
   };
 }
 
-type EditorType = BaseTemplate & {
+export type EditorType = BaseTemplate & {
   type: "editor";
   content: string;
 };
