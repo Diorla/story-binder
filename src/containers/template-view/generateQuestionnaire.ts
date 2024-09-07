@@ -106,6 +106,15 @@ export default function generateQuestionnaire(
         isInteger: true,
       },
     };
+  if (type === "reference")
+    return {
+      ...base,
+      answer: {
+        type,
+        value: "",
+        templateId: "",
+      },
+    };
   return {
     ...base,
     answer: {

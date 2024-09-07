@@ -17,6 +17,8 @@ import RangeInput from "./inputs/RangeInput";
 import RangeTemplate from "@/types/Template/RangeTemplate";
 import UnitInput from "./inputs/UnitInput";
 import UnitTemplate from "@/types/Template/UnitTemplate";
+import ReferenceInput from "./inputs/ReferenceInput";
+import RefTemplate from "@/types/Template/ReferenceTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -87,6 +89,13 @@ export default function QuestionRenderer({
     return (
       <UnitInput
         questionItem={questionItem as TemplateFormContentType<UnitTemplate>}
+        submit={submit}
+      />
+    );
+  if (questionItem.answer.type === "reference")
+    return (
+      <ReferenceInput
+        questionItem={questionItem as TemplateFormContentType<RefTemplate>}
         submit={submit}
       />
     );

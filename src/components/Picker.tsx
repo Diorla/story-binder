@@ -24,7 +24,7 @@ export default function Picker({
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120, width: "100%", ...sx }}>
+    <FormControl sx={{ minWidth: 120, width: "100%", ...sx }}>
       <InputLabel size="small">{label}</InputLabel>
       <Select
         value={value}
