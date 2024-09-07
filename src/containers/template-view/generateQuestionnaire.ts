@@ -50,6 +50,17 @@ export default function generateQuestionnaire(
     };
   }
 
+  if (type === "multi-select") {
+    return {
+      ...base,
+      answer: {
+        value: [],
+        type,
+        minCount: 1,
+        maxCount: 2,
+      },
+    };
+  }
   return {
     ...base,
     answer: {

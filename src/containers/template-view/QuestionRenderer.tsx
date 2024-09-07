@@ -7,6 +7,8 @@ import NumberInput from "./inputs/NumberInput";
 import NumberTemplate from "@/types/Template/NumberTemplate";
 import SelectInput from "./inputs/SelectInput";
 import SelectTemplate from "@/types/Template/SelectTemplate";
+import MultipleSelectInput from "./inputs/MultipleSelectInput";
+import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -40,6 +42,15 @@ export default function QuestionRenderer({
     return (
       <SelectInput
         questionItem={questionItem as TemplateFormContentType<SelectTemplate>}
+        submit={submit}
+      />
+    );
+  if (questionItem.answer.type === "multi-select")
+    return (
+      <MultipleSelectInput
+        questionItem={
+          questionItem as TemplateFormContentType<MultiSelectTemplate>
+        }
         submit={submit}
       />
     );

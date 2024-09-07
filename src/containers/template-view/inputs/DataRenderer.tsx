@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Chip } from "@mui/material";
 import validateData from "../validateData";
 import { useState } from "react";
 import Input from "@/components/Input";
@@ -24,7 +24,7 @@ export default function DataRenderer({
   };
 
   const updateValue = (item: string) => {
-    const arr = JSON.parse(value);
+    const arr = value ? JSON.parse(value) : [];
     arr.push(item);
     if (validateData(type, arr)) {
       setValue(JSON.stringify(arr));
@@ -32,6 +32,11 @@ export default function DataRenderer({
     }
   };
 
+  const removeItem = (item: string) => {
+    setValue(
+      JSON.stringify(JSON.parse(value).filter((i: string) => i !== item))
+    );
+  };
   return (
     <Box
       sx={{ px: 4, border: "1px solid silver", py: 1, my: 1, borderRadius: 1 }}
@@ -51,7 +56,9 @@ export default function DataRenderer({
         }}
       />
       <Box component="pre" sx={{ my: 1 }}>
-        {value}
+        {JSON.parse(value || "[]").map((item: string, index: number) => (
+          <Chip key={index} label={item} onDelete={() => removeItem(item)} />
+        ))}
       </Box>
     </Box>
   );
