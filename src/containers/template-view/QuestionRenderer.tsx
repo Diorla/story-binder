@@ -13,6 +13,8 @@ import DateInput from "./inputs/DateInput";
 import DateTemplate from "@/types/Template/DateTemplate";
 import TimeInput from "./inputs/TimeInput";
 import TimeTemplate from "@/types/Template/TimeTemplate";
+import RangeInput from "./inputs/RangeInput";
+import RangeTemplate from "@/types/Template/RangeTemplate";
 
 export default function QuestionRenderer({
   questionItem,
@@ -69,6 +71,13 @@ export default function QuestionRenderer({
     return (
       <TimeInput
         questionItem={questionItem as TemplateFormContentType<TimeTemplate>}
+        submit={submit}
+      />
+    );
+  if (questionItem.answer.type === "range")
+    return (
+      <RangeInput
+        questionItem={questionItem as TemplateFormContentType<RangeTemplate>}
         submit={submit}
       />
     );

@@ -82,6 +82,17 @@ export default function generateQuestionnaire(
         maxValue: 1,
       },
     };
+  if (type === "range")
+    return {
+      ...base,
+      answer: {
+        value: [0, 1],
+        type,
+        isInteger: true,
+        minValue: 0,
+        maxValue: 1,
+      },
+    };
   return {
     ...base,
     answer: {
