@@ -1,8 +1,7 @@
 import { BrowserWindow } from "electron";
 
 export default function getWindowInfo() {
-  const win =
-    BrowserWindow.getFocusedWindow() || BrowserWindow.getAllWindows()[0];
+  const win = BrowserWindow.fromId(Number(process.env.MainWindowId));
 
   return {
     isMaximized: win?.isMaximized(),
