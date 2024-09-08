@@ -79,7 +79,6 @@ export default function MultipleSelectInput({
             data: value,
           });
         }}
-        type="list"
       />
       <Box className="row" sx={{ justifyContent: "center" }}>
         <IconButton onClick={() => moveUp(questionItem.id)}>

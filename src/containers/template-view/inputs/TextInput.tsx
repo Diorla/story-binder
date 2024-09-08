@@ -58,7 +58,6 @@ export default function TextInput({
             data: value,
           });
         }}
-        type="list"
       />
       <Box className="row" sx={{ justifyContent: "center" }}>
         <IconButton onClick={() => moveUp(questionItem.id)}>

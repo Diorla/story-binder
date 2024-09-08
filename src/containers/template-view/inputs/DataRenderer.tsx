@@ -1,16 +1,13 @@
 import { Box, Button, Chip } from "@mui/material";
-import validateData from "../validateData";
 import { useState } from "react";
 import Input from "@/components/Input";
 
 export default function DataRenderer({
   value,
   setValue,
-  type,
 }: {
   value: string;
   setValue: (value: string) => void;
-  type: "list";
 }) {
   const [item, setItem] = useState("");
   const readJSON = async () => {
@@ -18,18 +15,14 @@ export default function DataRenderer({
       type: "select-file",
       filter: "db",
     })) as { data: string[] };
-    if (validateData(type, value?.data)) {
-      setValue(JSON.stringify(value?.data));
-    }
+    setValue(JSON.stringify(value?.data));
   };
 
   const updateValue = (item: string) => {
     const arr = value ? JSON.parse(value) : [];
     arr.push(item);
-    if (validateData(type, arr)) {
-      setValue(JSON.stringify(arr));
-      setItem("");
-    }
+    setValue(JSON.stringify(arr));
+    setItem("");
   };
 
   const removeItem = (item: string) => {

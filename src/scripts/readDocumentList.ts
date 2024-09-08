@@ -1,7 +1,5 @@
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import DocumentInfo from "@/types/DocumentInfo";
-import logError from "./logError";
-import validateDocument from "./validateDocument";
 import Directory from "@/types/Directory";
 
 export default async function readDocumentList(path: string) {
@@ -17,14 +15,7 @@ export default async function readDocumentList(path: string) {
       type: "read-file",
       path: `${path}/${file}`,
     })) as DocumentInfo;
-    if (validateDocument(info)) list.push(info);
-    else {
-      logError(
-        "read collection list",
-        "ajv validation",
-        new Error(JSON.stringify(validateDocument.errors))
-      );
-    }
+    list.push(info);
   }
   return list;
 }
