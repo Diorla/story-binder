@@ -1,7 +1,7 @@
 import TemplateConsumer from "./TemplateConsumer";
 import TemplateProvider from "./TemplateProvider";
 
-export default function TemplateForm() {
+export default function TemplateView() {
   return (
     <TemplateProvider>
       <TemplateConsumer />

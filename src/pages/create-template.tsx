@@ -1,5 +1,5 @@
-import TemplateForm from "@/containers/template-view";
+import TemplateView from "@/containers/template-view";
 
 export default function CreateTemplatePage() {
-  return <TemplateForm />;
+  return <TemplateView />;
 }
