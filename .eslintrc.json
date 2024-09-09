@@ -45,7 +45,6 @@
       { "max": 100, "skipBlankLines": true, "skipComments": true }
     ],
     "import/no-unresolved": 0,
-    "import/named": 2,
     "import/namespace": 2,
     "import/default": 2,
     "import/export": 2,

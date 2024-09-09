@@ -3,18 +3,19 @@
     "jsx": "react-jsx",
     "target": "ESNext",
     "module": "commonjs",
-    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
+    "strict": true,
     "baseUrl": ".",
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "strictNullChecks": true,
     "paths": {
-      "*": ["node_modules/*"],
       "@/*": ["src/*"]
     }
   },

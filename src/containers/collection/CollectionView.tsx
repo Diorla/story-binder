@@ -14,6 +14,7 @@ import NewCollectionForm from "@/components/NewCollectionForm";
 import CollectionList from "@/containers/collection/CollectionList";
 import { cardStyle } from "./cardStyle";
 import useCollectionContext from "./useCollectionContext";
+import TooltipWrapper from "@/components/TooltipWrapper";
 
 export default function CollectionView() {
   const [editing, setEditing] = useState(false);
@@ -34,11 +35,13 @@ export default function CollectionView() {
           <IconButton onClick={() => setOpenForm(openForm ? "" : "note")}>
             <NoteAddOutlined style={{ fontSize: 21, cursor: "pointer" }} />
           </IconButton>
-          <IconButton onClick={() => setOpenForm(openForm ? "" : "folder")}>
-            <CreateNewFolderOutlined
-              style={{ fontSize: 21, cursor: "pointer" }}
-            />
-          </IconButton>
+          <TooltipWrapper tooltip="New folder" side="bottom">
+            <IconButton onClick={() => setOpenForm(openForm ? "" : "folder")}>
+              <CreateNewFolderOutlined
+                style={{ fontSize: 21, cursor: "pointer" }}
+              />
+            </IconButton>
+          </TooltipWrapper>
           <IconButton onClick={() => setEditing(!editing)}>
             {editing ? (
               <GridView style={{ fontSize: 21, cursor: "pointer" }} />

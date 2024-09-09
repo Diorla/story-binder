@@ -1,7 +1,8 @@
 import icon from "@/assets/icon";
 import BROWSER from "@/constants/BROWSER";
-import { Close, CropSquare, FilterNone, Remove } from "@mui/icons-material";
+import { Close, FilterNone, Remove } from "@mui/icons-material";
 import { Typography, useTheme } from "@mui/material";
+import { Square } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Top() {
@@ -14,8 +15,9 @@ export default function Top() {
       .sendMessage({
         type: "get-window-info",
       })
-      .then((val: { isFullScreen: boolean }) => {
-        setIsFullScreen(val.isFullScreen);
+      .then((value) => {
+        const { isFullScreen = false } = value as { isFullScreen: boolean };
+        setIsFullScreen(isFullScreen);
         setLoading(false);
       });
   };
@@ -28,13 +30,13 @@ export default function Top() {
   const minimizeWindow = () => {
     window.api
       .sendMessage({ type: "minimize-window" })
-      .then((value: boolean) => setIsFullScreen(value));
+      .then((value) => setIsFullScreen(value as boolean));
   };
 
   const maximizeWindow = () => {
     window.api
       .sendMessage({ type: "toggle-window" })
-      .then((value: boolean) => setIsFullScreen(value));
+      .then((value) => setIsFullScreen(value as boolean));
   };
 
   const closeWindow = () => {
@@ -86,10 +88,7 @@ export default function Top() {
               style={{ rotate: "180deg", fontSize: 16 }}
             />
           ) : (
-            <CropSquare
-              fontSize="small"
-              style={{ rotate: "180deg", fontSize: 16 }}
-            />
+            <Square size={16} />
           )}
         </button>
         <button
