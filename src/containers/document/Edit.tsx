@@ -11,7 +11,6 @@ export default function Edit() {
     name: "",
     id: "",
     content: "",
-    template: null,
     note: "",
   });
 
@@ -51,7 +50,7 @@ export default function Edit() {
     return <div>Returning form edit</div>;
   return (
     <Editor
-      initialContent={document.content || document?.template?.template || ""}
+      initialContent={document.content || document?.template?.content || ""}
       updateFn={(data) => writeDocument(data)}
     />
   );

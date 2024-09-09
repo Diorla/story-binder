@@ -5,12 +5,6 @@ import AppContextProps from "./AppContextProps";
 const AppContext = createContext<AppContextProps>({
   userInfo: INITIAL_USER_INFO,
   updateUserInfo: () => "",
-  dir: {
-    projectPath: "",
-    folderPath: "",
-    documentId: "",
-  },
-  updateDir: () => "",
   refresh: () => "",
 });
 

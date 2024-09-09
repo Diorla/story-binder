@@ -10,9 +10,12 @@ import deepEqual from "deep-equal";
 
 export default function RouterProvider() {
   const [path, setPath] = useLocalState<Path>("current-path", "home");
-  const [history, setHistory] = useLocalState("path history", []);
-  const [params, setParams] = useLocalState("route params", null);
-  const [error, setError] = useLocalState("route error", null);
+  const [history, setHistory] = useLocalState<Path[]>("path history", []);
+  const [params, setParams] = useLocalState<object | null>(
+    "route params",
+    null
+  );
+  const [error, setError] = useLocalState<Error | null>("route error", null);
   const { refresh } = useApp();
 
   const _lastPath = history[history.length - 1];

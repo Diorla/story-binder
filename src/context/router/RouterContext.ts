@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { RouterContextProps } from "./RouterContextProps";
 
 const RouterContext = createContext<RouterContextProps<unknown>>({
-  navigate: null,
+  navigate: () => undefined,
   goBack: null,
   _lastPath: "home",
   params: null,

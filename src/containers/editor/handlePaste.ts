@@ -4,7 +4,7 @@ import convertImageToDataUri from "./convertImageToDataUri";
 export default function handlePaste(editor: Editor) {
   return (ev: ClipboardEvent) => {
     const dT = ev.clipboardData;
-    const file = dT.files[0];
+    const file = dT?.files[0];
 
     if (file) {
       convertImageToDataUri(file, (dataUri) => {

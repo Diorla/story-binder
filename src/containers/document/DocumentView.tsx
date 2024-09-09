@@ -12,7 +12,11 @@ import Nav from "./Nav";
 
 export default function DocumentView() {
   const [editing, setEditing] = useState(false);
-  const [document, setDocument] = useState<DocumentInfo>(null);
+  const [document, setDocument] = useState<DocumentInfo>({
+    name: "",
+    id: "",
+    note: "",
+  });
   const { params } = useRouter<{ dir: string[] }>();
   const {
     userInfo: { workspace },

@@ -19,8 +19,8 @@ export default function ProjectCard({ project }: { project: ProjectInfo }) {
   const {
     userInfo: { workspace },
   } = useApp();
-  const summaryRef = useRef();
-  const headerRef = useRef();
+  const summaryRef = useRef<any>();
+  const headerRef = useRef<any>();
   const { reloadProjects } = useHomeContext();
 
   useEffect(() => {

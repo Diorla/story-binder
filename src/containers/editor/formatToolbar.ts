@@ -3,9 +3,10 @@ import FormatType from "./FormatType";
 import ChainType from "./ChainType";
 
 export default function formatToolbar(
-  editor: Editor,
+  editor: Editor | null,
   type: FormatType
-): ChainType {
+): ChainType | null {
+  if (!editor) return null;
   const focus = editor.chain().focus();
   const color = editor.isActive(type) ? "primary" : "inherit";
 

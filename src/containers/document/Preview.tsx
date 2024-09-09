@@ -10,7 +10,6 @@ export default function Preview() {
     name: "",
     id: "",
     content: "",
-    template: null,
     note: "",
   });
 

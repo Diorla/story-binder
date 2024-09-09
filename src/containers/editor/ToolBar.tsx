@@ -39,14 +39,16 @@ export default function ToolBar({
   const previous = usePrevious(localData);
 
   useEffectOnce(() => {
-    document.body.addEventListener("paste", handlePaste(editor));
+    if (editor) document.body.addEventListener("paste", handlePaste(editor));
 
-    return () =>
-      document.body.removeEventListener("paste", handlePaste(editor));
+    return () => {
+      if (editor)
+        document.body.removeEventListener("paste", handlePaste(editor));
+    };
   });
 
   useEffectOnce(() => {
-    editor.on("update", () => {
+    editor?.on("update", () => {
       setLocalData(editor.getHTML());
     });
   });

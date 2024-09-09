@@ -33,7 +33,11 @@ export default function Nav() {
     []
   );
 
-  const [document, setDocument] = useLocalState<DocumentInfo>("document", null);
+  const [document, setDocument] = useLocalState<DocumentInfo>("document", {
+    id: "",
+    note: "",
+    name: "",
+  });
   const projectName = params.dir[0];
   const root = `${workspace}/${projectName}`;
   useEffectOnce(() => {

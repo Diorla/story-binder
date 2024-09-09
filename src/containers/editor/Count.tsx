@@ -12,9 +12,11 @@ import { useCurrentEditor } from "@tiptap/react";
 export default function Count() {
   const { editor } = useCurrentEditor();
 
-  return (
-    <div>
-      <Typography>{editor.storage.characterCount.words()} words</Typography>
-    </div>
-  );
+  if (editor)
+    return (
+      <div>
+        <Typography>{editor.storage.characterCount.words()} words</Typography>
+      </div>
+    );
+  return null;
 }
