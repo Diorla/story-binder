@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import useLocalState from "./useLocalState";
 
 const genObj = (arr: string[]) => {
@@ -25,7 +24,7 @@ export default function useForm<T extends object>({
   const [form, setForm] = useLocalState<T>("use-form", { ...defaultValue });
   const [formState, setFormState] = useLocalState(
     "form-state",
-    genObj(Object.keys(form as Record<string, any>))
+    genObj(Object.keys(form))
   );
 
   /**
@@ -34,7 +33,7 @@ export default function useForm<T extends object>({
    * @param value - the name of the field is being targetted
    * @returns onChangeText, onUpdate, onBlur, onFocus, value, errorText
    */
-  const register = (value: keyof T) => {
+  const register = <K extends keyof T>(value: K) => {
     return {
       // Can be used to directly with forms
       onChange: (
@@ -45,7 +44,7 @@ export default function useForm<T extends object>({
 
       // Another way to update forms, can be used with elements that
       // doesn't have onChange
-      onUpdate: (result: any) => {
+      onUpdate: (result: T[K]) => {
         setForm((prev) => ({ ...prev, [value]: result }));
       },
 
@@ -67,7 +66,7 @@ export default function useForm<T extends object>({
       },
 
       // the value of the form
-      value: form[value] as any,
+      value: form[value],
 
       // if there is any error, or if it is required but not filled
       errorText: formState[value as string],
@@ -81,7 +80,7 @@ export default function useForm<T extends object>({
    * @example setValue("age", 20)
    * @example setValue("isMarried", true)
    */
-  const setValue = (key: keyof T, value: any) => {
+  const setValue = <K extends keyof T>(key: K, value: T[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 

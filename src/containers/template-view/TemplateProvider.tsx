@@ -5,7 +5,6 @@ import { defaultTemplate } from "./defaultTemplate";
 import { TemplateContext } from "./TemplateContext";
 import { useAsync, useEffectOnce } from "react-use";
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import moveUp from "./moveUp";
 import moveDown from "./moveDown";
 
@@ -14,10 +13,8 @@ export default function TemplateProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { params } = useRouter<Template<AnswerTemplate> | null>();
-  const { register, form, handleSubmit, resetForm } = useForm<
-    Template<AnswerTemplate>
-  >({
+  const { params } = useRouter<Template>();
+  const { register, form, handleSubmit, resetForm } = useForm<Template>({
     defaultValue: {
       ...defaultTemplate,
     },
@@ -33,8 +30,8 @@ export default function TemplateProvider({
           type: "read-file",
           path: `./templates/${id}`,
         })
-        .then((data: Template<AnswerTemplate>) => {
-          resetForm(data);
+        .then((data) => {
+          resetForm(data as Template);
         })
         .then(() => {
           setLoading(false);
@@ -56,9 +53,8 @@ export default function TemplateProvider({
         path: `./templates/${form.id}`,
         content: form,
       });
-  }, [form, 1]);
+  }, [form]);
 
-  // console.log(form);
   if (loading) return <div>Loading</div>;
   return (
     <TemplateContext.Provider

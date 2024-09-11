@@ -2,7 +2,6 @@ import Input from "@/components/Input";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import DataRenderer from "./DataRenderer";
-import TextTemplate from "@/types/Template/TextTemplate";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 
@@ -10,8 +9,8 @@ export default function TextInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<TextTemplate>;
-  submit: (value: TemplateFormContentType<TextTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   return (

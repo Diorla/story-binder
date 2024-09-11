@@ -18,11 +18,12 @@ export default function RangeInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<RangeTemplate>;
-  submit: (value: TemplateFormContentType<RangeTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const isInteger = questionItem.answer.isInteger;
+  const answer: RangeTemplate = JSON.parse(questionItem.answer);
+  const isInteger = answer.isInteger;
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5">Range</Typography>
@@ -50,29 +51,29 @@ export default function RangeInput({
       <Input
         sx={{ my: 2 }}
         label="Minimum value"
-        value={questionItem.answer.minValue}
+        value={answer.minValue}
         type="number"
         onChange={(e) => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               minValue: numeric(e.target.value, isInteger),
-            },
+            }),
           });
         }}
       />
       <Input
         label="Maximum value"
-        value={questionItem.answer.maxValue}
+        value={answer.maxValue}
         type="number"
         onChange={(e) => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               maxValue: numeric(e.target.value, isInteger),
-            },
+            }),
           });
         }}
       />
@@ -82,10 +83,10 @@ export default function RangeInput({
         onClick={() => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               isInteger: !isInteger,
-            },
+            }),
           });
         }}
       />

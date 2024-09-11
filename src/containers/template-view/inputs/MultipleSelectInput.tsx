@@ -11,10 +11,11 @@ export default function MultipleSelectInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<MultiSelectTemplate>;
-  submit: (value: TemplateFormContentType<MultiSelectTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
+  const answer: MultiSelectTemplate = JSON.parse(questionItem.answer);
 
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
@@ -45,29 +46,29 @@ export default function MultipleSelectInput({
       <Input
         sx={{ my: 2 }}
         label="Minimum count"
-        value={questionItem.answer.minCount}
+        value={answer.minCount}
         type="number"
         onChange={(e) => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               minCount: numeric(e.target.value, true),
-            },
+            }),
           });
         }}
       />
       <Input
         label="Maximum count"
-        value={questionItem.answer.maxCount}
+        value={answer.maxCount}
         type="number"
         onChange={(e) => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               maxCount: numeric(e.target.value, true),
-            },
+            }),
           });
         }}
       />

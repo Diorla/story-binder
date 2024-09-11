@@ -6,7 +6,6 @@ import useTemplateContext from "../useTemplateContext";
 import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
 import { useState } from "react";
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import { useEffectOnce } from "react-use";
 import getTemplates from "@/services/get-templates";
 import Picker from "@/components/Picker";
@@ -15,17 +14,17 @@ export default function ReferenceInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<ReferenceTemplate>;
-  submit: (value: TemplateFormContentType<ReferenceTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
-  const [templateList, setTemplateList] = useState<Template<AnswerTemplate>[]>(
-    []
-  );
+  const [templateList, setTemplateList] = useState<Template[]>([]);
 
   useEffectOnce(() => {
     getTemplates().then(setTemplateList);
   });
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
+
+  const answer: ReferenceTemplate = JSON.parse(questionItem.answer);
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5" sx={{ my: 1 }}>
@@ -53,14 +52,14 @@ export default function ReferenceInput({
         }}
       />
       <Picker
-        value={questionItem.answer.templateId}
+        value={answer.templateId}
         onUpdate={(value) => {
           submit({
             ...questionItem,
-            answer: {
-              ...questionItem.answer,
+            answer: JSON.stringify({
+              ...answer,
               templateId: value,
-            },
+            }),
           });
         }}
         label="Template referenced"

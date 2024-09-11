@@ -1,22 +1,21 @@
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
+
+type TemplateKeys = keyof Template;
 
 export default interface TemplateContextProps {
-  register: (value: keyof Template<AnswerTemplate>) => {
+  register: (value: TemplateKeys) => {
     onChange: (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => void;
-    onUpdate: (result: unknown) => void;
+    onUpdate: <K extends TemplateKeys>(result: Template[K]) => void;
     onBlur: () => void;
     onFocus: () => void;
     value: unknown;
     errorText: string;
   };
-  form: Template<AnswerTemplate>;
-  handleSubmit: (
-    callback: (data: Template<AnswerTemplate>) => void
-  ) => (e: unknown) => void;
-  resetForm: (value?: Partial<Template<AnswerTemplate>>) => void;
+  form: Template;
+  handleSubmit: (callback: (data: Template) => void) => (e: unknown) => void;
+  resetForm: (value?: Partial<Template>) => void;
   moveUp: (id: string) => void;
   moveDown: (id: string) => void;
   deleteItem: (id: string) => void;

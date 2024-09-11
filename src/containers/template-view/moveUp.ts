@@ -1,19 +1,14 @@
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 
-export default function moveUp(
-  currentId: string,
-  form: Template<AnswerTemplate>
-): Template<AnswerTemplate> {
+export default function moveUp(currentId: string, form: Template): Template {
   const tempForm = { ...form };
-  const { content } = tempForm;
+  const content: { [id: string]: TemplateFormContentType } = JSON.parse(
+    tempForm.content
+  );
   let prevItem = null;
-  if (typeof content === "string" || !content[currentId]) return tempForm;
 
-  const currentItem = content[
-    currentId
-  ] as TemplateFormContentType<AnswerTemplate>;
+  const currentItem = content[currentId];
   const currentIdx = currentItem.order;
 
   let prevIdx = -Infinity;

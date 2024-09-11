@@ -10,10 +10,11 @@ export default function TimeInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<TimeTemplate>;
-  submit: (value: TemplateFormContentType<TimeTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
+  const answer: TimeTemplate = JSON.parse(questionItem.answer);
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5">Time</Typography>
@@ -42,19 +43,19 @@ export default function TimeInput({
         <Input
           label="Minimum time"
           type="time"
-          value={format(questionItem.answer.minValue, "HH:mm")}
+          value={format(answer.minValue, "HH:mm")}
           onChange={(e) => {
             const [h, m] = e.target.value.split(":").map(Number);
-            const val = set(questionItem.answer.minValue, {
+            const val = set(answer.minValue, {
               hours: h,
               minutes: m,
             });
             submit({
               ...questionItem,
-              answer: {
-                ...questionItem.answer,
+              answer: JSON.stringify({
+                ...answer,
                 minValue: +val,
-              },
+              }),
             });
           }}
           sx={{ mr: 2 }}
@@ -62,19 +63,19 @@ export default function TimeInput({
         <Input
           label="Maximum time"
           type="time"
-          value={format(questionItem.answer.maxValue, "HH:mm")}
+          value={format(answer.maxValue, "HH:mm")}
           onChange={(e) => {
             const [h, m] = e.target.value.split(":").map(Number);
-            const val = set(questionItem.answer.minValue, {
+            const val = set(answer.minValue, {
               hours: h,
               minutes: m,
             });
             submit({
               ...questionItem,
-              answer: {
-                ...questionItem.answer,
+              answer: JSON.stringify({
+                ...answer,
                 maxValue: +val,
-              },
+              }),
             });
           }}
           sx={{ ml: 2 }}

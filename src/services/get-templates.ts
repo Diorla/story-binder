@@ -1,14 +1,13 @@
 import Directory from "@/types/Directory";
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export async function readTemplate(files: string[]) {
-  const list: Template<AnswerTemplate>[] = [];
+  const list: Template[] = [];
   for (const file of files) {
     const info = (await window.api.sendMessage({
       type: "read-file",
       path: `./templates/${file}`,
-    })) as Template<AnswerTemplate>;
+    })) as Template;
     list.push(info);
   }
   return list;

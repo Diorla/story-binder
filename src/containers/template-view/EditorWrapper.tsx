@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Editor from "../editor";
 import useTemplateContext from "./useTemplateContext";
-import { EditorType } from "@/types/Template";
+import Template from "@/types/Template";
 
 export default function EditorWrapper({
   setIsSelect,
@@ -12,7 +12,7 @@ export default function EditorWrapper({
   const { form, resetForm } = useTemplateContext();
 
   const updateEditor = (data: string) => {
-    const value: EditorType = {
+    const value: Template = {
       ...form,
       type: "editor",
       content: data,

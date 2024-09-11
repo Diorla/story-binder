@@ -4,7 +4,6 @@ import { useState } from "react";
 import useTemplateContext from "./useTemplateContext";
 import generateQuestionnaire from "./generateQuestionnaire";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export default function AddQuestion({ page }: { page: number }) {
   const [selected, setSelected] = useState("text");
@@ -22,15 +21,14 @@ export default function AddQuestion({ page }: { page: number }) {
     { label: "Reference", value: "reference" },
   ];
 
-  const updateTemplate = (
-    questionnaire: TemplateFormContentType<AnswerTemplate>
-  ) => {
-    const content =
-      form.content as unknown as TemplateFormContentType<AnswerTemplate>;
-    register("content").onUpdate({
-      ...content,
-      [questionnaire.id]: questionnaire,
-    });
+  const updateTemplate = (questionnaire: TemplateFormContentType) => {
+    const content = form.content as unknown as TemplateFormContentType;
+    register("content").onUpdate(
+      JSON.stringify({
+        ...content,
+        [questionnaire.id]: questionnaire,
+      })
+    );
   };
 
   const addQuestion = () => {

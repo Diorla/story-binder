@@ -9,13 +9,12 @@ import EditorWrapper from "./EditorWrapper";
 import useTemplateContext from "./useTemplateContext";
 import FormWrapper from "./FormWrapper";
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export default function TemplateConsumer() {
   const [isSelect, setIsSelect] = useState(false);
   const { register, form, handleSubmit, resetForm } = useTemplateContext();
 
-  const submit = (data: Template<AnswerTemplate>) => {
+  const submit = (data: Template) => {
     const id = data.id || v4();
     const value = {
       ...data,

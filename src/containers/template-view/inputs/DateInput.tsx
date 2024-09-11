@@ -10,10 +10,11 @@ export default function DateInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType<DateTemplate>;
-  submit: (value: TemplateFormContentType<DateTemplate>) => void;
+  questionItem: TemplateFormContentType;
+  submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
+  const answer: DateTemplate = JSON.parse(questionItem.answer);
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5">Date</Typography>
@@ -42,14 +43,14 @@ export default function DateInput({
         <Input
           label="Minimum date"
           type="date"
-          value={format(questionItem.answer.minValue, "yyyy-MM-dd")}
+          value={format(answer.minValue, "yyyy-MM-dd")}
           onChange={(e) => {
             submit({
               ...questionItem,
-              answer: {
-                ...questionItem.answer,
+              answer: JSON.stringify({
+                ...answer,
                 minValue: +new Date(e.target.value),
-              },
+              }),
             });
           }}
           sx={{ mr: 2 }}
@@ -57,14 +58,14 @@ export default function DateInput({
         <Input
           label="Maximum date"
           type="date"
-          value={format(questionItem.answer.maxValue, "yyyy-MM-dd")}
+          value={format(answer.maxValue, "yyyy-MM-dd")}
           onChange={(e) => {
             submit({
               ...questionItem,
-              answer: {
-                ...questionItem.answer,
+              answer: JSON.stringify({
+                ...answer,
                 maxValue: +new Date(e.target.value),
-              },
+              }),
             });
           }}
           sx={{ ml: 2 }}

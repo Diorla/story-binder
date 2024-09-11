@@ -1,14 +1,21 @@
 /* eslint-disable max-lines */
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
+import DateTemplate from "@/types/Template/DateTemplate";
+import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
+import NumberTemplate from "@/types/Template/NumberTemplate";
+import RangeTemplate from "@/types/Template/RangeTemplate";
+import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
+import SelectTemplate from "@/types/Template/SelectTemplate";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import TextTemplate from "@/types/Template/TextTemplate";
+import TimeTemplate from "@/types/Template/TimeTemplate";
+import UnitTemplate from "@/types/Template/UnitTemplate";
 import { v4 } from "uuid";
 
 export default function generateQuestionnaire(
   type: string,
   order: number,
   page: number
-): TemplateFormContentType<AnswerTemplate> {
+): TemplateFormContentType {
   const base = {
     id: v4(),
     order,
@@ -24,102 +31,112 @@ export default function generateQuestionnaire(
     };
     return {
       ...base,
-      answer,
+      answer: JSON.stringify(answer),
     };
   }
 
   if (type === "number") {
+    const answer: NumberTemplate = {
+      value: 0,
+      type,
+      minValue: 0,
+      maxValue: 1,
+      isInteger: true,
+    };
     return {
       ...base,
-      answer: {
-        value: 0,
-        type,
-        minValue: 0,
-        maxValue: 1,
-        isInteger: true,
-      },
+      answer: JSON.stringify(answer),
     };
   }
 
   if (type === "select") {
+    const answer: SelectTemplate = {
+      value: "",
+      type,
+    };
     return {
       ...base,
-      answer: {
-        value: "",
-        type,
-      },
+      answer: JSON.stringify(answer),
     };
   }
 
   if (type === "multi-select") {
+    const answer: MultiSelectTemplate = {
+      value: [],
+      type,
+      minCount: 1,
+      maxCount: 2,
+    };
     return {
       ...base,
-      answer: {
-        value: [],
-        type,
-        minCount: 1,
-        maxCount: 2,
-      },
+      answer: JSON.stringify(answer),
     };
   }
 
-  if (type === "date")
+  if (type === "date") {
+    const answer: DateTemplate = {
+      value: +new Date(),
+      type,
+      minValue: 0,
+      maxValue: +new Date() * 2,
+    };
     return {
       ...base,
-      answer: {
-        value: +new Date(),
-        type,
-        minValue: 0,
-        maxValue: +new Date() * 2,
-      },
+      answer: JSON.stringify(answer),
     };
-  if (type === "time")
+  }
+  if (type === "time") {
+    const answer: TimeTemplate = {
+      value: +new Date(),
+      type,
+      minValue: 0,
+      maxValue: +new Date() * 2,
+    };
     return {
       ...base,
-      answer: {
-        value: +new Date(),
-        type,
-        minValue: 0,
-        maxValue: 1,
-      },
+      answer: JSON.stringify(answer),
     };
-  if (type === "range")
+  }
+  if (type === "range") {
+    const answer: RangeTemplate = {
+      value: [0, 1],
+      type,
+      isInteger: true,
+      minValue: 0,
+      maxValue: 1,
+    };
     return {
       ...base,
-      answer: {
-        value: [0, 1],
-        type,
-        isInteger: true,
-        minValue: 0,
-        maxValue: 1,
-      },
+      answer: JSON.stringify(answer),
     };
-  if (type === "unit")
+  }
+  if (type === "unit") {
+    const answer: UnitTemplate = {
+      type,
+      value: 0,
+      unit: "",
+      minValue: 0,
+      maxValue: 1,
+      isInteger: true,
+    };
     return {
       ...base,
-      answer: {
-        type,
-        value: 0,
-        unit: "",
-        minValue: 0,
-        maxValue: 1,
-        isInteger: true,
-      },
+      answer: JSON.stringify(answer),
     };
-  if (type === "reference")
+  }
+  if (type === "reference") {
+    const answer: ReferenceTemplate = {
+      type,
+      value: "",
+      templateId: "",
+    };
     return {
       ...base,
-      answer: {
-        type,
-        value: "",
-        templateId: "",
-      },
+      answer: JSON.stringify(answer),
     };
+  }
   return {
     ...base,
-    answer: {
-      value: "",
-      type: "text",
-    },
+    answer: "",
   };
 }

@@ -6,14 +6,13 @@ import useApp from "@/context/app/useApp";
 import FolderConfig from "@/types/FolderConfig";
 import { v4 } from "uuid";
 import Template from "@/types/Template";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export default function NewCollectionForm({
   currentDir,
   template,
 }: {
   currentDir: string;
-  template?: Template<AnswerTemplate>;
+  template?: Template;
 }) {
   const { refresh } = useApp();
   const { register, handleSubmit } = useForm<FolderConfig>({

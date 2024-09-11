@@ -10,15 +10,12 @@ import Template from "@/types/Template";
 import useCollectionContext from "./useCollectionContext";
 import writeCollection from "@/scripts/writeCollection";
 import { formStyle } from "./formStyle";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export default function SelectTemplate() {
   const { reload, currentDir } = useCollectionContext();
   const [templateId, setTemplateId] = useState("");
   const [loading, setLoading] = useState(true);
-  const [templateList, setTemplateList] = useState<Template<AnswerTemplate>[]>(
-    []
-  );
+  const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
   const { collection } = useCollectionContext();
 

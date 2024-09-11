@@ -1,6 +1,4 @@
-import AnswerTemplate from "./AnswerTemplate";
-
-export default interface TemplateFormContentType<T extends AnswerTemplate> {
+export default interface TemplateFormContentType {
   /**
    * The id of the question
    */
@@ -30,5 +28,10 @@ export default interface TemplateFormContentType<T extends AnswerTemplate> {
    * Placeholder for the input field, can be used to provide example
    */
   placeholder?: string;
-  answer: T;
+  /**
+   * The type of the input field, can be used to determine the type of the input field
+   * such as text, number, email, etc.
+   * This will correspond to AnswerTemplate
+   */
+  answer: string;
 }

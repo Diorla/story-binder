@@ -6,11 +6,10 @@ import { Box, Button, Card, Divider } from "@mui/material";
 import useRouter from "@/context/router/useRouter";
 import getTemplates from "@/services/get-templates";
 import EmptyTemplate from "./EmptyTemplate";
-import AnswerTemplate from "@/types/Template/AnswerTemplate";
 
 export default function Templates() {
   const [loading, setLoading] = useState(true);
-  const [templates, setTemplates] = useState<Template<AnswerTemplate>[]>([]);
+  const [templates, setTemplates] = useState<Template[]>([]);
   const { navigate } = useRouter();
 
   useEffectOnce(() => {
