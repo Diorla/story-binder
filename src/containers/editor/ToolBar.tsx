@@ -11,7 +11,6 @@ import {
   FormatUnderlined,
   InsertPhoto,
   LinkOff,
-  Texture,
 } from "@mui/icons-material";
 import { useCurrentEditor } from "@tiptap/react";
 import FormatType from "./FormatType";
@@ -23,6 +22,7 @@ import ToolbarIconsWrapper from "./ToolbarIconsWrapper";
 import { useEffectOnce, usePrevious } from "react-use";
 import handlePaste from "./handlePaste";
 import { useEffect, useState } from "react";
+import { Heading1, Heading2, Heading3, Highlighter } from "lucide-react";
 
 export default function ToolBar({
   initialContent,
@@ -70,8 +70,8 @@ export default function ToolBar({
         type: "select-file",
         filter: "images",
       })
-      .then((img: string) => {
-        editor.commands.setImage({ src: img });
+      .then((img) => {
+        editor.commands.setImage({ src: img as string });
       });
   };
   return (
@@ -113,17 +113,17 @@ export default function ToolBar({
         <ToolbarIconsWrapper>
           <FormatButton tooltip="Heading 1">
             <Typography {...chain("heading-1")} variant="button">
-              H1
+              <Heading1 />
             </Typography>
           </FormatButton>
           <FormatButton tooltip="Heading 2">
             <Typography {...chain("heading-2")} variant="button">
-              H2
+              <Heading2 />
             </Typography>
           </FormatButton>
           <FormatButton tooltip="Heading 3">
             <Typography {...chain("heading-3")} variant="button">
-              H3
+              <Heading3 />
             </Typography>
           </FormatButton>
         </ToolbarIconsWrapper>
@@ -154,7 +154,9 @@ export default function ToolBar({
 
         <ToolbarIconsWrapper>
           <FormatButton tooltip="highlight">
-            <Texture {...chain("highlight")} />
+            <Typography {...chain("highlight")}>
+              <Highlighter size={21} />
+            </Typography>
           </FormatButton>
         </ToolbarIconsWrapper>
 

@@ -223,4 +223,5 @@ ol {
   top: 0;
   height: calc(100vh - 136px);
   overflow-y: scroll;
+  caret-color: #964b00;
 }
