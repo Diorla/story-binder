@@ -1,6 +1,7 @@
+import Doc from "@/types/Doc";
 import { JSONSchemaType } from "ajv";
 
-export const documentSchema: JSONSchemaType<Document> = {
+export const docSchema: JSONSchemaType<Doc> = {
   type: "object",
   properties: {
     id: {
