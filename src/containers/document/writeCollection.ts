@@ -1,15 +1,12 @@
 import { v4 } from "uuid";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
-export default function writeCollection(
-  arg: FolderConfig,
-  projectPath: string
-) {
+export default function writeCollection(arg: Folder, projectPath: string) {
   const id = arg.id || v4();
 
   const path = `${projectPath}/${id}.${APP_FILE_EXT}`;
-  const content: FolderConfig = { ...arg, id };
+  const content: Folder = { ...arg, id };
   return window.api.sendMessage({
     type: "write-file",
     content,

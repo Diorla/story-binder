@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card, Typography, Divider, TextField } from "@mui/material";
 import useForm from "@/hooks/useForm";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
@@ -19,7 +19,7 @@ and summary
 */
 export default function EditProject() {
   const { project, reload } = useProjectContext();
-  const { handleSubmit, register } = useForm<ProjectInfo>({
+  const { handleSubmit, register } = useForm<Project>({
     defaultValue: project,
     required: ["name"],
   });
@@ -27,7 +27,7 @@ export default function EditProject() {
     userInfo: { workspace },
   } = useApp();
 
-  const submit = (form?: ProjectInfo) => {
+  const submit = (form?: Project) => {
     if (form) {
       writeProject(form, workspace)
         .then(reload)

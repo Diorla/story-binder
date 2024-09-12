@@ -1,5 +1,4 @@
-type TextTemplate = {
+export default interface SelectTemplate {
   type: "text";
   value: string;
-};
-export default TextTemplate;
+}

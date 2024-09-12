@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import { defaultCollection } from "./defaultCollection";
 import { CollectionContext } from "./CollectionContext";
 import readCollectionList from "@/scripts/readCollectionList";
@@ -19,15 +19,12 @@ export default function Collection() {
 
   const path = params.dir.join("/");
   const currentDir = `${workspace}/${path}`;
-  const [collection, setCollection] = useLocalState<FolderConfig>(
+  const [collection, setCollection] = useLocalState<Folder>(
     "collection",
     defaultCollection
   );
 
-  const [collectionList, setCollectionList] = useLocalState<FolderConfig[]>(
-    path,
-    []
-  );
+  const [collectionList, setCollectionList] = useLocalState<Folder[]>(path, []);
 
   const [documentList, setDocumentList] = useLocalState<DocumentInfo[]>(
     path,
@@ -45,7 +42,7 @@ export default function Collection() {
         type: "read-file",
         path: `${currentDir}/.config`,
       })
-      .then((data) => setCollection(data as FolderConfig));
+      .then((data) => setCollection(data as Folder));
   }, [currentDir, setCollection, workspace]);
 
   useEffect(() => {
@@ -60,7 +57,7 @@ export default function Collection() {
         type: "read-file",
         path: `${currentDir}/.config`,
       })
-      .then((data) => setCollection(data as FolderConfig));
+      .then((data) => setCollection(data as Folder));
     readCollectionList(currentDir).then((list) => {
       setCollectionList(list);
     });

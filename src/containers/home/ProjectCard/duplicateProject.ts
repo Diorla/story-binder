@@ -1,8 +1,8 @@
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import { v4 } from "uuid";
 
 export default async function duplicateProject(
-  projectInfo: ProjectInfo,
+  projectInfo: Project,
   workspace: string
 ) {
   const newId = v4();

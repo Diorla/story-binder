@@ -1,7 +1,7 @@
-import UserInfo from "@/types/UserInfo";
+import User from "@/types/User";
 
 export default interface AppContextProps {
-  userInfo: UserInfo;
-  updateUserInfo: (userInfo: Partial<UserInfo>) => void;
+  userInfo: User;
+  updateUserInfo: (userInfo: Partial<User>) => void;
   refresh: () => void;
 }

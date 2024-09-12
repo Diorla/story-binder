@@ -1,8 +1,10 @@
-type RangeTemplate = {
+export default interface RangeTemplate {
   type: "range";
-  value: [number, number];
+  value: {
+    min: number;
+    max: number;
+  };
   minValue: number;
   maxValue: number;
   isInteger: boolean;
-};
-export default RangeTemplate;
+}

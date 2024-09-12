@@ -2,16 +2,16 @@ import { Box } from "@mui/material";
 import ProjectView from "./ProjectView";
 import { useEffect, useState } from "react";
 import useLocalState from "@/hooks/useLocalState";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import { ProjectContext } from "./ProjectContext";
 import { defaultProject } from "./defaultProject";
 import readCollectionList from "@/scripts/readCollectionList";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 
 export default function Project() {
-  const [project, setProject] = useLocalState<ProjectInfo>(
+  const [project, setProject] = useLocalState<Project>(
     "project",
     defaultProject
   );
@@ -22,7 +22,7 @@ export default function Project() {
     userInfo: { workspace },
   } = useApp();
   const path = `${workspace}/${params.dir.join("/")}`;
-  const [collection, setCollection] = useLocalState<FolderConfig[]>(path, []);
+  const [collection, setCollection] = useLocalState<Folder[]>(path, []);
 
   useEffect(() => {
     window.api
@@ -30,7 +30,7 @@ export default function Project() {
         type: "read-file",
         path: `${path}/.config`,
       })
-      .then((data) => setProject(data as ProjectInfo))
+      .then((data) => setProject(data as Project))
       .then(() => setLoading(false));
   }, [path, setProject]);
 
@@ -49,7 +49,7 @@ export default function Project() {
         type: "read-file",
         path: `${path}/.config`,
       })
-      .then((data) => setProject(data as ProjectInfo));
+      .then((data) => setProject(data as Project));
   };
 
   if (loading) return <div>Loading</div>;

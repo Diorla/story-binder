@@ -1,6 +1,6 @@
 import logError from "@/scripts/logError";
 import Directory from "@/types/Directory";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 
 export default async function getProjectList(workspace: string) {
   const dirNames = (await window.api?.sendMessage({
@@ -16,7 +16,7 @@ export default async function getProjectList(workspace: string) {
       const res = (await window.api.sendMessage({
         type: "read-file",
         path,
-      })) as ProjectInfo;
+      })) as Project;
 
       const value = { ...res, path: `${workspace}/${project}` };
       list.push(value);

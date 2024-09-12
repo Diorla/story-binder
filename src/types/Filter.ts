@@ -1,12 +1,24 @@
-const filterList = ["images", "pdf", "all", "db", "app"] as const;
-
-export type FilterType = (typeof filterList)[number];
-
-type Filter = {
-  [key in FilterType]: {
+export default interface Filter {
+  images: {
     name: string;
     extensions: string[];
   };
-};
+  pdf: {
+    name: string;
+    extensions: string[];
+  };
+  all: {
+    name: string;
+    extensions: string[];
+  };
+  db: {
+    name: string;
+    extensions: string[];
+  };
+  app: {
+    name: string;
+    extensions: string[];
+  };
+}
 
-export default Filter;
+export type FilterType = keyof Filter;

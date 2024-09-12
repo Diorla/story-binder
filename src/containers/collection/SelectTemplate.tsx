@@ -1,5 +1,5 @@
 import logError from "@/scripts/logError";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import { Box, Button, Link, Typography } from "@mui/material";
 import Picker from "@/components/Picker";
 import { useEffect, useState } from "react";
@@ -32,7 +32,7 @@ export default function SelectTemplate() {
   const submit = () => {
     if (templateId) {
       const template = templateList.find((item) => item.id === templateId);
-      const tempCollection: FolderConfig = {
+      const tempCollection: Folder = {
         ...collection,
         template,
       };
@@ -46,7 +46,7 @@ export default function SelectTemplate() {
   };
 
   const removeTemplate = () => {
-    const tempCollection: FolderConfig = {
+    const tempCollection: Folder = {
       ...collection,
       template: undefined,
     };

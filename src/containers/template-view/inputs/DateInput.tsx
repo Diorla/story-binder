@@ -5,6 +5,7 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import DateTemplate from "@/types/Template/DateTemplate";
 import { format } from "date-fns";
+import validateDateTemplate from "@/schema/validateDateTemplate";
 
 export default function DateInput({
   questionItem,
@@ -14,7 +15,9 @@ export default function DateInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: DateTemplate = JSON.parse(questionItem.answer);
+  const answer: DateTemplate = validateDateTemplate(
+    JSON.parse(questionItem.answer)
+  );
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5">Date</Typography>

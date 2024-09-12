@@ -1,4 +1,4 @@
-export default interface UserInfo {
+export default interface User {
   /**
    * Indicates if the user has completed the onboarding flow
    * It is the date (Date.now()) or 0

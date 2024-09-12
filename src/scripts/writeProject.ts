@@ -1,7 +1,7 @@
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 
 export default async function writeProject(
-  projectInfo: ProjectInfo,
+  projectInfo: Project,
   workspace: string
 ) {
   const path = `${workspace}/${projectInfo.id}`;

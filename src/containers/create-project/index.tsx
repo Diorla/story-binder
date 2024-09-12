@@ -4,7 +4,7 @@ import { Card, Typography, Divider } from "@mui/material";
 import cover from "@/assets/placeholder";
 import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";
@@ -17,7 +17,7 @@ import { v4 } from "uuid";
 const { width, height } = BOOK_DIMENSION;
 export default function CreateProject() {
   const navigate = useOpenDir();
-  const { handleSubmit, register } = useForm<ProjectInfo>({
+  const { handleSubmit, register } = useForm<Project>({
     defaultValue: {
       id: "",
       name: "",
@@ -32,7 +32,7 @@ export default function CreateProject() {
     userInfo: { workspace },
   } = useApp();
 
-  const submit = (form?: ProjectInfo) => {
+  const submit = (form?: Project) => {
     if (form) {
       const id = v4();
       writeProject({ ...form, id }, workspace)

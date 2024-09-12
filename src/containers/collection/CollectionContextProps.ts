@@ -1,10 +1,10 @@
 import DocumentInfo from "@/types/DocumentInfo";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 
 export default interface CollectionContextProps {
-  collection: FolderConfig;
+  collection: Folder;
   currentDir: string;
-  collectionList: FolderConfig[];
+  collectionList: Folder[];
   reload: () => void;
   documentList: DocumentInfo[];
 }

@@ -9,7 +9,7 @@ import {
 import ContextMenu from "@/components/ContextMenu";
 import { FolderOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
 import writeCollection from "../scripts/writeCollection";
 import useRouter from "@/context/router/useRouter";
@@ -17,7 +17,7 @@ import { v4 } from "uuid";
 import deleteCollection from "../containers/project/deleteCollection";
 import useOpenDir from "@/hooks/useOpenDir";
 
-export default function CollectionCard({ item }: { item: FolderConfig }) {
+export default function CollectionCard({ item }: { item: Folder }) {
   const {
     refresh,
     userInfo: { workspace },

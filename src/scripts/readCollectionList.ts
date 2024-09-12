@@ -1,4 +1,4 @@
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import Directory from "@/types/Directory";
 
 export default async function readCollectionList(path: string) {
@@ -7,12 +7,12 @@ export default async function readCollectionList(path: string) {
     path,
   })) as Directory;
   const folders = dir.folders;
-  const list: FolderConfig[] = [];
+  const list: Folder[] = [];
   for (const folder of folders) {
     const info = (await window.api.sendMessage({
       type: "read-file",
       path: `${path}/${folder}/.config`,
-    })) as FolderConfig;
+    })) as Folder;
 
     list.push(info);
   }

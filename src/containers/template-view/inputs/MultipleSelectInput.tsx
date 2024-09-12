@@ -6,6 +6,7 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 import { numeric } from "./numeric";
+import validateMultiSelectSchema from "@/schema/validateMultiSelectTemplate";
 
 export default function MultipleSelectInput({
   questionItem,
@@ -15,7 +16,9 @@ export default function MultipleSelectInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: MultiSelectTemplate = JSON.parse(questionItem.answer);
+  const answer: MultiSelectTemplate = validateMultiSelectSchema(
+    JSON.parse(questionItem.answer)
+  );
 
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>

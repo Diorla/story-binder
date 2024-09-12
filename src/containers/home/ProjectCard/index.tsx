@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions, ListItemText, MenuItem } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";
@@ -14,7 +14,7 @@ import useOpenDir from "@/hooks/useOpenDir";
 import duplicateProject from "./duplicateProject";
 import useHomeContext from "../useHomeContext";
 
-export default function ProjectCard({ project }: { project: ProjectInfo }) {
+export default function ProjectCard({ project }: { project: Project }) {
   const navigate = useOpenDir();
   const {
     userInfo: { workspace },

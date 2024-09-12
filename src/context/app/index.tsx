@@ -1,7 +1,7 @@
 import INITIAL_USER_INFO from "@/constants/INITIAL_USER_INFO";
 import USER_INFO_DIR from "@/constants/USER_INFO_DIR";
 import { useEffect } from "react";
-import UserInfo from "@/types/UserInfo";
+import User from "@/types/User";
 import AppContext from "./AppContext";
 import useContextState from "@/hooks/useContextState";
 import Wrapper from "./Wrapper";
@@ -13,7 +13,7 @@ export default function AppProvider({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useContextState("app-context-loading", true);
-  const [userInfo, setUserInfo] = useContextState<UserInfo>(
+  const [userInfo, setUserInfo] = useContextState<User>(
     "app-context-status",
     INITIAL_USER_INFO
   );
@@ -25,7 +25,7 @@ export default function AppProvider({
     });
   }, [setLoading, setUserInfo]);
 
-  const updateUserInfo = (newUserInfo: Partial<UserInfo>) => {
+  const updateUserInfo = (newUserInfo: Partial<User>) => {
     const mergedUserInfo = { ...userInfo, ...newUserInfo };
     window.api
       .sendMessage({

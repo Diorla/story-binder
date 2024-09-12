@@ -1,9 +1,9 @@
-import FolderConfig from "@/types/FolderConfig";
-import ProjectInfo from "@/types/ProjectInfo";
+import Folder from "@/types/Folder";
+import Project from "@/types/ProjectInfo";
 
 export default interface ProjectContextProps {
-  project: ProjectInfo;
+  project: Project;
   path: string;
-  collection: FolderConfig[];
+  collection: Folder[];
   reload: () => void;
 }

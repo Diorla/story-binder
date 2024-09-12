@@ -23,11 +23,11 @@ export default interface TemplateFormContentType {
    * The data entered by the user, can be used to pre-populate the input field
    * or generate a value
    */
-  data?: string;
+  data: string;
   /**
    * Placeholder for the input field, can be used to provide example
    */
-  placeholder?: string;
+  placeholder: string;
   /**
    * The type of the input field, can be used to determine the type of the input field
    * such as text, number, email, etc.

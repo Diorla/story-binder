@@ -1,6 +1,6 @@
-import UserInfo from "@/types/UserInfo";
+import User from "@/types/User";
 
-const INITIAL_USER_INFO: UserInfo = {
+const INITIAL_USER_INFO: User = {
   onboardingCompletedAt: 0,
   appInitialisedAt: Date.now(),
   workspace: "",

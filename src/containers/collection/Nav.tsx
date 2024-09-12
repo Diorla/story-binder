@@ -1,10 +1,10 @@
 import { Breadcrumbs, Link } from "@mui/material";
 import { Folder, Workspaces } from "@mui/icons-material";
 import useRouter from "@/context/router/useRouter";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import useLocalState from "@/hooks/useLocalState";
 import { useEffectOnce } from "react-use";
-import FolderConfig from "@/types/FolderConfig";
+import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import { truncateText } from "@/scripts/truncateText";
@@ -16,17 +16,14 @@ export default function Nav() {
     userInfo: { workspace },
   } = useApp();
 
-  const [projectInfo, setProjectInfo] = useLocalState<ProjectInfo>(
-    "project-info",
-    {
-      id: "",
-      name: "",
-      summary: "",
-      cover: "",
-      path: "",
-    }
-  );
-  const [collectionPaths, setCollectionPaths] = useLocalState<FolderConfig[]>(
+  const [projectInfo, setProjectInfo] = useLocalState<Project>("project-info", {
+    id: "",
+    name: "",
+    summary: "",
+    cover: "",
+    path: "",
+  });
+  const [collectionPaths, setCollectionPaths] = useLocalState<Folder[]>(
     "collection-paths",
     []
   );
@@ -40,12 +37,12 @@ export default function Nav() {
         path: `${root}/.config`,
       })
       .then((data) => {
-        setProjectInfo(data as ProjectInfo);
+        setProjectInfo(data as Project);
       });
   });
 
   useEffectOnce(() => {
-    const list: FolderConfig[] = [];
+    const list: Folder[] = [];
     const folders = params.dir.slice(1);
     let path = root;
     folders.forEach((folder) => {
@@ -56,7 +53,7 @@ export default function Nav() {
           path: `${path}/.config`,
         })
         .then((data) => {
-          list.push(data as FolderConfig);
+          list.push(data as Folder);
         })
         .then(() => {
           setCollectionPaths(list);

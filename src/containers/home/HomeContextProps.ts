@@ -1,6 +1,6 @@
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 
 export default interface HomeContextProps {
-  projects: ProjectInfo[];
+  projects: Project[];
   reloadProjects: () => void;
 }

@@ -4,7 +4,7 @@ import Projects from "./projects";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import getProjectList from "./getProjectList";
-import ProjectInfo from "@/types/ProjectInfo";
+import Project from "@/types/ProjectInfo";
 import { HomeContext } from "./HomeContext";
 
 export default function Home() {
@@ -12,20 +12,17 @@ export default function Home() {
     userInfo: { workspace },
   } = useApp();
   const [loading, setLoading] = useState(true);
-  const [projects, setProjects] = useLocalState<ProjectInfo[]>(
-    "project-list",
-    []
-  );
+  const [projects, setProjects] = useLocalState<Project[]>("project-list", []);
 
   useEffect(() => {
-    getProjectList(workspace).then((res: ProjectInfo[]) => {
+    getProjectList(workspace).then((res: Project[]) => {
       setProjects(res);
       setLoading(false);
     });
   }, [setLoading, setProjects, workspace]);
 
   const reloadProjects = () => {
-    getProjectList(workspace).then((res: ProjectInfo[]) => {
+    getProjectList(workspace).then((res: Project[]) => {
       setProjects(res);
     });
   };
