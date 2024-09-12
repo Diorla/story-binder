@@ -1,20 +1,20 @@
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import DocumentInfo from "@/types/DocumentInfo";
+import Doc from "@/types/Doc";
 import Directory from "@/types/Directory";
 
-export default async function readDocumentList(path: string) {
+export default async function readDocList(path: string) {
   const dir = (await window.api.sendMessage({
     type: "read-directory",
     path,
   })) as Directory;
   const { files } = dir;
-  const list: DocumentInfo[] = [];
+  const list: Doc[] = [];
   for (const file of files) {
     if (!file.endsWith(APP_FILE_EXT)) continue;
     const info = (await window.api.sendMessage({
       type: "read-file",
       path: `${path}/${file}`,
-    })) as DocumentInfo;
+    })) as Doc;
     list.push(info);
   }
   return list;

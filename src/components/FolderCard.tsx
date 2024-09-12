@@ -11,13 +11,13 @@ import { FolderOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
-import writeCollection from "../scripts/writeCollection";
+import writeFolder from "../scripts/writeFolder";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
-import deleteCollection from "../containers/project/deleteCollection";
+import deleteFolder from "../containers/project/deleteFolder";
 import useOpenDir from "@/hooks/useOpenDir";
 
-export default function CollectionCard({ item }: { item: Folder }) {
+export default function FolderCard({ item }: { item: Folder }) {
   const {
     refresh,
     userInfo: { workspace },
@@ -38,17 +38,20 @@ export default function CollectionCard({ item }: { item: Folder }) {
           </MenuItem>
           <MenuItem
             onClick={() =>
-              writeCollection(
-                { name: item.name, note: item.note, id: v4() },
+              writeFolder(
+                {
+                  name: item.name,
+                  note: item.note,
+                  id: v4(),
+                  template: item.template,
+                },
                 path
               ).then(refresh)
             }
           >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
-          <MenuItem
-            onClick={() => deleteCollection(item.id, path).then(refresh)}
-          >
+          <MenuItem onClick={() => deleteFolder(item.id, path).then(refresh)}>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -68,7 +71,7 @@ export default function CollectionCard({ item }: { item: Folder }) {
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                writeCollection({ ...item, name: value }, path).then(refresh)
+                writeFolder({ ...item, name: value }, path).then(refresh)
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -82,7 +85,7 @@ export default function CollectionCard({ item }: { item: Folder }) {
             value={item.note}
             multiline={true}
             updateValue={(value) =>
-              writeCollection({ ...item, note: value }, path).then(refresh)
+              writeFolder({ ...item, note: value }, path).then(refresh)
             }
             textStyle={{
               textOverflow: "ellipsis",

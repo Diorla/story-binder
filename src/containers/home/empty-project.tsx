@@ -25,11 +25,7 @@ export default function EmptyProject() {
           textAlign: "center",
         }}
       >
-        <img
-          src={folder}
-          alt="collection"
-          style={{ height: 200, width: 200 }}
-        />
+        <img src={folder} alt="folder" style={{ height: 200, width: 200 }} />
         <Typography variant="h3">No Projects yet</Typography>
         <Typography>
           Such empty. Looks like you have not created any project yet. Click on

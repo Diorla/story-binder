@@ -42,10 +42,10 @@ This is where all the projects will be saved. It follows this pattern
 📁 Workspace
 ├── 📁 projectName.sbnd
     ├── ⚙️ .config
-    ├── 📁 collection
+    ├── 📁 folder
         ├── ⚙️ .template
-        ├── 📄 document1
-        ├── 📄 document2
+        ├── 📄 doc1
+        ├── 📄 doc2
 ├── 📁 The Lord of the Rings.sbnd
     ├── ⚙️ .config
     ├── 📁 characters

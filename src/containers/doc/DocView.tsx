@@ -5,17 +5,19 @@ import { useEffectOnce } from "react-use";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import Edit from "./Edit";
 import Preview from "./Preview";
-import DocumentInfo from "@/types/DocumentInfo";
+import Doc from "@/types/Doc";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import Nav from "./Nav";
 
-export default function DocumentView() {
+export default function DocView() {
   const [editing, setEditing] = useState(false);
-  const [document, setDocument] = useState<DocumentInfo>({
+  const [doc, setDoc] = useState<Doc>({
     name: "",
     id: "",
     note: "",
+    template: "",
+    content: "",
   });
   const { params } = useRouter<{ dir: string[] }>();
   const {
@@ -29,10 +31,10 @@ export default function DocumentView() {
         type: "read-file",
         path,
       })
-      .then((data) => setDocument(data as DocumentInfo));
+      .then((data) => setDoc(data as Doc));
   });
 
-  if (!document) return null;
+  if (!doc) return null;
 
   return (
     <div>

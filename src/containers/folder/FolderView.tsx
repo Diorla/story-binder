@@ -6,20 +6,20 @@ import {
   Tune,
 } from "@mui/icons-material";
 import { useState } from "react";
-import DocumentList from "./DocumentList";
+import DocList from "./DocList";
 import SelectTemplate from "./SelectTemplate";
-import NewDocumentForm from "./NewDocumentForm";
+import NewDocForm from "./NewDocForm";
 import Nav from "./Nav";
-import NewCollectionForm from "@/components/NewCollectionForm";
-import CollectionList from "@/containers/collection/CollectionList";
+import FolderList from "@/containers/folder/FolderList";
 import { cardStyle } from "./cardStyle";
-import useCollectionContext from "./useCollectionContext";
+import useFolderContext from "./useFolderContext";
 import TooltipWrapper from "@/components/TooltipWrapper";
+import NewFolderForm from "@/components/NewFolderForm";
 
-export default function CollectionView() {
+export default function FolderView() {
   const [editing, setEditing] = useState(false);
   const [openForm, setOpenForm] = useState<"note" | "folder" | "">("");
-  const { collection, currentDir } = useCollectionContext();
+  const { folder, currentDir } = useFolderContext();
 
   return (
     <div>
@@ -51,21 +51,18 @@ export default function CollectionView() {
           </IconButton>
         </div>
       </Card>
-      {openForm === "note" && <NewDocumentForm />}
+      {openForm === "note" && <NewDocForm />}
       {openForm === "folder" && (
-        <NewCollectionForm
-          currentDir={currentDir}
-          template={collection.template}
-        />
+        <NewFolderForm currentDir={currentDir} template={folder.template} />
       )}
       <Grid sx={{ p: 1 }}>
         {editing ? (
           <SelectTemplate />
         ) : (
           <>
-            <CollectionList />
+            <FolderList />
             <Divider />
-            <DocumentList />
+            <DocList />
           </>
         )}
       </Grid>

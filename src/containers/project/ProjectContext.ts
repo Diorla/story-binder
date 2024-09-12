@@ -5,6 +5,6 @@ import { defaultProject } from "./defaultProject";
 export const ProjectContext = createContext<ProjectContextProps>({
   project: defaultProject,
   path: "",
-  collection: [],
+  folder: [],
   reload: () => "",
 });

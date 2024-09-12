@@ -1,27 +1,29 @@
 import { Box, Button, Divider } from "@mui/material";
 import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
-import DocumentInfo from "@/types/DocumentInfo";
+import Doc from "@/types/Doc";
 import { v4 } from "uuid";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import useCollectionContext from "./useCollectionContext";
+import useFolderContext from "./useFolderContext";
 
-export default function NewDocumentForm() {
+export default function NewDocForm() {
   const {
     currentDir,
-    collection: { template },
+    folder: { template },
     reload,
-  } = useCollectionContext();
-  const { register, handleSubmit } = useForm<DocumentInfo>({
+  } = useFolderContext();
+  const { register, handleSubmit } = useForm<Doc>({
     defaultValue: {
       name: "",
       note: "",
       id: "",
+      template: "",
+      content: "",
     },
     required: ["name"],
   });
 
-  const writeDocument = (data: DocumentInfo) => {
+  const writeDoc = (data: Doc) => {
     const id = v4();
     window.api
       .sendMessage({
@@ -56,10 +58,10 @@ export default function NewDocumentForm() {
         <Button
           type="submit"
           onClick={handleSubmit((data) => {
-            writeDocument(data);
+            writeDoc(data);
           })}
         >
-          Save Document
+          Save Doc
         </Button>
       </Box>
       <Divider />

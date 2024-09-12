@@ -7,17 +7,18 @@ import { useEffectOnce } from "react-use";
 import useRouter from "@/context/router/useRouter";
 import getTemplates from "@/services/get-templates";
 import Template from "@/types/Template";
-import useCollectionContext from "./useCollectionContext";
-import writeCollection from "@/scripts/writeCollection";
+import useFolderContext from "./useFolderContext";
 import { formStyle } from "./formStyle";
+import JSONParse from "@/scripts/JSONParse";
+import writeFolder from "@/scripts/writeFolder";
 
 export default function SelectTemplate() {
-  const { reload, currentDir } = useCollectionContext();
+  const { reload, currentDir } = useFolderContext();
   const [templateId, setTemplateId] = useState("");
   const [loading, setLoading] = useState(true);
   const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
-  const { collection } = useCollectionContext();
+  const { folder } = useFolderContext();
 
   useEffectOnce(() => {
     getTemplates()
@@ -25,36 +26,38 @@ export default function SelectTemplate() {
       .then(() => setLoading(false));
   });
 
+  const template: Template = JSONParse(folder.template);
+
   useEffect(() => {
-    setTemplateId(collection.template?.id || "");
-  }, [collection.template?.id]);
+    setTemplateId(template.id || "");
+  }, [template.id]);
 
   const submit = () => {
     if (templateId) {
       const template = templateList.find((item) => item.id === templateId);
-      const tempCollection: Folder = {
-        ...collection,
-        template,
+      const tempFolder: Folder = {
+        ...folder,
+        template: JSON.stringify(template),
       };
 
-      writeCollection(tempCollection, currentDir)
+      writeFolder(tempFolder, currentDir)
         .then(reload)
-        .catch((err) => {
-          logError("update-collection", "submit", err);
+        .catch((err: Error) => {
+          logError("update-folder", "submit", err);
         });
     }
   };
 
   const removeTemplate = () => {
-    const tempCollection: Folder = {
-      ...collection,
-      template: undefined,
+    const tempFolder: Folder = {
+      ...folder,
+      template: "",
     };
 
-    writeCollection(tempCollection, currentDir)
+    writeFolder(tempFolder, currentDir)
       .then(reload)
-      .catch((err) => {
-        logError("update-collection", "remove-template", err);
+      .catch((err: Error) => {
+        logError("update-folder", "remove-template", err);
       });
   };
 

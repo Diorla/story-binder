@@ -2,15 +2,15 @@ import { Box } from "@mui/material";
 import ProjectView from "./ProjectView";
 import { useEffect, useState } from "react";
 import useLocalState from "@/hooks/useLocalState";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import { ProjectContext } from "./ProjectContext";
 import { defaultProject } from "./defaultProject";
-import readCollectionList from "@/scripts/readCollectionList";
+import readFolderList from "@/scripts/readFolderList";
 import Folder from "@/types/Folder";
 
-export default function Project() {
+export default function ProjectContainer() {
   const [project, setProject] = useLocalState<Project>(
     "project",
     defaultProject
@@ -22,7 +22,7 @@ export default function Project() {
     userInfo: { workspace },
   } = useApp();
   const path = `${workspace}/${params.dir.join("/")}`;
-  const [collection, setCollection] = useLocalState<Folder[]>(path, []);
+  const [folder, setFolder] = useLocalState<Folder[]>(path, []);
 
   useEffect(() => {
     window.api
@@ -35,14 +35,14 @@ export default function Project() {
   }, [path, setProject]);
 
   useEffect(() => {
-    readCollectionList(path).then((list) => {
-      setCollection(list);
+    readFolderList(path).then((list) => {
+      setFolder(list);
     });
-  }, [path, setCollection]);
+  }, [path, setFolder]);
 
   const reload = () => {
-    readCollectionList(path).then((list) => {
-      setCollection(list);
+    readFolderList(path).then((list) => {
+      setFolder(list);
     });
     window.api
       .sendMessage({
@@ -54,7 +54,7 @@ export default function Project() {
 
   if (loading) return <div>Loading</div>;
   return (
-    <ProjectContext.Provider value={{ project, path, collection, reload }}>
+    <ProjectContext.Provider value={{ project, path, folder, reload }}>
       <Box>
         <ProjectView />
       </Box>

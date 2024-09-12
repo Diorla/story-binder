@@ -21,9 +21,9 @@ export default function ImagePicker({
         type: "select-file",
         filter: "images",
       })
-      .then((value: string) => {
+      .then((value) => {
         if (value) {
-          onUpdate(value);
+          onUpdate(value as string);
         }
         setLoading(false);
       })

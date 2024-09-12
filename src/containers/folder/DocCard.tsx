@@ -11,37 +11,33 @@ import { InsertDriveFileOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
-import DocumentInfo from "@/types/DocumentInfo";
-import deleteDocument from "../project/deleteDocument";
+import deleteDoc from "../project/deleteDoc";
 import useOpenDir from "@/hooks/useOpenDir";
-import useCollectionContext from "./useCollectionContext";
-import writeDocument from "./writeDocument";
+import useFolderContext from "./useFolderContext";
+import writeDoc from "./writeDoc";
+import Doc from "@/types/Doc";
 
-export default function DocumentCard({ item }: { item: DocumentInfo }) {
+export default function DocCard({ item }: { item: Doc }) {
   const { params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
-  const { currentDir, reload } = useCollectionContext();
+  const { currentDir, reload } = useFolderContext();
 
   return (
     <ContextMenu
       menuComponent={
         <>
           <Typography sx={{ p: 1 }}>{item.name}</Typography>
-          <MenuItem
-            onClick={() => navigate("document", [...params.dir, item.id])}
-          >
+          <MenuItem onClick={() => navigate("doc", [...params.dir, item.id])}>
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
             onClick={() =>
-              writeDocument({ ...item, id: v4() }, currentDir).then(reload)
+              writeDoc({ ...item, id: v4() }, currentDir).then(reload)
             }
           >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
-          <MenuItem
-            onClick={() => deleteDocument(item.id, currentDir).then(reload)}
-          >
+          <MenuItem onClick={() => deleteDoc(item.id, currentDir).then(reload)}>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -50,18 +46,18 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
       <Card
         key={item.id}
         sx={{ width: 240, m: 1 }}
-        onDoubleClick={() => navigate("document", [...params.dir, item.id])}
+        onDoubleClick={() => navigate("doc", [...params.dir, item.id])}
       >
         <CardContent>
           <Box className="row">
             <InsertDriveFileOutlined
               sx={{ cursor: "pointer" }}
-              onClick={() => navigate("document", [...params.dir, item.id])}
+              onClick={() => navigate("doc", [...params.dir, item.id])}
             />
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                writeDocument({ ...item, name: value }, currentDir).then(reload)
+                writeDoc({ ...item, name: value }, currentDir).then(reload)
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -75,7 +71,7 @@ export default function DocumentCard({ item }: { item: DocumentInfo }) {
             value={item.note}
             multiline={true}
             updateValue={(value) =>
-              writeDocument({ ...item, note: value }, currentDir).then(reload)
+              writeDoc({ ...item, note: value }, currentDir).then(reload)
             }
             textStyle={{
               textOverflow: "ellipsis",

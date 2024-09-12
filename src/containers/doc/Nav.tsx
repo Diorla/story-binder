@@ -1,15 +1,19 @@
 /* eslint-disable max-lines */
 import { Breadcrumbs, Link } from "@mui/material";
-import { Folder, TextSnippet, Workspaces } from "@mui/icons-material";
+import {
+  Folder as FolderIcon,
+  TextSnippet,
+  Workspaces,
+} from "@mui/icons-material";
 import useRouter from "@/context/router/useRouter";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import useLocalState from "@/hooks/useLocalState";
 import { useEffectOnce } from "react-use";
 import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
-import DocumentInfo from "@/types/DocumentInfo";
+import Doc from "@/types/Doc";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -25,15 +29,17 @@ export default function Nav() {
     cover: "",
     path: "",
   });
-  const [collectionList, setCollectionList] = useLocalState<Folder[]>(
-    "collection-list",
+  const [folderList, setFolderList] = useLocalState<Folder[]>(
+    "folder-list",
     []
   );
 
-  const [document, setDocument] = useLocalState<DocumentInfo>("document", {
+  const [doc, setDoc] = useLocalState<Doc>("doc", {
     id: "",
     note: "",
     name: "",
+    template: "",
+    content: "",
   });
   const projectName = params.dir[0];
   const root = `${workspace}/${projectName}`;
@@ -63,14 +69,14 @@ export default function Nav() {
           list.push(data as Folder);
         })
         .then(() => {
-          setCollectionList(list);
+          setFolderList(list);
         });
     });
   });
 
   useEffectOnce(() => {
-    const documentId = params.dir.join("/");
-    const path = `${workspace}/${documentId}.${APP_FILE_EXT}`;
+    const docId = params.dir.join("/");
+    const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
 
     window.api
       .sendMessage({
@@ -78,11 +84,11 @@ export default function Nav() {
         path,
       })
       .then((data) => {
-        setDocument(data as DocumentInfo);
+        setDoc(data as Doc);
       });
   });
   if (projectInfo) {
-    const folderList = params.dir.slice(1);
+    const nestedFolderList = params.dir.slice(1);
     return (
       <Breadcrumbs maxItems={3}>
         <Link
@@ -95,7 +101,7 @@ export default function Nav() {
           <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
           {projectInfo.name}
         </Link>
-        {collectionList.map((item, idx) => (
+        {folderList.map((item, idx) => (
           <Link
             key={item.id}
             className="breadcrumbs"
@@ -105,11 +111,11 @@ export default function Nav() {
             onClick={() =>
               navigate("folder", [
                 projectInfo.id,
-                ...folderList.slice(0, idx + 1),
+                ...nestedFolderList.slice(0, idx + 1),
               ])
             }
           >
-            <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
+            <FolderIcon style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
             {item.name}
           </Link>
         ))}
@@ -120,7 +126,7 @@ export default function Nav() {
           sx={{ display: "flex", alignItems: "center" }}
         >
           <TextSnippet style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
-          {document?.name}
+          {doc?.name}
         </Link>
       </Breadcrumbs>
     );

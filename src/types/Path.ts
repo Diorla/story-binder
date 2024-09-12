@@ -9,8 +9,8 @@ type Path =
   | "folder"
   | "edit-project"
   | "edit-folder"
-  | "edit-document"
-  | "document"
+  | "edit-doc"
+  | "doc"
   | "create-template";
 
 export default Path;

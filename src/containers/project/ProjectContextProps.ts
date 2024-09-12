@@ -4,6 +4,6 @@ import Project from "@/types/ProjectInfo";
 export default interface ProjectContextProps {
   project: Project;
   path: string;
-  collection: Folder[];
+  folder: Folder[];
   reload: () => void;
 }

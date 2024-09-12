@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import Folder from "@/types/Folder";
 
-export default function writeCollection(arg: Folder, projectPath: string) {
+export default function writeFolder(arg: Folder, projectPath: string) {
   const id = arg.id || v4();
 
   const path = `${projectPath}/${id}/.config`;

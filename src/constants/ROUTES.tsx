@@ -4,10 +4,10 @@ import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home";
 import CreateProjectPage from "@/pages/create-project";
 import ProjectPage from "@/pages/project";
-import CollectionPage from "@/pages/collection";
+import FolderPage from "@/pages/folder";
 import Templates from "@/pages/templates";
 import CreateTemplatePage from "@/pages/create-template";
-import DocumentPage from "@/pages/document";
+import DocPage from "@/pages/doc";
 
 const ROUTES: { path: Path; element: ReactElement }[] = [
   {
@@ -40,7 +40,7 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
   },
   {
     path: "folder",
-    element: <CollectionPage />,
+    element: <FolderPage />,
   },
   {
     path: "edit-project",
@@ -51,12 +51,12 @@ const ROUTES: { path: Path; element: ReactElement }[] = [
     element: <NotFound />,
   },
   {
-    path: "edit-document",
+    path: "edit-doc",
     element: <NotFound />,
   },
   {
-    path: "document",
-    element: <DocumentPage />,
+    path: "doc",
+    element: <DocPage />,
   },
   {
     path: "create-template",

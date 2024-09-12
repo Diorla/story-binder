@@ -4,7 +4,7 @@ import { Card, Typography, Divider } from "@mui/material";
 import cover from "@/assets/placeholder";
 import useForm from "@/hooks/useForm";
 import useApp from "@/context/app/useApp";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";

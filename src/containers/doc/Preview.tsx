@@ -1,16 +1,19 @@
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useApp from "@/context/app/useApp";
 import useRouter from "@/context/router/useRouter";
-import DocumentInfo from "@/types/DocumentInfo";
+import JSONParse from "@/scripts/JSONParse";
+import Doc from "@/types/Doc";
+import Template from "@/types/Template";
 import { useState } from "react";
 import { useEffectOnce } from "react-use";
 
 export default function Preview() {
-  const [document, setDocument] = useState<DocumentInfo>({
+  const [doc, setDoc] = useState<Doc>({
     name: "",
     id: "",
     content: "",
     note: "",
+    template: "",
   });
 
   const {
@@ -19,8 +22,8 @@ export default function Preview() {
   const { params } = useRouter<{ dir: string[] }>();
 
   useEffectOnce(() => {
-    const documentId = params.dir.join("/");
-    const path = `${workspace}/${documentId}.${APP_FILE_EXT}`;
+    const docId = params.dir.join("/");
+    const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
 
     window.api
       .sendMessage({
@@ -28,14 +31,16 @@ export default function Preview() {
         path,
       })
       .then((data) => {
-        setDocument(data as DocumentInfo);
+        setDoc(data as Doc);
       });
   });
-  if (!document.id) return null;
-  if (document.template?.type === "form") return <div>Previewing form</div>;
+  if (!doc.id) return null;
+
+  const template: Template = JSONParse(doc.template);
+  if (template?.type === "form") return <div>Previewing form</div>;
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: document.content || "" }}
+      dangerouslySetInnerHTML={{ __html: doc.content || "" }}
       className="preview"
     />
   );

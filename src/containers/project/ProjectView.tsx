@@ -3,9 +3,9 @@ import { CreateNewFolderOutlined, GridView, Tune } from "@mui/icons-material";
 import { useState } from "react";
 import EditProject from "./EditProject";
 import Nav from "./Nav";
-import NewCollectionForm from "@/components/NewCollectionForm";
+import NewFolderForm from "@/components/NewFolderForm";
 import useProjectContext from "./useProjectContext";
-import CollectionList from "./CollectionList";
+import FolderList from "./FolderList";
 
 export default function ProjectView() {
   const [editing, setEditing] = useState(false);
@@ -48,10 +48,8 @@ export default function ProjectView() {
           </IconButton>
         </div>
       </Card>
-      {openForm && <NewCollectionForm currentDir={path} />}
-      <Grid sx={{ p: 1 }}>
-        {editing ? <EditProject /> : <CollectionList />}
-      </Grid>
+      {openForm && <NewFolderForm currentDir={path} />}
+      <Grid sx={{ p: 1 }}>{editing ? <EditProject /> : <FolderList />}</Grid>
     </div>
   );
 }

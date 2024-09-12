@@ -1,13 +1,13 @@
 import { Breadcrumbs, Link } from "@mui/material";
-import { Folder, Workspaces } from "@mui/icons-material";
+import { Folder as FolderIcon, Workspaces } from "@mui/icons-material";
 import useRouter from "@/context/router/useRouter";
-import Project from "@/types/ProjectInfo";
 import useLocalState from "@/hooks/useLocalState";
 import { useEffectOnce } from "react-use";
 import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import { truncateText } from "@/scripts/truncateText";
+import Project from "@/types/Project";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -23,8 +23,8 @@ export default function Nav() {
     cover: "",
     path: "",
   });
-  const [collectionPaths, setCollectionPaths] = useLocalState<Folder[]>(
-    "collection-paths",
+  const [folderPaths, setFolderPaths] = useLocalState<Folder[]>(
+    "folder-paths",
     []
   );
 
@@ -56,7 +56,7 @@ export default function Nav() {
           list.push(data as Folder);
         })
         .then(() => {
-          setCollectionPaths(list);
+          setFolderPaths(list);
         });
     });
   });
@@ -75,7 +75,7 @@ export default function Nav() {
           <Workspaces style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
           {truncateText(projectInfo.name, 15)}
         </Link>
-        {collectionPaths.map((item, idx) => (
+        {folderPaths.map((item, idx) => (
           <Link
             key={item.id}
             className="breadcrumbs"
@@ -89,7 +89,7 @@ export default function Nav() {
               ])
             }
           >
-            <Folder style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
+            <FolderIcon style={{ fontSize: 18 }} sx={{ mr: 0.5 }} />
             {truncateText(item.name, 15)}
           </Link>
         ))}

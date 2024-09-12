@@ -1,7 +1,7 @@
 import Folder from "@/types/Folder";
 import Directory from "@/types/Directory";
 
-export default async function readCollectionList(path: string) {
+export default async function readFolderList(path: string) {
   const dir = (await window.api.sendMessage({
     type: "read-directory",
     path,
