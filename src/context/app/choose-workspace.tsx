@@ -24,7 +24,7 @@ export default function ChooseWorkspace() {
           <Button
             variant="contained"
             onClick={() =>
-              selectWorkspace().then((workspace: string) =>
+              selectWorkspace().then((workspace) =>
                 updateUserInfo({ workspace })
               )
             }

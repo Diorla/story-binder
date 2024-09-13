@@ -11,5 +11,5 @@ export default async function selectWorkspace() {
     content: {},
   });
 
-  return directory;
+  return directory as string;
 }
