@@ -1,43 +1,26 @@
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import Template from "@/types/Template";
 import { JSONSchemaType } from "ajv";
 
-export const templateSchema: JSONSchemaType<TemplateFormContentType> = {
+export const templateSchema: JSONSchemaType<Template> = {
   type: "object",
   properties: {
     id: {
       type: "string",
     },
-    order: {
-      type: "number",
-    },
-    page: {
-      type: "number",
+    name: {
+      type: "string",
     },
     description: {
       type: "string",
     },
-    question: {
+    type: {
       type: "string",
+      enum: ["form", "editor"],
     },
-    data: {
-      type: "string",
-    },
-    placeholder: {
-      type: "string",
-    },
-    answer: {
+    content: {
       type: "string",
     },
   },
-  required: [
-    "id",
-    "order",
-    "page",
-    "description",
-    "question",
-    "answer",
-    "data",
-    "placeholder",
-  ],
-  additionalProperties: true,
+  required: ["id", "name", "description", "type", "content"],
+  additionalProperties: false,
 };

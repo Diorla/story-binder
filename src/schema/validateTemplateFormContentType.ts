@@ -1,10 +1,10 @@
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import Ajv from "ajv";
-import { templateSchema } from "./templateSchema";
+import { templateFormSchema } from "./templateFormSchema";
 const ajv = new Ajv();
 
-export default function validateNumberTemplate(value: TemplateFormContentType) {
-  const validate = ajv.compile(templateSchema);
+export default function validateTemplateForm(value: TemplateFormContentType) {
+  const validate = ajv.compile(templateFormSchema);
 
   if (validate(value)) {
     return value;
