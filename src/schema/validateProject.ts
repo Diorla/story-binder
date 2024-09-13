@@ -1,10 +1,10 @@
 import Project from "@/types/Project";
 import Ajv from "ajv";
-import { directorySchema } from "./directorySchema";
+import { projectSchema } from "./projectSchema";
 const ajv = new Ajv();
 
 export default function validateProject(value: Project) {
-  const validate = ajv.compile(directorySchema);
+  const validate = ajv.compile(projectSchema);
 
   if (validate(value)) {
     return value;
