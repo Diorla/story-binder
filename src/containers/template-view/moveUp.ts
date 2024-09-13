@@ -1,9 +1,10 @@
+import JSONParse from "@/scripts/JSONParse";
 import Template from "@/types/Template";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 
 export default function moveUp(currentId: string, form: Template): Template {
   const tempForm = { ...form };
-  const content: { [id: string]: TemplateFormContentType } = JSON.parse(
+  const content: { [id: string]: TemplateFormContentType } = JSONParse(
     tempForm.content
   );
   let prevItem = null;

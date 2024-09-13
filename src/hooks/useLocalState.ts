@@ -1,4 +1,5 @@
 import useRouter from "@/context/router/useRouter";
+import JSONParse from "@/scripts/JSONParse";
 import { useEffect, useState } from "react";
 
 /**
@@ -19,7 +20,7 @@ export default function useLocalState<T>(
     const storedValue = localStorage.getItem(_key);
 
     if (storedValue) {
-      setState(JSON.parse(storedValue));
+      setState(JSONParse(storedValue));
     }
   }, [_lastPath, key]);
 

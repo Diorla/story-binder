@@ -10,6 +10,7 @@ import TimeInput from "./inputs/TimeInput";
 import RangeInput from "./inputs/RangeInput";
 import UnitInput from "./inputs/UnitInput";
 import ReferenceInput from "./inputs/ReferenceInput";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function QuestionRenderer({
   questionItem,
@@ -20,7 +21,7 @@ export default function QuestionRenderer({
 
   const submit = (value: TemplateFormContentType) => {
     if (typeof form.content !== "object") return;
-    const content = JSON.parse(form.content);
+    const content = JSONParse(form.content);
     const newContent: TemplateFormContentType = {
       ...content,
       [questionItem.id]: value,
@@ -28,7 +29,7 @@ export default function QuestionRenderer({
     register("content").onUpdate(JSON.stringify(newContent));
   };
 
-  const answer: AnswerTemplate = JSON.parse(questionItem.answer);
+  const answer: AnswerTemplate = JSONParse(questionItem.answer);
   if (answer.type === "text")
     return <TextInput questionItem={questionItem} submit={submit} />;
   if (answer.type === "number")

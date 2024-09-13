@@ -13,6 +13,7 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import { numeric } from "./numeric";
 import RangeTemplate from "@/types/Template/RangeTemplate";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function RangeInput({
   questionItem,
@@ -22,7 +23,7 @@ export default function RangeInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: RangeTemplate = JSON.parse(questionItem.answer);
+  const answer: RangeTemplate = JSONParse(questionItem.answer);
   const isInteger = answer.isInteger;
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>

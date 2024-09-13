@@ -5,6 +5,7 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import { format, set } from "date-fns";
 import TimeTemplate from "@/types/Template/TimeTemplate";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function TimeInput({
   questionItem,
@@ -14,7 +15,7 @@ export default function TimeInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: TimeTemplate = JSON.parse(questionItem.answer);
+  const answer: TimeTemplate = JSONParse(questionItem.answer);
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5">Time</Typography>

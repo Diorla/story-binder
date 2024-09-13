@@ -7,6 +7,7 @@ import ErrorBoundary from "@/containers/error-boundary";
 import useLocalState from "@/hooks/useLocalState";
 import useApp from "../app/useApp";
 import deepEqual from "deep-equal";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function RouterProvider() {
   const [path, setPath] = useLocalState<Path>("current-path", "home");
@@ -22,7 +23,7 @@ export default function RouterProvider() {
   useEffect(() => {
     const db = localStorage.getItem("route");
     if (db) {
-      const { params, path, history } = JSON.parse(db);
+      const { params, path, history } = JSONParse(db);
       if (path) setPath(path);
       if (params) setParams(params);
       setHistory(history || []);

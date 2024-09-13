@@ -6,6 +6,7 @@ import useTemplateContext from "../useTemplateContext";
 import DateTemplate from "@/types/Template/DateTemplate";
 import { format } from "date-fns";
 import validateDateTemplate from "@/schema/validateDateTemplate";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function DateInput({
   questionItem,
@@ -16,7 +17,7 @@ export default function DateInput({
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   const answer: DateTemplate = validateDateTemplate(
-    JSON.parse(questionItem.answer)
+    JSONParse(questionItem.answer)
   );
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>

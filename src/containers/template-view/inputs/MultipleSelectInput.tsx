@@ -7,6 +7,7 @@ import useTemplateContext from "../useTemplateContext";
 import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 import { numeric } from "./numeric";
 import validateMultiSelectSchema from "@/schema/validateMultiSelectTemplate";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function MultipleSelectInput({
   questionItem,
@@ -17,7 +18,7 @@ export default function MultipleSelectInput({
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   const answer: MultiSelectTemplate = validateMultiSelectSchema(
-    JSON.parse(questionItem.answer)
+    JSONParse(questionItem.answer)
   );
 
   return (

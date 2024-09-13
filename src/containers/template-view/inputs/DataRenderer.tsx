@@ -1,6 +1,7 @@
 import { Box, Button, Chip } from "@mui/material";
 import { useState } from "react";
 import Input from "@/components/Input";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function DataRenderer({
   value,
@@ -19,7 +20,7 @@ export default function DataRenderer({
   };
 
   const updateValue = (item: string) => {
-    const arr = value ? JSON.parse(value) : [];
+    const arr = value ? JSONParse(value) : [];
     arr.push(item);
     setValue(JSON.stringify(arr));
     setItem("");
@@ -27,7 +28,7 @@ export default function DataRenderer({
 
   const removeItem = (item: string) => {
     setValue(
-      JSON.stringify(JSON.parse(value).filter((i: string) => i !== item))
+      JSON.stringify(JSONParse(value).filter((i: string) => i !== item))
     );
   };
   return (
@@ -49,7 +50,7 @@ export default function DataRenderer({
         }}
       />
       <Box component="pre" sx={{ my: 1 }}>
-        {JSON.parse(value || "[]").map((item: string, index: number) => (
+        {JSONParse(value || "[]").map((item: string, index: number) => (
           <Chip key={index} label={item} onDelete={() => removeItem(item)} />
         ))}
       </Box>

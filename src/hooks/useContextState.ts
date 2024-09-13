@@ -1,3 +1,4 @@
+import JSONParse from "@/scripts/JSONParse";
 import { useEffect, useState } from "react";
 
 /**
@@ -16,7 +17,7 @@ export default function useContextState<T>(
     const storedValue = localStorage.getItem(key);
 
     if (storedValue) {
-      setState(JSON.parse(storedValue));
+      setState(JSONParse(storedValue));
     }
   }, [key]);
 
