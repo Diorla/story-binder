@@ -1,6 +1,7 @@
 import NumberTemplate from "@/types/Template/NumberTemplate";
 import Ajv from "ajv";
 import { numberSchema } from "./numberSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateNumberTemplate(value: NumberTemplate) {
@@ -16,6 +17,6 @@ export default function validateNumberTemplate(value: NumberTemplate) {
       maxValue: 0,
       isInteger: false,
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

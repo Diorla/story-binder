@@ -1,6 +1,7 @@
 import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 import Ajv from "ajv";
 import { multiSelectSchema } from "./multiSelectSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateMultiSelectTemplate(
@@ -17,6 +18,6 @@ export default function validateMultiSelectTemplate(
       minCount: 0,
       maxCount: 0,
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

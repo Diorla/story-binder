@@ -1,6 +1,7 @@
 import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
 import Ajv from "ajv";
 import { referenceSchema } from "./referenceSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateReferenceTemplate(value: ReferenceTemplate) {
@@ -14,6 +15,6 @@ export default function validateReferenceTemplate(value: ReferenceTemplate) {
       templateId: "",
       value: "",
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

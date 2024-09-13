@@ -1,6 +1,7 @@
 import RangeTemplate from "@/types/Template/RangeTemplate";
 import Ajv from "ajv";
 import { rangeSchema } from "./rangeSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateRangeTemplate(value: RangeTemplate) {
@@ -19,6 +20,6 @@ export default function validateRangeTemplate(value: RangeTemplate) {
       maxValue: 0,
       isInteger: false,
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

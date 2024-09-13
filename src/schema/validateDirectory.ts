@@ -1,6 +1,7 @@
 import Directory from "@/types/Directory";
 import Ajv from "ajv";
 import { directorySchema } from "./directorySchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateDirectory(value: Directory) {
@@ -13,6 +14,6 @@ export default function validateDirectory(value: Directory) {
       files: [],
       folders: [],
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

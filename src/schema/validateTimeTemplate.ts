@@ -1,6 +1,7 @@
 import TimeTemplate from "@/types/Template/TimeTemplate";
 import Ajv from "ajv";
 import { timeSchema } from "./timeSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateTimeTemplate(value: TimeTemplate) {
@@ -15,6 +16,6 @@ export default function validateTimeTemplate(value: TimeTemplate) {
       minValue: 0,
       maxValue: 0,
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

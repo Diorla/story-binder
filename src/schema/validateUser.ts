@@ -1,6 +1,7 @@
 import User from "@/types/User";
 import Ajv from "ajv";
 import { userSchema } from "./userSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateUser(value: User) {
@@ -15,6 +16,6 @@ export default function validateUser(value: User) {
       workspace: "",
       explored: [],
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

@@ -1,6 +1,7 @@
 import TextTemplate from "@/types/Template/TextTemplate";
 import Ajv from "ajv";
 import { textSchema } from "./textSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateTextSchema(value: TextTemplate) {
@@ -13,6 +14,6 @@ export default function validateTextSchema(value: TextTemplate) {
       type: "text",
       value: "",
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

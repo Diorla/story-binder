@@ -1,6 +1,7 @@
 import Folder from "@/types/Folder";
 import Ajv from "ajv";
 import { folderSchema } from "./folderSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateFolder(value: Folder) {
@@ -9,6 +10,12 @@ export default function validateFolder(value: Folder) {
   if (validate(value)) {
     return value;
   } else {
-    return null;
+    const newValue: Folder = {
+      id: "",
+      name: "",
+      note: "",
+      template: "",
+    };
+    return fillObject(value, newValue);
   }
 }

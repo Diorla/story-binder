@@ -1,6 +1,7 @@
 import SelectTemplate from "@/types/Template/SelectTemplate";
 import Ajv from "ajv";
 import { selectSchema } from "./selectSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateSelectTemplate(value: SelectTemplate) {
@@ -13,6 +14,6 @@ export default function validateSelectTemplate(value: SelectTemplate) {
       type: "select",
       value: "",
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

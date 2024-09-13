@@ -1,6 +1,7 @@
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 import Ajv from "ajv";
 import { templateFormSchema } from "./templateFormSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateTemplateForm(value: TemplateFormContentType) {
@@ -19,6 +20,6 @@ export default function validateTemplateForm(value: TemplateFormContentType) {
       data: "",
       placeholder: "",
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

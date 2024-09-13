@@ -1,6 +1,7 @@
 import UnitTemplate from "@/types/Template/UnitTemplate";
 import Ajv from "ajv";
 import { unitSchema } from "./unitSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateUnitTemplate(value: UnitTemplate) {
@@ -17,6 +18,6 @@ export default function validateUnitTemplate(value: UnitTemplate) {
       maxValue: 0,
       isInteger: false,
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }

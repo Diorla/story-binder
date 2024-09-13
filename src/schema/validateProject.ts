@@ -1,6 +1,7 @@
 import Project from "@/types/Project";
 import Ajv from "ajv";
 import { projectSchema } from "./projectSchema";
+import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateProject(value: Project) {
@@ -16,6 +17,6 @@ export default function validateProject(value: Project) {
       cover: "",
       path: "",
     };
-    return newValue;
+    return fillObject(value, newValue);
   }
 }
