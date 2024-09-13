@@ -14,6 +14,8 @@ import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import Doc from "@/types/Doc";
+import validateFolder from "@/schema/validateFolder";
+import validateDoc from "@/schema/validateDoc";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -66,7 +68,7 @@ export default function Nav() {
           path: `${path}/.config`,
         })
         .then((data) => {
-          list.push(data as Folder);
+          list.push(validateFolder(data as Folder));
         })
         .then(() => {
           setFolderList(list);
@@ -84,7 +86,7 @@ export default function Nav() {
         path,
       })
       .then((data) => {
-        setDoc(data as Doc);
+        setDoc(validateDoc(data as Doc));
       });
   });
   if (projectInfo) {

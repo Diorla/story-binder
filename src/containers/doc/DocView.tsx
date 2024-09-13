@@ -9,6 +9,7 @@ import Doc from "@/types/Doc";
 import useRouter from "@/context/router/useRouter";
 import useApp from "@/context/app/useApp";
 import Nav from "./Nav";
+import validateDoc from "@/schema/validateDoc";
 
 export default function DocView() {
   const [editing, setEditing] = useState(false);
@@ -31,7 +32,7 @@ export default function DocView() {
         type: "read-file",
         path,
       })
-      .then((data) => setDoc(data as Doc));
+      .then((data) => setDoc(validateDoc(data as Doc)));
   });
 
   if (!doc) return null;

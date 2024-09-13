@@ -4,7 +4,7 @@ import Projects from "./projects";
 import useApp from "@/context/app/useApp";
 import useLocalState from "@/hooks/useLocalState";
 import getProjectList from "./getProjectList";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import { HomeContext } from "./HomeContext";
 
 export default function Home() {

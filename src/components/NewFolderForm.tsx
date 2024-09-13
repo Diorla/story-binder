@@ -11,7 +11,7 @@ export default function NewFolderForm({
   template,
 }: {
   currentDir: string;
-  template: string;
+  template?: string;
 }) {
   const { refresh } = useApp();
   const { register, handleSubmit } = useForm<Folder>({
@@ -19,7 +19,7 @@ export default function NewFolderForm({
       name: "",
       note: "",
       id: v4(),
-      template: "",
+      template: template || "",
     },
     required: ["name"],
   });
@@ -49,7 +49,7 @@ export default function NewFolderForm({
           type="submit"
           onClick={handleSubmit((data) => {
             if (data)
-              writeFolder({ ...data, template }, currentDir).then(() => {
+              writeFolder({ ...data }, currentDir).then(() => {
                 refresh();
               });
           })}

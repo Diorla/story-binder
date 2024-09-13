@@ -1,6 +1,7 @@
+import validateProject from "@/schema/validateProject";
 import logError from "@/scripts/logError";
 import Directory from "@/types/Directory";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 
 export default async function getProjectList(workspace: string) {
   const dirNames = (await window.api?.sendMessage({
@@ -19,10 +20,10 @@ export default async function getProjectList(workspace: string) {
       })) as Project;
 
       const value = { ...res, path: `${workspace}/${project}` };
-      list.push(value);
+      list.push(validateProject(value));
     }
   } catch (error) {
-    logError("Projects", "getProjectList", error);
+    logError("Projects", "getProjectList", error as Error);
   }
   return list;
 }

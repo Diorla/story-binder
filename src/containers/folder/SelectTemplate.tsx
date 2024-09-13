@@ -5,7 +5,7 @@ import Picker from "@/components/Picker";
 import { useEffect, useState } from "react";
 import { useEffectOnce } from "react-use";
 import useRouter from "@/context/router/useRouter";
-import getTemplates from "@/services/get-templates";
+import getTemplates from "@/scripts/get-templates";
 import Template from "@/types/Template";
 import useFolderContext from "./useFolderContext";
 import { formStyle } from "./formStyle";

@@ -1,10 +1,11 @@
-import Project from "@/types/ProjectInfo";
+import validateProject from "@/schema/validateProject";
+import Project from "@/types/Project";
 
 export default async function writeProject(
-  projectInfo: Project,
+  project: Project,
   workspace: string
 ) {
-  const path = `${workspace}/${projectInfo.id}`;
+  const path = `${workspace}/${project.id}`;
   await window.api.sendMessage({
     type: "create-directory",
     path,
@@ -12,6 +13,6 @@ export default async function writeProject(
   return await window.api.sendMessage({
     type: "write-file",
     path: `${path}/.config`,
-    content: projectInfo,
+    content: validateProject(project),
   });
 }

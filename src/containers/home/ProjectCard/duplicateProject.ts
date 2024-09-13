@@ -1,4 +1,5 @@
-import Project from "@/types/ProjectInfo";
+import validateProject from "@/schema/validateProject";
+import Project from "@/types/Project";
 import { v4 } from "uuid";
 
 export default async function duplicateProject(
@@ -18,7 +19,7 @@ export default async function duplicateProject(
   await window.api.sendMessage({
     type: "write-file",
     path: `${newPath}/.config`,
-    content: { ...projectInfo, id: newId },
+    content: validateProject({ ...projectInfo, id: newId }),
   });
   return true;
 }

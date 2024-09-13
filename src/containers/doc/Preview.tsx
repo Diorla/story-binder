@@ -1,6 +1,7 @@
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useApp from "@/context/app/useApp";
 import useRouter from "@/context/router/useRouter";
+import validateDoc from "@/schema/validateDoc";
 import JSONParse from "@/scripts/JSONParse";
 import Doc from "@/types/Doc";
 import Template from "@/types/Template";
@@ -31,7 +32,7 @@ export default function Preview() {
         path,
       })
       .then((data) => {
-        setDoc(data as Doc);
+        setDoc(validateDoc(data as Doc));
       });
   });
   if (!doc.id) return null;

@@ -1,3 +1,4 @@
+import validateTemplate from "@/schema/validateTemplate";
 import Directory from "@/types/Directory";
 import Template from "@/types/Template";
 
@@ -8,7 +9,7 @@ export async function readTemplate(files: string[]) {
       type: "read-file",
       path: `./templates/${file}`,
     })) as Template;
-    list.push(info);
+    list.push(validateTemplate(info));
   }
   return list;
 }

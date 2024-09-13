@@ -4,7 +4,7 @@ import { useEffectOnce } from "react-use";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Card, Divider } from "@mui/material";
 import useRouter from "@/context/router/useRouter";
-import getTemplates from "@/services/get-templates";
+import getTemplates from "@/scripts/get-templates";
 import EmptyTemplate from "./EmptyTemplate";
 
 export default function Templates() {

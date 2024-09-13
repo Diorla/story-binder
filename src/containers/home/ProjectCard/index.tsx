@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions, ListItemText, MenuItem } from "@mui/material";
 import ContextMenu from "@/components/ContextMenu";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import cardStyle from "./cardStyle";
 import deleteProject from "./deleteProject";
 import contentStyle from "./contentStyle";

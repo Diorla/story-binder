@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card, Typography, Divider, TextField } from "@mui/material";
 import useForm from "@/hooks/useForm";
-import Project from "@/types/ProjectInfo";
+import Project from "@/types/Project";
 import ImagePicker from "@/components/ImagePicker";
 import logError from "@/scripts/logError";
 import BOOK_DIMENSION from "@/constants/BOOK_DIMENSION";

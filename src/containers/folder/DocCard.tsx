@@ -11,11 +11,11 @@ import { InsertDriveFileOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import useRouter from "@/context/router/useRouter";
 import { v4 } from "uuid";
-import deleteDoc from "../project/deleteDoc";
 import useOpenDir from "@/hooks/useOpenDir";
 import useFolderContext from "./useFolderContext";
-import writeDoc from "./writeDoc";
 import Doc from "@/types/Doc";
+import writeDoc from "@/scripts/writeDoc";
+import deleteDoc from "@/scripts/deleteDoc";
 
 export default function DocCard({ item }: { item: Doc }) {
   const { params } = useRouter<{ dir: string[] }>();

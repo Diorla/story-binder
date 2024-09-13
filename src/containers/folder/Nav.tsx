@@ -8,6 +8,8 @@ import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import { truncateText } from "@/scripts/truncateText";
 import Project from "@/types/Project";
+import validateFolder from "@/schema/validateFolder";
+import validateProject from "@/schema/validateProject";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -37,7 +39,7 @@ export default function Nav() {
         path: `${root}/.config`,
       })
       .then((data) => {
-        setProjectInfo(data as Project);
+        setProjectInfo(validateProject(data as Project));
       });
   });
 
@@ -53,7 +55,7 @@ export default function Nav() {
           path: `${path}/.config`,
         })
         .then((data) => {
-          list.push(data as Folder);
+          list.push(validateFolder(data as Folder));
         })
         .then(() => {
           setFolderPaths(list);

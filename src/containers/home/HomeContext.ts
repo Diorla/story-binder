@@ -3,5 +3,5 @@ import HomeContextProps from "./HomeContextProps";
 
 export const HomeContext = createContext<HomeContextProps>({
   projects: [],
-  reloadProjects: null,
+  reloadProjects: () => undefined,
 });

@@ -1,5 +1,6 @@
 import Folder from "@/types/Folder";
 import Directory from "@/types/Directory";
+import validateFolder from "@/schema/validateFolder";
 
 export default async function readFolderList(path: string) {
   const dir = (await window.api.sendMessage({
@@ -14,7 +15,7 @@ export default async function readFolderList(path: string) {
       path: `${path}/${folder}/.config`,
     })) as Folder;
 
-    list.push(info);
+    list.push(validateFolder(info));
   }
   return list;
 }

@@ -5,6 +5,7 @@ import Doc from "@/types/Doc";
 import { v4 } from "uuid";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useFolderContext from "./useFolderContext";
+import writeDoc from "@/scripts/writeDoc";
 
 export default function NewDocForm() {
   const {
@@ -23,15 +24,11 @@ export default function NewDocForm() {
     required: ["name"],
   });
 
-  const writeDoc = (data: Doc) => {
+  const submit = (data: Doc) => {
     const id = v4();
-    window.api
-      .sendMessage({
-        type: "write-file",
-        path: `${currentDir}/${id}.${APP_FILE_EXT}`,
-        content: { ...data, id, template },
-      })
-      .then(reload);
+    const path = `${currentDir}/${id}.${APP_FILE_EXT}`;
+    const content = { ...data, id, template };
+    writeDoc(content, path).then(reload);
   };
 
   return (
@@ -58,7 +55,7 @@ export default function NewDocForm() {
         <Button
           type="submit"
           onClick={handleSubmit((data) => {
-            writeDoc(data);
+            submit(data);
           })}
         >
           Save Doc

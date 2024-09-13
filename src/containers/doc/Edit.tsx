@@ -7,6 +7,8 @@ import { useEffectOnce } from "react-use";
 import { useState } from "react";
 import JSONParse from "@/scripts/JSONParse";
 import Template from "@/types/Template";
+import validateDoc from "@/schema/validateDoc";
+import writeDoc from "@/scripts/writeDoc";
 
 export default function Edit() {
   const [doc, setDoc] = useState<Doc>({
@@ -32,20 +34,12 @@ export default function Edit() {
         path,
       })
       .then((data) => {
-        setDoc(data as Doc);
+        setDoc(validateDoc(data as Doc));
       });
   });
 
-  const writeDoc = (content: string) => {
-    const docId = params.dir.join("/");
-    const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
-
-    window.api.sendMessage({
-      type: "write-file",
-      path: `${path}`,
-      content: { ...doc, content },
-    });
-  };
+  const docId = params.dir.join("/");
+  const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
 
   if (!doc.id) return null;
 
@@ -54,7 +48,7 @@ export default function Edit() {
   return (
     <Editor
       initialContent={doc.content || template?.content || ""}
-      updateFn={(data) => writeDoc(data)}
+      updateFn={(content) => writeDoc({ ...doc, content }, path)}
     />
   );
 }

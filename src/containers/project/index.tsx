@@ -9,6 +9,7 @@ import { ProjectContext } from "./ProjectContext";
 import { defaultProject } from "./defaultProject";
 import readFolderList from "@/scripts/readFolderList";
 import Folder from "@/types/Folder";
+import validateProject from "@/schema/validateProject";
 
 export default function ProjectContainer() {
   const [project, setProject] = useLocalState<Project>(
@@ -30,7 +31,7 @@ export default function ProjectContainer() {
         type: "read-file",
         path: `${path}/.config`,
       })
-      .then((data) => setProject(data as Project))
+      .then((data) => setProject(validateProject(data as Project)))
       .then(() => setLoading(false));
   }, [path, setProject]);
 
@@ -49,7 +50,7 @@ export default function ProjectContainer() {
         type: "read-file",
         path: `${path}/.config`,
       })
-      .then((data) => setProject(data as Project));
+      .then((data) => setProject(validateProject(data as Project)));
   };
 
   if (loading) return <div>Loading</div>;

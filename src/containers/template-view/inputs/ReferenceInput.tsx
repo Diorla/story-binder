@@ -7,7 +7,7 @@ import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
 import { useState } from "react";
 import Template from "@/types/Template";
 import { useEffectOnce } from "react-use";
-import getTemplates from "@/services/get-templates";
+import getTemplates from "@/scripts/get-templates";
 import Picker from "@/components/Picker";
 
 export default function ReferenceInput({
