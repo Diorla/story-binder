@@ -13,6 +13,12 @@ export const userSchema: JSONSchemaType<User> = {
     workspace: {
       type: "string",
     },
+    projectPath: {
+      type: "string",
+    },
+    templatePath: {
+      type: "string",
+    },
     explored: {
       type: "array",
       items: {
@@ -25,6 +31,8 @@ export const userSchema: JSONSchemaType<User> = {
     "appInitialisedAt",
     "workspace",
     "explored",
+    "projectPath",
+    "templatePath",
   ],
   additionalProperties: false,
 };

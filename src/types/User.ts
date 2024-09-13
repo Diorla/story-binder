@@ -1,3 +1,4 @@
+// TODO: Add language and theme support
 export default interface User {
   /**
    * Indicates if the user has completed the onboarding flow
@@ -19,4 +20,15 @@ export default interface User {
    * It would be used to show help tips when the user opens it for the first time
    */
   explored: string[];
+
+  /**
+   * where all the projects will be saved
+   * workspace/projects
+   */
+  projectPath: string;
+  /**
+   * where all the templates will be saved
+   * workspace/templates
+   */
+  templatePath: string;
 }

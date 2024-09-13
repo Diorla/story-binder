@@ -9,20 +9,20 @@ import { HomeContext } from "./HomeContext";
 
 export default function Home() {
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useLocalState<Project[]>("project-list", []);
 
   useEffect(() => {
-    getProjectList(workspace).then((res: Project[]) => {
+    getProjectList(projectPath).then((res: Project[]) => {
       setProjects(res);
       setLoading(false);
     });
-  }, [setLoading, setProjects, workspace]);
+  }, [setLoading, setProjects, projectPath]);
 
   const reloadProjects = () => {
-    getProjectList(workspace).then((res: Project[]) => {
+    getProjectList(projectPath).then((res: Project[]) => {
       setProjects(res);
     });
   };

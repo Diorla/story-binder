@@ -5,6 +5,8 @@ const INITIAL_USER_INFO: User = {
   appInitialisedAt: Date.now(),
   workspace: "",
   explored: [],
+  projectPath: "",
+  templatePath: "",
 };
 
 export default INITIAL_USER_INFO;

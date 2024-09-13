@@ -4,11 +4,11 @@ import { v4 } from "uuid";
 
 export default async function duplicateProject(
   projectInfo: Project,
-  workspace: string
+  projectPath: string
 ) {
   const newId = v4();
-  const path = `${workspace}/${projectInfo.id}`;
-  const newPath = `${workspace}/${newId}`;
+  const path = `${projectPath}/${projectInfo.id}`;
+  const newPath = `${projectPath}/${newId}`;
 
   await window.api.sendMessage({
     type: "duplicate-directory",

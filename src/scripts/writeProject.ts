@@ -3,9 +3,9 @@ import Project from "@/types/Project";
 
 export default async function writeProject(
   project: Project,
-  workspace: string
+  projectPath: string
 ) {
-  const path = `${workspace}/${project.id}`;
+  const path = `${projectPath}/${project.id}`;
   await window.api.sendMessage({
     type: "create-directory",
     path,

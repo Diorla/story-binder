@@ -22,9 +22,9 @@ export default function DocView() {
   });
   const { params } = useRouter<{ dir: string[] }>();
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
-  const path = `${workspace}/${params.dir.join("/")}.${APP_FILE_EXT}`;
+  const path = `${projectPath}/${params.dir.join("/")}.${APP_FILE_EXT}`;
 
   useEffectOnce(() => {
     window.api

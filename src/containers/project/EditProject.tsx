@@ -24,12 +24,12 @@ export default function EditProject() {
     required: ["name"],
   });
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
 
   const submit = (form?: Project) => {
     if (form) {
-      writeProject(form, workspace)
+      writeProject(form, projectPath)
         .then(reload)
         .catch((err) => {
           logError("update-project", "submit", err);

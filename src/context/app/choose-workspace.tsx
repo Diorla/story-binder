@@ -25,7 +25,11 @@ export default function ChooseWorkspace() {
             variant="contained"
             onClick={() =>
               selectWorkspace().then((workspace) =>
-                updateUserInfo({ workspace })
+                updateUserInfo({
+                  workspace,
+                  projectPath: `${workspace}/projects`,
+                  templatePath: `${workspace}/templates`,
+                })
               )
             }
           >

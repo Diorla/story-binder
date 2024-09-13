@@ -15,7 +15,7 @@ export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
 
   const [projectInfo, setProjectInfo] = useLocalState<Project>("project-info", {
@@ -31,7 +31,7 @@ export default function Nav() {
   );
 
   const projectName = params.dir[0];
-  const root = `${workspace}/${projectName}`;
+  const root = `${projectPath}/${projectName}`;
   useEffectOnce(() => {
     window.api
       .sendMessage({

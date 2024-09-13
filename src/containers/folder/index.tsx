@@ -15,11 +15,11 @@ import readFolderList from "@/scripts/readFolderList";
 export default function FolderContainer() {
   const { params } = useRouter<{ dir: string[] }>();
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
 
   const path = params.dir.join("/");
-  const currentDir = `${workspace}/${path}`;
+  const currentDir = `${projectPath}/${path}`;
   const [folder, setFolder] = useLocalState<Folder>("folder", defaultFolder);
 
   const [folderList, setFolderList] = useLocalState<Folder[]>(path, []);
@@ -40,7 +40,7 @@ export default function FolderContainer() {
       .then((data) => {
         if (validateFolder(data as Folder)) setFolder(data as Folder);
       });
-  }, [currentDir, setFolder, workspace]);
+  }, [currentDir, setFolder, projectPath]);
 
   useEffect(() => {
     readFolderList(currentDir).then((list) => {

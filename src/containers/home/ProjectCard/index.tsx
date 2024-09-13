@@ -17,7 +17,7 @@ import useHomeContext from "../useHomeContext";
 export default function ProjectCard({ project }: { project: Project }) {
   const navigate = useOpenDir();
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
   const summaryRef = useRef<any>();
   const headerRef = useRef<any>();
@@ -36,7 +36,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             <Typography sx={{ p: 1 }}>{project.name}</Typography>
             <MenuItem
               onClick={() =>
-                duplicateProject({ ...project }, workspace).then(reloadProjects)
+                duplicateProject({ ...project }, projectPath).then(
+                  reloadProjects
+                )
               }
             >
               <ListItemText>Duplicate</ListItemText>

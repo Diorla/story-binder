@@ -29,13 +29,13 @@ export default function CreateProject() {
   });
 
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
 
   const submit = (form?: Project) => {
     if (form) {
       const id = v4();
-      writeProject({ ...form, id }, workspace)
+      writeProject({ ...form, id }, projectPath)
         .then(() => {
           navigate("project", [id]);
         })

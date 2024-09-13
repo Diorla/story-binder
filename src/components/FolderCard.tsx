@@ -20,12 +20,12 @@ import useOpenDir from "@/hooks/useOpenDir";
 export default function FolderCard({ item }: { item: Folder }) {
   const {
     refresh,
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
   const { params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
 
-  const path = `${workspace}/${params.dir.join("/")}`;
+  const path = `${projectPath}/${params.dir.join("/")}`;
   return (
     <ContextMenu
       menuComponent={

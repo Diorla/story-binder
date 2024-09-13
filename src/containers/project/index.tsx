@@ -20,9 +20,9 @@ export default function ProjectContainer() {
   const { params } = useRouter<{ dir: string[] }>();
 
   const {
-    userInfo: { workspace },
+    userInfo: { projectPath },
   } = useApp();
-  const path = `${workspace}/${params.dir.join("/")}`;
+  const path = `${projectPath}/${params.dir.join("/")}`;
   const [folder, setFolder] = useLocalState<Folder[]>(path, []);
 
   useEffect(() => {

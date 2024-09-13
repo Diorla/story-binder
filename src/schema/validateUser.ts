@@ -15,6 +15,8 @@ export default function validateUser(value: User | null) {
       appInitialisedAt: 0,
       workspace: "",
       explored: [],
+      projectPath: "",
+      templatePath: "",
     };
     return fillObject(value, newValue);
   }
