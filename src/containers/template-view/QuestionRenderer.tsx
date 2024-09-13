@@ -11,6 +11,8 @@ import RangeInput from "./inputs/RangeInput";
 import UnitInput from "./inputs/UnitInput";
 import ReferenceInput from "./inputs/ReferenceInput";
 import JSONParse from "@/scripts/JSONParse";
+import validateFormContent from "@/schema/validateFormContent";
+import FormContent from "@/types/Template/FormContent";
 
 export default function QuestionRenderer({
   questionItem,
@@ -19,10 +21,10 @@ export default function QuestionRenderer({
 }) {
   const { register, form } = useTemplateContext();
 
-  const content = JSONParse<FormQuestion>(form.content);
+  const content = validateFormContent(JSONParse<FormContent>(form.content));
   const submit = (value: FormQuestion) => {
     if (content === null) return;
-    const newContent: FormQuestion = {
+    const newContent: FormContent = {
       ...content,
       [questionItem.id]: value,
     };
