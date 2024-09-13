@@ -32,7 +32,9 @@ export default function DocView() {
         type: "read-file",
         path,
       })
-      .then((data) => setDoc(validateDoc(data as Doc)));
+      .then((data) => {
+        if (validateDoc(data as Doc)) setDoc(data as Doc);
+      });
   });
 
   if (!doc) return null;

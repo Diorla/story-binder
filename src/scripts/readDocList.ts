@@ -16,7 +16,7 @@ export default async function readDocList(path: string) {
       type: "read-file",
       path: `${path}/${file}`,
     })) as Doc;
-    list.push(validateDoc(info));
+    if (validateDoc(info)) list.push(info);
   }
   return list;
 }

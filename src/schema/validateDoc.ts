@@ -9,13 +9,6 @@ export default function validateDoc(value: Doc) {
   if (validate(value)) {
     return value;
   } else {
-    const newValue: Doc = {
-      id: "",
-      name: "",
-      note: "",
-      template: "",
-      content: "",
-    };
-    return newValue;
+    return null;
   }
 }

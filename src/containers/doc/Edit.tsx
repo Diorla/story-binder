@@ -24,22 +24,19 @@ export default function Edit() {
   } = useApp();
   const { params } = useRouter<{ dir: string[] }>();
 
-  useEffectOnce(() => {
-    const docId = params.dir.join("/");
-    const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
+  const docId = params.dir.join("/");
+  const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
 
+  useEffectOnce(() => {
     window.api
       .sendMessage({
         type: "read-file",
         path,
       })
       .then((data) => {
-        setDoc(validateDoc(data as Doc));
+        if (validateDoc(data as Doc)) setDoc(data as Doc);
       });
   });
-
-  const docId = params.dir.join("/");
-  const path = `${workspace}/${docId}.${APP_FILE_EXT}`;
 
   if (!doc.id) return null;
 

@@ -51,7 +51,9 @@ export default function FolderView() {
           </IconButton>
         </div>
       </Card>
-      {openForm === "note" && <NewDocForm />}
+      {openForm === "note" && (
+        <NewDocForm closeFolder={() => setOpenForm("")} />
+      )}
       {openForm === "folder" && (
         <NewFolderForm currentDir={currentDir} template={folder.template} />
       )}

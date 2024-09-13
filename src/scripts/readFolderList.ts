@@ -14,8 +14,7 @@ export default async function readFolderList(path: string) {
       type: "read-file",
       path: `${path}/${folder}/.config`,
     })) as Folder;
-
-    list.push(validateFolder(info));
+    if (validateFolder(info)) list.push(info);
   }
   return list;
 }

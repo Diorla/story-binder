@@ -37,7 +37,9 @@ export default function FolderContainer() {
         type: "read-file",
         path: `${currentDir}/.config`,
       })
-      .then((data) => setFolder(validateFolder(data as Folder)));
+      .then((data) => {
+        if (validateFolder(data as Folder)) setFolder(data as Folder);
+      });
   }, [currentDir, setFolder, workspace]);
 
   useEffect(() => {
@@ -52,7 +54,9 @@ export default function FolderContainer() {
         type: "read-file",
         path: `${currentDir}/.config`,
       })
-      .then((data) => setFolder(validateFolder(data as Folder)));
+      .then((data) => {
+        if (validateFolder(data as Folder)) setFolder(data as Folder);
+      });
     readFolderList(currentDir).then((list) => {
       setFolderList(list);
     });

@@ -8,8 +8,8 @@ import useApp from "@/context/app/useApp";
 import useOpenDir from "@/hooks/useOpenDir";
 import { truncateText } from "@/scripts/truncateText";
 import Project from "@/types/Project";
-import validateFolder from "@/schema/validateFolder";
 import validateProject from "@/schema/validateProject";
+import readFolderList from "@/scripts/readFolderList";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -44,22 +44,11 @@ export default function Nav() {
   });
 
   useEffectOnce(() => {
-    const list: Folder[] = [];
     const folders = params.dir.slice(1);
     let path = root;
     folders.forEach((folder) => {
       path += `/${folder}`;
-      window.api
-        .sendMessage({
-          type: "read-file",
-          path: `${path}/.config`,
-        })
-        .then((data) => {
-          list.push(validateFolder(data as Folder));
-        })
-        .then(() => {
-          setFolderPaths(list);
-        });
+      readFolderList(path).then((data) => setFolderPaths(data));
     });
   });
 

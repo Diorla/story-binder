@@ -3,11 +3,15 @@ import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
 import Doc from "@/types/Doc";
 import { v4 } from "uuid";
-import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 import useFolderContext from "./useFolderContext";
 import writeDoc from "@/scripts/writeDoc";
+import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
-export default function NewDocForm() {
+export default function NewDocForm({
+  closeFolder,
+}: {
+  closeFolder?: () => void;
+}) {
   const {
     currentDir,
     folder: { template },
@@ -28,7 +32,7 @@ export default function NewDocForm() {
     const id = v4();
     const path = `${currentDir}/${id}.${APP_FILE_EXT}`;
     const content = { ...data, id, template };
-    writeDoc(content, path).then(reload);
+    writeDoc(content, path).then(closeFolder).then(reload);
   };
 
   return (

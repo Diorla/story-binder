@@ -9,7 +9,7 @@ export async function readTemplate(files: string[]) {
       type: "read-file",
       path: `./templates/${file}`,
     })) as Template;
-    list.push(validateTemplate(info));
+    if (validateTemplate(info)) list.push(info);
   }
   return list;
 }

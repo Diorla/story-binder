@@ -9,12 +9,6 @@ export default function validateFolder(value: Folder) {
   if (validate(value)) {
     return value;
   } else {
-    const newValue: Folder = {
-      id: "",
-      name: "",
-      note: "",
-      template: "",
-    };
-    return newValue;
+    return null;
   }
 }

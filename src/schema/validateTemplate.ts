@@ -9,13 +9,6 @@ export default function validateTemplate(value: Template) {
   if (validate(value)) {
     return value;
   } else {
-    const newValue: Template = {
-      id: "",
-      name: "",
-      description: "",
-      type: "editor",
-      content: "",
-    };
-    return newValue;
+    return null;
   }
 }
