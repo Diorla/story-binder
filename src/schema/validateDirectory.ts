@@ -4,7 +4,7 @@ import { directorySchema } from "./directorySchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateDirectory(value: Directory) {
+export default function validateDirectory(value: Directory | null) {
   const validate = ajv.compile(directorySchema);
 
   if (validate(value)) {

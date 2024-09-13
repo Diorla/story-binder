@@ -4,7 +4,7 @@ import { projectSchema } from "./projectSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateProject(value: Project) {
+export default function validateProject(value: Project | null) {
   const validate = ajv.compile(projectSchema);
 
   if (validate(value)) {

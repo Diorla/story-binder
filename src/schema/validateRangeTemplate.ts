@@ -4,7 +4,7 @@ import { rangeSchema } from "./rangeSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateRangeTemplate(value: RangeTemplate) {
+export default function validateRangeTemplate(value: RangeTemplate | null) {
   const validate = ajv.compile(rangeSchema);
 
   if (validate(value)) {

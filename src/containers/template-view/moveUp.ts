@@ -4,10 +4,12 @@ import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
 
 export default function moveUp(currentId: string, form: Template): Template {
   const tempForm = { ...form };
-  const content: { [id: string]: TemplateFormContentType } = JSONParse(
+  const content = JSONParse<{ [id: string]: TemplateFormContentType }>(
     tempForm.content
   );
   let prevItem = null;
+
+  if (content === null) return tempForm;
 
   const currentItem = content[currentId];
   const currentIdx = currentItem.order;

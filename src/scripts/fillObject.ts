@@ -5,9 +5,10 @@
  * @returns the merging result of value and defaultValue
  */
 export default function fillObject<T extends object>(
-  value: T,
+  value: T | null,
   defaultValue: T
 ) {
+  if (value === null) return defaultValue;
   const result = { ...defaultValue };
   const keys = Object.keys(value) as (keyof T)[];
   keys.forEach((key) => {

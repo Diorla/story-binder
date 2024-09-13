@@ -2,14 +2,16 @@ import { Box } from "@mui/material";
 import QuestionRenderer from "./QuestionRenderer";
 import useTemplateContext from "./useTemplateContext";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function QuestionList({ page }: { page: number }) {
   const { form } = useTemplateContext();
 
-  const content = form?.content as unknown as {
-    [id: string]: TemplateFormContentType;
-  };
+  const content = JSONParse<{ [id: string]: TemplateFormContentType }>(
+    form?.content
+  );
 
+  if (!content) return null;
   const keyList = Object.keys(content);
 
   return (

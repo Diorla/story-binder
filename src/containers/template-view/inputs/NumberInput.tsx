@@ -14,6 +14,7 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import { numeric } from "./numeric";
 import JSONParse from "@/scripts/JSONParse";
+import validateNumberTemplate from "@/schema/validateNumberTemplate";
 
 export default function NumberInput({
   questionItem,
@@ -23,7 +24,11 @@ export default function NumberInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: NumberTemplate = JSONParse(questionItem.answer);
+
+  const answer = validateNumberTemplate(
+    JSONParse<NumberTemplate>(questionItem.answer)
+  );
+
   const isInteger = answer.isInteger;
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>

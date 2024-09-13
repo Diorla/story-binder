@@ -4,7 +4,9 @@ import { referenceSchema } from "./referenceSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateReferenceTemplate(value: ReferenceTemplate) {
+export default function validateReferenceTemplate(
+  value: ReferenceTemplate | null
+) {
   const validate = ajv.compile(referenceSchema);
 
   if (validate(value)) {

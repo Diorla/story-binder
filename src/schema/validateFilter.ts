@@ -4,7 +4,7 @@ const ajv = new Ajv();
 import { filterSchema } from "./filterSchema";
 import fillObject from "@/scripts/fillObject";
 
-export default function validateFilter(value: Filter) {
+export default function validateFilter(value: Filter | null) {
   const validate = ajv.compile(filterSchema);
 
   if (validate(value)) {

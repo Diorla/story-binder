@@ -14,6 +14,7 @@ import useTemplateContext from "../useTemplateContext";
 import { numeric } from "./numeric";
 import UnitTemplate from "@/types/Template/UnitTemplate";
 import JSONParse from "@/scripts/JSONParse";
+import validateUnitTemplate from "@/schema/validateUnitTemplate";
 
 export default function UnitInput({
   questionItem,
@@ -24,7 +25,10 @@ export default function UnitInput({
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
 
-  const answer: UnitTemplate = JSONParse(questionItem.answer);
+  const answer = validateUnitTemplate(
+    JSONParse<UnitTemplate>(questionItem.answer)
+  );
+
   const isInteger = answer.isInteger;
 
   return (

@@ -19,9 +19,9 @@ export default function QuestionRenderer({
 }) {
   const { register, form } = useTemplateContext();
 
+  const content = JSONParse<TemplateFormContentType>(form.content);
   const submit = (value: TemplateFormContentType) => {
-    if (typeof form.content !== "object") return;
-    const content = JSONParse(form.content);
+    if (content === null) return;
     const newContent: TemplateFormContentType = {
       ...content,
       [questionItem.id]: value,
@@ -29,7 +29,8 @@ export default function QuestionRenderer({
     register("content").onUpdate(JSON.stringify(newContent));
   };
 
-  const answer: AnswerTemplate = JSONParse(questionItem.answer);
+  const answer = JSONParse<AnswerTemplate>(questionItem.answer);
+  if (answer === null) return;
   if (answer.type === "text")
     return <TextInput questionItem={questionItem} submit={submit} />;
   if (answer.type === "number")

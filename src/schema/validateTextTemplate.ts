@@ -4,7 +4,7 @@ import { textSchema } from "./textSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateTextSchema(value: TextTemplate) {
+export default function validateTextSchema(value: TextTemplate | null) {
   const validate = ajv.compile(textSchema);
 
   if (validate(value)) {

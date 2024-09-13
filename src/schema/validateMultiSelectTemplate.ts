@@ -5,7 +5,7 @@ import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
 export default function validateMultiSelectTemplate(
-  value: MultiSelectTemplate
+  value: MultiSelectTemplate | null
 ) {
   const validate = ajv.compile(multiSelectSchema);
 

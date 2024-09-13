@@ -1,9 +1,10 @@
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import Picker from "@/components/Picker";
 import { useState } from "react";
 import useTemplateContext from "./useTemplateContext";
 import generateQuestionnaire from "./generateQuestionnaire";
 import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function AddQuestion({ page }: { page: number }) {
   const [selected, setSelected] = useState("text");
@@ -21,8 +22,10 @@ export default function AddQuestion({ page }: { page: number }) {
     { label: "Reference", value: "reference" },
   ];
 
+  const content = JSONParse<{ [id: string]: TemplateFormContentType }>(
+    form?.content
+  );
   const updateTemplate = (questionnaire: TemplateFormContentType) => {
-    const content = form.content as unknown as TemplateFormContentType;
     register("content").onUpdate(
       JSON.stringify({
         ...content,
@@ -32,38 +35,24 @@ export default function AddQuestion({ page }: { page: number }) {
   };
 
   const addQuestion = () => {
-    const length = Object.keys(form.content).length;
+    const length = content ? Object.keys(content).length : 0;
     const questionnaire = generateQuestionnaire(selected, length, page);
     updateTemplate(questionnaire);
   };
 
   return (
-    <Box
-      sx={{
-        position: "sticky",
-        bottom: 24,
-        backgroundColor: "white",
-        width: "100%",
-        zIndex: 2,
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          width: "calc(100vw - 72px)",
-        }}
-      >
+    <div className="sticky bottom-8 bg-white w-full z-10 mt-2">
+      <div className="flex flex-row items-start">
         <Picker
           value={selected}
           onUpdate={(value) => setSelected(value)}
           label="Select question type"
           list={list}
         />
-        <Button sx={{ mb: 0.5 }} onClick={addQuestion}>
-          Add
-        </Button>
-      </Box>
-    </Box>
+        <div className="mt-1">
+          <Button onClick={addQuestion}>Add</Button>
+        </div>
+      </div>
+    </div>
   );
 }

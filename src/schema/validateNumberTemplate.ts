@@ -4,7 +4,7 @@ import { numberSchema } from "./numberSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateNumberTemplate(value: NumberTemplate) {
+export default function validateNumberTemplate(value: NumberTemplate | null) {
   const validate = ajv.compile(numberSchema);
 
   if (validate(value)) {

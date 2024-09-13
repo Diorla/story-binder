@@ -10,6 +10,7 @@ import { useEffectOnce } from "react-use";
 import getTemplates from "@/scripts/get-templates";
 import Picker from "@/components/Picker";
 import JSONParse from "@/scripts/JSONParse";
+import validateReferenceTemplate from "@/schema/validateReferenceTemplate";
 
 export default function ReferenceInput({
   questionItem,
@@ -25,7 +26,10 @@ export default function ReferenceInput({
   });
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
 
-  const answer: ReferenceTemplate = JSONParse(questionItem.answer);
+  const answer = validateReferenceTemplate(
+    JSONParse<ReferenceTemplate>(questionItem.answer)
+  );
+
   return (
     <Box sx={{ p: 2, border: "1px solid silver", m: 2 }}>
       <Typography variant="h5" sx={{ my: 1 }}>

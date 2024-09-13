@@ -4,7 +4,7 @@ import { unitSchema } from "./unitSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateUnitTemplate(value: UnitTemplate) {
+export default function validateUnitTemplate(value: UnitTemplate | null) {
   const validate = ajv.compile(unitSchema);
 
   if (validate(value)) {

@@ -4,7 +4,7 @@ import { selectSchema } from "./selectSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateSelectTemplate(value: SelectTemplate) {
+export default function validateSelectTemplate(value: SelectTemplate | null) {
   const validate = ajv.compile(selectSchema);
 
   if (validate(value)) {

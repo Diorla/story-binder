@@ -4,7 +4,7 @@ import { timeSchema } from "./timeSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateTimeTemplate(value: TimeTemplate) {
+export default function validateTimeTemplate(value: TimeTemplate | null) {
   const validate = ajv.compile(timeSchema);
 
   if (validate(value)) {

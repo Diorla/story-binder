@@ -19,17 +19,18 @@ export default function DataRenderer({
     setValue(JSON.stringify(value?.data));
   };
 
+  const result = JSONParse(value);
+  const arr: string[] = Array.isArray(result) ? result : [];
+
   const updateValue = (item: string) => {
-    const arr = value ? JSONParse(value) : [];
+    if (arr.includes(item)) return;
     arr.push(item);
     setValue(JSON.stringify(arr));
     setItem("");
   };
 
   const removeItem = (item: string) => {
-    setValue(
-      JSON.stringify(JSONParse(value).filter((i: string) => i !== item))
-    );
+    setValue(JSON.stringify(arr.filter((i: string) => i !== item)));
   };
   return (
     <Box
@@ -50,7 +51,7 @@ export default function DataRenderer({
         }}
       />
       <Box component="pre" sx={{ my: 1 }}>
-        {JSONParse(value || "[]").map((item: string, index: number) => (
+        {arr.map((item: string, index: number) => (
           <Chip key={index} label={item} onDelete={() => removeItem(item)} />
         ))}
       </Box>

@@ -4,7 +4,7 @@ const ajv = new Ajv();
 import { templateSchema } from "./templateSchema";
 import fillObject from "@/scripts/fillObject";
 
-export default function validateTemplate(value: Template) {
+export default function validateTemplate(value: Template | null) {
   const validate = ajv.compile(templateSchema);
 
   if (validate(value)) {

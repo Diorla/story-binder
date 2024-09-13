@@ -6,8 +6,8 @@ import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import MultiSelectTemplate from "@/types/Template/MultiSelectTemplate";
 import { numeric } from "./numeric";
-import validateMultiSelectSchema from "@/schema/validateMultiSelectTemplate";
 import JSONParse from "@/scripts/JSONParse";
+import validateMultiSelectTemplate from "@/schema/validateMultiSelectTemplate";
 
 export default function MultipleSelectInput({
   questionItem,
@@ -17,8 +17,9 @@ export default function MultipleSelectInput({
   submit: (value: TemplateFormContentType) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
-  const answer: MultiSelectTemplate = validateMultiSelectSchema(
-    JSONParse(questionItem.answer)
+
+  const answer = validateMultiSelectTemplate(
+    JSONParse<MultiSelectTemplate>(questionItem.answer)
   );
 
   return (

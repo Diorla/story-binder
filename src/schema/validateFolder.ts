@@ -4,7 +4,7 @@ import { folderSchema } from "./folderSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateFolder(value: Folder) {
+export default function validateFolder(value: Folder | null) {
   const validate = ajv.compile(folderSchema);
 
   if (validate(value)) {

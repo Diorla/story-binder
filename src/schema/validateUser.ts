@@ -4,7 +4,7 @@ import { userSchema } from "./userSchema";
 import fillObject from "@/scripts/fillObject";
 const ajv = new Ajv();
 
-export default function validateUser(value: User) {
+export default function validateUser(value: User | null) {
   const validate = ajv.compile(userSchema);
 
   if (validate(value)) {
