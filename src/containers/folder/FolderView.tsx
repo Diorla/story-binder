@@ -1,4 +1,4 @@
-import { Card, Divider, Grid, IconButton } from "@mui/material";
+import { Card, Grid, IconButton } from "@mui/material";
 import {
   CreateNewFolderOutlined,
   GridView,
@@ -63,7 +63,6 @@ export default function FolderView() {
         ) : (
           <>
             <FolderList />
-            <Divider />
             <DocList />
           </>
         )}

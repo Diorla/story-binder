@@ -6,7 +6,7 @@ export default function DocList() {
   const { docList } = useFolderContext();
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+    <Box className="flex flex-wrap justify-evenly">
       {docList.map((item) => (
         <DocCard key={item.id} item={item} />
       ))}

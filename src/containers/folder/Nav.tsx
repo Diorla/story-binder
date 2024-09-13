@@ -9,7 +9,7 @@ import useOpenDir from "@/hooks/useOpenDir";
 import { truncateText } from "@/scripts/truncateText";
 import Project from "@/types/Project";
 import validateProject from "@/schema/validateProject";
-import readFolderList from "@/scripts/readFolderList";
+import validateFolder from "@/schema/validateFolder";
 
 export default function Nav() {
   const { _lastPath, params } = useRouter<{ dir: string[] }>();
@@ -44,12 +44,21 @@ export default function Nav() {
   });
 
   useEffectOnce(() => {
+    const list: Folder[] = [];
     const folders = params.dir.slice(1);
     let path = root;
     folders.forEach((folder) => {
       path += `/${folder}`;
-      readFolderList(path).then((data) => setFolderPaths(data));
+      window.api
+        .sendMessage({
+          type: "read-file",
+          path: `${path}/.config`,
+        })
+        .then((data) => {
+          if (validateFolder(data as Folder)) list.push(data as Folder);
+        });
     });
+    setFolderPaths(list);
   });
 
   if (projectInfo) {
