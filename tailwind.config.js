@@ -56,7 +56,9 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "Helvetica Neue",
+          "Roboto",
+          "Helvetica",
+          "Arial",
           "sans-serif",
           "var(--font-sans)",
           ...fontFamily.sans,

@@ -33,18 +33,14 @@ export default function Templates() {
   if (!templates.length) return <EmptyTemplate />;
   return (
     <div>
-      <Box className="row" sx={{ justifyContent: "space-between" }}>
-        <Typography variant="h5">Templates</Typography>
-        <Button
-          variant="outlined"
-          onClick={() => navigate("create-template")}
-          size="small"
-        >
+      <div className="flex flex-row justify-between items-center pl-1">
+        <Typography variant="h6">Templates</Typography>
+        <Button onClick={() => navigate("create-template")}>
           New template
         </Button>
-      </Box>
-      <Divider sx={{ my: 1 }} />
-      <Box className="row" sx={{ flexWrap: "wrap" }}>
+      </div>
+      <Divider />
+      <div className="flex flex-row flex-wrap">
         {templates.map((template) => (
           <Card
             key={template.id}
@@ -59,10 +55,10 @@ export default function Templates() {
           >
             <div>
               <Typography>{template.name}</Typography>
+              <Divider />
               <Typography>{template.description}</Typography>
             </div>
             <div>
-              <Divider />
               <Box className="row" sx={{ justifyContent: "space-between" }}>
                 <Button
                   color="error"
@@ -84,7 +80,7 @@ export default function Templates() {
             </div>
           </Card>
         ))}
-      </Box>
+      </div>
     </div>
   );
 }

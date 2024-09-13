@@ -28,7 +28,8 @@ export default function TemplateConsumer() {
       <Box sx={formStyle}>
         <Box
           sx={{
-            width: 300,
+            maxWidth: 500,
+            width: "100%",
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
@@ -42,6 +43,13 @@ export default function TemplateConsumer() {
             onUpdate={(value) => {
               register("type").onUpdate(value);
             }}
+          />
+          <Input
+            {...register("description")}
+            sx={{ mb: 2 }}
+            label="Description"
+            multiline
+            rows={4}
           />
         </Box>
         <Button
