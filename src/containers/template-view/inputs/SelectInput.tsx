@@ -1,6 +1,6 @@
 import Input from "@/components/Input";
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import DataRenderer from "./DataRenderer";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
@@ -9,8 +9,8 @@ export default function SelectInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType;
-  submit: (value: TemplateFormContentType) => void;
+  questionItem: FormQuestion;
+  submit: (value: FormQuestion) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   return (

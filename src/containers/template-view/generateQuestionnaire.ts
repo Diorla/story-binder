@@ -7,7 +7,7 @@ import NumberTemplate from "@/types/Template/NumberTemplate";
 import RangeTemplate from "@/types/Template/RangeTemplate";
 import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
 import SelectTemplate from "@/types/Template/SelectTemplate";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import TextTemplate from "@/types/Template/TextTemplate";
 import TimeTemplate from "@/types/Template/TimeTemplate";
 import UnitTemplate from "@/types/Template/UnitTemplate";
@@ -17,7 +17,7 @@ export default function generateQuestionnaire(
   type: string,
   order: number,
   page: number
-): TemplateFormContentType {
+): FormQuestion {
   const base = {
     id: v4(),
     order,

@@ -1,6 +1,6 @@
 import Input from "@/components/Input";
 import { Box, Typography, Button, IconButton } from "@mui/material";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import DateTemplate from "@/types/Template/DateTemplate";
@@ -12,8 +12,8 @@ export default function DateInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType;
-  submit: (value: TemplateFormContentType) => void;
+  questionItem: FormQuestion;
+  submit: (value: FormQuestion) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
   const answer = validateDateTemplate(

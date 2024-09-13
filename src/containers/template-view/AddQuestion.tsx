@@ -3,7 +3,7 @@ import Picker from "@/components/Picker";
 import { useState } from "react";
 import useTemplateContext from "./useTemplateContext";
 import generateQuestionnaire from "./generateQuestionnaire";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import JSONParse from "@/scripts/JSONParse";
 
 export default function AddQuestion({ page }: { page: number }) {
@@ -22,10 +22,8 @@ export default function AddQuestion({ page }: { page: number }) {
     { label: "Reference", value: "reference" },
   ];
 
-  const content = JSONParse<{ [id: string]: TemplateFormContentType }>(
-    form?.content
-  );
-  const updateTemplate = (questionnaire: TemplateFormContentType) => {
+  const content = JSONParse<{ [id: string]: FormQuestion }>(form?.content);
+  const updateTemplate = (questionnaire: FormQuestion) => {
     register("content").onUpdate(
       JSON.stringify({
         ...content,

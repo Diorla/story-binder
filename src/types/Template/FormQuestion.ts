@@ -1,4 +1,4 @@
-export default interface TemplateFormContentType {
+export default interface FormQuestion {
   /**
    * The id of the question
    */

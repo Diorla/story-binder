@@ -1,7 +1,7 @@
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import { JSONSchemaType } from "ajv";
 
-export const templateFormSchema: JSONSchemaType<TemplateFormContentType> = {
+export const templateFormSchema: JSONSchemaType<FormQuestion> = {
   type: "object",
   properties: {
     id: {

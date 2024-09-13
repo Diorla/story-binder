@@ -1,5 +1,5 @@
 import useTemplateContext from "./useTemplateContext";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import TextInput from "./inputs/TextInput";
 import AnswerTemplate from "@/types/Template/AnswerTemplate";
 import NumberInput from "./inputs/NumberInput";
@@ -15,14 +15,14 @@ import JSONParse from "@/scripts/JSONParse";
 export default function QuestionRenderer({
   questionItem,
 }: {
-  questionItem: TemplateFormContentType;
+  questionItem: FormQuestion;
 }) {
   const { register, form } = useTemplateContext();
 
-  const content = JSONParse<TemplateFormContentType>(form.content);
-  const submit = (value: TemplateFormContentType) => {
+  const content = JSONParse<FormQuestion>(form.content);
+  const submit = (value: FormQuestion) => {
     if (content === null) return;
-    const newContent: TemplateFormContentType = {
+    const newContent: FormQuestion = {
       ...content,
       [questionItem.id]: value,
     };

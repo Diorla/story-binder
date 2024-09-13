@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import NumberTemplate from "@/types/Template/NumberTemplate";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
@@ -20,8 +20,8 @@ export default function NumberInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType;
-  submit: (value: TemplateFormContentType) => void;
+  questionItem: FormQuestion;
+  submit: (value: FormQuestion) => void;
 }) {
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
 

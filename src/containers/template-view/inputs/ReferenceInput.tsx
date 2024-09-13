@@ -1,6 +1,6 @@
 import Input from "@/components/Input";
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import TemplateFormContentType from "@/types/Template/TemplateFormContentType";
+import FormQuestion from "@/types/Template/FormQuestion";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import ReferenceTemplate from "@/types/Template/ReferenceTemplate";
@@ -16,8 +16,8 @@ export default function ReferenceInput({
   questionItem,
   submit,
 }: {
-  questionItem: TemplateFormContentType;
-  submit: (value: TemplateFormContentType) => void;
+  questionItem: FormQuestion;
+  submit: (value: FormQuestion) => void;
 }) {
   const [templateList, setTemplateList] = useState<Template[]>([]);
 
