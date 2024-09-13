@@ -11,6 +11,8 @@ import useFolderContext from "./useFolderContext";
 import { formStyle } from "./formStyle";
 import JSONParse from "@/scripts/JSONParse";
 import writeFolder from "@/scripts/writeFolder";
+import validateTemplate from "@/schema/validateTemplate";
+import useApp from "@/context/app/useApp";
 
 export default function SelectTemplate() {
   const { reload, currentDir } = useFolderContext();
@@ -19,14 +21,17 @@ export default function SelectTemplate() {
   const [templateList, setTemplateList] = useState<Template[]>([]);
   const { navigate } = useRouter();
   const { folder } = useFolderContext();
+  const {
+    userInfo: { templatePath },
+  } = useApp();
 
   useEffectOnce(() => {
-    getTemplates()
+    getTemplates(templatePath)
       .then(setTemplateList)
       .then(() => setLoading(false));
   });
 
-  const template: Template = JSONParse(folder.template);
+  const template: Template = validateTemplate(JSONParse(folder.template));
 
   useEffect(() => {
     setTemplateId(template.id || "");

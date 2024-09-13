@@ -7,12 +7,16 @@ import { useAsync, useEffectOnce } from "react-use";
 import Template from "@/types/Template";
 import moveUp from "./moveUp";
 import moveDown from "./moveDown";
+import useApp from "@/context/app/useApp";
 
 export default function TemplateProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const {
+    userInfo: { templatePath },
+  } = useApp();
   const { params } = useRouter<Template>();
   const { register, form, handleSubmit, resetForm } = useForm<Template>({
     defaultValue: {
@@ -28,7 +32,7 @@ export default function TemplateProvider({
       window.api
         .sendMessage({
           type: "read-file",
-          path: `./templates/${id}`,
+          path: `${templatePath}/${id}`,
         })
         .then((data) => {
           resetForm(data as Template);
@@ -50,7 +54,7 @@ export default function TemplateProvider({
     if (form.id)
       window.api.sendMessage({
         type: "write-file",
-        path: `./templates/${form.id}`,
+        path: `${templatePath}/${form.id}`,
         content: form,
       });
   }, [form]);

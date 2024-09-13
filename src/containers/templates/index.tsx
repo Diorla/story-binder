@@ -6,21 +6,25 @@ import { Box, Button, Card, Divider } from "@mui/material";
 import useRouter from "@/context/router/useRouter";
 import getTemplates from "@/scripts/get-templates";
 import EmptyTemplate from "./EmptyTemplate";
+import useApp from "@/context/app/useApp";
 
 export default function Templates() {
   const [loading, setLoading] = useState(true);
   const [templates, setTemplates] = useState<Template[]>([]);
   const { navigate } = useRouter();
+  const {
+    userInfo: { templatePath },
+  } = useApp();
 
   useEffectOnce(() => {
-    getTemplates().then((list) => {
+    getTemplates(templatePath).then((list) => {
       setTemplates(list);
       setLoading(false);
     });
   });
 
   const refresh = () => {
-    getTemplates().then((list) => {
+    getTemplates(templatePath).then((list) => {
       setTemplates(list);
     });
   };
@@ -66,7 +70,7 @@ export default function Templates() {
                     window.api
                       .sendMessage({
                         type: "delete-file",
-                        path: `./templates/${template.id}`,
+                        path: `${templatePath}/${template.id}`,
                       })
                       .then(refresh);
                   }}
