@@ -11,6 +11,7 @@ import getTemplates from "@/scripts/get-templates";
 import Picker from "@/components/Picker";
 import JSONParse from "@/scripts/JSONParse";
 import validateReferenceTemplate from "@/schema/validateReferenceTemplate";
+import useApp from "@/context/app/useApp";
 
 export default function ReferenceInput({
   questionItem,
@@ -20,9 +21,12 @@ export default function ReferenceInput({
   submit: (value: FormQuestion) => void;
 }) {
   const [templateList, setTemplateList] = useState<Template[]>([]);
+  const {
+    userInfo: { templatePath },
+  } = useApp();
 
   useEffectOnce(() => {
-    getTemplates().then(setTemplateList);
+    getTemplates(templatePath).then(setTemplateList);
   });
   const { moveUp, moveDown, deleteItem } = useTemplateContext();
 
