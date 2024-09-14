@@ -182,3 +182,8 @@ textarea::-webkit-scrollbar {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+
+.react-datepicker-popper {
+  z-index: 20;
+}

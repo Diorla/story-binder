@@ -4,9 +4,9 @@ import FormQuestion from "@/types/Template/FormQuestion";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
 import DateTemplate from "@/types/Template/DateTemplate";
-import { format } from "date-fns";
 import JSONParse from "@/scripts/JSONParse";
 import validateDateTemplate from "@/schema/validateDateTemplate";
+import DatePicker from "@/components/DatePicker";
 
 export default function DateInput({
   questionItem,
@@ -45,35 +45,31 @@ export default function DateInput({
         }}
       />
       <Box className="row" sx={{ my: 2 }}>
-        <Input
+        <DatePicker
           label="Minimum date"
-          type="date"
-          value={format(answer.minValue, "yyyy-MM-dd")}
-          onChange={(e) => {
+          date={answer.minValue}
+          setDate={(minValue) => {
             submit({
               ...questionItem,
               answer: JSON.stringify({
                 ...answer,
-                minValue: +new Date(e.target.value),
+                minValue,
               }),
             });
           }}
-          sx={{ mr: 2 }}
         />
-        <Input
+        <DatePicker
           label="Maximum date"
-          type="date"
-          value={format(answer.maxValue, "yyyy-MM-dd")}
-          onChange={(e) => {
+          date={answer.maxValue}
+          setDate={(maxValue) => {
             submit({
               ...questionItem,
               answer: JSON.stringify({
                 ...answer,
-                maxValue: +new Date(e.target.value),
+                maxValue,
               }),
             });
           }}
-          sx={{ ml: 2 }}
         />
       </Box>
       <Box className="row" sx={{ justifyContent: "center" }}>

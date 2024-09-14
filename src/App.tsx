@@ -11,6 +11,7 @@ import "@fontsource/roboto/700.css";
 import "./styles/editor.css";
 import "./styles/base.css";
 import "./styles/global.css";
+import "react-datepicker/dist/react-datepicker.css";
 import AppLayout from "./app-layout";
 
 const root = createRoot(document.getElementById("app") as HTMLElement);
