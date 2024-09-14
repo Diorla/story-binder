@@ -3,7 +3,7 @@
 export default interface TimeTemplate {
   type: "time";
   // hour, minute, seconds
-  value: number;
-  minValue: number; //
-  maxValue: number; //
+  value: string;
+  minValue: string; //
+  maxValue: string; //
 }

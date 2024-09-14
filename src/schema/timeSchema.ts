@@ -9,13 +9,13 @@ export const timeSchema: JSONSchemaType<TimeTemplate> = {
       const: "time",
     },
     value: {
-      type: "number",
+      type: "string",
     },
     minValue: {
-      type: "number",
+      type: "string",
     },
     maxValue: {
-      type: "number",
+      type: "string",
     },
   },
   required: ["type", "value", "minValue", "maxValue"],

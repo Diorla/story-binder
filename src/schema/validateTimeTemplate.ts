@@ -12,9 +12,9 @@ export default function validateTimeTemplate(value: TimeTemplate | null) {
   } else {
     const newValue: TimeTemplate = {
       type: "time",
-      value: 0,
-      minValue: 0,
-      maxValue: 0,
+      value: "00:00",
+      minValue: "00:00",
+      maxValue: "23:59",
     };
     return fillObject(value, newValue);
   }

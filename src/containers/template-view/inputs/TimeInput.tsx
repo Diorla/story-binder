@@ -3,10 +3,10 @@ import { Box, Typography, Button, IconButton } from "@mui/material";
 import FormQuestion from "@/types/Template/FormQuestion";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import useTemplateContext from "../useTemplateContext";
-import { format, set } from "date-fns";
 import TimeTemplate from "@/types/Template/TimeTemplate";
 import JSONParse from "@/scripts/JSONParse";
 import validateTimeTemplate from "@/schema/validateTimeTemplate";
+import TimePicker from "@/components/TimePicker";
 
 export default function TimeInput({
   questionItem,
@@ -46,45 +46,31 @@ export default function TimeInput({
         }}
       />
       <Box className="row" sx={{ my: 2 }}>
-        <Input
+        <TimePicker
           label="Minimum time"
-          type="time"
-          value={format(answer.minValue, "HH:mm")}
-          onChange={(e) => {
-            const [h, m] = e.target.value.split(":").map(Number);
-            const val = set(answer.minValue, {
-              hours: h,
-              minutes: m,
-            });
+          value={answer.minValue}
+          setTime={(value) => {
             submit({
               ...questionItem,
               answer: JSON.stringify({
                 ...answer,
-                minValue: +val,
+                minValue: value,
               }),
             });
           }}
-          sx={{ mr: 2 }}
         />
-        <Input
+        <TimePicker
           label="Maximum time"
-          type="time"
-          value={format(answer.maxValue, "HH:mm")}
-          onChange={(e) => {
-            const [h, m] = e.target.value.split(":").map(Number);
-            const val = set(answer.minValue, {
-              hours: h,
-              minutes: m,
-            });
+          value={answer.maxValue}
+          setTime={(value) => {
             submit({
               ...questionItem,
               answer: JSON.stringify({
                 ...answer,
-                maxValue: +val,
+                maxValue: value,
               }),
             });
           }}
-          sx={{ ml: 2 }}
         />
       </Box>
       <Box className="row" sx={{ justifyContent: "center" }}>

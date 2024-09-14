@@ -12,6 +12,8 @@ import "./styles/editor.css";
 import "./styles/base.css";
 import "./styles/global.css";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
 import AppLayout from "./app-layout";
 
 const root = createRoot(document.getElementById("app") as HTMLElement);
