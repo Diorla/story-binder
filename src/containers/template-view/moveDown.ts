@@ -1,31 +1,29 @@
+import validateFormContent from "@/schema/validateFormContent";
 import JSONParse from "@/scripts/JSONParse";
 import Template from "@/types/Template";
-import FormQuestion from "@/types/Template/FormQuestion";
+import FormContent from "@/types/Template/FormContent";
 
-export default function moveDown(currentId: string, form: Template): Template {
+export default function moveUp(currentId: string, form: Template): Template {
   const tempForm = { ...form };
-  const content = JSONParse<{ [id: string]: FormQuestion }>(tempForm.content);
-  let prevItem = null;
-
-  if (content === null) return tempForm;
-  const currentItem = content[currentId];
-  const currentIdx = currentItem.order;
+  const content = validateFormContent(JSONParse<FormContent>(tempForm.content));
 
   let prevIdx = Infinity;
 
-  for (const key of Object.keys(content)) {
-    if (content[key].id === currentId) continue;
-    if (content[key].order <= prevIdx && content[key].order >= currentIdx) {
-      prevIdx = content[key].order;
-      prevItem = { ...content[key] };
-    }
-  }
+  let prevId = currentId;
+  const currentIdx = content[currentId].order;
 
-  if (!prevItem) return tempForm;
-  prevItem.order = currentIdx;
-  currentItem.order = prevIdx;
+  Object.keys(content)
+    .filter((key) => key !== currentId)
+    .forEach((key) => {
+      const item = content[key];
+      if (item.order <= prevIdx && item.order >= currentIdx) {
+        prevIdx = item.order;
+        prevId = key;
+      }
+    });
 
-  content[prevItem.id] = prevItem;
-  content[currentId] = currentItem;
+  content[prevId].order = currentIdx;
+  content[currentId].order = prevIdx;
+  tempForm.content = JSON.stringify(content);
   return tempForm;
 }
