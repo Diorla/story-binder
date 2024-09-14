@@ -14,7 +14,6 @@ export default function validateTemplate(value: Template | null) {
       id: "",
       name: "",
       description: "",
-      type: "form",
       content: "",
     };
     return fillObject(value, newValue);

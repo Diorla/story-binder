@@ -1,13 +1,10 @@
-import Picker from "@/components/Picker";
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import Input from "@/components/Input";
 import { v4 } from "uuid";
-import { list } from "./list";
 import formStyle from "./formStyle";
 import EditorWrapper from "./EditorWrapper";
 import useTemplateContext from "./useTemplateContext";
-import FormWrapper from "./FormWrapper";
 import Template from "@/types/Template";
 
 export default function TemplateConsumer() {
@@ -36,14 +33,7 @@ export default function TemplateConsumer() {
           }}
         >
           <Input {...register("name")} sx={{ mb: 2 }} label="Name" />
-          <Picker
-            value={form?.type}
-            label="Select template"
-            list={list}
-            onUpdate={(value) => {
-              register("type").onUpdate(value);
-            }}
-          />
+
           <Input
             {...register("description")}
             sx={{ mb: 2 }}
@@ -65,8 +55,6 @@ export default function TemplateConsumer() {
         ) : null}
       </Box>
     );
-
-  if (form?.type === "form") return <FormWrapper setIsSelect={setIsSelect} />;
 
   return <EditorWrapper setIsSelect={setIsSelect} />;
 }

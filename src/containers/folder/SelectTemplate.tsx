@@ -71,9 +71,7 @@ export default function SelectTemplate() {
     return (
       <Box sx={formStyle}>
         <Typography sx={{ textAlign: "center" }}>No template found</Typography>
-        <Button onClick={() => navigate("create-template")}>
-          Create template
-        </Button>
+        <Button onClick={() => navigate("template")}>Create template</Button>
       </Box>
     );
   return (
@@ -96,7 +94,7 @@ export default function SelectTemplate() {
         Don't find what you are looking for,{" "}
         <Link
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("create-template")}
+          onClick={() => navigate("template")}
         >
           Create here
         </Link>{" "}

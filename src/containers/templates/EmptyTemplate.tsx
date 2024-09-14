@@ -14,7 +14,7 @@ export default function EmptyTemplate() {
         <Typography>
           Oops, where did all those template go? We need to create new template
         </Typography>
-        <Button variant="outlined" onClick={() => navigate("create-template")}>
+        <Button variant="outlined" onClick={() => navigate("template")}>
           New template
         </Button>
       </div>

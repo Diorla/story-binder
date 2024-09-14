@@ -14,7 +14,6 @@ export default function EditorWrapper({
   const updateEditor = (data: string) => {
     const value: Template = {
       ...form,
-      type: "editor",
       content: data,
     };
     resetForm(value);

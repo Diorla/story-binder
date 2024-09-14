@@ -39,7 +39,7 @@ This is where all the projects will be saved. It follows this pattern
 
 ```
 
-📁 Workspace
+📁 Workspace / Projects
 ├── 📁 projectName.sbnd
     ├── ⚙️ .config
     ├── 📁 folder

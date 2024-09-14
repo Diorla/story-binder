@@ -13,14 +13,10 @@ export const templateSchema: JSONSchemaType<Template> = {
     description: {
       type: "string",
     },
-    type: {
-      type: "string",
-      enum: ["form", "editor"],
-    },
     content: {
       type: "string",
     },
   },
-  required: ["id", "name", "description", "type", "content"],
+  required: ["id", "name", "description", "content"],
   additionalProperties: false,
 };

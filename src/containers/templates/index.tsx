@@ -35,9 +35,7 @@ export default function Templates() {
     <div>
       <div className="flex flex-row justify-between items-center pl-1">
         <Typography variant="h6">Templates</Typography>
-        <Button onClick={() => navigate("create-template")}>
-          New template
-        </Button>
+        <Button onClick={() => navigate("template")}>New template</Button>
       </div>
       <Divider />
       <div className="flex flex-row flex-wrap">
@@ -73,7 +71,7 @@ export default function Templates() {
                 >
                   Delete
                 </Button>
-                <Button onClick={() => navigate("create-template", template)}>
+                <Button onClick={() => navigate("template", template)}>
                   Edit
                 </Button>
               </Box>

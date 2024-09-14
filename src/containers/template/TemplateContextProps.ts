@@ -16,7 +16,4 @@ export default interface TemplateContextProps {
   form: Template;
   handleSubmit: (callback: (data: Template) => void) => (e: unknown) => void;
   resetForm: (value?: Partial<Template>) => void;
-  moveUp: (id: string) => void;
-  moveDown: (id: string) => void;
-  deleteItem: (id: string) => void;
 }
