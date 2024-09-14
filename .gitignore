@@ -90,3 +90,10 @@ typings/
 
 # Electron-Forge
 out/
+
+
+/temp
+
+
+info.sbnd
+/templates

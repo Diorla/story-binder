@@ -1,0 +1,193 @@
+body {
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Window button */
+.window-button {
+  height: 36px;
+  width: 48px;
+  border: none;
+  transition: 0.15s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.window-button:hover {
+  background-color: rgb(231, 230, 230);
+}
+
+.window-button.error:hover {
+  background-color: rgb(170, 3, 3);
+  color: white;
+}
+
+/* Scroll */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f6e9e5;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #f6e9e5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear,
+      left bottom,
+      left top,
+      color-stop(0.4, #964b00),
+      color-stop(0.7, #c86600),
+      color-stop(0.8, #e7ae89));
+}
+
+textarea::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* Main background */
+
+#browser {
+  background-size: 100% 100%;
+}
+
+/* Sidebar */
+
+.sidebar-button {
+  height: 36px;
+  width: 36px;
+  border: none;
+  transition: 0.15s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+
+.sidebar-button:hover {
+  background-color: rgb(231, 230, 230);
+}
+
+/* Bread crumbs */
+
+.breadcrumbs {
+  cursor: pointer;
+}
+
+/* Template */
+
+#empty-template {
+  height: 100%;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.empty-template-wrapper {
+  padding: 20px;
+}
+
+.empty-template-wrapper>p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.onboarding {
+  background-size: 100% 100%;
+}
+
+.onboarding-1 {
+  background-image: url(../assets/onboarding/home-empty.png);
+  background-color: transparent !important;
+}
+
+.onboarding-2 {
+  background-image: url(../assets/onboarding/create-project.png);
+  background-color: transparent !important;
+}
+
+.onboarding-3 {
+  background-image: url(../assets/onboarding/project-list.png);
+  background-color: transparent !important;
+}
+
+.onboarding-4 {
+  background-image: url(../assets/onboarding/no-templates.png);
+  background-color: transparent !important;
+}
+
+.onboarding-5 {
+  background-image: url(../assets/onboarding/template-editing.png);
+  background-color: transparent !important;
+}
+
+.onboarding-6 {
+  background-image: url(../assets/onboarding/template-list.png);
+  background-color: transparent !important;
+}
+
+.onboarding-7 {
+  background-image: url(../assets/onboarding/project-view-empty.png);
+  background-color: transparent !important;
+}
+
+.onboarding-8 {
+  background-image: url(../assets/onboarding/project-folder-children.png);
+  background-color: transparent !important;
+}
+
+.onboarding-9 {
+  background-image: url(../assets/onboarding/nested-category.png);
+  background-color: transparent !important;
+}
+
+.onboarding-10 {
+  background-image: url(../assets/onboarding/select-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-11 {
+  background-image: url(../assets/onboarding/nested-category-inherit-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-12 {
+  background-image: url(../assets/onboarding/inherited-template.png);
+  background-color: transparent !important;
+}
+
+.onboarding-13 {
+  background-image: url(../assets/onboarding/item-preview.png);
+  background-color: transparent !important;
+}
+
+.onboarding-14 {
+  background-image: url(../assets/onboarding/bravo.png);
+  background-color: transparent !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.react-datepicker-popper {
+  z-index: 20;
+}
+
+.react-time-picker__wrapper {
+  border: none !important;
+}

@@ -1,0 +1,227 @@
+.tiptap:first-child,
+.preview:first-child {
+  margin-top: 0;
+}
+
+.control-group {
+  position: sticky;
+  top: 30px;
+}
+
+.tiptap,
+.preview {
+  padding: 4px;
+  outline: none;
+}
+
+/* Inline styles */
+
+.tiptap strong,
+.preview strong {
+  font-weight: bold;
+}
+
+.tiptap em,
+.preview em {
+  font-style: italic;
+}
+
+.tiptap sup,
+.preview sup {
+  vertical-align: super;
+  font-size: small;
+}
+
+.tiptap sub,
+.preview sub {
+  vertical-align: sub;
+  font-size: small;
+}
+
+.tiptap code,
+.preview code {
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+  font-size: "smaller";
+}
+
+.tiptap p>code,
+.preview p>code {
+  background-color: #e0f2f1;
+  color: #00a59d;
+}
+
+/* Display styles */
+
+.tiptap p,
+.preview p {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0.00938em;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap pre,
+.preview pre {
+  display: block;
+  background: #f1f1f1;
+  padding: 1em;
+  border-radius: 0.33em;
+}
+
+/* TODO: Remove unused styles like blockquote */
+.tiptap,
+.preview h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+
+}
+
+/* .preview h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+
+} */
+
+.tiptap h1,
+.preview h1 {
+  font-size: 2.4rem;
+}
+
+.tiptap h2,
+.preview h2 {
+  font-size: 2rem;
+}
+
+.tiptap h3,
+.preview h3 {
+  font-size: 1.6rem;
+}
+
+.tiptap ul,
+ol,
+.preview ul,
+ol {
+  margin-left: 2rem;
+}
+
+.tiptap ul li,
+.preview ul li {
+  list-style: square;
+  margin: 0;
+}
+
+.tiptap ul ul li,
+.preview ul ul li {
+  list-style: disc;
+  margin: 0;
+}
+
+.tiptap ul ul ul li,
+.preview ul ul ul li {
+  list-style: circle;
+  margin: 0;
+}
+
+.tiptap ol li,
+.preview ol li {
+  list-style: decimal;
+  margin: 0;
+}
+
+.tiptap ol ol li,
+.preview ol ol li {
+  list-style: upper-roman;
+  margin: 0;
+}
+
+.tiptap ol ol ol li,
+.preview ol ol ol li {
+  list-style: lower-roman;
+  margin: 0;
+}
+
+.tiptap ol ol ol ol li,
+.preview ol ol ol ol li {
+  list-style: lower-latin;
+  margin: 0;
+}
+
+.tiptap ol ol ol ol ol li,
+.preview ol ol ol ol ol li {
+  list-style: upper-latin;
+  margin: 0;
+}
+
+.tiptap>p::first-letter,
+.preview>p::first-letter {
+  padding-left: 0.2rem;
+}
+
+.tiptap blockquote,
+.preview blockquote {
+  margin: 1em;
+}
+
+.tiptap blockquote>p,
+.preview blockquote>p {
+  display: block;
+  padding: 0.2rem;
+  margin: 0;
+}
+
+.task-list {
+  margin-left: 3rem;
+}
+
+.task-list li {
+  display: block;
+}
+
+.task-list * {
+  display: inline;
+}
+
+.task-list p {
+  margin: 0;
+}
+
+/* Controls */
+
+.control-group .MuiIconButton-colorSecondary {
+  color: #00a59d;
+}
+
+.editor-top {
+  position: fixed;
+  top: 36px;
+  background: white;
+  width: 100%;
+  z-index: 10;
+}
+
+.tiptap {
+  top: 0;
+  height: calc(100vh - 136px);
+  overflow-y: scroll;
+  caret-color: #964b00;
+}
