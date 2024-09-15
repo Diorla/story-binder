@@ -79,11 +79,11 @@ For example, we want to create a world of magical creatures.
 }
 ```
 2. You can load this file (locally) and name it e.g. `magical_creatures`. You will find the place where you will load your data on the app.
-3.  Now, you can use your function by prefixing it with `u-` e.g. `u-magical_creatures`. This is meant to separate it from user generated and default functions.
+3.  Now, you can use your function by prefixing it with an underscore `_` e.g. `_magical_creatures`. This is meant to separate it from user generated and default functions.
 ```
 I am a ~u-magical_creatures()[specie]~ and I hope someday, I would be the most powerful ~[specie]~ on earth.
 ```
-4.  Upload/Download file: If you want to share it with the world, you can upload your own data, and if you are interested, you can find other people's data to use online.
+1.  Upload/Download file: If you want to share it with the world, you can upload your own data, and if you are interested, you can find other people's data to use online.
 
 ## Add odds
 
