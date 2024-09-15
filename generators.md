@@ -15,7 +15,7 @@ In this situation, `firstName()` will generate a first name.
 Some times, you want to fine tune the function to return something more precise
 
 ```
-Hi, my name is firstName(female), I am from ~country(europe)~ and I am ~number(20, 50)~ years old.
+Hi, my name is firstName(gender=female), I am from ~country(continent=europe)~ and I am ~number(min=20, max=50)~ years old.
 ```
 ```
 Hi, my name is Jane, I am from Germany and I am 28 years old
@@ -23,21 +23,27 @@ Hi, my name is Jane, I am from Germany and I am 28 years old
 
 We declared three functions that took different args
 
-- `firstName(female)` which accepts "male" and "female". In this situation it will return female name
-- `country(europe)` returns an european country. It accepts continents, regions (e.g. middle east) etc
-- `number(20, 50)` return a number from 20 to 50.
+- `firstName(gender=female)` which accepts "male" and "female". In this situation it will return female name
+- `country(continent=europe)` returns an european country. It accepts continents, regions (e.g. middle east) etc
+- `number(min=20, max=50)` return a number from 20 to 50.
+
+```ts
+fn(argType=argValue)
+```
 
 You can view all the available functions and what they accept [here](http://story-binder.adeolaade.com/generators).
 
 # Referencing
-You might want to reuse the value of a function throughout your work. This can be achieved using variables and arguments
+If you call `firstName()` 100 times, it will return the same name in a particular document.
+
+You might want to reuse the value of a function throughout your work and differentiate it. This can be achieved using variables and arguments.
 
 ## Variables
 
 Reusing the value directly in your work
 
 ```
-I was born in the city of ~city()[hometown]~, I grew up there and didn't leave ~[hometown]~ until I was ~number(30, 32)[age]~ years old.
+I was born in the city of ~city()[hometown]~, I grew up there and didn't leave ~[hometown]~ until I was ~number(min=30, max=32)[age]~ years old.
 So why did I wait till I was ~[age]~ before I left ~[hometown]~, well it is a long story.
 ```
 ```
@@ -52,7 +58,7 @@ Here, we reference each functions
 This means using the value of a function inside another function.
 
 ```
-I was born in ~city([nationality])~, ~country()[nationality]~, same as my mother, ~firstName(female, [nationality])~.
+I was born in ~city(country=[nationality])~, ~country()[nationality]~, same as my mother, ~firstName(gender=female, country=[nationality])~.
 ```
 
 ```
@@ -60,12 +66,13 @@ I was born in Abuja, Nigeria, same as my mother, Funke.
 ```
 
 - `country()[nationality]`: As usual, we create a reference for country, nationality
-- `firstName(female, [nationality])` in this case, the firstName will be "female" and and match the country, e.g. Nigeria
-- `city([nationality])`: it will return a city from the matching country, e.g. Abuja is in Nigeria.
+- `firstName(gender=female, country=[nationality])` in this case, the firstName will be "female" and and match the country, e.g. Nigeria
+- `city(country=[nationality])`: it will return a city from the matching country, e.g. Abuja is in Nigeria.
 
 It should be noted that city was declared before country, even though we will be using the value of country. Order doesn't matter, as this enables you to maintain your artistic liberties while writing without worrying about arguments or dependencies.
 
 # Creating your own generators
+This will be supported later on, but not now.
 Apart from using default generators available with the app, you can create your own generators as well! What would you need?
 For example, we want to create a world of magical creatures.
 
