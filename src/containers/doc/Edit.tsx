@@ -5,11 +5,8 @@ import useRouter from "@/context/router/useRouter";
 import Doc from "@/types/Doc";
 import { useEffectOnce } from "react-use";
 import { useState } from "react";
-import JSONParse from "@/scripts/JSONParse";
-import Template from "@/types/Template";
 import validateDoc from "@/schema/validateDoc";
 import writeDoc from "@/scripts/writeDoc";
-import validateTemplate from "@/schema/validateTemplate";
 
 export default function Edit() {
   const [doc, setDoc] = useState<Doc>({
@@ -41,11 +38,9 @@ export default function Edit() {
 
   if (!doc.id) return null;
 
-  const template: Template = validateTemplate(JSONParse(doc?.template));
-  if (template?.type === "form") return <div>Returning form edit</div>;
   return (
     <Editor
-      initialContent={doc.content || template?.content || ""}
+      initialContent={doc.content || doc.template}
       updateFn={(content) => writeDoc({ ...doc, content }, path)}
     />
   );

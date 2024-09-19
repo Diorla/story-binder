@@ -17,13 +17,15 @@ export default function NewDocForm({
     folder: { template },
     reload,
   } = useFolderContext();
+
+  const templateContent = JSON.parse(template).content;
   const { register, handleSubmit } = useForm<Doc>({
     defaultValue: {
       name: "",
       note: "",
       id: "",
-      template: "",
-      content: "",
+      template: templateContent,
+      content: templateContent,
     },
     required: ["name"],
   });
@@ -31,7 +33,8 @@ export default function NewDocForm({
   const submit = (data: Doc) => {
     const id = v4();
     const path = `${currentDir}/${id}.${APP_FILE_EXT}`;
-    const content = { ...data, id, template };
+    const content = { ...data, id };
+
     writeDoc(content, path).then(closeFolder).then(reload);
   };
 

@@ -64,6 +64,7 @@ export default function FolderContainer() {
       setDocList(list);
     });
   };
+
   return (
     <FolderContext.Provider
       value={{ folder, currentDir, folderList, reload, docList }}
