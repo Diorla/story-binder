@@ -1,4 +1,4 @@
-import Registry from "../Registry";
+import Registry from "../registry";
 import { arrayToObject } from "./arrayToObject";
 import FnDict from "./FnDict";
 import FnItem from "./FnItem";

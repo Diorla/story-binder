@@ -1,8 +1,4 @@
-import city from "./city";
-import country from "./country";
-import firstname from "./firstname";
-import food from "./food";
-import gender from "./gender";
+import sex from "./sex";
 import RegistryFunc from "./RegistryFunc";
 import whole_number from "./whole_number";
 
@@ -11,12 +7,8 @@ interface RegistryProps {
 }
 
 const Registry: RegistryProps = {
-  city,
-  gender,
-  firstname,
-  country,
+  sex,
   whole_number,
-  food,
 };
 
 export default Registry;

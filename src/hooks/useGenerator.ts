@@ -1,4 +1,4 @@
-import Generator from "@/scripts/Generator";
+import Generator from "@/generator";
 import { useEffect, useState } from "react";
 
 export default function useGenerator(template: string) {

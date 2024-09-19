@@ -1,5 +1,5 @@
 import Chance from "./Chance";
 
-export default function gender() {
+export default function sex() {
   return Chance.gender();
 }

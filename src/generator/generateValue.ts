@@ -1,4 +1,4 @@
-import Registry from "../Registry";
+import Registry from "../registry";
 import FnItem from "./FnItem";
 import VarDict from "./VarDict";
 
