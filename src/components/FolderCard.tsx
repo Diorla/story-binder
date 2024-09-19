@@ -25,7 +25,7 @@ export default function FolderCard({ item }: { item: Folder }) {
   const { params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
 
-  const path = `${projectPath}/${params.dir.join("/")}`;
+  const path = `${projectPath}/${params.dir.join("/")}/${item.id}`;
   return (
     <ContextMenu
       menuComponent={
