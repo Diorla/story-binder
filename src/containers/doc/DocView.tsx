@@ -1,4 +1,4 @@
-import { Card, Grid, IconButton } from "@mui/material";
+import { Card, Box, IconButton } from "@mui/material";
 import { Mode, Visibility } from "@mui/icons-material";
 import { useState } from "react";
 import { useEffectOnce } from "react-use";
@@ -70,7 +70,7 @@ export default function DocView() {
           </IconButton>
         </div>
       </Card>
-      <Grid sx={{ p: 1 }}>{editing ? <Preview /> : <Edit />}</Grid>
+      <Box sx={{ p: 1 }}>{editing ? <Preview /> : <Edit />}</Box>
     </div>
   );
 }

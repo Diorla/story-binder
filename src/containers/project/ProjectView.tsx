@@ -1,4 +1,4 @@
-import { Card, Grid, IconButton } from "@mui/material";
+import { Card, Box, IconButton } from "@mui/material";
 import { CreateNewFolderOutlined, GridView, Tune } from "@mui/icons-material";
 import { useState } from "react";
 import EditProject from "./EditProject";
@@ -49,7 +49,7 @@ export default function ProjectView() {
         </div>
       </Card>
       {openForm && <NewFolderForm currentDir={path} />}
-      <Grid sx={{ p: 1 }}>{editing ? <EditProject /> : <FolderList />}</Grid>
+      <Box sx={{ p: 1 }}>{editing ? <EditProject /> : <FolderList />}</Box>
     </div>
   );
 }

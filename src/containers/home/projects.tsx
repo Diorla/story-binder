@@ -1,5 +1,5 @@
 import ProjectCard from "@/containers/home/ProjectCard";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import useHomeContext from "./useHomeContext";
 
 export default function Projects() {
@@ -7,7 +7,7 @@ export default function Projects() {
 
   return (
     <Box sx={{ p: 1 }}>
-      <Grid
+      <Box
         style={{
           display: "flex",
           flexDirection: "row",
@@ -17,7 +17,7 @@ export default function Projects() {
         {projects.map((project) => {
           return <ProjectCard project={project} key={project.id} />;
         })}
-      </Grid>
+      </Box>
     </Box>
   );
 }

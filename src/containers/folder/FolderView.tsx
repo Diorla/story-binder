@@ -1,4 +1,4 @@
-import { Card, Grid, IconButton } from "@mui/material";
+import { Card, Box, IconButton } from "@mui/material";
 import {
   CreateNewFolderOutlined,
   GridView,
@@ -57,7 +57,7 @@ export default function FolderView() {
       {openForm === "folder" && (
         <NewFolderForm currentDir={currentDir} template={folder.template} />
       )}
-      <Grid sx={{ p: 1 }}>
+      <Box sx={{ p: 1 }}>
         {editing ? (
           <SelectTemplate />
         ) : (
@@ -66,7 +66,7 @@ export default function FolderView() {
             <DocList />
           </>
         )}
-      </Grid>
+      </Box>
     </div>
   );
 }
