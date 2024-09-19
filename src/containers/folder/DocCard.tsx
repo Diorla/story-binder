@@ -16,11 +16,13 @@ import useFolderContext from "./useFolderContext";
 import Doc from "@/types/Doc";
 import writeDoc from "@/scripts/writeDoc";
 import deleteDoc from "@/scripts/deleteDoc";
+import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
 
 export default function DocCard({ item }: { item: Doc }) {
   const { params } = useRouter<{ dir: string[] }>();
   const navigate = useOpenDir();
   const { currentDir, reload } = useFolderContext();
+  const path = `${currentDir}/${item.id}.${APP_FILE_EXT}`;
 
   return (
     <ContextMenu
@@ -31,13 +33,11 @@ export default function DocCard({ item }: { item: Doc }) {
             <ListItemText>Open</ListItemText>
           </MenuItem>
           <MenuItem
-            onClick={() =>
-              writeDoc({ ...item, id: v4() }, currentDir).then(reload)
-            }
+            onClick={() => writeDoc({ ...item, id: v4() }, path).then(reload)}
           >
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
-          <MenuItem onClick={() => deleteDoc(item.id, currentDir).then(reload)}>
+          <MenuItem onClick={() => deleteDoc(item.id, path).then(reload)}>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -57,7 +57,7 @@ export default function DocCard({ item }: { item: Doc }) {
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                writeDoc({ ...item, name: value }, currentDir).then(reload)
+                writeDoc({ ...item, name: value }, path).then(reload)
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -71,7 +71,7 @@ export default function DocCard({ item }: { item: Doc }) {
             value={item.note}
             multiline={true}
             updateValue={(value) =>
-              writeDoc({ ...item, note: value }, currentDir).then(reload)
+              writeDoc({ ...item, note: value }, path).then(reload)
             }
             textStyle={{
               textOverflow: "ellipsis",

@@ -6,6 +6,7 @@ import { v4 } from "uuid";
 import useFolderContext from "./useFolderContext";
 import writeDoc from "@/scripts/writeDoc";
 import APP_FILE_EXT from "@/constants/APP_FILE_EXT";
+import JSONParse from "@/scripts/JSONParse";
 
 export default function NewDocForm({
   closeFolder,
@@ -18,7 +19,8 @@ export default function NewDocForm({
     reload,
   } = useFolderContext();
 
-  const templateContent = JSON.parse(template).content;
+  const templateContent =
+    JSONParse<{ content: string }>(template)?.content || "";
   const { register, handleSubmit } = useForm<Doc>({
     defaultValue: {
       name: "",
