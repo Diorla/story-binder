@@ -18,7 +18,6 @@ export default function Preview() {
     template: "",
   });
 
-  // const [generated, setGenerated] = useState(false);
   const { generatedText, refresh } = useGenerator(doc.content || doc.template);
   const {
     userInfo: { projectPath },
@@ -39,10 +38,11 @@ export default function Preview() {
   });
 
   const save = () => {
-    writeDoc(
-      { ...doc, content: generatedText.replaceAll(`class="mod"`, "") },
-      path
-    );
+    const newDoc = {
+      ...doc,
+      content: generatedText.replaceAll(`class="mod"`, ""),
+    };
+    writeDoc(newDoc, path).then(() => setDoc(newDoc));
   };
 
   if (!doc.id) return null;
