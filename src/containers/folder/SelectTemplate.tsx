@@ -10,7 +10,7 @@ import Template from "@/types/Template";
 import useFolderContext from "./useFolderContext";
 import { formStyle } from "./formStyle";
 import JSONParse from "@/scripts/JSONParse";
-import writeFolder from "@/scripts/writeFolder";
+import updateFolder from "@/scripts/updateFolder";
 import validateTemplate from "@/schema/validateTemplate";
 import useApp from "@/context/app/useApp";
 
@@ -37,7 +37,7 @@ export default function SelectTemplate() {
     setTemplateId(template.id || "");
   }, [template.id]);
 
-  const submit = () => {
+  const saveTemplate = () => {
     if (templateId) {
       const template = templateList.find((item) => item.id === templateId);
       const tempFolder: Folder = {
@@ -45,10 +45,10 @@ export default function SelectTemplate() {
         template: JSON.stringify(template),
       };
 
-      writeFolder(tempFolder, currentDir)
+      updateFolder(tempFolder, currentDir)
         .then(reload)
         .catch((err: Error) => {
-          logError("update-folder", "submit", err);
+          logError("update-folder", "saveTemplate", err);
         });
     }
   };
@@ -59,7 +59,7 @@ export default function SelectTemplate() {
       template: "",
     };
 
-    writeFolder(tempFolder, currentDir)
+    updateFolder(tempFolder, currentDir)
       .then(reload)
       .catch((err: Error) => {
         logError("update-folder", "remove-template", err);
@@ -88,7 +88,7 @@ export default function SelectTemplate() {
           };
         })}
       />
-      <Button onClick={submit}>Save</Button>
+      <Button onClick={saveTemplate}>Save</Button>
       <Button onClick={removeTemplate}>Remove template</Button>
       <Typography>
         Don't find what you are looking for,{" "}

@@ -11,11 +11,11 @@ import { FolderOutlined } from "@mui/icons-material";
 import EditableContent from "@/components/EditableContent";
 import Folder from "@/types/Folder";
 import useApp from "@/context/app/useApp";
-import writeFolder from "../scripts/writeFolder";
+import updateFolder from "../scripts/updateFolder";
 import useRouter from "@/context/router/useRouter";
-import { v4 } from "uuid";
 import deleteFolder from "../containers/project/deleteFolder";
 import useOpenDir from "@/hooks/useOpenDir";
+import createFolder from "@/scripts/createFolder";
 
 export default function FolderCard({ item }: { item: Folder }) {
   const {
@@ -38,11 +38,11 @@ export default function FolderCard({ item }: { item: Folder }) {
           </MenuItem>
           <MenuItem
             onClick={() =>
-              writeFolder(
+              createFolder(
                 {
                   name: item.name,
                   note: item.note,
-                  id: v4(),
+                  id: "",
                   template: item.template,
                 },
                 path
@@ -71,7 +71,7 @@ export default function FolderCard({ item }: { item: Folder }) {
             <EditableContent
               value={item.name}
               updateValue={(value) =>
-                writeFolder({ ...item, name: value }, path).then(refresh)
+                updateFolder({ ...item, name: value }, path).then(refresh)
               }
               textStyle={{
                 textOverflow: "ellipsis",
@@ -85,7 +85,7 @@ export default function FolderCard({ item }: { item: Folder }) {
             value={item.note}
             multiline={true}
             updateValue={(value) =>
-              writeFolder({ ...item, note: value }, path).then(refresh)
+              updateFolder({ ...item, note: value }, path).then(refresh)
             }
             textStyle={{
               textOverflow: "ellipsis",

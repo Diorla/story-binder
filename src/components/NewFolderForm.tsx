@@ -1,7 +1,7 @@
 import { Box, Button, Divider } from "@mui/material";
 import Input from "@/components/Input";
 import useForm from "@/hooks/useForm";
-import writeFolder from "../scripts/writeFolder";
+import createFolder from "@/scripts/createFolder";
 import useApp from "@/context/app/useApp";
 import Folder from "@/types/Folder";
 import { v4 } from "uuid";
@@ -49,7 +49,7 @@ export default function NewFolderForm({
           type="submit"
           onClick={handleSubmit((data) => {
             if (data)
-              writeFolder({ ...data }, currentDir).then(() => {
+              createFolder({ ...data }, currentDir).then(() => {
                 refresh();
               });
           })}
