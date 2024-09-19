@@ -225,3 +225,10 @@ ol {
   overflow-y: scroll;
   caret-color: #964b00;
 }
+
+.err {
+  text-decoration-style: wavy;
+  text-decoration-color: #964b00;
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
+}

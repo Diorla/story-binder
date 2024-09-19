@@ -1,60 +1,24 @@
-import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import Input from "@/components/Input";
-import { v4 } from "uuid";
-import formStyle from "./formStyle";
-import EditorWrapper from "./EditorWrapper";
 import useTemplateContext from "./useTemplateContext";
-import Template from "@/types/Template";
+import { TemplatePath } from "./TemplatePath";
+import Nav from "./Nav";
+import Body from "./Body";
 
 export default function TemplateConsumer() {
-  const [isSelect, setIsSelect] = useState(false);
-  const { register, form, handleSubmit, resetForm } = useTemplateContext();
+  const [path, setPath] = useState<TemplatePath>("editor");
+  const { form, register, handleSubmit, resetForm } = useTemplateContext();
 
-  const submit = (data: Template) => {
-    const id = data.id || v4();
-    const value = {
-      ...data,
-      id,
-    };
-    resetForm(value);
-  };
-
-  if (!form.id || isSelect)
-    return (
-      <Box sx={formStyle}>
-        <Box
-          sx={{
-            maxWidth: 500,
-            width: "100%",
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Input {...register("name")} sx={{ mb: 2 }} label="Name" />
-
-          <Input
-            {...register("description")}
-            sx={{ mb: 2 }}
-            label="Description"
-            multiline
-            rows={4}
-          />
-        </Box>
-        <Button
-          onClick={handleSubmit((data) => {
-            if (form.id) setIsSelect(false);
-            submit(data);
-          })}
-        >
-          Save
-        </Button>
-        {form.id ? (
-          <Button onClick={() => setIsSelect(false)}>Close</Button>
-        ) : null}
-      </Box>
-    );
-
-  return <EditorWrapper setIsSelect={setIsSelect} />;
+  return (
+    <>
+      <Nav form={form} setPath={setPath} path={path} />
+      <Body
+        form={form}
+        path={path}
+        register={register}
+        handleSubmit={handleSubmit}
+        resetForm={resetForm}
+        setPath={setPath}
+      />
+    </>
+  );
 }
