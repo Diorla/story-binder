@@ -66,14 +66,14 @@ export default class Generator {
     Object.values(this.fnDict).forEach((item) => {
       newTemplate = newTemplate.replaceAll(
         item.template,
-        `<b>${item.value.toString()}</b>`
+        `<span class="mod">${item.value.toString()}</span>`
       );
     });
     Object.keys(this.varDict).forEach((key) => {
       const variableName = `~[${key}]~`;
       newTemplate = newTemplate.replaceAll(
         variableName,
-        `<b>${this.varDict[key]}</b>`
+        `<span class="mod">${this.varDict[key]}</span>`
       );
     });
     newTemplate = newTemplate.replaceAll(

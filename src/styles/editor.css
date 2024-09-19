@@ -232,3 +232,10 @@ ol {
   text-decoration-line: underline;
   text-underline-offset: 3px;
 }
+
+.mod {
+  text-decoration-style: double;
+  text-decoration-color: #00a59d;
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
+}

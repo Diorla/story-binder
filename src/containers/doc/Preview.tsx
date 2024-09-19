@@ -39,7 +39,10 @@ export default function Preview() {
   });
 
   const save = () => {
-    writeDoc({ ...doc, content: generatedText }, path);
+    writeDoc(
+      { ...doc, content: generatedText.replaceAll(`class="mod"`, "") },
+      path
+    );
   };
 
   if (!doc.id) return null;
