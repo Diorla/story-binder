@@ -82,5 +82,37 @@ No support yet, but it's in the wood work
 ## Active
 The following are functions that are currently supported
 
+### `whole_number`
+
+- returns a whole number like 8
+- accepts
+  - min: the lower bound of the value
+  - max: the higher bound of the value
+
+```
+whole_number() => 12344234342
+whole_number(min=10) => -24834923
+whole_number(max=100) => 83
+whole_number(min=1, max=50) => 45
+```
+
+
+### `decimal_number`
+
+- returns a whole decimal_number like 8.78
+- accepts
+  - min: the lower bound of the value
+  - max: the higher bound of the value
+  - sf: the number of significant values that would be shown after the decimal numbers
+
+```
+decimal_number() => 123442.34342
+decimal_number(sf=2) => 123442.00
+decimal_number(min=10) => -2483492.7873
+decimal_number(max=100) => 83.7898
+decimal_number(min=1, max=50) => 45.8589
+```
+
+
 ## Proposed
 These are functions that may be added, under consideration
