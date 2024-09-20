@@ -1,8 +1,8 @@
 /**
  * starts with ~[
  * ends with ~]
- * Accepts only lower and upper alphabets
+ * Accepts only _, lower and upper alphabets
  */
-const VARIABLE_REGEX = /~\[[a-zA-Z]+\]~/gi;
+const VARIABLE_REGEX = /~\[[a-zA-Z_]+\]~/gi;
 
 export default VARIABLE_REGEX;
