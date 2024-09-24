@@ -113,6 +113,28 @@ decimal_number(max=100) => 83.7898
 decimal_number(min=1, max=50) => 45.8589
 ```
 
+### `name`
+
+- Returns full name (firstname, middle name and last name). The names are returned in English spelling
+- accepts
+  - region: this includes things like Africa, Europe, Mediterranean etc
+  - country: you can provide any country name
+  - origin: this will be based on the source or origin of the name e.g. English, French, Arabic etc.
+  - gender: `male` or `female`. If not provided, it would use male name.
+- You should only provide one of `region`, `country` and `origin`. This is the order of priority: origin > country > region
+  - So if you state an origin and country, the country is ignored.
+  - And since country are subset of region, the region is redundant.
+  - In case no parameter is provided, it will randomly select a country and then one of the origin in that country. See `country` function to see how the country is selected
+
+### `country`
+- Returns a country
+- accepts
+  - region: like Middle east, Caribbean etc
+  - ethnicity: same as origin under `name`
+- It would be return a country. Region and/or Ethnicity may be used to filter down the result
 
 ## Proposed
 These are functions that may be added, under consideration
+
+### Ethnicity
+This is based on `origin` in `name()` or ethnicity in `country()`. Right now, all I have are 3 letters. I could expand them to human readable for e.g. `eng` becomes `English`. Furthermore, I could change how it works in names, so that if user provide "Yoruba", it will change it to "yor" which will be processed by `name()`.

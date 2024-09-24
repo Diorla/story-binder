@@ -20,6 +20,6 @@ export default function filterCountry({
   if (results.length === 0) {
     return countries;
   }
-  // console.log("results", results);
+
   return results.map((item) => item.item);
 }
