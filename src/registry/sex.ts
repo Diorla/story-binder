@@ -1,5 +1,5 @@
 import Chance from "./Chance";
 
-export default function sex() {
+export default async function sex() {
   return Chance.gender();
 }

@@ -4,20 +4,23 @@ import { useEffect, useState } from "react";
 export default function useGenerator(template: string) {
   const [formattedText, setFormattedText] = useState("");
   const [generatedText, setGeneratedText] = useState("");
-  const refresh = () => {
+  const refresh = async () => {
     const generatedObj = new Generator(template);
     const formattedText = generatedObj.getFormattedText();
     const generatedText = generatedObj.generateContent();
     setFormattedText(formattedText);
-    setGeneratedText(generatedText);
+    setGeneratedText(await generatedText);
   };
 
   useEffect(() => {
     const generatedObj = new Generator(template);
     const formattedText = generatedObj.getFormattedText();
-    const generatedText = generatedObj.generateContent();
     setFormattedText(formattedText);
-    setGeneratedText(generatedText);
+    const generateText = async () => {
+      const generatedText = generatedObj.generateContent();
+      setGeneratedText(await generatedText);
+    };
+    generateText();
   }, [template]);
 
   return {

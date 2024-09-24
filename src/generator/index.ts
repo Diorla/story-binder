@@ -54,21 +54,25 @@ export default class Generator {
     this.pruneFnDict();
   };
 
-  generateFnDictValues = () => {
-    this.fnDict = generateFnDictValues(this.fnDict, this.varDict);
+  generateFnDictValues = async () => {
+    const fnDict = await generateFnDictValues(this.fnDict, this.varDict);
+    this.fnDict = { ...fnDict };
+    return fnDict;
   };
 
   getFormattedText = () => this.formattedText;
 
-  generateContent = () => {
-    this.generateFnDictValues();
+  generateContent = async () => {
+    const fnDict = await this.generateFnDictValues();
     let newTemplate = this.template;
-    Object.values(this.fnDict).forEach((item) => {
+
+    Object.values(fnDict).forEach((item) => {
       newTemplate = newTemplate.replaceAll(
         item.template,
         `<span class="mod">${item.value.toString()}</span>`
       );
     });
+
     Object.keys(this.varDict).forEach((key) => {
       const variableName = `~[${key}]~`;
       newTemplate = newTemplate.replaceAll(

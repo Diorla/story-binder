@@ -18,7 +18,7 @@ export const parseFn = (template: string, index: number): FnItem | null => {
   let args = {};
   let dep: string[] = [];
   if (params) {
-    args = arrayToObject(params.split(","));
+    args = arrayToObject(params.toLocaleLowerCase().split(","));
     dep = Object.values(args)
       .map((item) =>
         typeof item === "string" && item.startsWith("[")
