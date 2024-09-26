@@ -133,6 +133,22 @@ decimal_number(min=1, max=50) => 45.8589
   - ethnicity: same as origin under `name`
 - It would be return a country. Region and/or Ethnicity may be used to filter down the result
 
+
+### `build`
+
+This is a tough one to crack, so I am using this metrics
+1. Bone or body frame
+2. Fat
+3. Muscle
+
+I am only going to consider two of those to describe the body and map it to this
+
+![Body frame](./docs/build.png)
+
+I guess, everyone has an innate body frame, and then we can define them based on the presence or absence of muscles or fat.
+
+
+This will also return body shape, using the statistics based on this [site](https://www.calculator.net/body-type-calculator.html).
 ## Proposed
 These are functions that may be added, under consideration
 
