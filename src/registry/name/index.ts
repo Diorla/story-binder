@@ -10,6 +10,7 @@ const chance = new Chance();
 // but later on, I will create a checkup list based on this link:
 // https://www.behindthename.com/api/appendix1.php
 export default async function generateName(arg: FuncArgType) {
+  if (process.env.NODE_ENV === "development") return "Adeola Ade";
   const {
     gender = "male",
     region = "",
